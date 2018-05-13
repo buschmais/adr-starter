@@ -28,7 +28,6 @@ import com.salesmanager.catalog.business.service.product.review.ProductReviewSer
 import com.salesmanager.core.business.services.common.generic.SalesManagerEntityServiceImpl;
 import com.salesmanager.catalog.business.service.search.SearchService;
 import com.salesmanager.core.business.utils.CatalogServiceHelper;
-import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.core.model.catalog.category.Category;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.ProductCriteria;
@@ -76,9 +75,6 @@ public class ProductServiceImpl extends SalesManagerEntityServiceImpl<Long, Prod
 	
 	@Inject
 	ProductImageService productImageService;
-	
-	@Inject
-	CoreConfiguration configuration;
 	
 	@Inject
 	ProductReviewService productReviewService;
