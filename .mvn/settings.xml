@@ -5,4 +5,15 @@
 
     <localRepository>../m2-repository</localRepository>
 
+    <profiles>
+        <profile>
+            <id>load-properties</id>
+            <properties>
+                <jqassistant.version>1.8.0</jqassistant.version>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 </settings>
