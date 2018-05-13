@@ -4,7 +4,7 @@
 package com.salesmanager.shop.populator.shoppingCart;
 
 import com.salesmanager.core.business.exception.ServiceException;
-import com.salesmanager.core.business.services.catalog.product.PricingService;
+import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.services.shoppingcart.ShoppingCartCalculationService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.catalog.product.attribute.ProductOptionDescription;

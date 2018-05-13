@@ -1,10 +1,10 @@
 package com.salesmanager.shop.populator.catalog;
 
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.core.business.services.catalog.category.CategoryService;
-import com.salesmanager.core.business.services.catalog.product.attribute.ProductOptionService;
-import com.salesmanager.core.business.services.catalog.product.attribute.ProductOptionValueService;
-import com.salesmanager.core.business.services.catalog.product.manufacturer.ManufacturerService;
+import com.salesmanager.catalog.business.service.category.CategoryService;
+import com.salesmanager.catalog.business.service.product.attribute.ProductOptionService;
+import com.salesmanager.catalog.business.service.product.attribute.ProductOptionValueService;
+import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
@@ -25,7 +25,6 @@ import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.model.catalog.product.PersistableImage;
 import com.salesmanager.shop.model.catalog.product.PersistableProduct;
 import com.salesmanager.shop.model.catalog.product.ProductPriceEntity;
-import com.salesmanager.shop.model.customer.Customer;
 import com.salesmanager.shop.utils.DateUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.Validate;

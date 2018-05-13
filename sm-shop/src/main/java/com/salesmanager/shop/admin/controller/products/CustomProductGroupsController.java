@@ -1,9 +1,9 @@
 package com.salesmanager.shop.admin.controller.products;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.salesmanager.core.business.services.catalog.category.CategoryService;
-import com.salesmanager.core.business.services.catalog.product.ProductService;
-import com.salesmanager.core.business.services.catalog.product.relationship.ProductRelationshipService;
+import com.salesmanager.catalog.business.service.category.CategoryService;
+import com.salesmanager.catalog.business.service.product.ProductService;
+import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.core.model.catalog.category.Category;

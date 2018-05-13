@@ -9,11 +9,10 @@ import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
 
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.core.business.services.catalog.product.ProductService;
-import com.salesmanager.core.business.services.catalog.product.attribute.ProductAttributeService;
-import com.salesmanager.core.business.services.catalog.product.file.DigitalProductService;
+import com.salesmanager.catalog.business.service.product.ProductService;
+import com.salesmanager.catalog.business.service.product.attribute.ProductAttributeService;
+import com.salesmanager.catalog.business.service.product.file.DigitalProductService;
 import com.salesmanager.core.business.services.customer.CustomerService;
-import com.salesmanager.core.business.services.order.OrderService;
 import com.salesmanager.core.business.services.reference.currency.CurrencyService;
 import com.salesmanager.core.business.services.shoppingcart.ShoppingCartService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;

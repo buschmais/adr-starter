@@ -1,7 +1,7 @@
 package com.salesmanager.shop.populator.catalog;
 
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.core.business.services.catalog.category.CategoryService;
+import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.catalog.category.Category;

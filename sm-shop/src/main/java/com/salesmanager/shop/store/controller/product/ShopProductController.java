@@ -1,11 +1,11 @@
 package com.salesmanager.shop.store.controller.product;
 
-import com.salesmanager.core.business.services.catalog.category.CategoryService;
-import com.salesmanager.core.business.services.catalog.product.PricingService;
-import com.salesmanager.core.business.services.catalog.product.ProductService;
-import com.salesmanager.core.business.services.catalog.product.attribute.ProductAttributeService;
-import com.salesmanager.core.business.services.catalog.product.relationship.ProductRelationshipService;
-import com.salesmanager.core.business.services.catalog.product.review.ProductReviewService;
+import com.salesmanager.catalog.business.service.category.CategoryService;
+import com.salesmanager.catalog.business.service.product.PricingService;
+import com.salesmanager.catalog.business.service.product.ProductService;
+import com.salesmanager.catalog.business.service.product.attribute.ProductAttributeService;
+import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
+import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
 import com.salesmanager.core.business.utils.CacheUtils;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.attribute.ProductAttribute;

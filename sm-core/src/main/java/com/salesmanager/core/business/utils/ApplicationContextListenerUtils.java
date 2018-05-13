@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextStartedEvent;
 
-import com.salesmanager.core.business.services.search.SearchService;
+import com.salesmanager.catalog.business.service.search.SearchService;
 
 public class ApplicationContextListenerUtils implements ApplicationListener<ContextStartedEvent> {
 

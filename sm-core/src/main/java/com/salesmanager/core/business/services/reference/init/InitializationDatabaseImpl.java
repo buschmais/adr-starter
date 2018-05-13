@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.salesmanager.core.business.exception.ServiceException;
-import com.salesmanager.core.business.services.catalog.product.manufacturer.ManufacturerService;
-import com.salesmanager.core.business.services.catalog.product.type.ProductTypeService;
+import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
+import com.salesmanager.catalog.business.service.product.type.ProductTypeService;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.core.business.services.reference.country.CountryService;
 import com.salesmanager.core.business.services.reference.currency.CurrencyService;

@@ -1,6 +1,6 @@
 package com.salesmanager.shop.admin.controller.orders;
 
-import com.salesmanager.core.business.services.catalog.product.PricingService;
+import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.order.OrderService;
 import com.salesmanager.core.business.services.payments.PaymentService;

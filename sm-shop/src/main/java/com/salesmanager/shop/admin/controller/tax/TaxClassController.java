@@ -1,6 +1,6 @@
 package com.salesmanager.shop.admin.controller.tax;
 
-import com.salesmanager.core.business.services.catalog.product.ProductService;
+import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;

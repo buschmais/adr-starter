@@ -1,0 +1,15 @@
+package com.salesmanager.catalog;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import javax.persistence.EntityListeners;
+
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan(basePackages = {"com.salesmanager.catalog.business.service"})
+@EnableJpaRepositories(basePackages = {"com.salesmanager.catalog.business.repository"})
+public class CatalogConfiguration {
+}

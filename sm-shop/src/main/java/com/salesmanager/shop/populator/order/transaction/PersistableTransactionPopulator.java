@@ -3,7 +3,7 @@ package com.salesmanager.shop.populator.order.transaction;
 import org.apache.commons.lang.Validate;
 
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.core.business.services.catalog.product.PricingService;
+import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.services.order.OrderService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.merchant.MerchantStore;

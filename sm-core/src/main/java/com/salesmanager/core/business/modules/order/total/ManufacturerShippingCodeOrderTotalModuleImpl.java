@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.salesmanager.core.business.constants.Constants;
-import com.salesmanager.core.business.services.catalog.product.PricingService;
+import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.price.FinalPrice;
 import com.salesmanager.core.model.customer.Customer;

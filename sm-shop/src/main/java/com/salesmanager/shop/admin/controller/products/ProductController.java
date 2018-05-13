@@ -1,10 +1,10 @@
 package com.salesmanager.shop.admin.controller.products;
 
-import com.salesmanager.core.business.services.catalog.category.CategoryService;
-import com.salesmanager.core.business.services.catalog.product.ProductService;
-import com.salesmanager.core.business.services.catalog.product.image.ProductImageService;
-import com.salesmanager.core.business.services.catalog.product.manufacturer.ManufacturerService;
-import com.salesmanager.core.business.services.catalog.product.type.ProductTypeService;
+import com.salesmanager.catalog.business.service.category.CategoryService;
+import com.salesmanager.catalog.business.service.product.ProductService;
+import com.salesmanager.catalog.business.service.product.image.ProductImageService;
+import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
+import com.salesmanager.catalog.business.service.product.type.ProductTypeService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.core.business.utils.ProductPriceUtils;

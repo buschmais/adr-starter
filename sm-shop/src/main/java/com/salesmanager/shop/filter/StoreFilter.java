@@ -1,8 +1,8 @@
 package com.salesmanager.shop.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.salesmanager.core.business.services.catalog.category.CategoryService;
-import com.salesmanager.core.business.services.catalog.product.ProductService;
+import com.salesmanager.catalog.business.service.category.CategoryService;
+import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;

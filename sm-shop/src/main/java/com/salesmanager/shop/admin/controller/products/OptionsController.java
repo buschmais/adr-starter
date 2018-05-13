@@ -1,6 +1,6 @@
 package com.salesmanager.shop.admin.controller.products;
 
-import com.salesmanager.core.business.services.catalog.product.attribute.ProductOptionService;
+import com.salesmanager.catalog.business.service.product.attribute.ProductOptionService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.core.model.catalog.product.attribute.ProductOption;

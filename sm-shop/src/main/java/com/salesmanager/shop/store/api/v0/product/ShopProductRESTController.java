@@ -1,12 +1,12 @@
 package com.salesmanager.shop.store.api.v0.product;
 
-import com.salesmanager.core.business.services.catalog.category.CategoryService;
-import com.salesmanager.core.business.services.catalog.product.PricingService;
-import com.salesmanager.core.business.services.catalog.product.ProductService;
-import com.salesmanager.core.business.services.catalog.product.attribute.ProductOptionService;
-import com.salesmanager.core.business.services.catalog.product.attribute.ProductOptionValueService;
-import com.salesmanager.core.business.services.catalog.product.manufacturer.ManufacturerService;
-import com.salesmanager.core.business.services.catalog.product.review.ProductReviewService;
+import com.salesmanager.catalog.business.service.category.CategoryService;
+import com.salesmanager.catalog.business.service.product.PricingService;
+import com.salesmanager.catalog.business.service.product.ProductService;
+import com.salesmanager.catalog.business.service.product.attribute.ProductOptionService;
+import com.salesmanager.catalog.business.service.product.attribute.ProductOptionValueService;
+import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
+import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;

@@ -1,6 +1,6 @@
 package com.salesmanager.shop.admin.controller.products;
 
-import com.salesmanager.core.business.services.catalog.product.ProductService;
+import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.core.model.catalog.product.Product;
