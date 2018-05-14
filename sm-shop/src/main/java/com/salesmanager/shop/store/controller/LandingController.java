@@ -35,7 +35,7 @@ import com.salesmanager.shop.model.shop.Breadcrumb;
 import com.salesmanager.shop.model.shop.BreadcrumbItem;
 import com.salesmanager.shop.model.shop.BreadcrumbItemType;
 import com.salesmanager.shop.model.shop.PageInformation;
-import com.salesmanager.catalog.presentation.populator.ReadableProductPopulator;
+import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
 import com.salesmanager.shop.utils.DateUtil;
 import com.salesmanager.shop.utils.ImageFilePath;
 import com.salesmanager.shop.utils.LabelUtils;

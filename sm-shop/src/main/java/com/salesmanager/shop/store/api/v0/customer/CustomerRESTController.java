@@ -24,7 +24,7 @@ import com.salesmanager.shop.populator.customer.CustomerPopulator;
 import com.salesmanager.shop.populator.customer.PersistableCustomerOptionPopulator;
 import com.salesmanager.shop.populator.customer.PersistableCustomerOptionValuePopulator;
 import com.salesmanager.shop.populator.customer.ReadableCustomerPopulator;
-import com.salesmanager.shop.store.api.v0.category.ShoppingCategoryRESTController;
+import com.salesmanager.catalog.presentation.api.v0.category.ShoppingCategoryRESTController;
 import com.salesmanager.shop.utils.EmailTemplatesUtils;
 import com.salesmanager.shop.utils.LabelUtils;
 import com.salesmanager.shop.utils.LocaleUtils;

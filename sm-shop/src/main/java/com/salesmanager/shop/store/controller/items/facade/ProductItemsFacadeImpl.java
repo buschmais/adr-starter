@@ -20,7 +20,7 @@ import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
-import com.salesmanager.catalog.presentation.populator.ReadableProductPopulator;
+import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
 import com.salesmanager.shop.utils.ImageFilePath;
 
 @Component

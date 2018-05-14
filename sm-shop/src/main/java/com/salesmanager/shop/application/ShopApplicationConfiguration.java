@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import com.salesmanager.catalog.CatalogConfiguration;
+import com.salesmanager.catalog.presentation.CatalogApplicationConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.PropertyConfigurator;
@@ -42,7 +43,7 @@ import com.salesmanager.core.constants.SchemaConstant;
 @Configuration
 @ComponentScan({"com.salesmanager.shop","com.salesmanager.core.business"})
 @EnableAutoConfiguration
-@Import({CoreApplicationConfiguration.class, CatalogConfiguration.class})//import sm-core configurations
+@Import({CoreApplicationConfiguration.class, CatalogApplicationConfiguration.class})//import sm-core configurations
 @ImportResource({"classpath:/spring/shopizer-shop-context.xml"})
 @EnableWebSecurity
 public class ShopApplicationConfiguration extends WebMvcConfigurerAdapter{
