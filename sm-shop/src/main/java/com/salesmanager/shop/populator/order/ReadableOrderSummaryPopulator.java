@@ -14,7 +14,7 @@ import com.salesmanager.core.model.order.OrderTotalSummary;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.model.order.ReadableOrderTotalSummary;
 import com.salesmanager.shop.model.order.total.ReadableOrderTotal;
-import com.salesmanager.shop.utils.LabelUtils;
+import com.salesmanager.common.presentation.util.LabelUtils;
 
 public class ReadableOrderSummaryPopulator extends AbstractDataPopulator<OrderTotalSummary, ReadableOrderTotalSummary> {
 

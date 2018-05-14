@@ -11,7 +11,7 @@ import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.admin.model.merchant.StoreLanding;
 import com.salesmanager.shop.admin.model.merchant.StoreLandingDescription;
-import com.salesmanager.shop.admin.model.web.Menu;
+import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

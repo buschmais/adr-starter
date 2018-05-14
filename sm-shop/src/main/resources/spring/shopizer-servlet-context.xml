@@ -49,7 +49,7 @@
   	</beans:bean>
 
 	
-	<beans:bean id="messages" class="com.salesmanager.shop.utils.LabelUtils"/>
+	<beans:bean id="messages" class="com.salesmanager.common.presentation.util.LabelUtils"/>
 	
 	<!-- with infinispan -->
 	<!-- load images from local web server [com.salesmanager.web.utils.LocalImageFilePathUtils] -->

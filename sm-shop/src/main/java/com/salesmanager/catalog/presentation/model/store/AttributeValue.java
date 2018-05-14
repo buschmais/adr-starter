@@ -2,7 +2,7 @@ package com.salesmanager.catalog.presentation.model.store;
 
 import java.io.Serializable;
 
-import com.salesmanager.shop.model.ShopEntity;
+import com.salesmanager.common.presentation.model.ShopEntity;
 
 public class AttributeValue extends ShopEntity implements Serializable {
 	

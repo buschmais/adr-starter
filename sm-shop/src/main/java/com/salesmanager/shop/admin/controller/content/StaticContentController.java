@@ -15,7 +15,6 @@ import javax.inject.Inject;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -38,7 +37,7 @@ import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.shop.admin.controller.ControllerConstants;
 import com.salesmanager.shop.admin.model.content.ContentFiles;
-import com.salesmanager.shop.admin.model.web.Menu;
+import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.shop.utils.ImageFilePath;
 

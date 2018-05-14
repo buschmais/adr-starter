@@ -45,7 +45,7 @@ import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPo
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductReviewPopulator;
 import com.salesmanager.catalog.presentation.populator.manufacturer.PersistableManufacturerPopulator;
 import com.salesmanager.catalog.presentation.populator.manufacturer.ReadableManufacturerPopulator;
-import com.salesmanager.shop.utils.DateUtil;
+import com.salesmanager.common.presentation.util.DateUtil;
 import com.salesmanager.shop.utils.ImageFilePath;
 
 @Service("productFacade")

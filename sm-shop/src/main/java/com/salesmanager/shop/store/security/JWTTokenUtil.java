@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.salesmanager.shop.store.security.user.JWTUser;
-import com.salesmanager.shop.utils.DateUtil;
+import com.salesmanager.common.presentation.util.DateUtil;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

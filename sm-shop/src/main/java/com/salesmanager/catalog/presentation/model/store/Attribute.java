@@ -3,7 +3,7 @@ package com.salesmanager.catalog.presentation.model.store;
 import java.io.Serializable;
 import java.util.List;
 
-import com.salesmanager.shop.model.ShopEntity;
+import com.salesmanager.common.presentation.model.ShopEntity;
 
 
 public class Attribute extends ShopEntity implements Serializable {

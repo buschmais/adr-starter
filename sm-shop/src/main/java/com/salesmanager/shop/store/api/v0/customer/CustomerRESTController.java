@@ -26,7 +26,7 @@ import com.salesmanager.shop.populator.customer.PersistableCustomerOptionValuePo
 import com.salesmanager.shop.populator.customer.ReadableCustomerPopulator;
 import com.salesmanager.catalog.presentation.api.v0.category.ShoppingCategoryRESTController;
 import com.salesmanager.shop.utils.EmailTemplatesUtils;
-import com.salesmanager.shop.utils.LabelUtils;
+import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.shop.utils.LocaleUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

@@ -25,7 +25,7 @@ import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.PersistableImage;
 import com.salesmanager.catalog.presentation.model.product.PersistableProduct;
 import com.salesmanager.catalog.presentation.model.product.ProductPriceEntity;
-import com.salesmanager.shop.utils.DateUtil;
+import com.salesmanager.common.presentation.util.DateUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;

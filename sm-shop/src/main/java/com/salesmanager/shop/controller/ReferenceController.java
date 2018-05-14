@@ -11,7 +11,7 @@ import com.salesmanager.core.model.reference.country.Country;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.model.reference.zone.Zone;
 import com.salesmanager.shop.constants.Constants;
-import com.salesmanager.shop.utils.DateUtil;
+import com.salesmanager.common.presentation.util.DateUtil;
 import com.salesmanager.shop.utils.LanguageUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

@@ -6,7 +6,7 @@ import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufacturer;
-import com.salesmanager.shop.model.shop.PageInformation;
+import com.salesmanager.common.presentation.model.PageInformation;
 import com.salesmanager.catalog.presentation.populator.manufacturer.ReadableManufacturerPopulator;
 import com.salesmanager.shop.store.controller.ControllerConstants;
 import com.salesmanager.shop.utils.PageBuilderUtils;

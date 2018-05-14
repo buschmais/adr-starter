@@ -12,7 +12,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.salesmanager.shop.utils;
+package com.salesmanager.common.presentation.util;
 
 import com.salesmanager.common.business.constants.Constants;
 import org.slf4j.Logger;

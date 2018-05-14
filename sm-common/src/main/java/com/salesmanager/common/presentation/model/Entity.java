@@ -1,4 +1,4 @@
-package com.salesmanager.shop.model;
+package com.salesmanager.common.presentation.model;
 
 import java.io.Serializable;
 

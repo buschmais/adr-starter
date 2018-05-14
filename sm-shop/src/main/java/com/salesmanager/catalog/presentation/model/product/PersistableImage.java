@@ -1,6 +1,6 @@
 package com.salesmanager.catalog.presentation.model.product;
 
-import com.salesmanager.shop.model.Entity;
+import com.salesmanager.common.presentation.model.Entity;
 
 public class PersistableImage extends Entity {
 	

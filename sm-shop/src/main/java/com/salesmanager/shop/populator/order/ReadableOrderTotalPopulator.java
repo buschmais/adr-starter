@@ -8,7 +8,7 @@ import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.OrderTotal;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.model.order.total.ReadableOrderTotal;
-import com.salesmanager.shop.utils.LabelUtils;
+import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.shop.utils.LocaleUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;

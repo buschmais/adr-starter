@@ -10,7 +10,7 @@ import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.payments.Transaction;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.model.order.transaction.ReadableTransaction;
-import com.salesmanager.shop.utils.DateUtil;
+import com.salesmanager.common.presentation.util.DateUtil;
 
 
 public class ReadableTransactionPopulator extends AbstractDataPopulator<Transaction, ReadableTransaction> {

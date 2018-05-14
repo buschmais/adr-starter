@@ -28,7 +28,7 @@ import com.salesmanager.shop.store.controller.ControllerConstants;
 import com.salesmanager.shop.store.controller.customer.facade.CustomerFacade;
 import com.salesmanager.shop.store.controller.order.facade.OrderFacade;
 import com.salesmanager.shop.utils.EmailTemplatesUtils;
-import com.salesmanager.shop.utils.LabelUtils;
+import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.shop.utils.LanguageUtils;
 import com.salesmanager.shop.utils.LocaleUtils;
 import org.apache.commons.lang3.StringUtils;

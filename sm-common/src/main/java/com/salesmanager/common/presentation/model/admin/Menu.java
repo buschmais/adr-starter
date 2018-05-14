@@ -1,4 +1,4 @@
-package com.salesmanager.shop.admin.model.web;
+package com.salesmanager.common.presentation.model.admin;
 
 
 

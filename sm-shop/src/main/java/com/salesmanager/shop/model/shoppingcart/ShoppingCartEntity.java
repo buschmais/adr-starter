@@ -1,6 +1,6 @@
 package com.salesmanager.shop.model.shoppingcart;
 
-import com.salesmanager.shop.model.ShopEntity;
+import com.salesmanager.common.presentation.model.ShopEntity;
 
 public class ShoppingCartEntity extends ShopEntity {
 

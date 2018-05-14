@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.salesmanager.shop.model.ShopEntity;
+import com.salesmanager.common.presentation.model.ShopEntity;
 
 
 public class ProductReviewEntity extends ShopEntity implements Serializable {

@@ -2,7 +2,7 @@ package com.salesmanager.catalog.presentation.model;
 
 import java.io.Serializable;
 
-import com.salesmanager.shop.model.ShopEntity;
+import com.salesmanager.common.presentation.model.ShopEntity;
 
 
 public abstract class CatalogEntity extends ShopEntity implements Serializable {

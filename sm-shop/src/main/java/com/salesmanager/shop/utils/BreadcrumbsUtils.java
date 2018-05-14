@@ -1,6 +1,7 @@
 package com.salesmanager.shop.utils;
 
 import com.salesmanager.catalog.business.service.category.CategoryService;
+import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.core.model.catalog.category.Category;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;

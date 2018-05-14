@@ -34,11 +34,11 @@ import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.shop.model.shop.Breadcrumb;
 import com.salesmanager.shop.model.shop.BreadcrumbItem;
 import com.salesmanager.shop.model.shop.BreadcrumbItemType;
-import com.salesmanager.shop.model.shop.PageInformation;
+import com.salesmanager.common.presentation.model.PageInformation;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
-import com.salesmanager.shop.utils.DateUtil;
+import com.salesmanager.common.presentation.util.DateUtil;
 import com.salesmanager.shop.utils.ImageFilePath;
-import com.salesmanager.shop.utils.LabelUtils;
+import com.salesmanager.common.presentation.util.LabelUtils;
 
 
 

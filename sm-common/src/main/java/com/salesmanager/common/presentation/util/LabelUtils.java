@@ -1,4 +1,4 @@
-package com.salesmanager.shop.utils;
+package com.salesmanager.common.presentation.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

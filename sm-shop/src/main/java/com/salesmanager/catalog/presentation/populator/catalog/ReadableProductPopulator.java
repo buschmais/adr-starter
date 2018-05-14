@@ -26,7 +26,7 @@ import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufact
 import com.salesmanager.catalog.presentation.model.product.ReadableImage;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.model.product.RentalOwner;
-import com.salesmanager.shop.utils.DateUtil;
+import com.salesmanager.common.presentation.util.DateUtil;
 import com.salesmanager.shop.utils.ImageFilePath;
 
 

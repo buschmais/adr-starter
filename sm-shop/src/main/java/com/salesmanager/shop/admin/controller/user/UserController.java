@@ -1,6 +1,7 @@
 package com.salesmanager.shop.admin.controller.user;
 
 import com.salesmanager.common.business.exception.ServiceException;
+import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.core.business.modules.email.Email;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.core.business.services.reference.country.CountryService;
@@ -17,7 +18,7 @@ import com.salesmanager.core.model.user.User;
 import com.salesmanager.shop.admin.controller.ControllerConstants;
 import com.salesmanager.shop.admin.model.secutity.Password;
 import com.salesmanager.shop.admin.model.userpassword.UserReset;
-import com.salesmanager.shop.admin.model.web.Menu;
+import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.admin.security.SecurityQuestion;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.shop.constants.EmailConstants;
@@ -72,7 +73,7 @@ public class UserController {
 	private MerchantStoreService merchantStoreService;
 	
 	@Inject
-	LabelUtils messages;
+    LabelUtils messages;
 	
 	@Inject
 	private FilePathUtils filePathUtils;

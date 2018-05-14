@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.salesmanager.core.business.services.system.MerchantConfigurationService;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.system.MerchantConfig;
-import com.salesmanager.shop.admin.model.web.Menu;
+import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 
 
