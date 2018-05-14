@@ -1,7 +1,7 @@
 package com.salesmanager.shop.populator.order;
 
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;

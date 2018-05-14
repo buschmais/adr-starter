@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.salesmanager.core.business.exception.ServiceException;
-import com.salesmanager.core.business.utils.ProductPriceUtils;
+import com.salesmanager.common.business.exception.ServiceException;
+import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.attribute.ProductAttribute;
 import com.salesmanager.core.model.catalog.product.price.FinalPrice;

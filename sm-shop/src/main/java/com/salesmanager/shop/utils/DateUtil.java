@@ -14,7 +14,7 @@
  */
 package com.salesmanager.shop.utils;
 
-import com.salesmanager.core.business.constants.Constants;
+import com.salesmanager.common.business.constants.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

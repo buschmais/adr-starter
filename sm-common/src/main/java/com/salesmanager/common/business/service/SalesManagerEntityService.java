@@ -1,9 +1,9 @@
-package com.salesmanager.core.business.services.common.generic;
+package com.salesmanager.common.business.service;
 
 import java.io.Serializable;
 import java.util.List;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 
 
 /**
@@ -11,7 +11,7 @@ import com.salesmanager.core.business.exception.ServiceException;
  *
  * @param <T> type d'entité
  */
-public interface SalesManagerEntityService<K extends Serializable & Comparable<K>, E extends com.salesmanager.core.model.generic.SalesManagerEntity<K, ?>> extends TransactionalAspectAwareService{
+public interface SalesManagerEntityService<K extends Serializable & Comparable<K>, E extends com.salesmanager.common.model.SalesManagerEntity<K, ?>> extends TransactionalAspectAwareService{
 
 	/**
 	 * Crée l'entité dans la base de données. Mis à part dans les tests pour faire des sauvegardes simples, utiliser

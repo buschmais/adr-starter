@@ -68,7 +68,7 @@
   	  <tx:annotation-driven/> 
   	  
   	  <aop:config>
-		<aop:pointcut id="txPointCutDef" expression="this(com.salesmanager.core.business.services.common.generic.TransactionalAspectAwareService)" />
+		<aop:pointcut id="txPointCutDef" expression="this(com.salesmanager.common.business.service.TransactionalAspectAwareService)" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCutDef" />
 	  </aop:config>
 
@@ -77,7 +77,7 @@
 				<tx:method name="get*" read-only="true" />
 				<tx:method name="list*" read-only="true" />
 				<tx:method name="search*" read-only="true" />
-				<tx:method name="*" read-only="false" rollback-for="com.salesmanager.core.business.exception.ServiceException" />
+				<tx:method name="*" read-only="false" rollback-for="com.salesmanager.common.business.exception.ServiceException" />
 			</tx:attributes>
 	  </tx:advice> 
     

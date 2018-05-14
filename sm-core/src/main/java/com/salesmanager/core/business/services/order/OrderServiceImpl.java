@@ -1,10 +1,10 @@
 package com.salesmanager.core.business.services.order;
 
-import com.salesmanager.core.business.constants.Constants;
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.constants.Constants;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.modules.order.InvoiceModule;
 import com.salesmanager.core.business.repositories.order.OrderRepository;
-import com.salesmanager.core.business.services.common.generic.SalesManagerEntityServiceImpl;
+import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.order.ordertotal.OrderTotalService;
 import com.salesmanager.core.business.services.payments.PaymentService;

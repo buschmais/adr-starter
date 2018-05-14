@@ -1,6 +1,5 @@
 package com.salesmanager.shop.store.security.manager;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,8 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,7 +23,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.social.UserIdSource;
@@ -47,18 +43,15 @@ import org.springframework.social.security.SocialUserDetails;
 import org.springframework.social.security.provider.SocialAuthenticationService;
 import org.springframework.social.support.URIBuilder;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.salesmanager.core.business.services.user.UserService;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.shop.model.customer.Address;
-import com.salesmanager.shop.model.customer.CustomerEntity;
 import com.salesmanager.shop.model.customer.PersistableCustomer;
 import com.salesmanager.shop.model.customer.UserAlreadyExistException;
 import com.salesmanager.shop.store.controller.customer.facade.CustomerFacade;
@@ -240,7 +233,7 @@ public class FacebookCustomerAuthenticationManager extends CustomAuthenticationM
 			PersistableCustomer registration = null;
 			try {
 				
-				MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.core.business.constants.Constants.DEFAULT_STORE);
+				MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 				Language language = languageUtils.getRESTLanguage(request, merchantStore);	
 
 				registration = register(token.getConnection());
@@ -316,7 +309,7 @@ public class FacebookCustomerAuthenticationManager extends CustomAuthenticationM
 			Address address = new Address();
 			address.setFirstName(socialMediaProfile.getFirstName());
 			address.setLastName(socialMediaProfile.getLastName());
-			address.setCountry(com.salesmanager.core.business.constants.Constants.DEFAULT_COUNTRY);
+			address.setCountry(com.salesmanager.common.business.constants.Constants.DEFAULT_COUNTRY);
 			
 			customer.setBilling(address);
 

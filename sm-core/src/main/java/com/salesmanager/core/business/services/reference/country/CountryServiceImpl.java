@@ -9,13 +9,12 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.repositories.reference.country.CountryRepository;
-import com.salesmanager.core.business.services.common.generic.SalesManagerEntityServiceImpl;
+import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.core.business.utils.CacheUtils;
 import com.salesmanager.core.model.reference.country.Country;
 import com.salesmanager.core.model.reference.country.CountryDescription;

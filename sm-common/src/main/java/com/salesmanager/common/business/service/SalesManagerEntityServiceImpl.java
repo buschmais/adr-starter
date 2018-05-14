@@ -1,4 +1,4 @@
-package com.salesmanager.core.business.services.common.generic;
+package com.salesmanager.common.business.service;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.salesmanager.core.business.exception.ServiceException;
-import com.salesmanager.core.model.generic.SalesManagerEntity;
+import com.salesmanager.common.business.exception.ServiceException;
+import com.salesmanager.common.model.SalesManagerEntity;
 
 /**
  * @param <T> entity type

@@ -8,7 +8,7 @@ import java.util.Set;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.model.common.Billing;
 import com.salesmanager.core.model.common.Delivery;
 import com.salesmanager.core.model.customer.Customer;

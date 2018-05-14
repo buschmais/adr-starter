@@ -1,7 +1,7 @@
 package com.salesmanager.core.business.services.merchant;
 
-import com.salesmanager.core.business.exception.ServiceException;
-import com.salesmanager.core.business.services.common.generic.SalesManagerEntityService;
+import com.salesmanager.common.business.exception.ServiceException;
+import com.salesmanager.common.business.service.SalesManagerEntityService;
 import com.salesmanager.core.model.merchant.MerchantStore;
 
 public interface MerchantStoreService extends SalesManagerEntityService<Integer, MerchantStore>{

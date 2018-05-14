@@ -6,10 +6,10 @@ import com.salesmanager.core.business.modules.cms.content.StaticContentFileManag
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.repository.product.file.DigitalProductRepository;
 import com.salesmanager.catalog.business.service.product.ProductService;
-import com.salesmanager.core.business.services.common.generic.SalesManagerEntityServiceImpl;
+import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.file.DigitalProduct;
 import com.salesmanager.core.model.content.FileContentType;

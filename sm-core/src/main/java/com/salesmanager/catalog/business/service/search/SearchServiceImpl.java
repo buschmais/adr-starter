@@ -1,7 +1,7 @@
 package com.salesmanager.catalog.business.service.search;
 
-import com.salesmanager.core.business.constants.Constants;
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.constants.Constants;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.core.model.catalog.category.Category;

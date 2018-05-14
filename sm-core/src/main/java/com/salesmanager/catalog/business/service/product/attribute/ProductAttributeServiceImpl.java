@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.salesmanager.core.business.exception.ServiceException;
-import com.salesmanager.core.business.services.common.generic.SalesManagerEntityServiceImpl;
+import com.salesmanager.common.business.exception.ServiceException;
+import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import org.springframework.stereotype.Service;
 
 import com.salesmanager.catalog.business.repository.product.attribute.ProductAttributeRepository;

@@ -13,7 +13,7 @@ import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
 
 import com.salesmanager.core.constants.SchemaConstant;
-import com.salesmanager.core.model.generic.SalesManagerEntity;
+import com.salesmanager.common.model.SalesManagerEntity;
 
 @Entity
 @Table(name="CUSTOMER_OPTION_SET", schema=SchemaConstant.SALESMANAGER_SCHEMA,

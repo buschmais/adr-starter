@@ -1,4 +1,4 @@
-package com.salesmanager.core.business.constants;
+package com.salesmanager.common.business.constants;
 
 import java.util.Currency;
 import java.util.Locale;

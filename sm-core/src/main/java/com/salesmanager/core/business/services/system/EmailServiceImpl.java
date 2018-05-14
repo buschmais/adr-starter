@@ -5,8 +5,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.salesmanager.core.business.constants.Constants;
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.constants.Constants;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.modules.email.Email;
 import com.salesmanager.core.business.modules.email.EmailConfig;
 import com.salesmanager.core.business.modules.email.HtmlEmailSender;

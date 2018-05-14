@@ -201,7 +201,7 @@ public class ShoppingOrderPaymentController extends AbstractController {
 						
 						
 						
-						if(config.getEnvironment().equals(com.salesmanager.core.business.constants.Constants.PRODUCTION_ENVIRONMENT)) {
+						if(config.getEnvironment().equals(com.salesmanager.common.business.constants.Constants.PRODUCTION_ENVIRONMENT)) {
 							StringBuilder url = new StringBuilder().append(coreConfiguration.getProperty("PAYPAL_EXPRESSCHECKOUT_PRODUCTION")).append(urlAppender.toString());
 							ajaxResponse.addEntry("url", url.toString());
 						} else {

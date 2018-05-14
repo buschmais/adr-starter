@@ -11,8 +11,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.salesmanager.core.business.constants.Constants;
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.constants.Constants;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.modules.cms.impl.LocalCacheManagerImpl;
 import com.salesmanager.core.business.modules.cms.product.ProductImageGet;
 import com.salesmanager.core.business.modules.cms.product.ProductImagePut;

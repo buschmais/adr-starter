@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.salesmanager.core.business.repositories.order.orderproduct.OrderProductDownloadRepository;
-import com.salesmanager.core.business.services.common.generic.SalesManagerEntityServiceImpl;
+import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.core.model.order.orderproduct.OrderProductDownload;
 
 

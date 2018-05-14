@@ -1,4 +1,4 @@
-package com.salesmanager.core.business.services.common.generic;
+package com.salesmanager.common.business.service;
 
 /**
  * Indique que le service doit être rendu transactionnel via un aspect.

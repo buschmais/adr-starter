@@ -8,9 +8,9 @@ import javax.inject.Inject;
 import org.apache.commons.lang.Validate;
 import org.springframework.stereotype.Service;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.repositories.customer.review.CustomerReviewRepository;
-import com.salesmanager.core.business.services.common.generic.SalesManagerEntityServiceImpl;
+import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.customer.review.CustomerReview;

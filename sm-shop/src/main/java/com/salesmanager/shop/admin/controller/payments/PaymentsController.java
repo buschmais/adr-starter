@@ -72,7 +72,7 @@ public class PaymentsController {
 		IntegrationConfiguration configuration = paymentService.getPaymentConfiguration(code, store);
 		if(configuration==null) {
 			configuration = new IntegrationConfiguration();
-			configuration.setEnvironment(com.salesmanager.core.business.constants.Constants.PRODUCTION_ENVIRONMENT);
+			configuration.setEnvironment(com.salesmanager.common.business.constants.Constants.PRODUCTION_ENVIRONMENT);
 			
 			Map<String,String> keys = new HashMap<String,String>();
 			keys.put("transaction", TransactionType.AUTHORIZECAPTURE.name());
@@ -84,8 +84,8 @@ public class PaymentsController {
 		configuration.setModuleCode(code);
 		
 		List<String> environments = new ArrayList<String>();
-		environments.add(com.salesmanager.core.business.constants.Constants.TEST_ENVIRONMENT);
-		environments.add(com.salesmanager.core.business.constants.Constants.PRODUCTION_ENVIRONMENT);
+		environments.add(com.salesmanager.common.business.constants.Constants.TEST_ENVIRONMENT);
+		environments.add(com.salesmanager.common.business.constants.Constants.PRODUCTION_ENVIRONMENT);
 		
 		model.addAttribute("configuration", configuration);
 		model.addAttribute("environments", environments);
@@ -105,8 +105,8 @@ public class PaymentsController {
 
 		
 		List<String> environments = new ArrayList<String>();
-		environments.add(com.salesmanager.core.business.constants.Constants.TEST_ENVIRONMENT);
-		environments.add(com.salesmanager.core.business.constants.Constants.PRODUCTION_ENVIRONMENT);
+		environments.add(com.salesmanager.common.business.constants.Constants.TEST_ENVIRONMENT);
+		environments.add(com.salesmanager.common.business.constants.Constants.PRODUCTION_ENVIRONMENT);
 
 		model.addAttribute("environments", environments);
 		model.addAttribute("configuration", configuration);

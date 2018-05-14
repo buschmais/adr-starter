@@ -138,7 +138,8 @@
 	  	<module>sm-core-modules</module>
 	  	<module>sm-core</module>
 	  	<module>sm-shop</module>
-	</modules>
+        <module>sm-common</module>
+    </modules>
 
     <repositories>
         <repository>

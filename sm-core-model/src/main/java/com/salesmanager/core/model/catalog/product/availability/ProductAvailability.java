@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 import com.salesmanager.core.constants.SchemaConstant;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.price.ProductPrice;
-import com.salesmanager.core.model.generic.SalesManagerEntity;
+import com.salesmanager.common.model.SalesManagerEntity;
 import com.salesmanager.core.utils.CloneUtils;
 
 

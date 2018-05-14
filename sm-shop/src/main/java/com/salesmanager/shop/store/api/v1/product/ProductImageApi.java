@@ -141,7 +141,7 @@ public class ProductImageApi {
      	
  		try {
      	
- 	    	MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.core.business.constants.Constants.DEFAULT_STORE);
+ 	    	MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
  			Language language = languageUtils.getRESTLanguage(request, merchantStore);	
  	    	
  	    	//get the product

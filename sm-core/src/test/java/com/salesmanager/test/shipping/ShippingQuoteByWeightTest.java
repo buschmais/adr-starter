@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import org.junit.Ignore;
 import org.springframework.util.Assert;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.services.shipping.ShippingService;
 import com.salesmanager.core.model.catalog.product.Product;

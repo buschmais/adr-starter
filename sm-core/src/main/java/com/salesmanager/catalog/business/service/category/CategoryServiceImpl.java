@@ -9,9 +9,9 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.salesmanager.core.business.constants.Constants;
-import com.salesmanager.core.business.exception.ServiceException;
-import com.salesmanager.core.business.services.common.generic.SalesManagerEntityServiceImpl;
+import com.salesmanager.common.business.constants.Constants;
+import com.salesmanager.common.business.exception.ServiceException;
+import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 

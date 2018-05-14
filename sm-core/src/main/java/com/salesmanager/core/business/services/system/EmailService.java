@@ -2,7 +2,7 @@ package com.salesmanager.core.business.services.system;
 
 
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.modules.email.Email;
 import com.salesmanager.core.business.modules.email.EmailConfig;
 import com.salesmanager.core.model.merchant.MerchantStore;

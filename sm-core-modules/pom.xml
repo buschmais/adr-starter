@@ -21,6 +21,13 @@
 
 	<dependencies>
 
+		<!-- sm-common -->
+		<dependency>
+			<groupId>com.shopizer</groupId>
+			<artifactId>sm-common</artifactId>
+			<version>${shopizer.version}</version>
+		</dependency>
+
 		<!-- sm-core-model -->
 		<dependency>
 			<groupId>com.shopizer</groupId>

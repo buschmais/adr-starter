@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.product.image.ProductImageService;
 import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.model.catalog.product.file.ProductImageSize;

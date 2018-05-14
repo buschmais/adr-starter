@@ -6,15 +6,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.common.business.exception.ServiceException;
+import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.core.business.modules.cms.content.StaticContentFileManager;
 import com.salesmanager.core.business.modules.cms.product.ProductFileManager;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import com.salesmanager.core.business.exception.ServiceException;
 import com.salesmanager.catalog.business.repository.product.image.ProductImageRepository;
-import com.salesmanager.core.business.services.common.generic.SalesManagerEntityServiceImpl;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.file.ProductImageSize;
 import com.salesmanager.core.model.catalog.product.image.ProductImage;
@@ -24,7 +24,7 @@ import com.salesmanager.core.model.content.ImageContentFile;
 import com.salesmanager.core.model.content.OutputContentFile;
 
 @Service("productImage")
-public class ProductImageServiceImpl extends SalesManagerEntityServiceImpl<Long, ProductImage> 
+public class ProductImageServiceImpl extends SalesManagerEntityServiceImpl<Long, ProductImage>
 	implements ProductImageService {
 	
 	private ProductImageRepository productImageRepository;

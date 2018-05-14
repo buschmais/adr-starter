@@ -17,7 +17,7 @@ import javax.persistence.TableGenerator;
 import org.hibernate.annotations.Type;
 
 import com.salesmanager.core.constants.SchemaConstant;
-import com.salesmanager.core.model.generic.SalesManagerEntity;
+import com.salesmanager.common.model.SalesManagerEntity;
 
 
 /**

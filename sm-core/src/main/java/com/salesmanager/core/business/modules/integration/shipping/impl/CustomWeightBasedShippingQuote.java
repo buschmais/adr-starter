@@ -10,9 +10,9 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.services.system.MerchantConfigurationService;
-import com.salesmanager.core.business.utils.ProductPriceUtils;
+import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.model.common.Delivery;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.shipping.PackageDetails;

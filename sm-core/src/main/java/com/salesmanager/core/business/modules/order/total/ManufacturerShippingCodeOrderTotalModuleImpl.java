@@ -8,7 +8,7 @@ import org.drools.runtime.StatelessKnowledgeSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.salesmanager.core.business.constants.Constants;
+import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.price.FinalPrice;

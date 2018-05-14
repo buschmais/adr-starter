@@ -30,7 +30,7 @@ import org.hibernate.annotations.Type;
 import com.salesmanager.core.constants.SchemaConstant;
 import com.salesmanager.core.model.common.Billing;
 import com.salesmanager.core.model.common.Delivery;
-import com.salesmanager.core.model.generic.SalesManagerEntity;
+import com.salesmanager.common.model.SalesManagerEntity;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.attributes.OrderAttribute;
 import com.salesmanager.core.model.order.orderproduct.OrderProduct;

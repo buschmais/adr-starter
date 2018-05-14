@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.services.order.OrderService;
 import com.salesmanager.core.business.services.order.OrderServiceImpl;
 import com.salesmanager.core.model.customer.Customer;

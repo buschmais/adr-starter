@@ -2,7 +2,7 @@ package com.salesmanager.shop.admin.controller.products;
 
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.price.ProductPriceService;
-import com.salesmanager.core.business.utils.ProductPriceUtils;
+import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.core.model.catalog.product.Product;
@@ -76,7 +76,7 @@ public class ProductPriceController {
 		
 		ProductAvailability productAvailability = null;
 		for(ProductAvailability availability : product.getAvailabilities()) {
-			if(availability.getRegion().equals(com.salesmanager.core.business.constants.Constants.ALL_REGIONS)) {
+			if(availability.getRegion().equals(com.salesmanager.common.business.constants.Constants.ALL_REGIONS)) {
 				productAvailability = availability;
 			}
 		}
@@ -140,7 +140,7 @@ public class ProductPriceController {
 
 			//get default availability
 			for(ProductAvailability availability : availabilities) {
-				if(availability.getRegion().equals(com.salesmanager.core.business.constants.Constants.ALL_REGIONS)) {
+				if(availability.getRegion().equals(com.salesmanager.common.business.constants.Constants.ALL_REGIONS)) {
 					defaultAvailability = availability;
 					break;
 				}
@@ -256,7 +256,7 @@ public class ProductPriceController {
 	
 			//get default availability
 			for(ProductAvailability availability : availabilities) {
-				if(availability.getRegion().equals(com.salesmanager.core.business.constants.Constants.ALL_REGIONS)) {//TODO to be updated when multiple regions is implemented
+				if(availability.getRegion().equals(com.salesmanager.common.business.constants.Constants.ALL_REGIONS)) {//TODO to be updated when multiple regions is implemented
 					productAvailability = availability;
 					Set<ProductPrice> prices = availability.getPrices();
 					for(ProductPrice price : prices) {
@@ -311,7 +311,7 @@ public class ProductPriceController {
 		if(productAvailability==null) {
 			Set<ProductAvailability> availabilities = product.getAvailabilities();
 			for(ProductAvailability availability : availabilities) {
-				if(availability.getRegion().equals(com.salesmanager.core.business.constants.Constants.ALL_REGIONS)) {//TODO to be updated when multiple regions is implemented
+				if(availability.getRegion().equals(com.salesmanager.common.business.constants.Constants.ALL_REGIONS)) {//TODO to be updated when multiple regions is implemented
 					productAvailability = availability;
 					break;
 				}

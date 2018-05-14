@@ -2,7 +2,7 @@ package com.salesmanager.shop.admin.controller.shipping;
 
 import com.salesmanager.core.business.services.reference.country.CountryService;
 import com.salesmanager.core.business.services.shipping.ShippingService;
-import com.salesmanager.core.business.utils.ProductPriceUtils;
+import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.core.model.merchant.MerchantStore;
@@ -192,8 +192,8 @@ public class CustomShippingMethodsController {
 		LOGGER.debug("Saving module code " + moduleCode);
 		
 		List<String> environments = new ArrayList<String>();
-		environments.add(com.salesmanager.core.business.constants.Constants.TEST_ENVIRONMENT);
-		environments.add(com.salesmanager.core.business.constants.Constants.PRODUCTION_ENVIRONMENT);
+		environments.add(com.salesmanager.common.business.constants.Constants.TEST_ENVIRONMENT);
+		environments.add(com.salesmanager.common.business.constants.Constants.PRODUCTION_ENVIRONMENT);
 
 		model.addAttribute("environments", environments);
 		model.addAttribute("configuration", configuration);
@@ -739,7 +739,7 @@ public class CustomShippingMethodsController {
 		
 		
 		List<String> environments = new ArrayList<String>();
-		environments.add(com.salesmanager.core.business.constants.Constants.PRODUCTION_ENVIRONMENT);//only production
+		environments.add(com.salesmanager.common.business.constants.Constants.PRODUCTION_ENVIRONMENT);//only production
 		
 		model.addAttribute("environments", environments);
 		model.addAttribute("configuration", configuration);

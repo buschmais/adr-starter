@@ -1,6 +1,6 @@
 package com.salesmanager.shop.store.controller.customer;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.customer.attribute.CustomerAttributeService;
 import com.salesmanager.core.business.services.customer.attribute.CustomerOptionService;

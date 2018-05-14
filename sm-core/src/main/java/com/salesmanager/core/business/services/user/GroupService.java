@@ -3,8 +3,8 @@ package com.salesmanager.core.business.services.user;
 import java.util.List;
 import java.util.Set;
 
-import com.salesmanager.core.business.exception.ServiceException;
-import com.salesmanager.core.business.services.common.generic.SalesManagerEntityService;
+import com.salesmanager.common.business.exception.ServiceException;
+import com.salesmanager.common.business.service.SalesManagerEntityService;
 import com.salesmanager.core.model.user.Group;
 import com.salesmanager.core.model.user.GroupType;
 

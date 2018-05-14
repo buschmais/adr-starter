@@ -2,7 +2,7 @@ package com.salesmanager.shop.init.data;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salesmanager.core.business.constants.SystemConstants;
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.core.business.services.reference.init.InitializationDatabase;
 import com.salesmanager.core.business.services.system.MerchantConfigurationService;
@@ -28,14 +28,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.xml.transform.stream.StreamSource;
 
 
 @Component

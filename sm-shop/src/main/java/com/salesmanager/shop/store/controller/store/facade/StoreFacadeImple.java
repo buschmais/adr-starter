@@ -15,7 +15,7 @@ public class StoreFacadeImple implements StoreFacade {
 
 	@Override
 	public MerchantStore getByCode(String code) throws Exception {
-		return merchantStoreService.getByCode(com.salesmanager.core.business.constants.Constants.DEFAULT_STORE);
+		return merchantStoreService.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 	}
 
 }

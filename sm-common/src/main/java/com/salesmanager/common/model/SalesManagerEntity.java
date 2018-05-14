@@ -1,4 +1,4 @@
-package com.salesmanager.core.model.generic;
+package com.salesmanager.common.model;
 
 import java.io.Serializable;
 import java.text.Collator;

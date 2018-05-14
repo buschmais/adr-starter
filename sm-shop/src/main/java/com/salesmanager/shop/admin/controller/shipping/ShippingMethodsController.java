@@ -87,8 +87,8 @@ public class ShippingMethodsController {
 		configuration.setModuleCode(code);
 		
 		List<String> environments = new ArrayList<String>();
-		environments.add(com.salesmanager.core.business.constants.Constants.TEST_ENVIRONMENT);
-		environments.add(com.salesmanager.core.business.constants.Constants.PRODUCTION_ENVIRONMENT);
+		environments.add(com.salesmanager.common.business.constants.Constants.TEST_ENVIRONMENT);
+		environments.add(com.salesmanager.common.business.constants.Constants.PRODUCTION_ENVIRONMENT);
 		
 		model.addAttribute("configuration", configuration);
 		model.addAttribute("environments", environments);
@@ -108,8 +108,8 @@ public class ShippingMethodsController {
 		LOGGER.debug("Saving module code " + moduleCode);
 		
 		List<String> environments = new ArrayList<String>();
-		environments.add(com.salesmanager.core.business.constants.Constants.TEST_ENVIRONMENT);
-		environments.add(com.salesmanager.core.business.constants.Constants.PRODUCTION_ENVIRONMENT);
+		environments.add(com.salesmanager.common.business.constants.Constants.TEST_ENVIRONMENT);
+		environments.add(com.salesmanager.common.business.constants.Constants.PRODUCTION_ENVIRONMENT);
 
 		model.addAttribute("environments", environments);
 		model.addAttribute("configuration", configuration);

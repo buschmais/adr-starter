@@ -13,7 +13,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.services.reference.loader.IntegrationModulesLoader;
 import com.salesmanager.core.business.services.system.ModuleConfigurationService;
 import com.salesmanager.core.model.system.IntegrationModule;

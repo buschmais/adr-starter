@@ -2,7 +2,7 @@ package com.salesmanager.core.modules.integration.shipping.model;
 
 import java.util.List;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.shipping.PackageDetails;
 import com.salesmanager.core.model.shipping.ShippingProduct;

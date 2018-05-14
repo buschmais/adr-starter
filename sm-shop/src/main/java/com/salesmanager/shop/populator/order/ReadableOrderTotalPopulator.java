@@ -1,6 +1,6 @@
 package com.salesmanager.shop.populator.order;
 
-import com.salesmanager.core.business.constants.Constants;
+import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;

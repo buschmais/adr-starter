@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 
 import com.salesmanager.core.constants.SchemaConstant;
 import com.salesmanager.core.model.common.Delivery;
-import com.salesmanager.core.model.generic.SalesManagerEntity;
+import com.salesmanager.common.model.SalesManagerEntity;
 
 
 /**

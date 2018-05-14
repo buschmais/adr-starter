@@ -3,8 +3,8 @@ package com.salesmanager.core.business.services.payments;
 import java.util.Date;
 import java.util.List;
 
-import com.salesmanager.core.business.exception.ServiceException;
-import com.salesmanager.core.business.services.common.generic.SalesManagerEntityService;
+import com.salesmanager.common.business.exception.ServiceException;
+import com.salesmanager.common.business.service.SalesManagerEntityService;
 import com.salesmanager.core.model.order.Order;
 import com.salesmanager.core.model.payments.Transaction;
 

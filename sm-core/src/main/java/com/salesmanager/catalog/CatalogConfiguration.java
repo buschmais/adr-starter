@@ -9,7 +9,7 @@ import javax.persistence.EntityListeners;
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan(basePackages = {"com.salesmanager.catalog.business.service"})
+@ComponentScan(basePackages = {"com.salesmanager.catalog.business.service", "com.salesmanager.catalog.business.util"})
 @EnableJpaRepositories(basePackages = {"com.salesmanager.catalog.business.repository"})
 public class CatalogConfiguration {
 }

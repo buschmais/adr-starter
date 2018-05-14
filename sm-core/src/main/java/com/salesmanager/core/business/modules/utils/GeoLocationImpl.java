@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.model.CityResponse;
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.model.common.Address;
 import com.salesmanager.core.modules.utils.GeoLocation;
 

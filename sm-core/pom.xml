@@ -36,6 +36,12 @@
 			<version>${shopizer.version}</version>
 		</dependency>
 
+		<!-- sm-common -->
+		<dependency>
+			<groupId>com.shopizer</groupId>
+			<artifactId>sm-common</artifactId>
+			<version>${shopizer.version}</version>
+		</dependency>
 
 		<!-- sm-core-modules -->
 		<dependency>

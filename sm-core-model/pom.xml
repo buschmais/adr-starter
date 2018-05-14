@@ -29,6 +29,13 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- sm-common -->
+		<dependency>
+			<groupId>com.shopizer</groupId>
+			<artifactId>sm-common</artifactId>
+			<version>${shopizer.version}</version>
+		</dependency>
 		
 		<!-- Spring Data JPA-->
 		<dependency>

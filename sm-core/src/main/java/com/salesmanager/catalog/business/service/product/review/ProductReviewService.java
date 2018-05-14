@@ -2,7 +2,7 @@ package com.salesmanager.catalog.business.service.product.review;
 
 import java.util.List;
 
-import com.salesmanager.core.business.services.common.generic.SalesManagerEntityService;
+import com.salesmanager.common.business.service.SalesManagerEntityService;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.review.ProductReview;
 import com.salesmanager.core.model.customer.Customer;

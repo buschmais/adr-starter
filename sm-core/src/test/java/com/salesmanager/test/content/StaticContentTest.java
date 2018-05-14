@@ -13,9 +13,8 @@ import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
-import org.junit.Test;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.InputContentFile;

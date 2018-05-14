@@ -14,7 +14,7 @@ import javax.persistence.UniqueConstraint;
 
 import com.salesmanager.core.constants.SchemaConstant;
 import com.salesmanager.core.model.customer.Customer;
-import com.salesmanager.core.model.generic.SalesManagerEntity;
+import com.salesmanager.common.model.SalesManagerEntity;
 
 @Entity
 @Table(name="CUSTOMER_ATTRIBUTE", schema=SchemaConstant.SALESMANAGER_SCHEMA,

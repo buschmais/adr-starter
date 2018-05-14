@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 
 import com.salesmanager.core.business.services.system.MerchantLogService;
 import com.salesmanager.core.business.utils.CreditCardUtils;
-import com.salesmanager.core.business.utils.ProductPriceUtils;
+import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.Order;

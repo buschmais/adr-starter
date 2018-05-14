@@ -3,8 +3,8 @@ package com.salesmanager.core.business.services.reference.country;
 import java.util.List;
 import java.util.Map;
 
-import com.salesmanager.core.business.exception.ServiceException;
-import com.salesmanager.core.business.services.common.generic.SalesManagerEntityService;
+import com.salesmanager.common.business.exception.ServiceException;
+import com.salesmanager.common.business.service.SalesManagerEntityService;
 import com.salesmanager.core.model.reference.country.Country;
 import com.salesmanager.core.model.reference.country.CountryDescription;
 import com.salesmanager.core.model.reference.language.Language;

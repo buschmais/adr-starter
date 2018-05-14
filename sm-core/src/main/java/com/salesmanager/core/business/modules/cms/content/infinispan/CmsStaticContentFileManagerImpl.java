@@ -18,7 +18,7 @@ import org.infinispan.tree.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.modules.cms.content.FileGet;
 import com.salesmanager.core.business.modules.cms.content.FilePut;
 import com.salesmanager.core.business.modules.cms.content.FileRemove;

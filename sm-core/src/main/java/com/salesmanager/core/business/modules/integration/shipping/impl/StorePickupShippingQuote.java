@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import org.apache.commons.lang.Validate;
 
 import com.salesmanager.core.business.services.system.MerchantConfigurationService;
-import com.salesmanager.core.business.utils.ProductPriceUtils;
+import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.model.common.Delivery;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.shipping.PackageDetails;

@@ -5,7 +5,7 @@ package com.salesmanager.core.business.modules.cms.content;
 
 import java.util.List;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.modules.cms.content.infinispan.CmsStaticContentFileManagerImpl;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.InputContentFile;

@@ -7,7 +7,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.services.shipping.ShippingService;
 import com.salesmanager.core.business.services.system.MerchantLogService;
 import com.salesmanager.core.model.catalog.product.Product;

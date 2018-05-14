@@ -7,7 +7,7 @@ import com.salesmanager.catalog.business.service.product.manufacturer.Manufactur
 import com.salesmanager.catalog.business.service.product.type.ProductTypeService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.core.business.utils.CoreConfiguration;
-import com.salesmanager.core.business.utils.ProductPriceUtils;
+import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.core.model.catalog.category.Category;
@@ -192,7 +192,7 @@ public class ProductController {
 			if(availabilities!=null && availabilities.size()>0) {
 				
 				for(ProductAvailability availability : availabilities) {
-					if(availability.getRegion().equals(com.salesmanager.core.business.constants.Constants.ALL_REGIONS)) {
+					if(availability.getRegion().equals(com.salesmanager.common.business.constants.Constants.ALL_REGIONS)) {
 						productAvailability = availability;
 						Set<ProductPrice> prices = availability.getPrices();
 						for(ProductPrice price : prices) {
@@ -403,7 +403,7 @@ public class ProductController {
 			if(avails !=null && avails.size()>0) {
 				
 				for(ProductAvailability availability : avails) {
-					if(availability.getRegion().equals(com.salesmanager.core.business.constants.Constants.ALL_REGIONS)) {
+					if(availability.getRegion().equals(com.salesmanager.common.business.constants.Constants.ALL_REGIONS)) {
 
 						
 						newProductAvailability = availability;
@@ -631,7 +631,7 @@ public class ProductController {
 			
 			
 
-			if(availability.getRegion().equals(com.salesmanager.core.business.constants.Constants.ALL_REGIONS)) {
+			if(availability.getRegion().equals(com.salesmanager.common.business.constants.Constants.ALL_REGIONS)) {
 				product.setAvailability(availability);
 			}
 			

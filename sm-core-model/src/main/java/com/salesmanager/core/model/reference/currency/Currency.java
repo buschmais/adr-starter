@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
 import com.salesmanager.core.constants.SchemaConstant;
-import com.salesmanager.core.model.generic.SalesManagerEntity;
+import com.salesmanager.common.model.SalesManagerEntity;
 
 @Entity
 @Table(name = "CURRENCY", schema = SchemaConstant.SALESMANAGER_SCHEMA)

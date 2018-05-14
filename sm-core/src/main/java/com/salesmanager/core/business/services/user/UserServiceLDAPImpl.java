@@ -2,7 +2,7 @@ package com.salesmanager.core.business.services.user;
 
 import java.util.List;
 
-import com.salesmanager.core.business.exception.ServiceException;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.user.User;
 
@@ -86,7 +86,7 @@ public class UserServiceLDAPImpl implements UserService {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.salesmanager.core.business.services.common.generic.SalesManagerEntityService#flush()
+	 * @see com.salesmanager.common.business.service.SalesManagerEntityService#flush()
 	 */
 	@Override
 	public void flush() {

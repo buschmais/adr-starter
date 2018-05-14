@@ -1,4 +1,4 @@
-package com.salesmanager.core.business.exception;
+package com.salesmanager.common.business.exception;
 
 /**
  * <p>Exception générée par les services de l'application.</p>
