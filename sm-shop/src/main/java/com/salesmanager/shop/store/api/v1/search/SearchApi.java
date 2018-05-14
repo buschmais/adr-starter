@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.model.catalog.SearchProductList;
-import com.salesmanager.shop.model.catalog.SearchProductRequest;
+import com.salesmanager.catalog.presentation.model.SearchProductList;
+import com.salesmanager.catalog.presentation.model.SearchProductRequest;
 import com.salesmanager.shop.store.controller.search.facade.SearchFacade;
 import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
 import com.salesmanager.shop.utils.LanguageUtils;

@@ -7,7 +7,7 @@ import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.shop.constants.Constants;
-import com.salesmanager.shop.model.catalog.manufacturer.Manufacturer;
+import com.salesmanager.catalog.presentation.model.manufacturer.Manufacturer;
 
 
 

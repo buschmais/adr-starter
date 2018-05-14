@@ -27,12 +27,12 @@ import com.salesmanager.core.model.search.IndexProduct;
 import com.salesmanager.core.model.search.SearchEntry;
 import com.salesmanager.core.model.search.SearchFacet;
 import com.salesmanager.core.model.search.SearchResponse;
-import com.salesmanager.shop.model.catalog.SearchProductList;
-import com.salesmanager.shop.model.catalog.SearchProductRequest;
-import com.salesmanager.shop.model.catalog.category.ReadableCategory;
-import com.salesmanager.shop.model.catalog.product.ReadableProduct;
-import com.salesmanager.shop.populator.catalog.ReadableCategoryPopulator;
-import com.salesmanager.shop.populator.catalog.ReadableProductPopulator;
+import com.salesmanager.catalog.presentation.model.SearchProductList;
+import com.salesmanager.catalog.presentation.model.SearchProductRequest;
+import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
+import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
+import com.salesmanager.catalog.presentation.populator.ReadableCategoryPopulator;
+import com.salesmanager.catalog.presentation.populator.ReadableProductPopulator;
 import com.salesmanager.shop.utils.ImageFilePath;
 
 

@@ -2,7 +2,7 @@ package com.salesmanager.shop.model.customer.attribute;
 
 import java.io.Serializable;
 
-import com.salesmanager.shop.model.catalog.CatalogEntity;
+import com.salesmanager.catalog.presentation.model.CatalogEntity;
 
 public class CustomerOptionValueDescription extends CatalogEntity implements
 		Serializable {

@@ -3,7 +3,7 @@ package com.salesmanager.shop.model.shoppingcart;
 import java.io.Serializable;
 import java.util.List;
 
-import com.salesmanager.shop.model.catalog.product.attribute.ProductAttribute;
+import com.salesmanager.catalog.presentation.model.product.attribute.ProductAttribute;
 
 /**
  * Compatible with v1

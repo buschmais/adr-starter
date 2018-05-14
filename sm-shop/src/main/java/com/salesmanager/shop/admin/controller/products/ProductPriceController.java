@@ -245,7 +245,7 @@ public class ProductPriceController {
 	
 		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
 
-		com.salesmanager.shop.admin.model.catalog.ProductPrice pprice = new com.salesmanager.shop.admin.model.catalog.ProductPrice();
+		com.salesmanager.catalog.presentation.model.admin.ProductPrice pprice = new com.salesmanager.catalog.presentation.model.admin.ProductPrice();
 		
 		ProductPrice productPrice = null;
 		ProductAvailability productAvailability = null;
@@ -336,7 +336,7 @@ public class ProductPriceController {
 	
 	@PreAuthorize("hasRole('PRODUCTS')")
 	@RequestMapping(value="/admin/products/price/save.html", method=RequestMethod.POST)
-	public String saveProductPrice(@Valid @ModelAttribute("price") com.salesmanager.shop.admin.model.catalog.ProductPrice price, BindingResult result, Model model, HttpServletRequest request, Locale locale) throws Exception {
+	public String saveProductPrice(@Valid @ModelAttribute("price") com.salesmanager.catalog.presentation.model.admin.ProductPrice price, BindingResult result, Model model, HttpServletRequest request, Locale locale) throws Exception {
 		
 		//dates after save
 		

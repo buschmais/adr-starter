@@ -13,9 +13,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.salesmanager.shop.model.catalog.SearchProductList;
-import com.salesmanager.shop.model.catalog.SearchProductRequest;
-import com.salesmanager.shop.model.catalog.manufacturer.PersistableManufacturer;
+import com.salesmanager.catalog.presentation.model.SearchProductList;
+import com.salesmanager.catalog.presentation.model.SearchProductRequest;
+import com.salesmanager.catalog.presentation.model.manufacturer.PersistableManufacturer;
 
 public class SearchProductAPITest {
 	

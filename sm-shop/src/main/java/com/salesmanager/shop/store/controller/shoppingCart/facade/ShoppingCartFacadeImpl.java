@@ -305,9 +305,9 @@ public class ShoppingCartFacadeImpl
 		item.setShoppingCart(cartModel);
 		
 		//set attributes
-		List<com.salesmanager.shop.model.catalog.product.attribute.ProductAttribute> attributes = shoppingCartItem.getAttributes();
+		List<com.salesmanager.catalog.presentation.model.product.attribute.ProductAttribute> attributes = shoppingCartItem.getAttributes();
 		if (!CollectionUtils.isEmpty(attributes)) {
-			for(com.salesmanager.shop.model.catalog.product.attribute.ProductAttribute attribute : attributes) {
+			for(com.salesmanager.catalog.presentation.model.product.attribute.ProductAttribute attribute : attributes) {
 				
 				ProductAttribute productAttribute = productAttributeService.getById(attribute.getId());
 				

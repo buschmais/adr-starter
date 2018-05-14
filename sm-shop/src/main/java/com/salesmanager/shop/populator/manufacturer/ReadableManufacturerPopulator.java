@@ -5,7 +5,7 @@ import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.catalog.product.manufacturer.ManufacturerDescription;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.model.catalog.manufacturer.ReadableManufacturer;
+import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufacturer;
 
 import java.util.Set;
 
@@ -36,7 +36,7 @@ public class ReadableManufacturerPopulator extends AbstractDataPopulator<com.sal
 				target.setCode(source.getCode());
 				
 				if (description != null) {
-					com.salesmanager.shop.model.catalog.manufacturer.ManufacturerDescription d = new com.salesmanager.shop.model.catalog.manufacturer.ManufacturerDescription();
+					com.salesmanager.catalog.presentation.model.manufacturer.ManufacturerDescription d = new com.salesmanager.catalog.presentation.model.manufacturer.ManufacturerDescription();
 					d.setName(description.getName());
 					d.setDescription(description.getDescription());
 					d.setId(description.getId());

@@ -9,14 +9,14 @@ import com.salesmanager.core.model.catalog.product.manufacturer.Manufacturer;
 import com.salesmanager.core.model.catalog.product.review.ProductReview;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.model.catalog.manufacturer.PersistableManufacturer;
-import com.salesmanager.shop.model.catalog.manufacturer.ReadableManufacturer;
-import com.salesmanager.shop.model.catalog.product.PersistableProduct;
-import com.salesmanager.shop.model.catalog.product.PersistableProductReview;
-import com.salesmanager.shop.model.catalog.product.ProductPriceEntity;
-import com.salesmanager.shop.model.catalog.product.ReadableProduct;
-import com.salesmanager.shop.model.catalog.product.ReadableProductList;
-import com.salesmanager.shop.model.catalog.product.ReadableProductReview;
+import com.salesmanager.catalog.presentation.model.manufacturer.PersistableManufacturer;
+import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufacturer;
+import com.salesmanager.catalog.presentation.model.product.PersistableProduct;
+import com.salesmanager.catalog.presentation.model.product.PersistableProductReview;
+import com.salesmanager.catalog.presentation.model.product.ProductPriceEntity;
+import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
+import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
+import com.salesmanager.catalog.presentation.model.product.ReadableProductReview;
 
 public interface ProductFacade {
 	

@@ -33,8 +33,8 @@ import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.ImageContentFile;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.model.catalog.product.PersistableImage;
-import com.salesmanager.shop.populator.catalog.PersistableImagePopulator;
+import com.salesmanager.catalog.presentation.model.product.PersistableImage;
+import com.salesmanager.catalog.presentation.populator.PersistableImagePopulator;
 import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
 import com.salesmanager.shop.utils.LanguageUtils;
 

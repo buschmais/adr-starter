@@ -22,7 +22,7 @@ import com.salesmanager.core.business.services.reference.language.LanguageServic
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.model.catalog.product.ReadableProductList;
+import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
 import com.salesmanager.shop.store.controller.items.facade.ProductItemsFacade;
 import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
 import com.salesmanager.shop.utils.LanguageUtils;

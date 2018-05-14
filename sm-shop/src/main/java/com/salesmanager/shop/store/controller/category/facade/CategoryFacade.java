@@ -3,8 +3,8 @@ package com.salesmanager.shop.store.controller.category.facade;
 import com.salesmanager.core.model.catalog.category.Category;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.model.catalog.category.PersistableCategory;
-import com.salesmanager.shop.model.catalog.category.ReadableCategory;
+import com.salesmanager.catalog.presentation.model.category.PersistableCategory;
+import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 
 import java.util.List;
 

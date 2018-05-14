@@ -31,18 +31,18 @@ import com.salesmanager.core.model.catalog.product.price.ProductPrice;
 import com.salesmanager.core.model.catalog.product.review.ProductReview;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.model.catalog.manufacturer.PersistableManufacturer;
-import com.salesmanager.shop.model.catalog.manufacturer.ReadableManufacturer;
-import com.salesmanager.shop.model.catalog.product.PersistableProduct;
-import com.salesmanager.shop.model.catalog.product.PersistableProductReview;
-import com.salesmanager.shop.model.catalog.product.ProductPriceEntity;
-import com.salesmanager.shop.model.catalog.product.ReadableProduct;
-import com.salesmanager.shop.model.catalog.product.ReadableProductList;
-import com.salesmanager.shop.model.catalog.product.ReadableProductReview;
-import com.salesmanager.shop.populator.catalog.PersistableProductPopulator;
-import com.salesmanager.shop.populator.catalog.PersistableProductReviewPopulator;
-import com.salesmanager.shop.populator.catalog.ReadableProductPopulator;
-import com.salesmanager.shop.populator.catalog.ReadableProductReviewPopulator;
+import com.salesmanager.catalog.presentation.model.manufacturer.PersistableManufacturer;
+import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufacturer;
+import com.salesmanager.catalog.presentation.model.product.PersistableProduct;
+import com.salesmanager.catalog.presentation.model.product.PersistableProductReview;
+import com.salesmanager.catalog.presentation.model.product.ProductPriceEntity;
+import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
+import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
+import com.salesmanager.catalog.presentation.model.product.ReadableProductReview;
+import com.salesmanager.catalog.presentation.populator.PersistableProductPopulator;
+import com.salesmanager.catalog.presentation.populator.PersistableProductReviewPopulator;
+import com.salesmanager.catalog.presentation.populator.ReadableProductPopulator;
+import com.salesmanager.catalog.presentation.populator.ReadableProductReviewPopulator;
 import com.salesmanager.shop.populator.manufacturer.PersistableManufacturerPopulator;
 import com.salesmanager.shop.populator.manufacturer.ReadableManufacturerPopulator;
 import com.salesmanager.shop.utils.DateUtil;
@@ -90,7 +90,7 @@ public class ProductFacadeImpl implements ProductFacade {
 			throws Exception {
 		
 
-		com.salesmanager.shop.model.catalog.manufacturer.Manufacturer manufacturer = product.getManufacturer();
+		com.salesmanager.catalog.presentation.model.manufacturer.Manufacturer manufacturer = product.getManufacturer();
 		
 		if(manufacturer == null || (manufacturer.getId()==null || manufacturer.getId().longValue()==0)
 				&& StringUtils.isBlank(manufacturer.getCode())) {
@@ -100,7 +100,7 @@ public class ProductFacadeImpl implements ProductFacade {
 			
 			if(defaultManufacturer != null) {
 			
-				com.salesmanager.shop.model.catalog.manufacturer.Manufacturer m = new com.salesmanager.shop.model.catalog.manufacturer.Manufacturer();
+				com.salesmanager.catalog.presentation.model.manufacturer.Manufacturer m = new com.salesmanager.catalog.presentation.model.manufacturer.Manufacturer();
 				m.setId(defaultManufacturer.getId());
 				m.setCode(defaultManufacturer.getCode());
 				product.setManufacturer(m);

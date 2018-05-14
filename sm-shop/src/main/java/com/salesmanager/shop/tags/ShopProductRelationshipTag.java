@@ -21,8 +21,8 @@ import com.salesmanager.core.model.catalog.product.relationship.ProductRelations
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
-import com.salesmanager.shop.model.catalog.product.ReadableProduct;
-import com.salesmanager.shop.populator.catalog.ReadableProductPopulator;
+import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
+import com.salesmanager.catalog.presentation.populator.ReadableProductPopulator;
 import com.salesmanager.shop.utils.ImageFilePath;
 
 

@@ -17,7 +17,7 @@ import com.salesmanager.core.model.catalog.product.relationship.ProductRelations
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
-import com.salesmanager.shop.model.catalog.product.ReadableProductList;
+import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
 import com.salesmanager.shop.store.controller.items.facade.ProductItemsFacade;
 import com.salesmanager.shop.store.controller.product.facade.ProductFacade;
 import com.salesmanager.shop.utils.DateUtil;

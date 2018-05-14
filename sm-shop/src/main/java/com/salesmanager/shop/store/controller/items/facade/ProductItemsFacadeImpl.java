@@ -18,9 +18,9 @@ import com.salesmanager.core.model.catalog.product.ProductCriteria;
 import com.salesmanager.core.model.catalog.product.relationship.ProductRelationship;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.model.catalog.product.ReadableProduct;
-import com.salesmanager.shop.model.catalog.product.ReadableProductList;
-import com.salesmanager.shop.populator.catalog.ReadableProductPopulator;
+import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
+import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
+import com.salesmanager.catalog.presentation.populator.ReadableProductPopulator;
 import com.salesmanager.shop.utils.ImageFilePath;
 
 @Component

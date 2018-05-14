@@ -20,10 +20,10 @@ import com.salesmanager.core.business.services.reference.language.LanguageServic
 import com.salesmanager.core.model.catalog.category.Category;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.model.catalog.category.PersistableCategory;
-import com.salesmanager.shop.model.catalog.category.ReadableCategory;
-import com.salesmanager.shop.populator.catalog.PersistableCategoryPopulator;
-import com.salesmanager.shop.populator.catalog.ReadableCategoryPopulator;
+import com.salesmanager.catalog.presentation.model.category.PersistableCategory;
+import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
+import com.salesmanager.catalog.presentation.populator.PersistableCategoryPopulator;
+import com.salesmanager.catalog.presentation.populator.ReadableCategoryPopulator;
 
 
 @Service( value = "categoryFacade" )

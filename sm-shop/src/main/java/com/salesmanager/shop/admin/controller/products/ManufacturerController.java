@@ -87,7 +87,7 @@ public class ManufacturerController {
 		List<Language> languages = store.getLanguages();
 		
 		
-		com.salesmanager.shop.admin.model.catalog.Manufacturer manufacturer = new com.salesmanager.shop.admin.model.catalog.Manufacturer();
+		com.salesmanager.catalog.presentation.model.admin.Manufacturer manufacturer = new com.salesmanager.catalog.presentation.model.admin.Manufacturer();
 		List<ManufacturerDescription> descriptions = new ArrayList<ManufacturerDescription>();
 
 		
@@ -159,7 +159,7 @@ public class ManufacturerController {
 		
 	@PreAuthorize("hasRole('PRODUCTS')")  
 	@RequestMapping(value="/admin/catalogue/manufacturer/save.html", method=RequestMethod.POST)
-	public String saveManufacturer( @Valid @ModelAttribute("manufacturer") com.salesmanager.shop.admin.model.catalog.Manufacturer manufacturer, BindingResult result, Model model,  HttpServletRequest request, HttpServletResponse response, Locale locale) throws Exception {
+	public String saveManufacturer(@Valid @ModelAttribute("manufacturer") com.salesmanager.catalog.presentation.model.admin.Manufacturer manufacturer, BindingResult result, Model model, HttpServletRequest request, HttpServletResponse response, Locale locale) throws Exception {
 
 		this.setMenu(model, request);
 		//save or edit a manufacturer

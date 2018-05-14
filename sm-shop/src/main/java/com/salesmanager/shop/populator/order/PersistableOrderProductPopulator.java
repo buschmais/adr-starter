@@ -14,7 +14,7 @@ import com.salesmanager.core.model.order.orderproduct.OrderProductDownload;
 import com.salesmanager.core.model.order.orderproduct.OrderProductPrice;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.ApplicationConstants;
-import com.salesmanager.shop.model.catalog.product.attribute.ProductAttribute;
+import com.salesmanager.catalog.presentation.model.product.attribute.ProductAttribute;
 import com.salesmanager.shop.model.order.PersistableOrderProduct;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.Validate;

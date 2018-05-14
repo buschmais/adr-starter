@@ -1,6 +1,6 @@
 package com.salesmanager.shop.model.shoppingcart;
 
-import com.salesmanager.shop.model.catalog.product.attribute.ReadableProductOptionValue;
+import com.salesmanager.catalog.presentation.model.product.attribute.ReadableProductOptionValue;
 
 public class ReadableShoppingCartAttributeOptionValue extends ReadableProductOptionValue {
 

@@ -2,10 +2,10 @@ package com.salesmanager.test.shop.controller.category.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.salesmanager.shop.model.catalog.category.Category;
-import com.salesmanager.shop.model.catalog.category.CategoryDescription;
-import com.salesmanager.shop.model.catalog.category.PersistableCategory;
-import com.salesmanager.shop.model.catalog.category.ReadableCategory;
+import com.salesmanager.catalog.presentation.model.category.Category;
+import com.salesmanager.catalog.presentation.model.category.CategoryDescription;
+import com.salesmanager.catalog.presentation.model.category.PersistableCategory;
+import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.*;

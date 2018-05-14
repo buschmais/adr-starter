@@ -5,7 +5,7 @@ import java.util.List;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.model.catalog.product.ReadableProductList;
+import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
 
 public interface ProductItemsFacade {
 	

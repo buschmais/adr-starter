@@ -31,7 +31,7 @@ import com.salesmanager.shop.model.shoppingcart.ReadableShoppingCartAttribute;
 import com.salesmanager.shop.model.shoppingcart.ReadableShoppingCartAttributeOption;
 import com.salesmanager.shop.model.shoppingcart.ReadableShoppingCartAttributeOptionValue;
 import com.salesmanager.shop.model.shoppingcart.ReadableShoppingCartItem;
-import com.salesmanager.shop.populator.catalog.ReadableProductPopulator;
+import com.salesmanager.catalog.presentation.populator.ReadableProductPopulator;
 import com.salesmanager.shop.utils.ImageFilePath;
 
 public class ReadableShoppingCartPopulator extends AbstractDataPopulator<ShoppingCart, ReadableShoppingCart> {
