@@ -3,7 +3,6 @@ package com.salesmanager.catalog.business.service.search;
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.product.PricingService;
-import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.core.model.catalog.category.Category;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.description.ProductDescription;
@@ -21,6 +20,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -36,17 +37,16 @@ public class SearchServiceImpl implements com.salesmanager.catalog.business.serv
 	
 	private final static String PRODUCT_INDEX_NAME = "product";
 	private final static String UNDERSCORE = "_";
-	private final static String INDEX_PRODUCTS = "INDEX_PRODUCTS";
+	private final static String INDEX_PRODUCTS = "catalog.product.index";
 
 	@Inject
 	private com.shopizer.search.services.SearchService searchService;
 	
 	@Inject
 	private PricingService pricingService;
-	
-	@Inject
-	private CoreConfiguration configuration;
-	
+
+	@Autowired
+	private Environment environment;
 
 	public void initService() {
 		searchService.initService();
@@ -90,7 +90,7 @@ public class SearchServiceImpl implements com.salesmanager.catalog.business.serv
 		 * 
 		 */
 		
-		if(configuration.getProperty(INDEX_PRODUCTS)==null || configuration.getProperty(INDEX_PRODUCTS).equals(Constants.FALSE)) {
+		if(environment.getProperty(INDEX_PRODUCTS)==null || environment.getProperty(INDEX_PRODUCTS).equals(Constants.FALSE)) {
 			return;
 		}
 		
@@ -147,7 +147,7 @@ public class SearchServiceImpl implements com.salesmanager.catalog.business.serv
 
 	public void deleteIndex(MerchantStore store, Product product) throws ServiceException {
 		
-		if(configuration.getProperty(INDEX_PRODUCTS)==null || configuration.getProperty(INDEX_PRODUCTS).equals(Constants.FALSE)) {
+		if(environment.getProperty(INDEX_PRODUCTS)==null || environment.getProperty(INDEX_PRODUCTS).equals(Constants.FALSE)) {
 			return;
 		}
 		

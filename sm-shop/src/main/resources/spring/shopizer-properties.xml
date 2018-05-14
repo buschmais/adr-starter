@@ -19,7 +19,6 @@
 	<!-- Properties to be used accross all components of the application -->
 	<util:properties id="shopizer-properties">
     			<prop key="MULTIPLE_PRICE_AVAILABILITY">false</prop>
-    			<prop key="INDEX_PRODUCTS">true</prop>
 				
 				<!-- upload image validations -->
 				<prop key="PRODUCT_IMAGE_MAX_HEIGHT_SIZE">2000</prop>
