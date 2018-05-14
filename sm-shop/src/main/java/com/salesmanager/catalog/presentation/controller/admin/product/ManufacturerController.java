@@ -10,7 +10,6 @@ import com.salesmanager.core.model.catalog.product.manufacturer.ManufacturerDesc
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.admin.controller.ControllerConstants;
-import com.salesmanager.shop.admin.controller.customers.CustomerController;
 import com.salesmanager.shop.admin.model.web.Menu;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.shop.utils.LabelUtils;
@@ -51,7 +50,7 @@ public class ManufacturerController {
 	@Inject
 	private CoreConfiguration configuration;
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ManufacturerController.class);
 	
 	@PreAuthorize("hasRole('PRODUCTS')")
 	@RequestMapping(value="/admin/catalogue/manufacturer/list.html", method=RequestMethod.GET)
