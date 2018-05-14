@@ -48,9 +48,6 @@ public class CmsImageFileManagerImpl
     private static final String ROOT_CONTAINER = "products";
     
     private String rootName = ROOT_NAME;
-    
-    private LocalCacheManagerImpl cacheManager;
-
 
     public static CmsImageFileManagerImpl getInstance()
     {
@@ -313,15 +310,5 @@ public class CmsImageFileManagerImpl
 	public String getRootName() {
 		return rootName;
 	}
-
-	public LocalCacheManagerImpl getCacheManager() {
-		return cacheManager;
-	}
-
-	public void setCacheManager(LocalCacheManagerImpl cacheManager) {
-		this.cacheManager = cacheManager;
-	}
-
-
 
 }

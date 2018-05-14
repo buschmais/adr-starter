@@ -13,6 +13,7 @@ import java.util.Set;
 import org.apache.commons.io.IOUtils;
 import org.infinispan.tree.Fqn;
 import org.infinispan.tree.Node;
+import org.infinispan.tree.TreeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +30,7 @@ import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.ImageContentFile;
 import com.salesmanager.core.model.content.OutputContentFile;
 import com.salesmanager.core.model.merchant.MerchantStore;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Manager for storing in retrieving image files from the CMS This is a layer on top of Infinispan
@@ -53,7 +55,8 @@ public class CmsImageFileManagerImpl
     
     private String rootName = ROOT_NAME;
 
-    private CacheManager cacheManager;
+    @Autowired
+    private TreeCache catalogTreeCache;
 
     /**
      * Requires to stop the engine when image servlet un-deploys
@@ -63,7 +66,7 @@ public class CmsImageFileManagerImpl
 
         try
         {
-        	cacheManager.getManager().stop();
+            catalogTreeCache.stop();
             LOGGER.info( "Stopping CMS" );
         }
         catch ( Exception e )
@@ -98,11 +101,6 @@ public class CmsImageFileManagerImpl
     		ImageContentFile contentImage )
         throws ServiceException
     {
-
-        if ( cacheManager.getTreeCache() == null )
-        {
-            throw new ServiceException( "CmsImageFileManagerInfinispan has a null cacheManager.getTreeCache()" );
-        }
 
         try
         {
@@ -164,11 +162,6 @@ public class CmsImageFileManagerImpl
     public List<OutputContentFile> getImages( Product product )
         throws ServiceException
     {
-
-        if ( cacheManager.getTreeCache() == null )
-        {
-            throw new ServiceException( "CmsImageFileManagerInfinispan has a null cacheManager.getTreeCache()" );
-        }
 
         List<OutputContentFile> images = new ArrayList<OutputContentFile>();
         
@@ -232,10 +225,6 @@ public class CmsImageFileManagerImpl
     public void removeImages( final String merchantStoreCode )
         throws ServiceException
     {
-        if ( cacheManager.getTreeCache() == null )
-        {
-            throw new ServiceException( "CmsImageFileManagerInfinispan has a null cacheManager.getTreeCache()" );
-        }
 
         try
         {
@@ -243,7 +232,7 @@ public class CmsImageFileManagerImpl
 
 			final StringBuilder merchantPath = new StringBuilder();
 	        merchantPath.append( getRootName()).append(merchantStoreCode );
-	        cacheManager.getTreeCache().getRoot().remove(merchantPath.toString());
+            catalogTreeCache.getRoot().remove(merchantPath.toString());
 			
 
 
@@ -264,11 +253,6 @@ public class CmsImageFileManagerImpl
     public void removeProductImage( ProductImage productImage )
         throws ServiceException
     {
-
-        if ( cacheManager.getTreeCache() == null )
-        {
-            throw new ServiceException( "CmsImageFileManagerInfinispan has a null cacheManager.getTreeCache()" );
-        }
 
         try
         {
@@ -302,11 +286,6 @@ public class CmsImageFileManagerImpl
         throws ServiceException
     {
 
-        if ( cacheManager.getTreeCache() == null )
-        {
-            throw new ServiceException( "CmsImageFileManagerInfinispan has a null cacheManager.getTreeCache()" );
-        }
-
         try
         {
 
@@ -338,10 +317,6 @@ public class CmsImageFileManagerImpl
     @Override
 	public List<OutputContentFile> getImages(final String merchantStoreCode,
 			FileContentType imageContentType) throws ServiceException {
-        if ( cacheManager.getTreeCache() == null )
-        {
-            throw new ServiceException( "CmsImageFileManagerInfinispan has a null cacheManager.getTreeCache()" );
-        }
         List<OutputContentFile> images = new ArrayList<OutputContentFile>();
         FileNameMap fileNameMap = URLConnection.getFileNameMap();
 
@@ -418,11 +393,6 @@ public class CmsImageFileManagerImpl
 	
 	private OutputContentFile getProductImage(String merchantStoreCode,
 			String productCode, String imageName, String size) throws ServiceException {
-		
-        if ( cacheManager.getTreeCache() == null )
-        {
-            throw new ServiceException( "CmsImageFileManagerInfinispan has a null cacheManager.getTreeCache()" );
-        }
         InputStream input = null;
         OutputContentFile contentImage = new OutputContentFile();
         try
@@ -489,26 +459,18 @@ public class CmsImageFileManagerImpl
 
         Fqn contentFilesFqn = Fqn.fromString(merchantPath.toString()); 
 
-		Node<String,Object> nd = cacheManager.getTreeCache().getRoot().getChild(contentFilesFqn); 
+		Node<String,Object> nd = catalogTreeCache.getRoot().getChild(contentFilesFqn);
         
         if(nd==null) {
 
-            cacheManager.getTreeCache().getRoot().addChild(contentFilesFqn);
-            nd = cacheManager.getTreeCache().getRoot().getChild(contentFilesFqn); 
+            catalogTreeCache.getRoot().addChild(contentFilesFqn);
+            nd = catalogTreeCache.getRoot().getChild(contentFilesFqn);
 
         }
         
         return nd;
 
     }
-
-	public CacheManager getCacheManager() {
-		return cacheManager;
-	}
-
-	public void setCacheManager(CacheManager cacheManager) {
-		this.cacheManager = cacheManager;
-	}
 
 	public void setRootName(String rootName) {
 		this.rootName = rootName;
@@ -517,7 +479,5 @@ public class CmsImageFileManagerImpl
 	public String getRootName() {
 		return rootName;
 	}
-
-
 
 }

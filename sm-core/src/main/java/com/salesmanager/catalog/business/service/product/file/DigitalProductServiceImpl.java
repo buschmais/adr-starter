@@ -2,7 +2,7 @@ package com.salesmanager.catalog.business.service.product.file;
 
 import javax.inject.Inject;
 
-import com.salesmanager.core.business.modules.cms.content.StaticContentFileManager;
+import com.salesmanager.catalog.business.cms.product.StaticProductFileManager;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -24,7 +24,7 @@ public class DigitalProductServiceImpl extends SalesManagerEntityServiceImpl<Lon
 	private DigitalProductRepository digitalProductRepository;
 	
     @Inject
-	StaticContentFileManager productDownloadsFileManager;
+	StaticProductFileManager productDownloadsFileManager;
     
     @Inject
     ProductService productService;

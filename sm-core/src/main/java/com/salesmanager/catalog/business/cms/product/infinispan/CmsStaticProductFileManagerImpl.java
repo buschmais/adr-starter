@@ -1,7 +1,22 @@
 /**
  * 
  */
-package com.salesmanager.core.business.modules.cms.content.infinispan;
+package com.salesmanager.catalog.business.cms.product.infinispan;
+
+import com.salesmanager.catalog.business.cms.product.FileGet;
+import com.salesmanager.catalog.business.cms.product.FilePut;
+import com.salesmanager.catalog.business.cms.product.FileRemove;
+import com.salesmanager.common.business.exception.ServiceException;
+import com.salesmanager.core.model.content.FileContentType;
+import com.salesmanager.core.model.content.InputContentFile;
+import com.salesmanager.core.model.content.OutputContentFile;
+import org.apache.commons.io.IOUtils;
+import org.infinispan.tree.Fqn;
+import org.infinispan.tree.Node;
+import org.infinispan.tree.TreeCache;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,22 +27,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
-import org.infinispan.tree.Fqn;
-import org.infinispan.tree.Node;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.core.business.modules.cms.content.FileGet;
-import com.salesmanager.core.business.modules.cms.content.FilePut;
-import com.salesmanager.core.business.modules.cms.content.FileRemove;
-import com.salesmanager.core.business.modules.cms.impl.CacheManager;
-import com.salesmanager.core.model.content.FileContentType;
-import com.salesmanager.core.model.content.InputContentFile;
-import com.salesmanager.core.model.content.OutputContentFile;
-
-
 
 /**
  * Manages
@@ -37,23 +36,24 @@ import com.salesmanager.core.model.content.OutputContentFile;
  * @since 1.2
  *
  */
-public class CmsStaticContentFileManagerImpl implements FilePut,FileGet,FileRemove
+public class CmsStaticProductFileManagerImpl implements FilePut,FileGet,FileRemove
 {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger( CmsStaticContentFileManagerImpl.class );
-    private static CmsStaticContentFileManagerImpl fileManager = null;
+    private static final Logger LOGGER = LoggerFactory.getLogger( CmsStaticProductFileManagerImpl.class );
+    private static CmsStaticProductFileManagerImpl fileManager = null;
     private static final String ROOT_NAME="static-merchant-";
     
     private String rootName = ROOT_NAME;
     
-    private CacheManager cacheManager;
+    @Autowired
+    private TreeCache catalogTreeCache;
 
-    public static CmsStaticContentFileManagerImpl getInstance()
+    public static CmsStaticProductFileManagerImpl getInstance()
     {
 
         if ( fileManager == null )
         {
-            fileManager = new CmsStaticContentFileManagerImpl();
+            fileManager = new CmsStaticProductFileManagerImpl();
         }
 
         return fileManager;
@@ -83,11 +83,6 @@ public class CmsStaticContentFileManagerImpl implements FilePut,FileGet,FileRemo
     public void addFile( final String merchantStoreCode, final InputContentFile inputStaticContentData )
         throws ServiceException
     {
-        if ( cacheManager.getTreeCache() == null )
-        {
-            LOGGER.error( "Unable to find cacheManager.getTreeCache() in Infinispan.." );
-            throw new ServiceException( "CmsStaticContentFileManagerInfinispanImpl has a null cacheManager.getTreeCache()" );
-        }
         try
         {
             
@@ -126,11 +121,6 @@ public class CmsStaticContentFileManagerImpl implements FilePut,FileGet,FileRemo
     public void addFiles( final String merchantStoreCode, final List<InputContentFile> inputStaticContentDataList )
         throws ServiceException
     {
-        if ( cacheManager.getTreeCache() == null )
-        {
-            LOGGER.error( "Unable to find cacheManager.getTreeCache() in Infinispan.." );
-            throw new ServiceException( "CmsStaticContentFileManagerInfinispanImpl has a null cacheManager.getTreeCache()" );
-        }
         try
         {
           
@@ -172,11 +162,6 @@ public class CmsStaticContentFileManagerImpl implements FilePut,FileGet,FileRemo
     public OutputContentFile getFile( final String merchantStoreCode, final FileContentType fileContentType, final String contentFileName )
         throws ServiceException
     {
-       
-        if ( cacheManager.getTreeCache() == null )
-        {
-            throw new ServiceException( "CmsStaticContentFileManagerInfinispan has a null cacheManager.getTreeCache()" );
-        }
         OutputContentFile outputStaticContentData=null;
         InputStream input = null;
         try
@@ -220,13 +205,6 @@ public class CmsStaticContentFileManagerImpl implements FilePut,FileGet,FileRemo
 	@Override
 	public List<OutputContentFile> getFiles(
 			final String merchantStoreCode, final FileContentType staticContentType) throws ServiceException {
-
-		
-		
-        if ( cacheManager.getTreeCache() == null )
-        {
-            throw new ServiceException( "CmsStaticContentFileManagerInfinispan has a null cacheManager.getTreeCache()" );
-        }
         List<OutputContentFile> images = new ArrayList<OutputContentFile>();
         try
         {
@@ -279,12 +257,6 @@ public class CmsStaticContentFileManagerImpl implements FilePut,FileGet,FileRemo
         throws ServiceException
     {
 
-    	
-        if ( cacheManager.getTreeCache() == null )
-        {
-            throw new ServiceException( "CmsStaticContentFileManagerInfinispan has a null cacheManager.getTreeCache()" );
-        }
-
         try
         {
             
@@ -314,11 +286,6 @@ public class CmsStaticContentFileManagerImpl implements FilePut,FileGet,FileRemo
     {
         
         LOGGER.info( "Removing all images for {} merchant ",merchantStoreCode);
-        if ( cacheManager.getTreeCache() == null )
-        {
-            LOGGER.error( "Unable to find cacheManager.getTreeCache() in Infinispan.." );
-            throw new ServiceException( "CmsImageFileManagerInfinispan has a null cacheManager.getTreeCache()" );
-        }
         
         try
         {
@@ -326,7 +293,7 @@ public class CmsStaticContentFileManagerImpl implements FilePut,FileGet,FileRemo
         	
 			final StringBuilder merchantPath = new StringBuilder();
 	        merchantPath.append( getRootName()).append(merchantStoreCode );
-	        cacheManager.getTreeCache().getRoot().remove(merchantPath.toString());
+            catalogTreeCache.getRoot().remove(merchantPath.toString());
         	
         	
 
@@ -349,12 +316,12 @@ public class CmsStaticContentFileManagerImpl implements FilePut,FileGet,FileRemo
 
         Fqn contentFilesFqn = Fqn.fromString(merchantPath.toString()); 
 
-		Node<String,Object> nd = cacheManager.getTreeCache().getRoot().getChild(contentFilesFqn); 
+		Node<String,Object> nd = catalogTreeCache.getRoot().getChild(contentFilesFqn);
         
         if(nd==null) {
 
-            cacheManager.getTreeCache().getRoot().addChild(contentFilesFqn);
-            nd = cacheManager.getTreeCache().getRoot().getChild(contentFilesFqn); 
+            catalogTreeCache.getRoot().addChild(contentFilesFqn);
+            nd = catalogTreeCache.getRoot().getChild(contentFilesFqn);
 
         }
         
@@ -370,16 +337,6 @@ public class CmsStaticContentFileManagerImpl implements FilePut,FileGet,FileRemo
 		return nodePath.toString();
     	
     }
-    
-
-    
-    public CacheManager getCacheManager() {
-        return cacheManager;
-    }
-
-    public void setCacheManager(CacheManager cacheManager) {
-        this.cacheManager = cacheManager;
-    }
 
 
     /**
@@ -391,13 +348,6 @@ public class CmsStaticContentFileManagerImpl implements FilePut,FileGet,FileRemo
 	@Override
 	public List<String> getFileNames(final String merchantStoreCode, final FileContentType staticContentType)
 			throws ServiceException {
-		
-		
-		
-	       if ( cacheManager.getTreeCache() == null )
-	        {
-	            throw new ServiceException( "CmsStaticContentFileManagerInfinispan has a null cacheManager.getTreeCache()" );
-	        }
 
 	        try
 	        {

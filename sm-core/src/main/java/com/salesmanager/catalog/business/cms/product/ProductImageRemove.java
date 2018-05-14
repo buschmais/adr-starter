@@ -1,7 +1,6 @@
 package com.salesmanager.catalog.business.cms.product;
 
 import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.core.business.modules.cms.common.ImageRemove;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.image.ProductImage;
 

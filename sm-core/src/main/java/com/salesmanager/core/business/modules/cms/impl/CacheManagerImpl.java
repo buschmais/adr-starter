@@ -27,23 +27,10 @@ public abstract class CacheManagerImpl implements CacheManager {
 	private TreeCache treeCache = null;
 
 	@SuppressWarnings("unchecked")
-	protected void init(String namedCache, String location) {
+	protected void init(String namedCache, String location, DefaultCacheManager defaultCacheManager) {
 		
 		
 		try {
-			
-
-				 //manager = new DefaultCacheManager(repositoryFileName);
-			
-			     VendorCacheManager manager =  VendorCacheManager.getInstance();
-				 
-				 if(manager==null) {
-					 LOGGER.error("CacheManager is null");
-					 return;
-				 }
-				 
-				 
-				 //final EmbeddedCacheManager manager = new DefaultCacheManager();  
 				 final PersistenceConfigurationBuilder persistConfig = new ConfigurationBuilder().persistence();  
 				 persistConfig.passivation(false);
 				 final SingleFileStoreConfigurationBuilder fileStore = new SingleFileStoreConfigurationBuilder(persistConfig).location(location);
@@ -53,9 +40,9 @@ public abstract class CacheManagerImpl implements CacheManager {
 				 fileStore.jmxStatistics().disable();
 				 final Configuration config = persistConfig.addStore(fileStore).build();  
 				 config.compatibility().enabled();  
-				 manager.getManager().defineConfiguration(namedCache, config);  
+				 defaultCacheManager.defineConfiguration(namedCache, config);
 
-				 final Cache<String, String> cache = manager.getManager().getCache(namedCache);  
+				 final Cache<String, String> cache = defaultCacheManager.getCache(namedCache);
 				 //c.addListener(new CacheListener());
 
 				 
@@ -107,10 +94,6 @@ public abstract class CacheManagerImpl implements CacheManager {
 		
 		
 		
-	}
-	
-	public EmbeddedCacheManager getManager() {
-		return VendorCacheManager.getInstance().getManager();
 	}
 
 	@SuppressWarnings("rawtypes")

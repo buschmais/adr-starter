@@ -4,6 +4,7 @@
 package com.salesmanager.core.business.modules.cms.impl;
 
 import com.google.api.client.util.Value;
+import org.infinispan.manager.DefaultCacheManager;
 
 /**
  * Cache manager to handle static content data in Infinispan cache.
@@ -27,9 +28,9 @@ public class StaticContentCacheManagerImpl extends CacheManagerImpl
     private String location = null;
     
 
-    public StaticContentCacheManagerImpl(String location) {
+    public StaticContentCacheManagerImpl(String location, DefaultCacheManager defaultCacheManager) {
         
-        super.init(NAMED_CACHE,location);
+        super.init(NAMED_CACHE,location, defaultCacheManager);
         
         
     }

@@ -6,11 +6,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.business.cms.product.ProductFileManager;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
-import com.salesmanager.core.business.modules.cms.content.StaticContentFileManager;
-import com.salesmanager.core.business.modules.cms.product.ProductFileManager;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -35,6 +35,7 @@ public class ProductImageServiceImpl extends SalesManagerEntityServiceImpl<Long,
 		this.productImageRepository = productImageRepository;
 	}
 
+	@Autowired
 	private ProductFileManager productFileManager;
 	
 
