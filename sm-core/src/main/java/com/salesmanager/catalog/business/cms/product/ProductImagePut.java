@@ -1,4 +1,4 @@
-package com.salesmanager.core.business.modules.cms.product;
+package com.salesmanager.catalog.business.cms.product;
 
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.model.catalog.product.image.ProductImage;

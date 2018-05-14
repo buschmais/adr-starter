@@ -1,4 +1,4 @@
-package com.salesmanager.core.business.utils;
+package com.salesmanager.catalog.business.util;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;

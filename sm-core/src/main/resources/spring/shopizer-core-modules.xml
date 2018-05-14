@@ -92,7 +92,7 @@
 	
 	<!-- Product images manager -->
 	<beans:bean id="productFileManager"
-		class="com.salesmanager.core.business.modules.cms.product.ProductFileManagerImpl">
+		class="com.salesmanager.catalog.business.cms.product.ProductFileManagerImpl">
 		<beans:property name="uploadImage">
 				<beans:ref bean="cmsProductImage" />
 		</beans:property>
@@ -102,14 +102,11 @@
 		<beans:property name="removeImage">
 				<beans:ref bean="cmsProductImage" />
 		</beans:property>
-		<beans:property name="configuration">
-				<beans:ref bean="coreConfiguration" />
-		</beans:property>
 	</beans:bean>
 	
 	<!-- CMS implementation for product images -->
 	<beans:bean id="cmsProductImage"
-				class="com.salesmanager.core.business.modules.cms.product.infinispan.CmsImageFileManagerImpl" factory-method="getInstance" >
+                class="com.salesmanager.catalog.business.cms.product.infinispan.CmsImageFileManagerImpl" factory-method="getInstance" >
 				<beans:property name="cacheManager">
 						<beans:ref bean="localCacheManager" />
 				</beans:property>

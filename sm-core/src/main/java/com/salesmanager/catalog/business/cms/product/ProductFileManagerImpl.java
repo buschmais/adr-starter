@@ -1,4 +1,4 @@
-package com.salesmanager.core.business.modules.cms.product;
+package com.salesmanager.catalog.business.cms.product;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -18,15 +18,16 @@ import org.slf4j.LoggerFactory;
 
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.core.business.utils.CoreConfiguration;
-import com.salesmanager.core.business.utils.ProductImageCropUtils;
-import com.salesmanager.core.business.utils.ProductImageSizeUtils;
+import com.salesmanager.catalog.business.util.ProductImageCropUtils;
+import com.salesmanager.catalog.business.util.ProductImageSizeUtils;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.file.ProductImageSize;
 import com.salesmanager.core.model.catalog.product.image.ProductImage;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.ImageContentFile;
 import com.salesmanager.core.model.content.OutputContentFile;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 
 public class ProductFileManagerImpl extends ProductFileManager {
@@ -37,23 +38,13 @@ public class ProductFileManagerImpl extends ProductFileManager {
 	private ProductImagePut uploadImage;
 	private ProductImageGet getImage;
 	private ProductImageRemove removeImage;
+
+	@Autowired
+	private Environment environment;
 	
-	private CoreConfiguration configuration;
-	
-	private final static String PRODUCT_IMAGE_HEIGHT_SIZE = "PRODUCT_IMAGE_HEIGHT_SIZE";
-	private final static String PRODUCT_IMAGE_WIDTH_SIZE = "PRODUCT_IMAGE_WIDTH_SIZE";
-	private final static String CROP_UPLOADED_IMAGES ="CROP_UPLOADED_IMAGES";
-
-
-	public CoreConfiguration getConfiguration() {
-		return configuration;
-	}
-
-
-	public void setConfiguration(CoreConfiguration configuration) {
-		this.configuration = configuration;
-	}
-
+	private final static String PRODUCT_IMAGE_HEIGHT_SIZE = "catalog.product.image.height";
+	private final static String PRODUCT_IMAGE_WIDTH_SIZE = "catalog.product.image.width";
+	private final static String CROP_UPLOADED_IMAGES ="catalog.product.image.crop";
 
 	public ProductImageRemove getRemoveImage() {
 		return removeImage;
@@ -124,18 +115,18 @@ public class ProductFileManagerImpl extends ProductFileManager {
 		
 		//get template properties file
 			
-		String slargeImageHeight = configuration.getProperty(PRODUCT_IMAGE_HEIGHT_SIZE);
-		String slargeImageWidth = configuration.getProperty(PRODUCT_IMAGE_WIDTH_SIZE);
+		String slargeImageHeight = environment.getProperty(PRODUCT_IMAGE_HEIGHT_SIZE);
+		String slargeImageWidth = environment.getProperty(PRODUCT_IMAGE_WIDTH_SIZE);
 		
 		//String ssmallImageHeight = configuration.getProperty("SMALL_IMAGE_HEIGHT_SIZE");
 		//String ssmallImageWidth = configuration.getProperty("SMALL_IMAGE_WIDTH_SIZE");
 
 			
 		if(!StringUtils.isBlank(slargeImageHeight) && !StringUtils.isBlank(slargeImageWidth)) { //&& !StringUtils.isBlank(ssmallImageHeight) && !StringUtils.isBlank(ssmallImageWidth)) {
-			
-			
+
+
 			FileNameMap fileNameMap = URLConnection.getFileNameMap();
-			
+
 			String contentType = fileNameMap.getContentTypeFor(contentImage.getFileName());
 			String extension = null;
 			if(contentType!=null) {
@@ -145,92 +136,92 @@ public class ProductFileManagerImpl extends ProductFileManager {
 			if(extension==null){
 				extension="jpeg";
 			}
-			
-			
+
+
 			int largeImageHeight = Integer.parseInt(slargeImageHeight);
 			int largeImageWidth = Integer.parseInt(slargeImageWidth);
-			
+
 			if(largeImageHeight<=0 || largeImageWidth<=0) {
 				String sizeMsg = "Image configuration set to an invalid value [PRODUCT_IMAGE_HEIGHT_SIZE] " + largeImageHeight + " , [PRODUCT_IMAGE_WIDTH_SIZE] " + largeImageWidth;
 				LOGGER.error(sizeMsg);
 				throw new ServiceException(sizeMsg);
 			}
 
-			if(!StringUtils.isBlank(configuration.getProperty(CROP_UPLOADED_IMAGES)) && configuration.getProperty(CROP_UPLOADED_IMAGES).equals(Constants.TRUE)) {
+			if(!StringUtils.isBlank(environment.getProperty(CROP_UPLOADED_IMAGES)) && environment.getProperty(CROP_UPLOADED_IMAGES).equals(Constants.TRUE)) {
 					//crop image
 					ProductImageCropUtils utils = new ProductImageCropUtils(bufferedImage, largeImageWidth, largeImageHeight);
 					if(utils.isCropeable()) {
 						bufferedImage = utils.getCroppedImage();
-					} 
-			} 
-				
-				
+					}
+			}
+
+
 			//TODO print cropped image
-			
-			
+
+
 				//do not keep a large image for now, just take care of the regular image and a small image
-				
+
 				//resize large
 				//ByteArrayOutputStream output = new ByteArrayOutputStream();
 				BufferedImage largeResizedImage = ProductImageSizeUtils.resizeWithRatio(bufferedImage, largeImageWidth, largeImageHeight);
-				
-				
+
+
 				File tempLarge = File.createTempFile(new StringBuilder().append(productImage.getProduct().getId()).append("tmpLarge").toString(), "." + extension );
 				ImageIO.write(largeResizedImage, extension, tempLarge);
 
 				FileInputStream isLarge = new FileInputStream(tempLarge);
-				
-				 
+
+
 	            //IOUtils.copy(isLarge, output);
-				
+
 
 	            ImageContentFile largeContentImage = new ImageContentFile();
 	            largeContentImage.setFileContentType(FileContentType.PRODUCT);
 	            largeContentImage.setFileName(productImage.getProductImage());
 	            largeContentImage.setFile(isLarge);
-	            
-	            
+
+
 	            //largeContentImage.setBufferedImage(bufferedImage);
-				
+
 	            //largeContentImage.setFile(output);
 				//largeContentImage.setDefaultImage(false);
 				//largeContentImage.setImageName(new StringBuilder().append("L-").append(productImage.getProductImage()).toString());
 
 
 				uploadImage.addProductImage(productImage, largeContentImage);
-				
+
 				//output.flush();
 				//output.close();
-				
+
 				tempLarge.delete();
-				
+
 				//now upload original
-				
-				
-				
+
+
+
 /*						//resize small
 				BufferedImage smallResizedImage = ProductImageSizeUtils.resize(cropped, smallImageWidth, smallImageHeight);
 				File tempSmall = File.createTempFile(new StringBuilder().append(productImage.getProduct().getId()).append("tmpSmall").toString(), "." + extension );
 				ImageIO.write(smallResizedImage, extension, tempSmall);
-				
+
 				//byte[] is = IOUtils.toByteArray(new FileInputStream(tempSmall));
-				
+
 				FileInputStream isSmall = new FileInputStream(tempSmall);
-				
-				output = new ByteArrayOutputStream(); 
+
+				output = new ByteArrayOutputStream();
 	            IOUtils.copy(isSmall, output);
-				
+
 
 				smallContentImage = new InputContentImage(ImageContentType.PRODUCT);
 				smallContentImage.setFile(output);
 				smallContentImage.setDefaultImage(false);
 				smallContentImage.setImageName(new StringBuilder().append("S-").append(productImage.getProductImage()).toString());
-				
+
 				uploadImage.uploadProductImage(configuration, productImage, smallContentImage);
-				
+
 				output.flush();
 				output.close();
-				
+
 				tempSmall.delete();*/
 			
 			

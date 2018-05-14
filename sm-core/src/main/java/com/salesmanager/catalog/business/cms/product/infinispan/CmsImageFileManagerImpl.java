@@ -1,4 +1,4 @@
-package com.salesmanager.core.business.modules.cms.product.infinispan;
+package com.salesmanager.catalog.business.cms.product.infinispan;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -19,9 +19,9 @@ import org.slf4j.LoggerFactory;
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.modules.cms.impl.CacheManager;
-import com.salesmanager.core.business.modules.cms.product.ProductImageGet;
-import com.salesmanager.core.business.modules.cms.product.ProductImagePut;
-import com.salesmanager.core.business.modules.cms.product.ProductImageRemove;
+import com.salesmanager.catalog.business.cms.product.ProductImageGet;
+import com.salesmanager.catalog.business.cms.product.ProductImagePut;
+import com.salesmanager.catalog.business.cms.product.ProductImageRemove;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.file.ProductImageSize;
 import com.salesmanager.core.model.catalog.product.image.ProductImage;
