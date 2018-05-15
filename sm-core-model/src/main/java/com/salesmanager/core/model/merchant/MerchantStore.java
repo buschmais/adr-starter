@@ -21,6 +21,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 
+import com.salesmanager.core.integration.TransferableEntity;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -35,7 +37,7 @@ import com.salesmanager.core.utils.CloneUtils;
 
 @Entity
 @Table(name = "MERCHANT_STORE", schema=SchemaConstant.SALESMANAGER_SCHEMA)
-public class MerchantStore extends SalesManagerEntity<Integer, MerchantStore> {
+public class MerchantStore extends SalesManagerEntity<Integer, MerchantStore> implements TransferableEntity<MerchantStoreDTO> {
 	private static final long serialVersionUID = 7671103335743647655L;
 	
 	
@@ -348,10 +350,9 @@ public class MerchantStore extends SalesManagerEntity<Integer, MerchantStore> {
 	}
 
 
-
-
-
-
-
+	@Override
+	public MerchantStoreDTO toDTO() {
+		return new MerchantStoreDTO(this.id, this.code);
+	}
 
 }

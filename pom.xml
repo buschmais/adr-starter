@@ -139,6 +139,7 @@
 	  	<module>sm-core</module>
 	  	<module>sm-shop</module>
         <module>sm-common</module>
+        <module>sm-core-model-api</module>
     </modules>
 
     <repositories>
@@ -170,7 +171,12 @@
     
     <dependencyManagement>
 		<dependencies>
-
+			<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.16.20</version>
+			</dependency>
 		</dependencies>
 
 	</dependencyManagement>
