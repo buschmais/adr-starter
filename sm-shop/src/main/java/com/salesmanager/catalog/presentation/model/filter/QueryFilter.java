@@ -1,4 +1,4 @@
-package com.salesmanager.shop.store.model.filter;
+package com.salesmanager.catalog.presentation.model.filter;
 
 /**
  * Used in Category and Search to filter display based on other

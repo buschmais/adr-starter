@@ -27,10 +27,10 @@ import com.salesmanager.catalog.presentation.populator.catalog.PersistableProduc
 import com.salesmanager.catalog.presentation.populator.catalog.PersistableProductReviewPopulator;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
 import com.salesmanager.catalog.presentation.populator.manufacturer.PersistableManufacturerPopulator;
-import com.salesmanager.shop.store.controller.items.facade.ProductItemsFacade;
+import com.salesmanager.catalog.presentation.controller.items.facade.ProductItemsFacade;
 import com.salesmanager.catalog.presentation.controller.product.facade.ProductFacade;
-import com.salesmanager.shop.store.model.filter.QueryFilter;
-import com.salesmanager.shop.store.model.filter.QueryFilterType;
+import com.salesmanager.catalog.presentation.model.filter.QueryFilter;
+import com.salesmanager.catalog.presentation.model.filter.QueryFilterType;
 import com.salesmanager.shop.utils.ImageFilePath;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

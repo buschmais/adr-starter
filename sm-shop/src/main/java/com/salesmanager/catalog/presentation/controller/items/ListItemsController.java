@@ -1,6 +1,7 @@
-package com.salesmanager.shop.store.controller.items;
+package com.salesmanager.catalog.presentation.controller.items;
 
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
+import com.salesmanager.catalog.presentation.controller.ControllerConstants;
 import com.salesmanager.core.model.catalog.product.manufacturer.Manufacturer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
@@ -8,7 +9,6 @@ import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufacturer;
 import com.salesmanager.common.presentation.model.PageInformation;
 import com.salesmanager.catalog.presentation.populator.manufacturer.ReadableManufacturerPopulator;
-import com.salesmanager.shop.store.controller.ControllerConstants;
 import com.salesmanager.shop.utils.PageBuilderUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

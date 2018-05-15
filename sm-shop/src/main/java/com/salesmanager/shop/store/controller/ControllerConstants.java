@@ -20,18 +20,6 @@ public interface ControllerConstants
             final static String shoppingCart="maincart";
         }
         
-        interface Category{
-            final static String category="category";
-        }
-        
-        interface Product{
-            final static String product="product";
-        }
-        
-        interface Items{
-            final static String items_manufacturer="items.manufacturer";
-        }
-        
         interface Customer{
             final static String customer="customer";
             final static String customerLogon="customerLogon";
@@ -61,10 +49,6 @@ public interface ControllerConstants
         interface Checkout{
             final static String checkout="checkout";
             final static String confirmation="confirmation";
-        }
-        
-        interface Search{
-            final static String search="search";
         }
         
         interface Error {

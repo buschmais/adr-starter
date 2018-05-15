@@ -1,13 +1,13 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
 import com.salesmanager.catalog.business.service.product.ProductService;
+import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.description.ProductDescription;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.admin.controller.ControllerConstants;
 import com.salesmanager.catalog.presentation.model.admin.Keyword;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;

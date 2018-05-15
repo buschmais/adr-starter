@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.salesmanager.catalog.presentation.controller.ControllerConstants;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +33,6 @@ import com.salesmanager.core.model.search.SearchKeywords;
 import com.salesmanager.core.model.search.SearchResponse;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.SearchProductList;
-import com.salesmanager.shop.store.controller.ControllerConstants;
 import com.salesmanager.catalog.presentation.controller.search.facade.SearchFacade;
 import com.salesmanager.catalog.presentation.model.search.AutoCompleteRequest;
 import com.salesmanager.shop.utils.ImageFilePath;

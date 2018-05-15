@@ -1,4 +1,4 @@
-package com.salesmanager.shop.store.controller.items.facade;
+package com.salesmanager.catalog.presentation.controller.items.facade;
 
 import java.util.List;
 

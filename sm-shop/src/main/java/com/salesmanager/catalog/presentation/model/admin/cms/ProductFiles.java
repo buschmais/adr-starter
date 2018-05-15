@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.salesmanager.shop.admin.model.digital;
+package com.salesmanager.catalog.presentation.model.admin.cms;
 
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.file.DigitalProduct;

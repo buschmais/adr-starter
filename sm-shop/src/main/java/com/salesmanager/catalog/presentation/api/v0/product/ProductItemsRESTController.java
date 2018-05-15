@@ -18,7 +18,7 @@ import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
-import com.salesmanager.shop.store.controller.items.facade.ProductItemsFacade;
+import com.salesmanager.catalog.presentation.controller.items.facade.ProductItemsFacade;
 import com.salesmanager.catalog.presentation.controller.product.facade.ProductFacade;
 import com.salesmanager.common.presentation.util.DateUtil;
 import com.salesmanager.shop.utils.ImageFilePath;

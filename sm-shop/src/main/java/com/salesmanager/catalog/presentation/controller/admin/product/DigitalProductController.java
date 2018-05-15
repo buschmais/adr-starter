@@ -2,14 +2,14 @@ package com.salesmanager.catalog.presentation.controller.admin.product;
 
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.file.DigitalProductService;
+import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.file.DigitalProduct;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.InputContentFile;
 import com.salesmanager.core.model.merchant.MerchantStore;
-import com.salesmanager.shop.admin.controller.ControllerConstants;
-import com.salesmanager.shop.admin.model.digital.ProductFiles;
+import com.salesmanager.catalog.presentation.model.admin.cms.ProductFiles;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 import org.apache.commons.collections4.CollectionUtils;
