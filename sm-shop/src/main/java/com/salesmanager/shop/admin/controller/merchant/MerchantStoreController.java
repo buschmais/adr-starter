@@ -360,6 +360,7 @@ public class MerchantStoreController {
 		
 		//update session store
 		request.getSession().setAttribute(Constants.ADMIN_STORE, sessionStore);
+		request.getSession().setAttribute(Constants.ADMIN_STORE_DTO, sessionStore.toDTO());
 
 
 		model.addAttribute("success","success");

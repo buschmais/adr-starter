@@ -157,6 +157,7 @@ public class LandingController {
 			MerchantStore merchantStore = merchantService.getByCode(store);
 			if(merchantStore!=null) {
 				request.getSession().setAttribute(Constants.MERCHANT_STORE, merchantStore);
+				request.getSession().setAttribute(Constants.MERCHANT_STORE_DTO, merchantStore.toDTO());
 			} else {
 				LOGGER.error("MerchantStore does not exist for store code " + store);
 			}

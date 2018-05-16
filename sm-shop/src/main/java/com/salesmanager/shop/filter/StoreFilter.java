@@ -10,6 +10,7 @@ import com.salesmanager.core.business.services.reference.language.LanguageServic
 import com.salesmanager.core.business.services.system.MerchantConfigurationService;
 import com.salesmanager.core.business.utils.CacheUtils;
 import com.salesmanager.core.business.utils.CoreConfiguration;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.catalog.category.Category;
 import com.salesmanager.core.model.catalog.category.CategoryDescription;
 import com.salesmanager.core.model.catalog.product.Product;
@@ -141,7 +142,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 			try {
 
 				/** merchant store **/
-				MerchantStore store = (MerchantStore)request.getSession().getAttribute(Constants.MERCHANT_STORE);
+				MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getSession().getAttribute(Constants.MERCHANT_STORE_DTO);
 	
 				String storeCode = request.getParameter(STORE_REQUEST_PARAMETER);
 				
@@ -149,19 +150,21 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 				request.removeAttribute(Constants.LINK_CODE);
 				
 				if(!StringUtils.isBlank(storeCode)) {
-					if(store!=null) {
-						if(!store.getCode().equals(storeCode)) {
-							store = setMerchantStoreInSession(request, storeCode);
+					if(storeDTO!=null) {
+						if(!storeDTO.getCode().equals(storeCode)) {
+							storeDTO = setMerchantStoreInSession(request, storeCode);
 						}
 					}else{ // when url sm-shop/shop is being loaded for first time store is null
-						store = setMerchantStoreInSession(request, storeCode);
+						storeDTO = setMerchantStoreInSession(request, storeCode);
 					}
 				}
 
-				if(store==null) {
-					store = setMerchantStoreInSession(request, MerchantStore.DEFAULT_STORE);
+				if(storeDTO==null) {
+					storeDTO = setMerchantStoreInSession(request, MerchantStore.DEFAULT_STORE);
 				}
+				MerchantStore store = merchantService.getMerchantStore(storeDTO.getCode());
 				
+				request.setAttribute(Constants.MERCHANT_STORE_DTO, storeDTO);
 				request.setAttribute(Constants.MERCHANT_STORE, store);
 				
 				/** customer **/
@@ -942,14 +945,17 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 	    * @return the MerchantStore inserted in the session.
 	    * @throws Exception
 	    */
-	   private MerchantStore setMerchantStoreInSession(HttpServletRequest request, String storeCode) throws Exception{
+	   private MerchantStoreDTO setMerchantStoreInSession(HttpServletRequest request, String storeCode) throws Exception{
 		   if(storeCode == null || request == null)
 			   return null;
 		   MerchantStore store = merchantService.getByCode(storeCode);
 			if(store!=null) {
+				MerchantStoreDTO storeDTO = store.toDTO();
+				request.getSession().setAttribute(Constants.MERCHANT_STORE_DTO, storeDTO);
 				request.getSession().setAttribute(Constants.MERCHANT_STORE, store);
+				return storeDTO;
 			}		
-			return store;
+			return null;
 	   }
 
 }
