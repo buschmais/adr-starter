@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
 import com.salesmanager.core.constants.SchemaConstant;
+import com.salesmanager.core.integration.TransferableEntity;
+import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.model.common.audit.AuditListener;
 import com.salesmanager.core.model.common.audit.AuditSection;
 import com.salesmanager.core.model.common.audit.Auditable;
@@ -27,7 +29,7 @@ import com.salesmanager.core.model.merchant.MerchantStore;
 @EntityListeners(value = AuditListener.class)
 @Table(name = "LANGUAGE", schema=SchemaConstant.SALESMANAGER_SCHEMA)
 @Cacheable
-public class Language extends SalesManagerEntity<Integer, Language> implements Auditable {
+public class Language extends SalesManagerEntity<Integer, Language> implements Auditable, TransferableEntity<LanguageDTO> {
 	private static final long serialVersionUID = -7676627812941330669L;
 	
 
@@ -110,5 +112,10 @@ public class Language extends SalesManagerEntity<Integer, Language> implements A
 			Language language = (Language) obj;
 			return (this.id == language.getId());
 		}
+	}
+
+	@Override
+	public LanguageDTO toDTO() {
+		return new LanguageDTO(id, code);
 	}
 }

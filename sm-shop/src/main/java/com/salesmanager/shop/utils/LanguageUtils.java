@@ -51,11 +51,13 @@ public class LanguageUtils {
 								LocaleContextHolder.setLocale(locale);
 							}
 							request.getSession().setAttribute(Constants.LANGUAGE, language);
+							request.getSession().setAttribute(Constants.LANGUAGE_DTO, language.toDTO());
 					}
 				
 					if(language==null) {
 						language = languageService.toLanguage(locale);
 						request.getSession().setAttribute(Constants.LANGUAGE, language);
+						request.getSession().setAttribute(Constants.LANGUAGE_DTO, language.toDTO());
 					}
 				
 				}
@@ -90,6 +92,7 @@ public class LanguageUtils {
 		}
 		response.setLocale(locale);
 		request.getSession().setAttribute(Constants.LANGUAGE, language);
+		request.getSession().setAttribute(Constants.LANGUAGE_DTO, language.toDTO());
 
 		return language;
 	}
