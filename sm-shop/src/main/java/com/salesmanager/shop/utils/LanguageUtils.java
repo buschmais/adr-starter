@@ -4,7 +4,6 @@ import com.salesmanager.core.business.services.reference.language.LanguageServic
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -22,6 +21,7 @@ public class LanguageUtils {
 	
 	@Inject
 	LanguageService languageService;
+
 	
 	/**
 	 * Determines request language based on store rules
@@ -33,7 +33,7 @@ public class LanguageUtils {
 		Locale locale = null;
 		
 		Language language = (Language) request.getSession().getAttribute(Constants.LANGUAGE);
-		MerchantStore store = (MerchantStore)request.getSession().getAttribute(Constants.MERCHANT_STORE);
+		MerchantStore store = (MerchantStore) request.getSession().getAttribute(Constants.MERCHANT_STORE);
 		
 
 		if(language==null) {
@@ -50,14 +50,10 @@ public class LanguageUtils {
 							if(locale!=null) {
 								LocaleContextHolder.setLocale(locale);
 							}
-							request.getSession().setAttribute(Constants.LANGUAGE, language);
-							request.getSession().setAttribute(Constants.LANGUAGE_DTO, language.toDTO());
 					}
 				
 					if(language==null) {
 						language = languageService.toLanguage(locale);
-						request.getSession().setAttribute(Constants.LANGUAGE, language);
-						request.getSession().setAttribute(Constants.LANGUAGE_DTO, language.toDTO());
 					}
 				
 				}

@@ -1,35 +1,27 @@
 package com.salesmanager.catalog.presentation.api.v1.category;
 
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
+import com.salesmanager.catalog.business.service.category.CategoryService;
+import com.salesmanager.catalog.presentation.controller.category.facade.CategoryFacade;
+import com.salesmanager.catalog.presentation.model.category.PersistableCategory;
+import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
+import com.salesmanager.catalog.presentation.util.RestUtils;
+import com.salesmanager.core.model.catalog.category.Category;
+import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.core.model.reference.language.Language;
+import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
+import com.salesmanager.shop.utils.ImageFilePath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
-import com.salesmanager.catalog.business.service.category.CategoryService;
-import com.salesmanager.core.model.catalog.category.Category;
-import com.salesmanager.core.model.merchant.MerchantStore;
-import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.catalog.presentation.model.category.PersistableCategory;
-import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
-import com.salesmanager.catalog.presentation.controller.category.facade.CategoryFacade;
-import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
-import com.salesmanager.shop.utils.ImageFilePath;
-import com.salesmanager.shop.utils.LanguageUtils;
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/v1")
@@ -49,7 +41,7 @@ public class CategoryApi {
 	private StoreFacade storeFacade;
 	
 	@Inject
-	private LanguageUtils languageUtils;
+	private RestUtils restUtils;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CategoryApi.class);
 	
@@ -60,7 +52,7 @@ public class CategoryApi {
 	
 		try {
 			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = languageUtils.getRESTLanguage(request, merchantStore);	
+			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			ReadableCategory category  = categoryFacade.getById(merchantStore, id, language);
 			
@@ -101,7 +93,7 @@ public class CategoryApi {
 	
 		try {
 			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = languageUtils.getRESTLanguage(request, merchantStore);	
+			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			List <ReadableCategory> category  = categoryFacade.getCategoryHierarchy(merchantStore, 0, language, filter);
 
@@ -131,7 +123,7 @@ public class CategoryApi {
 
 
 			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = languageUtils.getRESTLanguage(request, merchantStore);	
+			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			categoryFacade.saveCategory(merchantStore, category);
 
 			

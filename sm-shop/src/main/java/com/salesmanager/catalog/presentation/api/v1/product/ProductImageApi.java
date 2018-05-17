@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.salesmanager.catalog.presentation.util.RestUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,6 @@ import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.PersistableImage;
 import com.salesmanager.catalog.presentation.populator.catalog.PersistableImagePopulator;
 import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
-import com.salesmanager.shop.utils.LanguageUtils;
 
 @Controller
 @RequestMapping("/api/v1")
@@ -49,7 +49,7 @@ public class ProductImageApi {
 	private StoreFacade storeFacade;
 	
 	@Inject
-	private LanguageUtils languageUtils;
+	private RestUtils restUtils;
 
 	
 	@Inject
@@ -142,7 +142,7 @@ public class ProductImageApi {
  		try {
      	
  	    	MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
- 			Language language = languageUtils.getRESTLanguage(request, merchantStore);	
+ 			Language language = restUtils.getRESTLanguage(request, merchantStore);
  	    	
  	    	//get the product
  	    	Product product = productService.getById(id);

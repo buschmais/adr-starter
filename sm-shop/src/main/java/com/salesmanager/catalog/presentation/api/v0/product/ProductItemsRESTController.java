@@ -8,6 +8,7 @@ import com.salesmanager.catalog.business.service.product.attribute.ProductOption
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
 import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
+import com.salesmanager.catalog.presentation.util.RestUtils;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
@@ -22,7 +23,6 @@ import com.salesmanager.catalog.presentation.controller.items.facade.ProductItem
 import com.salesmanager.catalog.presentation.controller.product.facade.ProductFacade;
 import com.salesmanager.common.presentation.util.DateUtil;
 import com.salesmanager.shop.utils.ImageFilePath;
-import com.salesmanager.shop.utils.LanguageUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,7 +96,7 @@ public class ProductItemsRESTController {
 	private ImageFilePath imageUtils;
 	
 	@Inject
-	private LanguageUtils languageUtils;
+	private RestUtils restUtils;
 	
 	@Inject
 	private ProductRelationshipService productRelationshipService;
@@ -220,7 +220,7 @@ public class ProductItemsRESTController {
 			
 	
 	
-			Language lang = languageUtils.getRESTLanguage(request, merchantStore);
+			Language lang = restUtils.getRESTLanguage(request, merchantStore);
 			
 			//get product group
 			List<ProductRelationship> group = productRelationshipService.getByGroup(merchantStore, code, lang);

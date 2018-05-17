@@ -1,31 +1,25 @@
 package com.salesmanager.catalog.presentation.api.v1.product;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
+import com.salesmanager.catalog.presentation.controller.items.facade.ProductItemsFacade;
+import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
+import com.salesmanager.catalog.presentation.util.RestUtils;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
-import com.salesmanager.catalog.presentation.controller.items.facade.ProductItemsFacade;
 import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
-import com.salesmanager.shop.utils.LanguageUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Used for product grouping such as
@@ -41,7 +35,7 @@ public class ProductGroupApi {
 	private LanguageService languageService;
 	
 	@Inject
-	private LanguageUtils languageUtils;
+	private RestUtils restUtils;
 	
 	@Inject
 	private ProductService productService;
@@ -81,7 +75,7 @@ public class ProductGroupApi {
 		try {
 
 			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = languageUtils.getRESTLanguage(request, merchantStore);
+			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			
 			ReadableProductList list = productItemsFacade.listItemsByGroup(code, merchantStore, language);
@@ -110,7 +104,7 @@ public class ProductGroupApi {
 		try {
     	
 	    	MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = languageUtils.getRESTLanguage(request, merchantStore);	
+			Language language = restUtils.getRESTLanguage(request, merchantStore);
 	    	
 	    	//get the product
 	    	Product product = productService.getById(productId);
@@ -142,7 +136,7 @@ public class ProductGroupApi {
 		try {
     	
 	    	MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = languageUtils.getRESTLanguage(request, merchantStore);	
+			Language language = restUtils.getRESTLanguage(request, merchantStore);
 	    	
 	    	//get the product
 	    	Product product = productService.getById(productId);

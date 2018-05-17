@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.salesmanager.catalog.presentation.util.RestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -40,7 +41,7 @@ public class SearchApi {
 	private StoreFacade storeFacade;
 	
 	@Inject
-	private LanguageUtils languageUtils;
+	private RestUtils restUtils;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SearchApi.class);
 	
@@ -61,7 +62,7 @@ public class SearchApi {
 		try {
 			
 			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = languageUtils.getRESTLanguage(request, merchantStore);			
+			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			SearchProductList productList = searchFacade.search(merchantStore, language, searchRequest);
 			
 			return productList;

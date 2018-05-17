@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.salesmanager.catalog.presentation.util.RestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,6 @@ import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
 import com.salesmanager.catalog.presentation.controller.product.facade.ProductFacade;
 import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
 import com.salesmanager.shop.utils.ImageFilePath;
-import com.salesmanager.shop.utils.LanguageUtils;
 
 /**
  * API to create, read, update and delete a Product
@@ -73,7 +73,7 @@ public class ProductApi {
 	private StoreFacade storeFacade;
 	
 	@Inject
-	private LanguageUtils languageUtils;
+	private RestUtils restUtils;
 	
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductApi.class);
@@ -86,7 +86,7 @@ public class ProductApi {
 		try {
 			
 			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = languageUtils.getRESTLanguage(request, merchantStore);	
+			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			productFacade.saveProduct(merchantStore, product, language);
 			
@@ -473,7 +473,7 @@ public class ProductApi {
 		try {
 			
 			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = languageUtils.getRESTLanguage(request, merchantStore);	
+			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			
 			ReadableProductList productList = productFacade.getProductListsByCriterias(merchantStore, language, criteria);
@@ -513,7 +513,7 @@ public class ProductApi {
 	public ReadableProduct get(@PathVariable final Long id, @RequestParam(value = "lang", required=false) String lang, HttpServletRequest request, HttpServletResponse response) throws Exception {
 	
 		MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-		Language language = languageUtils.getRESTLanguage(request, merchantStore);	
+		Language language = restUtils.getRESTLanguage(request, merchantStore);
 		
 		ReadableProduct product = productFacade.getProduct(merchantStore, id, language);
 		
@@ -534,7 +534,7 @@ public class ProductApi {
 		try {
     	
 	    	MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = languageUtils.getRESTLanguage(request, merchantStore);	
+			Language language = restUtils.getRESTLanguage(request, merchantStore);
 	    	
 	    	//get the product
 	    	Product product = productService.getById(productId);
@@ -563,7 +563,7 @@ public class ProductApi {
 		try {
     	
 	    	MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = languageUtils.getRESTLanguage(request, merchantStore);	
+			Language language = restUtils.getRESTLanguage(request, merchantStore);
 	    	
 	    	//get the product
 	    	Product product = productService.getById(productId);
