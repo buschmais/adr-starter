@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.salesmanager.shop.constants.Constants;
-import com.salesmanager.shop.model.shop.Breadcrumb;
+import com.salesmanager.common.presentation.model.Breadcrumb;
 
 
 public class StoreBreadcrumbsTag extends TagSupport {

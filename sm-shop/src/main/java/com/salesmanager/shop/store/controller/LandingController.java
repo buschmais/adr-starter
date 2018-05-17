@@ -31,9 +31,9 @@ import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
-import com.salesmanager.shop.model.shop.Breadcrumb;
-import com.salesmanager.shop.model.shop.BreadcrumbItem;
-import com.salesmanager.shop.model.shop.BreadcrumbItemType;
+import com.salesmanager.common.presentation.model.Breadcrumb;
+import com.salesmanager.common.presentation.model.BreadcrumbItem;
+import com.salesmanager.common.presentation.model.BreadcrumbItemType;
 import com.salesmanager.common.presentation.model.PageInformation;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
 import com.salesmanager.common.presentation.util.DateUtil;
@@ -91,7 +91,7 @@ public class LandingController {
 
 		
 		Breadcrumb breadCrumb = new Breadcrumb();
-		breadCrumb.setLanguage(language);
+		breadCrumb.setLanguage(language.getCode());
 		
 		List<BreadcrumbItem> items = new ArrayList<BreadcrumbItem>();
 		items.add(item);

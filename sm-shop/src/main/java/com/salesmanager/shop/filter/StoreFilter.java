@@ -27,9 +27,9 @@ import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.shop.model.customer.Address;
 import com.salesmanager.shop.model.customer.AnonymousCustomer;
-import com.salesmanager.shop.model.shop.Breadcrumb;
-import com.salesmanager.shop.model.shop.BreadcrumbItem;
-import com.salesmanager.shop.model.shop.BreadcrumbItemType;
+import com.salesmanager.common.presentation.model.Breadcrumb;
+import com.salesmanager.common.presentation.model.BreadcrumbItem;
+import com.salesmanager.common.presentation.model.BreadcrumbItemType;
 import com.salesmanager.common.presentation.model.PageInformation;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableCategoryPopulator;
 import com.salesmanager.catalog.presentation.controller.category.facade.CategoryFacade;
@@ -859,13 +859,13 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 				Language language = (Language)request.getAttribute(Constants.LANGUAGE);
 				if(breadCrumb==null) {
 					breadCrumb = new Breadcrumb();
-					breadCrumb.setLanguage(language);
+					breadCrumb.setLanguage(language.getCode());
 					BreadcrumbItem item = this.getDefaultBreadcrumbItem(language, locale);
 					breadCrumb.getBreadCrumbs().add(item);
 				} else {
 					
 					//check language
-					if(language.getCode().equals(breadCrumb.getLanguage().getCode())) {
+					if(language.getCode().equals(breadCrumb.getLanguageCode())) {
 						
 						//rebuild using the appropriate language
 						List<BreadcrumbItem> items = new ArrayList<BreadcrumbItem>();
@@ -912,7 +912,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 						}
 						
 						breadCrumb = new Breadcrumb();
-						breadCrumb.setLanguage(language);
+						breadCrumb.setLanguage(language.getCode());
 						breadCrumb.setBreadCrumbs(items);
 						
 					}

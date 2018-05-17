@@ -1,4 +1,4 @@
-package com.salesmanager.shop.utils;
+package com.salesmanager.catalog.presentation.util;
 
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.common.presentation.util.LabelUtils;
@@ -8,9 +8,11 @@ import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
-import com.salesmanager.shop.model.shop.Breadcrumb;
-import com.salesmanager.shop.model.shop.BreadcrumbItem;
-import com.salesmanager.shop.model.shop.BreadcrumbItemType;
+import com.salesmanager.common.presentation.model.Breadcrumb;
+import com.salesmanager.common.presentation.model.BreadcrumbItem;
+import com.salesmanager.common.presentation.model.BreadcrumbItemType;
+import com.salesmanager.shop.utils.FilePathUtils;
+import com.salesmanager.shop.utils.LocaleUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -44,7 +46,7 @@ public class BreadcrumbsUtils {
 		home.setUrl(filePathUtils.buildStoreUri(store, contextPath) + Constants.SHOP_URI);
 
 		Breadcrumb breadCrumb = new Breadcrumb();
-		breadCrumb.setLanguage(language);
+		breadCrumb.setLanguage(language.getCode());
 		
 		List<BreadcrumbItem> items = new ArrayList<BreadcrumbItem>();
 		items.add(home);
@@ -68,7 +70,7 @@ public class BreadcrumbsUtils {
 				BreadcrumbItem categoryBreadcrump = new BreadcrumbItem();
 				categoryBreadcrump.setItemType(BreadcrumbItemType.CATEGORY);
 				categoryBreadcrump.setLabel(c.getDescription().getName());
-				categoryBreadcrump.setUrl(filePathUtils.buildCategoryUrl(store, contextPath, c.getDescription().getSeUrl()));
+				categoryBreadcrump.setUrl(buildCategoryUrl(store, contextPath, c.getDescription().getSeUrl()));
 				items.add(categoryBreadcrump);
 			}
 			
@@ -95,7 +97,7 @@ public class BreadcrumbsUtils {
 		home.setUrl(filePathUtils.buildStoreUri(store, contextPath) + Constants.SHOP_URI);
 
 		Breadcrumb breadCrumb = new Breadcrumb();
-		breadCrumb.setLanguage(language);
+		breadCrumb.setLanguage(language.getCode());
 		
 		List<BreadcrumbItem> items = new ArrayList<BreadcrumbItem>();
 		items.add(home);
@@ -116,7 +118,7 @@ public class BreadcrumbsUtils {
 				BreadcrumbItem categoryBreadcrump = new BreadcrumbItem();
 				categoryBreadcrump.setItemType(BreadcrumbItemType.CATEGORY);
 				categoryBreadcrump.setLabel(c.getDescription().getName());
-				categoryBreadcrump.setUrl(filePathUtils.buildCategoryUrl(store, contextPath, c.getDescription().getSeUrl()));
+				categoryBreadcrump.setUrl(buildCategoryUrl(store, contextPath, c.getDescription().getSeUrl()));
 				items.add(categoryBreadcrump);
 			}
 			
@@ -127,7 +129,7 @@ public class BreadcrumbsUtils {
 		BreadcrumbItem productBreadcrump = new BreadcrumbItem();
 		productBreadcrump.setItemType(BreadcrumbItemType.PRODUCT);
 		productBreadcrump.setLabel(productClicked.getDescription().getName());
-		productBreadcrump.setUrl(filePathUtils.buildProductUrl(store, contextPath, productClicked.getDescription().getFriendlyUrl()));
+		productBreadcrump.setUrl(buildProductUrl(store, contextPath, productClicked.getDescription().getFriendlyUrl()));
 		items.add(productBreadcrump);
 		
 		
@@ -185,6 +187,34 @@ public class BreadcrumbsUtils {
 		
 		return sb.toString();
 		
+	}
+
+	private String buildCategoryUrl(MerchantStore store, String contextPath, String url) {
+		StringBuilder resourcePath = new StringBuilder();
+		resourcePath.append(filePathUtils.buildStoreUri(store, contextPath))
+
+				.append(Constants.SHOP_URI)
+
+				.append(Constants.CATEGORY_URI)
+				.append(Constants.SLASH)
+				.append(url)
+				.append(Constants.URL_EXTENSION);
+
+		return resourcePath.toString();
+
+	}
+
+	private String buildProductUrl(MerchantStore store, String contextPath, String url) {
+		StringBuilder resourcePath = new StringBuilder();
+		resourcePath.append(filePathUtils.buildStoreUri(store, contextPath))
+				.append(Constants.SHOP_URI)
+				.append(Constants.PRODUCT_URI)
+				.append(Constants.SLASH)
+				.append(url)
+				.append(Constants.URL_EXTENSION);
+
+		return resourcePath.toString();
+
 	}
 
 }

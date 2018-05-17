@@ -1,10 +1,8 @@
-package com.salesmanager.shop.model.shop;
+package com.salesmanager.common.presentation.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.salesmanager.core.model.reference.language.Language;
 
 
 public class Breadcrumb implements Serializable {
@@ -14,14 +12,14 @@ public class Breadcrumb implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private BreadcrumbItemType itemType;
-	private Language language;
+	private String languageCode;
 	private String urlRefContent = null;
 	private List<BreadcrumbItem> breadCrumbs = new ArrayList<BreadcrumbItem>();
-	public Language getLanguage() {
-		return language;
+	public String getLanguageCode() {
+		return languageCode;
 	}
-	public void setLanguage(Language language) {
-		this.language = language;
+	public void setLanguage(String languageCode) {
+		this.languageCode = languageCode;
 	}
 	public List<BreadcrumbItem> getBreadCrumbs() {
 		return breadCrumbs;
