@@ -10,11 +10,16 @@ import org.infinispan.tree.TreeCache;
 import org.infinispan.tree.TreeCacheFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.persistence.EntityListeners;
@@ -24,6 +29,7 @@ import javax.persistence.EntityListeners;
 @ComponentScan(basePackages = {"com.salesmanager.catalog.business.service", "com.salesmanager.catalog.business.util"})
 @EnableJpaRepositories(basePackages = {"com.salesmanager.catalog.business.repository"})
 @PropertySource("classpath:catalog.properties")
+@EnableCaching
 public class CatalogConfiguration {
 
     @Autowired
@@ -49,5 +55,17 @@ public class CatalogConfiguration {
         TreeCache treeCache = f.createTreeCache(cache);
         cache.start();
         return treeCache;
+    }
+
+    @Bean
+    public CacheManager catalogEhCacheManager() {
+        return new EhCacheCacheManager(catalogEhCacheManagerFactory().getObject());
+    }
+
+    @Bean
+    public EhCacheManagerFactoryBean catalogEhCacheManagerFactory() {
+        EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
+        ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource("spring/ehcache-catalog.xml"));
+        return ehCacheManagerFactoryBean;
     }
 }

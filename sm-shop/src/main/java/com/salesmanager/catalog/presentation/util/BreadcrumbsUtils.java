@@ -15,7 +15,12 @@ import com.salesmanager.shop.utils.FilePathUtils;
 import com.salesmanager.shop.utils.LocaleUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.Cache;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -35,7 +40,11 @@ public class BreadcrumbsUtils {
 	
 	@Inject
 	private FilePathUtils filePathUtils;
-	
+
+	@Value("#{catalogEhCacheManager.getCache('catalogCache')}")
+	private Cache catalogCache;
+
+	private static final String STORE_URI_KEY = "STORE_URI";
 	
 	public Breadcrumb buildCategoryBreadcrumb(ReadableCategory categoryClicked, MerchantStore store, Language language, String contextPath) throws Exception {
 		
@@ -43,7 +52,7 @@ public class BreadcrumbsUtils {
 		BreadcrumbItem home = new BreadcrumbItem();
 		home.setItemType(BreadcrumbItemType.HOME);
 		home.setLabel(messages.getMessage(Constants.HOME_MENU_KEY, LocaleUtils.getLocale(language)));
-		home.setUrl(filePathUtils.buildStoreUri(store, contextPath) + Constants.SHOP_URI);
+		home.setUrl(getStoreUri(store, contextPath));
 
 		Breadcrumb breadCrumb = new Breadcrumb();
 		breadCrumb.setLanguage(language.getCode());
@@ -94,7 +103,7 @@ public class BreadcrumbsUtils {
 		BreadcrumbItem home = new BreadcrumbItem();
 		home.setItemType(BreadcrumbItemType.HOME);
 		home.setLabel(messages.getMessage(Constants.HOME_MENU_KEY, LocaleUtils.getLocale(language)));
-		home.setUrl(filePathUtils.buildStoreUri(store, contextPath) + Constants.SHOP_URI);
+		home.setUrl(getStoreUri(store, contextPath));
 
 		Breadcrumb breadCrumb = new Breadcrumb();
 		breadCrumb.setLanguage(language.getCode());
@@ -191,7 +200,7 @@ public class BreadcrumbsUtils {
 
 	private String buildCategoryUrl(MerchantStore store, String contextPath, String url) {
 		StringBuilder resourcePath = new StringBuilder();
-		resourcePath.append(filePathUtils.buildStoreUri(store, contextPath))
+		resourcePath.append(getStoreUri(store, contextPath))
 
 				.append(Constants.SHOP_URI)
 
@@ -206,7 +215,7 @@ public class BreadcrumbsUtils {
 
 	private String buildProductUrl(MerchantStore store, String contextPath, String url) {
 		StringBuilder resourcePath = new StringBuilder();
-		resourcePath.append(filePathUtils.buildStoreUri(store, contextPath))
+		resourcePath.append(getStoreUri(store, contextPath))
 				.append(Constants.SHOP_URI)
 				.append(Constants.PRODUCT_URI)
 				.append(Constants.SLASH)
@@ -215,6 +224,13 @@ public class BreadcrumbsUtils {
 
 		return resourcePath.toString();
 
+	}
+
+	private String getStoreUri(MerchantStore store, String contextPath) {
+		if (catalogCache.get(STORE_URI_KEY) == null) {
+			catalogCache.put(STORE_URI_KEY, filePathUtils.buildStoreUri(store, contextPath) + Constants.SHOP_URI);
+		}
+		return (String) catalogCache.get(STORE_URI_KEY).get();
 	}
 
 }

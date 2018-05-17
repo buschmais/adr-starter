@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ehcache name="com.shopizer.core.cache" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
-	
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+
     <defaultCache
             maxElementsInMemory="10000"
             eternal="false"
@@ -14,14 +13,14 @@
             diskPersistent="false"
             diskExpiryThreadIntervalSeconds="120"
             memoryStoreEvictionPolicy="LRU" />
-            
-            
-     <cache name="com.shopizer.OBJECT_CACHE"
+
+
+    <cache name="catalogCache"
            maxElementsInMemory="10000"
            eternal="false"
            overflowToDisk="false"
            timeToIdleSeconds="1200"
            timeToLiveSeconds="1200"
-           memoryStoreEvictionPolicy="LFU"/>
+           memoryStoreEvictionPolicy="LFU" />
 
 </ehcache>

@@ -18,7 +18,7 @@
 		<property name="shared" value="false" />
 	</bean>
 
-	<bean id="serviceCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+	<bean id="serviceCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" primary="true">
 		<property name="cacheManager">
 			<ref bean="springCacheManager" />
 		</property>
