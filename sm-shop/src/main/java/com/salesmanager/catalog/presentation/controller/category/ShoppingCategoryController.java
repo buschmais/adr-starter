@@ -28,7 +28,7 @@ import com.salesmanager.catalog.presentation.model.filter.QueryFilterType;
 import com.salesmanager.shop.utils.BreadcrumbsUtils;
 import com.salesmanager.shop.utils.ImageFilePath;
 import com.salesmanager.common.presentation.util.LabelUtils;
-import com.salesmanager.shop.utils.PageBuilderUtils;
+import com.salesmanager.catalog.presentation.util.PageBuilderUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

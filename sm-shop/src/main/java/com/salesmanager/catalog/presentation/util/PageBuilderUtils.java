@@ -1,4 +1,4 @@
-package com.salesmanager.shop.utils;
+package com.salesmanager.catalog.presentation.util;
 
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.shop.constants.Constants;

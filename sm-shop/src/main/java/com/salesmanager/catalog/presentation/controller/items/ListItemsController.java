@@ -9,7 +9,7 @@ import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufacturer;
 import com.salesmanager.common.presentation.model.PageInformation;
 import com.salesmanager.catalog.presentation.populator.manufacturer.ReadableManufacturerPopulator;
-import com.salesmanager.shop.utils.PageBuilderUtils;
+import com.salesmanager.catalog.presentation.util.PageBuilderUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
