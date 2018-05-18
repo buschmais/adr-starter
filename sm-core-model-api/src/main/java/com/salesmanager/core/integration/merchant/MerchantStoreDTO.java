@@ -1,16 +1,18 @@
 package com.salesmanager.core.integration.merchant;
 
 import com.salesmanager.core.integration.AbstractCoreDTO;
-import lombok.AllArgsConstructor;
-import lombok.Value;
+import lombok.*;
 
 import java.io.Serializable;
 
-@Value
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class MerchantStoreDTO extends AbstractCoreDTO {
 
-    private final Integer id;
+    private Integer id;
 
-    private final String code;
+    private String code;
 
 }

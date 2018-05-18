@@ -1,5 +1,7 @@
 package com.salesmanager.catalog;
 
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.infinispan.Cache;
 import org.infinispan.configuration.cache.ConfigurationBuilder;
 import org.infinispan.configuration.cache.PersistenceConfigurationBuilder;
@@ -21,6 +23,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.DefaultUriTemplateHandler;
 
 import javax.persistence.EntityListeners;
 
@@ -67,5 +72,17 @@ public class CatalogConfiguration {
         EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
         ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource("spring/ehcache-catalog.xml"));
         return ehCacheManagerFactoryBean;
+    }
+
+    @Bean
+    public RestTemplate coreRestTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+        PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
+        connectionManager.setMaxTotal(100);
+        connectionManager.setDefaultMaxPerRoute(6);
+        restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(HttpClients.custom().setConnectionManager(connectionManager).build()));
+        String coreUrl = environment.getProperty("core.url");
+        ((DefaultUriTemplateHandler) restTemplate.getUriTemplateHandler()).setBaseUrl(coreUrl);
+        return restTemplate;
     }
 }
