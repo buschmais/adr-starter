@@ -18,13 +18,13 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.salesmanager.core.business.services.system.MerchantLogService;
 import com.salesmanager.core.business.utils.CreditCardUtils;
-import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.Order;
@@ -45,7 +45,7 @@ import com.salesmanager.core.modules.integration.payment.model.PaymentModule;
 public class BeanStreamPayment implements PaymentModule {
 	
 	@Inject
-	private ProductPriceUtils productPriceUtils;
+	private ProductPriceApi productPriceApi;
 	
 	@Inject
 	private MerchantLogService merchantLogService;
@@ -91,7 +91,7 @@ public class BeanStreamPayment implements PaymentModule {
 		
 				String trnID = capturableTransaction.getTransactionDetails().get("TRANSACTIONID");
 				
-				String amnt = productPriceUtils.getAdminFormatedAmount(store, order.getTotal());
+				String amnt = productPriceApi.getAdminFormattedAmount(store.toDTO(), order.getTotal());
 				
 				/**
 				merchant_id=123456789&requestType=BACKEND
@@ -185,7 +185,7 @@ public class BeanStreamPayment implements PaymentModule {
 
 			String trnID = transaction.getTransactionDetails().get("TRANSACTIONID");
 			
-			String amnt = productPriceUtils.getAdminFormatedAmount(store, amount);
+			String amnt = productPriceApi.getAdminFormattedAmount(store.toDTO(), amount);
 			
 			/**
 			merchant_id=123456789&requestType=BACKEND
@@ -506,7 +506,7 @@ public class BeanStreamPayment implements PaymentModule {
 			
 		String orderNumber = uniqueId;
 		
-		String amnt = productPriceUtils.getAdminFormatedAmount(store, amount);
+		String amnt = productPriceApi.getAdminFormattedAmount(store.toDTO(), amount);
 		
 		
 		StringBuilder messageString = new StringBuilder();

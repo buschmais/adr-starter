@@ -352,7 +352,7 @@ public class MerchantStore extends SalesManagerEntity<Integer, MerchantStore> im
 
 	@Override
 	public MerchantStoreDTO toDTO() {
-		return new MerchantStoreDTO(this.id, this.code);
+		return new MerchantStoreDTO(this.id, this.code, this.currency.getCode(), this.defaultLanguage.getCode(), this.country.getIsoCode(), this.currencyFormatNational);
 	}
 
 }

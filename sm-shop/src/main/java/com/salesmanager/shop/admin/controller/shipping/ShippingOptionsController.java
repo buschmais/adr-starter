@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.inject.Inject;
+
+import com.salesmanager.catalog.api.ProductPriceApi;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +26,6 @@ import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.shipping.ShippingConfiguration;
 import com.salesmanager.core.model.shipping.ShippingType;
 import com.salesmanager.core.business.services.shipping.ShippingService;
-import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.shop.admin.controller.ControllerConstants;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
@@ -43,7 +44,7 @@ public class ShippingOptionsController {
 	LabelUtils messages;
 	
 	@Inject
-	private ProductPriceUtils priceUtil;
+	private ProductPriceApi productPriceApi;
 	
 	/**
 	 * Displays shipping options
@@ -74,11 +75,11 @@ public class ShippingOptionsController {
 		if(shippingConfiguration!=null) {
 			
 			if(shippingConfiguration.getHandlingFees()!=null) {
-				shippingConfiguration.setHandlingFeesText(priceUtil.getAdminFormatedAmount(store,shippingConfiguration.getHandlingFees()));
+				shippingConfiguration.setHandlingFeesText(productPriceApi.getAdminFormattedAmount(store.toDTO(), shippingConfiguration.getHandlingFees()));
 			}
 			
 			if(shippingConfiguration.getOrderTotalFreeShipping()!=null) {
-				shippingConfiguration.setOrderTotalFreeShippingText(priceUtil.getAdminFormatedAmount(store,shippingConfiguration.getOrderTotalFreeShipping()));
+				shippingConfiguration.setOrderTotalFreeShippingText(productPriceApi.getAdminFormattedAmount(store.toDTO(), shippingConfiguration.getOrderTotalFreeShipping()));
 			}
 			
 		}
@@ -119,7 +120,7 @@ public class ShippingOptionsController {
 		BigDecimal submitedOrderPrice = null;
 		if(!StringUtils.isBlank(configuration.getOrderTotalFreeShippingText())){
 			try {
-				submitedOrderPrice = priceUtil.getAmount(configuration.getOrderTotalFreeShippingText());
+				submitedOrderPrice = productPriceApi.getAmount(configuration.getOrderTotalFreeShippingText());
 				shippingConfiguration.setOrderTotalFreeShipping(submitedOrderPrice);
 			} catch (Exception e) {
 				ObjectError error = new ObjectError("orderTotalFreeShippingText",messages.getMessage("message.invalid.price", locale));
@@ -130,7 +131,7 @@ public class ShippingOptionsController {
 		BigDecimal submitedHandlingPrice = null;
 		if(!StringUtils.isBlank(configuration.getHandlingFeesText())){
 			try {
-				submitedHandlingPrice = priceUtil.getAmount(configuration.getHandlingFeesText());
+				submitedHandlingPrice = productPriceApi.getAmount(configuration.getHandlingFeesText());
 				shippingConfiguration.setHandlingFees(submitedHandlingPrice);
 			} catch (Exception e) {
 				ObjectError error = new ObjectError("handlingFeesText",messages.getMessage("message.invalid.price", locale));

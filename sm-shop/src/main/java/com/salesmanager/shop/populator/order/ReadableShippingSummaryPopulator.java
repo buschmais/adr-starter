@@ -1,8 +1,8 @@
 package com.salesmanager.shop.populator.order;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import org.apache.commons.lang.Validate;
 
-import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
@@ -14,14 +14,14 @@ import com.salesmanager.shop.model.order.shipping.ReadableShippingSummary;
 public class ReadableShippingSummaryPopulator extends
 		AbstractDataPopulator<ShippingSummary, ReadableShippingSummary> {
 	
-	private PricingService pricingService;
+	private ProductPriceApi productPriceApi;
 
 	@Override
 	public ReadableShippingSummary populate(ShippingSummary source,
 			ReadableShippingSummary target, MerchantStore store,
 			Language language) throws ConversionException {
 		
-		Validate.notNull(pricingService,"PricingService must be set");
+		Validate.notNull(productPriceApi,"productPriceApi must be set");
 	
 		try {
 			
@@ -31,8 +31,8 @@ public class ReadableShippingSummaryPopulator extends
 			target.setShippingModule(source.getShippingModule());
 			target.setShippingOption(source.getShippingOption());
 			target.setTaxOnShipping(source.isTaxOnShipping());
-			target.setHandlingText(pricingService.getDisplayAmount(source.getHandling(), store));
-			target.setShippingText(pricingService.getDisplayAmount(source.getShipping(), store));
+			target.setHandlingText(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), source.getHandling()));
+			target.setShippingText(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), source.getShipping()));
 			
 			if(source.getDeliveryAddress()!=null) {
 			
@@ -69,12 +69,11 @@ public class ReadableShippingSummaryPopulator extends
 				ReadableShippingSummary();
 	}
 
-	public PricingService getPricingService() {
-		return pricingService;
+	public ProductPriceApi getProductPriceApi() {
+		return productPriceApi;
 	}
 
-	public void setPricingService(PricingService pricingService) {
-		this.pricingService = pricingService;
+	public void setProductPriceApi(ProductPriceApi productPriceApi) {
+		this.productPriceApi = productPriceApi;
 	}
-
 }

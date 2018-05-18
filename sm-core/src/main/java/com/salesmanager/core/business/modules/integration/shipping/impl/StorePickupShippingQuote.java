@@ -8,10 +8,10 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import org.apache.commons.lang.Validate;
 
 import com.salesmanager.core.business.services.system.MerchantConfigurationService;
-import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.model.common.Delivery;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.shipping.PackageDetails;
@@ -46,7 +46,7 @@ public class StorePickupShippingQuote implements ShippingQuoteModule, ShippingQu
 	private MerchantConfigurationService merchantConfigurationService;
 	
 	@Inject
-	private ProductPriceUtils productPriceUtils;
+	private ProductPriceApi productPriceApi;
 
 
 	@Override
@@ -147,9 +147,9 @@ public class StorePickupShippingQuote implements ShippingQuoteModule, ShippingQu
 			shippingOption.setOptionCode(MODULE_CODE);
 			shippingOption.setOptionId(new StringBuilder().append(MODULE_CODE).append("_").append(region).toString());
 			
-			shippingOption.setOptionPrice(productPriceUtils.getAmount(price));
+			shippingOption.setOptionPrice(productPriceApi.getAmount(price));
 	
-			shippingOption.setOptionPriceText(productPriceUtils.getStoreFormatedAmountWithCurrency(store, productPriceUtils.getAmount(price)));
+			shippingOption.setOptionPriceText(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), productPriceApi.getAmount(price)));
 	
 			List<ShippingOption> options = quote.getShippingOptions();
 			

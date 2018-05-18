@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jopendocument.dom.OOUtils;
@@ -33,7 +35,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.core.business.services.reference.country.CountryService;
 import com.salesmanager.core.business.services.reference.zone.ZoneService;
-import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.business.utils.ProductUtils;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.Order;
@@ -69,7 +70,7 @@ public class ODSInvoiceModule implements InvoiceModule {
 	private CountryService countryService;
 	
 	@Inject
-	private ProductPriceUtils priceUtil;
+	private ProductPriceApi productPriceApi;
 	
 
 	@Override
@@ -307,9 +308,11 @@ public class ODSInvoiceModule implements InvoiceModule {
 				
 				int quantity = orderProduct.getProductQuantity();
 				sheet.setValueAt(quantity, 1, productCell);
-				String amount = priceUtil.getStoreFormatedAmountWithCurrency(store, orderProduct.getOneTimeCharge());
+				String amount = productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), orderProduct.getOneTimeCharge());
 				sheet.setValueAt(amount, 2, productCell);
-				String t = priceUtil.getStoreFormatedAmountWithCurrency(store, priceUtil.getOrderProductTotalPrice(store, orderProduct));
+				BigDecimal finalPrice = orderProduct.getOneTimeCharge();
+				finalPrice = finalPrice.multiply(new BigDecimal(orderProduct.getProductQuantity()));
+				String t = productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), finalPrice);
 				sheet.setValueAt(t, 3, productCell);
 
 				productCell++;
@@ -325,7 +328,7 @@ public class ODSInvoiceModule implements InvoiceModule {
 				if(totalName.contains(".")) {
 					totalName = orderTotal.getTitle();
 				}
-				String totalValue = priceUtil.getStoreFormatedAmountWithCurrency(store,orderTotal.getValue());
+				String totalValue = productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), orderTotal.getValue());
 				sheet.setValueAt(totalName, 2, productCell);
 				sheet.setValueAt(totalValue, 3, productCell);
 				productCell++;

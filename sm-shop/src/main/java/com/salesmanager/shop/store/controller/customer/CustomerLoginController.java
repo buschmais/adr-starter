@@ -1,7 +1,7 @@
 package com.salesmanager.shop.store.controller.customer;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.services.shoppingcart.ShoppingCartCalculationService;
 import com.salesmanager.core.business.services.shoppingcart.ShoppingCartService;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
@@ -53,7 +53,7 @@ public class CustomerLoginController extends AbstractController {
     private ShoppingCartCalculationService shoppingCartCalculationService;
     
     @Inject
-    private PricingService pricingService;
+    private ProductPriceApi productPriceApi;
 
     
 	 @Inject
@@ -194,7 +194,7 @@ public class CustomerLoginController extends AbstractController {
 
         ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
         shoppingCartDataPopulator.setShoppingCartCalculationService( shoppingCartCalculationService );
-        shoppingCartDataPopulator.setPricingService( pricingService );
+        shoppingCartDataPopulator.setProductPriceApi(productPriceApi);
         
         try
         {

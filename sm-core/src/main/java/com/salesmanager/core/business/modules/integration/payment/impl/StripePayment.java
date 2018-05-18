@@ -9,11 +9,11 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.Order;
@@ -38,7 +38,7 @@ import com.stripe.model.Refund;
 public class StripePayment implements PaymentModule {
 	
 	@Inject
-	private ProductPriceUtils productPriceUtils;
+	private ProductPriceApi productPriceApi;
 
 	
 	private final static String AUTHORIZATION = "Authorization";
@@ -126,7 +126,7 @@ public class StripePayment implements PaymentModule {
 			}
 			
 
-			String amnt = productPriceUtils.getAdminFormatedAmount(store, amount);
+			String amnt = productPriceApi.getAdminFormattedAmount(store.toDTO(), amount);
 			
 			//stripe does not support floating point
 			//so amnt * 100 or remove floating point
@@ -270,7 +270,7 @@ public class StripePayment implements PaymentModule {
 		Transaction transaction = new Transaction();
 		try {
 			
-			String amnt = productPriceUtils.getAdminFormatedAmount(store, amount);
+			String amnt = productPriceApi.getAdminFormattedAmount(store.toDTO(), amount);
 			
 			//stripe does not support floating point
 			//so amnt * 100 or remove floating point
@@ -344,7 +344,7 @@ public class StripePayment implements PaymentModule {
 
 			String trnID = transaction.getTransactionDetails().get("TRNORDERNUMBER");
 			
-			String amnt = productPriceUtils.getAdminFormatedAmount(store, amount);
+			String amnt = productPriceApi.getAdminFormattedAmount(store.toDTO(), amount);
 			
 			Stripe.apiKey = apiKey;
 			

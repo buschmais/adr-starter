@@ -109,11 +109,4 @@ public interface PricingService {
 	String getStringAmount(BigDecimal amount, MerchantStore store)
 			throws ServiceException;
 
-	/**
-	 * Method for calculating sub total
-	 * @param price
-	 * @param quantity
-	 * @return
-	 */
-	BigDecimal calculatePriceQuantity(BigDecimal price, int quantity);
 }

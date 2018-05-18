@@ -1,12 +1,12 @@
 package com.salesmanager.shop.populator.order;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.OrderTotal;
@@ -21,7 +21,7 @@ public class ReadableOrderSummaryPopulator extends AbstractDataPopulator<OrderTo
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ReadableOrderSummaryPopulator.class);
 	
-	private PricingService pricingService;
+	private ProductPriceApi productPriceApi;
 	
 	private LabelUtils messages;
 	
@@ -31,7 +31,7 @@ public class ReadableOrderSummaryPopulator extends AbstractDataPopulator<OrderTo
 	public ReadableOrderTotalSummary populate(OrderTotalSummary source, ReadableOrderTotalSummary target,
 			MerchantStore store, Language language) throws ConversionException {
 		
-		Validate.notNull(pricingService,"PricingService must be set");
+		Validate.notNull(productPriceApi,"productPriceApi must be set");
 		Validate.notNull(messages,"LabelUtils must be set");
 		
 		if(target==null) {
@@ -41,19 +41,19 @@ public class ReadableOrderSummaryPopulator extends AbstractDataPopulator<OrderTo
 		try {
 		
 			if(source.getSubTotal() != null) {
-				target.setSubTotal(pricingService.getDisplayAmount(source.getSubTotal(), store));
+				target.setSubTotal(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), source.getSubTotal()));
 			}
 			if(source.getTaxTotal()!=null) {
-				target.setTaxTotal(pricingService.getDisplayAmount(source.getTaxTotal(), store));
+				target.setTaxTotal(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), source.getTaxTotal()));
 			}
 			if(source.getTotal() != null) {
-				target.setTotal(pricingService.getDisplayAmount(source.getTotal(), store));
+				target.setTotal(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), source.getTotal()));
 			}
 			
 			if(!CollectionUtils.isEmpty(source.getTotals())) {
 				ReadableOrderTotalPopulator orderTotalPopulator = new ReadableOrderTotalPopulator();
 				orderTotalPopulator.setMessages(messages);
-				orderTotalPopulator.setPricingService(pricingService);
+				orderTotalPopulator.setProductPriceApi(productPriceApi);
 				for(OrderTotal orderTotal : source.getTotals()) {
 					ReadableOrderTotal t = new ReadableOrderTotal();
 					orderTotalPopulator.populate(orderTotal, t, store, language);
@@ -76,16 +76,15 @@ public class ReadableOrderSummaryPopulator extends AbstractDataPopulator<OrderTo
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	public PricingService getPricingService() {
-		return pricingService;
+
+	public ProductPriceApi getProductPriceApi() {
+		return productPriceApi;
 	}
 
-	public void setPricingService(PricingService pricingService) {
-		this.pricingService = pricingService;
+	public void setProductPriceApi(ProductPriceApi productPriceApi) {
+		this.productPriceApi = productPriceApi;
 	}
-	
+
 	public LabelUtils getMessages() {
 		return messages;
 	}

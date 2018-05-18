@@ -1,10 +1,9 @@
 package com.salesmanager.shop.utils;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.common.presentation.util.DateUtil;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.core.business.modules.email.Email;
-import com.salesmanager.catalog.business.service.product.PricingService;
-import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.core.business.services.reference.country.CountryService;
 import com.salesmanager.core.business.services.reference.zone.ZoneService;
 import com.salesmanager.core.business.services.system.EmailService;
@@ -50,13 +49,10 @@ public class EmailTemplatesUtils {
 	private CountryService countryService;
 	
 	@Inject
-	private ProductService productService;
-	
-	@Inject
 	private ZoneService zoneService;
 	
 	@Inject
-	private PricingService pricingService;
+	private ProductPriceApi productPriceApi;
 	
 	@Inject
 	@Qualifier("img")
@@ -167,7 +163,7 @@ public class EmailTemplatesUtils {
 		    		   orderTable.append(TR);
 			    		   orderTable.append(TD).append(product.getProductName()).append(" - ").append(product.getSku()).append(CLOSING_TD);
 		    		   	   orderTable.append(TD).append(messages.getMessage("label.quantity", customerLocale)).append(": ").append(product.getProductQuantity()).append(CLOSING_TD);
-	    		   		   orderTable.append(TD).append(pricingService.getDisplayAmount(product.getOneTimeCharge(), merchantStore)).append(CLOSING_TD);
+	    		   		   orderTable.append(TD).append(productPriceApi.getStoreFormattedAmountWithCurrency(merchantStore.toDTO(), product.getOneTimeCharge())).append(CLOSING_TD);
     		   		   orderTable.append(CLOSING_TR);
 		    	   }
 
@@ -196,7 +192,7 @@ public class EmailTemplatesUtils {
 		    		   		orderTable.append(TD);
 		    		   			orderTable.append("<strong>");
 
-		    		   			orderTable.append(pricingService.getDisplayAmount(total.getValue(), merchantStore));
+		    		   			orderTable.append(productPriceApi.getStoreFormattedAmountWithCurrency(merchantStore.toDTO(), total.getValue()));
 
 	    		   				orderTable.append("</strong>");
 		    		   		orderTable.append(CLOSING_TD);

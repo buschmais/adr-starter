@@ -3,9 +3,9 @@
  */
 package com.salesmanager.shop.populator.shoppingCart;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.services.shoppingcart.ShoppingCartCalculationService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionDescription;
@@ -44,7 +44,7 @@ public class ShoppingCartDataPopulator extends AbstractDataPopulator<ShoppingCar
 
     private static final Logger LOG = LoggerFactory.getLogger(ShoppingCartDataPopulator.class);
 
-    private PricingService pricingService;
+    private ProductPriceApi productPriceApi;
 
     private  ShoppingCartCalculationService shoppingCartCalculationService;
     
@@ -78,8 +78,8 @@ public class ShoppingCartDataPopulator extends AbstractDataPopulator<ShoppingCar
 
 
 
-    public PricingService getPricingService() {
-        return pricingService;
+    public ProductPriceApi getProductPriceApi() {
+        return productPriceApi;
     }
 
 
@@ -118,14 +118,14 @@ public class ShoppingCartDataPopulator extends AbstractDataPopulator<ShoppingCar
                     
                     shoppingCartItem.setName(itemName);
 
-                    shoppingCartItem.setPrice(pricingService.getDisplayAmount(item.getItemPrice(),store));
+                    shoppingCartItem.setPrice(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), item.getItemPrice()));
                     shoppingCartItem.setQuantity(item.getQuantity());
                     
                     
                     cartQuantity = cartQuantity + item.getQuantity();
                     
                     shoppingCartItem.setProductPrice(item.getItemPrice());
-                    shoppingCartItem.setSubTotal(pricingService.getDisplayAmount(item.getSubTotal(), store));
+                    shoppingCartItem.setSubTotal(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), item.getSubTotal()));
                     ProductImage image = item.getProduct().getProductImage();
                     if(image!=null && imageUtils!=null) {
                         String imagePath = imageUtils.buildProductImageUtils(store, item.getProduct().getSku(), image.getProductImage());
@@ -191,12 +191,12 @@ public class ShoppingCartDataPopulator extends AbstractDataPopulator<ShoppingCar
             	cart.setTotals(totals);
             }
             
-            cart.setSubTotal(pricingService.getDisplayAmount(orderSummary.getSubTotal(), store));
-            cart.setTotal(pricingService.getDisplayAmount(orderSummary.getTotal(), store));
+            cart.setSubTotal(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), orderSummary.getSubTotal()));
+            cart.setTotal(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), orderSummary.getTotal()));
             cart.setQuantity(cartQuantity);
             cart.setId(shoppingCart.getId());
         }
-        catch(ServiceException ex){
+        catch(Exception ex){
             LOG.error( "Error while converting cart Model to cart Data.."+ex );
             throw new ConversionException( "Unable to create cart data", ex );
         }
@@ -209,8 +209,8 @@ public class ShoppingCartDataPopulator extends AbstractDataPopulator<ShoppingCar
 
 
 
-    public void setPricingService(final PricingService pricingService) {
-        this.pricingService = pricingService;
+    public void setProductPriceApi(final ProductPriceApi productPriceApi) {
+        this.productPriceApi = productPriceApi;
     }
 
 

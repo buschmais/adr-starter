@@ -1,13 +1,11 @@
 package com.salesmanager.catalog.model.integration.core;
 
 import com.salesmanager.core.constants.SchemaConstant;
+import com.salesmanager.core.model.reference.currency.Currency;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -27,4 +25,16 @@ public class MerchantStoreInfo {
     @Pattern(regexp="^[a-zA-Z0-9_]*$")
     @Column(name = "STORE_CODE", nullable=false, unique=true, length=100)
     private String code;
+
+    @Column(name = "CURRENCY_ID", nullable=false)
+    private String currency;
+
+    @Column(name = "LANGUAGE_ID", nullable=false)
+    private String defaultLanguage;
+
+    @Column(name = "COUNTRY_ID", nullable = false)
+    private String countryIsoCode;
+
+    @Column(name = "CURRENCY_FORMAT_NATIONAL")
+    private boolean currencyFormatNational;
 }

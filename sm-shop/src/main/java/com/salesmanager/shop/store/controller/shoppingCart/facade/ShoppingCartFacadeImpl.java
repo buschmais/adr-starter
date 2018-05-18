@@ -13,6 +13,8 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
+import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -25,12 +27,10 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductAttributeService;
 import com.salesmanager.core.business.services.shoppingcart.ShoppingCartCalculationService;
 import com.salesmanager.core.business.services.shoppingcart.ShoppingCartService;
-import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
 import com.salesmanager.catalog.model.product.availability.ProductAvailability;
@@ -70,13 +70,13 @@ public class ShoppingCartFacadeImpl
     ShoppingCartCalculationService shoppingCartCalculationService;
 
     @Inject
-    private ProductPriceUtils productPriceUtils;
-
-    @Inject
-    private ProductService productService;
+    private ProductPriceApi productPriceApi;
 
     @Inject
     private PricingService pricingService;
+
+    @Inject
+    private ProductService productService;
 
     @Inject
     private ProductAttributeService productAttributeService;
@@ -172,7 +172,7 @@ public class ShoppingCartFacadeImpl
 
         ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
         shoppingCartDataPopulator.setShoppingCartCalculationService( shoppingCartCalculationService );
-        shoppingCartDataPopulator.setPricingService( pricingService );
+        shoppingCartDataPopulator.setProductPriceApi(productPriceApi);
         shoppingCartDataPopulator.setimageUtils(imageUtils);
 
         return shoppingCartDataPopulator.populate( cartModel, store, language );
@@ -422,7 +422,7 @@ public class ShoppingCartFacadeImpl
 
         ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
         shoppingCartDataPopulator.setShoppingCartCalculationService( shoppingCartCalculationService );
-        shoppingCartDataPopulator.setPricingService( pricingService );
+        shoppingCartDataPopulator.setProductPriceApi(productPriceApi);
         shoppingCartDataPopulator.setimageUtils(imageUtils);
 
         //Language language = (Language) getKeyValue( Constants.LANGUAGE );
@@ -458,7 +458,7 @@ public class ShoppingCartFacadeImpl
 
         ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
         shoppingCartDataPopulator.setShoppingCartCalculationService( shoppingCartCalculationService );
-        shoppingCartDataPopulator.setPricingService( pricingService );
+        shoppingCartDataPopulator.setProductPriceApi(productPriceApi);
         shoppingCartDataPopulator.setimageUtils(imageUtils);
         //Language language = (Language) getKeyValue( Constants.LANGUAGE );
         MerchantStore merchantStore = (MerchantStore) getKeyValue( Constants.MERCHANT_STORE );
@@ -496,7 +496,7 @@ public class ShoppingCartFacadeImpl
 
                     ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
                     shoppingCartDataPopulator.setShoppingCartCalculationService( shoppingCartCalculationService );
-                    shoppingCartDataPopulator.setPricingService( pricingService );
+                    shoppingCartDataPopulator.setProductPriceApi(productPriceApi);
                     shoppingCartDataPopulator.setimageUtils(imageUtils);
                     return shoppingCartDataPopulator.populate( cartModel, store, language );
                 }
@@ -533,14 +533,14 @@ public class ShoppingCartFacadeImpl
                 List<ProductAttribute> productAttributes = new ArrayList<ProductAttribute>();
                 productAttributes.addAll( entryToUpdate.getProduct().getAttributes() );
                 final FinalPrice finalPrice =
-                    productPriceUtils.getFinalProductPrice( entryToUpdate.getProduct(), productAttributes );
+                    productPriceApi.getFinalProductPrice( entryToUpdate.getProduct(), productAttributes );
                 entryToUpdate.setItemPrice( finalPrice.getFinalPrice() );
                 shoppingCartService.saveOrUpdate( cartModel );
 
                 LOG.info( "Cart entry updated with desired quantity" );
                 ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
                 shoppingCartDataPopulator.setShoppingCartCalculationService( shoppingCartCalculationService );
-                shoppingCartDataPopulator.setPricingService( pricingService );
+                shoppingCartDataPopulator.setProductPriceApi(productPriceApi);
                 shoppingCartDataPopulator.setimageUtils(imageUtils);
                 return shoppingCartDataPopulator.populate( cartModel, store, language );
 
@@ -583,7 +583,7 @@ public class ShoppingCartFacadeImpl
                 productAttributes.addAll( entryToUpdate.getProduct().getAttributes() );
                 
                 final FinalPrice finalPrice =
-                        productPriceUtils.getFinalProductPrice( entryToUpdate.getProduct(), productAttributes );
+                        productPriceApi.getFinalProductPrice( entryToUpdate.getProduct(), productAttributes );
                 entryToUpdate.setItemPrice( finalPrice.getFinalPrice() );
                     
 
@@ -599,7 +599,7 @@ public class ShoppingCartFacadeImpl
             LOG.info( "Cart entry updated with desired quantity" );
             ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
             shoppingCartDataPopulator.setShoppingCartCalculationService( shoppingCartCalculationService );
-            shoppingCartDataPopulator.setPricingService( pricingService );
+            shoppingCartDataPopulator.setProductPriceApi(productPriceApi);
             shoppingCartDataPopulator.setimageUtils(imageUtils);
             return shoppingCartDataPopulator.populate( cartModel, store, language );
 
@@ -683,10 +683,10 @@ public class ShoppingCartFacadeImpl
         ReadableShoppingCartPopulator readableShoppingCart = new ReadableShoppingCartPopulator();
         
         readableShoppingCart.setImageUtils(imageUtils);
-        readableShoppingCart.setPricingService(pricingService);
+        readableShoppingCart.setProductPriceApi(productPriceApi);
         readableShoppingCart.setProductAttributeService(productAttributeService);
         readableShoppingCart.setShoppingCartCalculationService(shoppingCartCalculationService);
-  
+        readableShoppingCart.setPricingService(pricingService);
         ReadableShoppingCart readableCart = new  ReadableShoppingCart();
         
         readableShoppingCart.populate(cartModel, readableCart,  store, language);
@@ -750,9 +750,10 @@ public class ShoppingCartFacadeImpl
         ReadableShoppingCartPopulator readableShoppingCart = new ReadableShoppingCartPopulator();
         
         readableShoppingCart.setImageUtils(imageUtils);
-        readableShoppingCart.setPricingService(pricingService);
+        readableShoppingCart.setProductPriceApi(productPriceApi);
         readableShoppingCart.setProductAttributeService(productAttributeService);
         readableShoppingCart.setShoppingCartCalculationService(shoppingCartCalculationService);
+        readableShoppingCart.setPricingService(pricingService);
   
         ReadableShoppingCart readableCart = new  ReadableShoppingCart();
         
@@ -782,10 +783,10 @@ public class ShoppingCartFacadeImpl
 	        ReadableShoppingCartPopulator readableShoppingCart = new ReadableShoppingCartPopulator();
 	        
 	        readableShoppingCart.setImageUtils(imageUtils);
-	        readableShoppingCart.setPricingService(pricingService);
+	        readableShoppingCart.setProductPriceApi(productPriceApi);
 	        readableShoppingCart.setProductAttributeService(productAttributeService);
 	        readableShoppingCart.setShoppingCartCalculationService(shoppingCartCalculationService);
-
+            readableShoppingCart.setPricingService(pricingService);
 	        readableShoppingCart.populate(cart, readableCart,  store, language);
 			
 			

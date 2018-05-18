@@ -1,9 +1,9 @@
 package com.salesmanager.shop.populator.order.transaction;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import org.apache.commons.lang.Validate;
 
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.services.order.OrderService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.merchant.MerchantStore;
@@ -18,7 +18,7 @@ import com.shopizer.search.utils.DateUtil;
 public class PersistableTransactionPopulator extends AbstractDataPopulator<PersistableTransaction, Transaction> {
 
 	private OrderService orderService;
-	private PricingService pricingService;
+	private ProductPriceApi productPriceApi;
 	
 	@Override
 	public Transaction populate(PersistableTransaction source, Transaction target, MerchantStore store,
@@ -26,7 +26,7 @@ public class PersistableTransactionPopulator extends AbstractDataPopulator<Persi
 		
 		Validate.notNull(source,"PersistableTransaction must not be null");
 		Validate.notNull(orderService,"OrderService must not be null");
-		Validate.notNull(pricingService,"OrderService must not be null");
+		Validate.notNull(productPriceApi,"OrderService must not be null");
 		
 		if(target == null) {
 			target = new Transaction();
@@ -36,7 +36,7 @@ public class PersistableTransactionPopulator extends AbstractDataPopulator<Persi
 		try {
 			
 
-			target.setAmount(pricingService.getAmount(source.getAmount()));
+			target.setAmount(productPriceApi.getAmount(source.getAmount()));
 			target.setDetails(source.getDetails());
 			target.setPaymentType(PaymentType.valueOf(source.getPaymentType()));
 			target.setTransactionType(TransactionType.valueOf(source.getTransactionType()));
@@ -78,12 +78,11 @@ public class PersistableTransactionPopulator extends AbstractDataPopulator<Persi
 		this.orderService = orderService;
 	}
 
-	public PricingService getPricingService() {
-		return pricingService;
+	public ProductPriceApi getProductPriceApi() {
+		return productPriceApi;
 	}
 
-	public void setPricingService(PricingService pricingService) {
-		this.pricingService = pricingService;
+	public void setProductPriceApi(ProductPriceApi productPriceApi) {
+		this.productPriceApi = productPriceApi;
 	}
-
 }

@@ -3,10 +3,10 @@ package com.salesmanager.shop.populator.order.transaction;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import org.apache.commons.lang3.Validate;
 
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.payments.Payment;
@@ -18,7 +18,7 @@ import com.salesmanager.shop.model.order.transaction.PersistablePayment;
 public class PersistablePaymentPopulator extends AbstractDataPopulator<PersistablePayment, Payment> {
 	
 	
-	PricingService pricingService;
+	ProductPriceApi productPriceApi;
 
 
 
@@ -27,14 +27,14 @@ public class PersistablePaymentPopulator extends AbstractDataPopulator<Persistab
 			throws ConversionException {
 		
 		Validate.notNull(source,"PersistablePayment cannot be null");
-		Validate.notNull(pricingService,"pricingService must be set");
+		Validate.notNull(productPriceApi,"productPriceApi must be set");
 		if(target == null) {
 			target = new Payment();
 		}
 		
 		try {
 		
-			target.setAmount(pricingService.getAmount(source.getAmount()));
+			target.setAmount(productPriceApi.getAmount(source.getAmount()));
 			target.setModuleName(source.getPaymentModule());
 			target.setPaymentType(PaymentType.valueOf(source.getPaymentType()));
 			target.setTransactionType(TransactionType.valueOf(source.getTransactionType()));
@@ -55,13 +55,12 @@ public class PersistablePaymentPopulator extends AbstractDataPopulator<Persistab
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public PricingService getPricingService() {
-		return pricingService;
+
+	public ProductPriceApi getProductPriceApi() {
+		return productPriceApi;
 	}
 
-	public void setPricingService(PricingService pricingService) {
-		this.pricingService = pricingService;
+	public void setProductPriceApi(ProductPriceApi productPriceApi) {
+		this.productPriceApi = productPriceApi;
 	}
-
 }

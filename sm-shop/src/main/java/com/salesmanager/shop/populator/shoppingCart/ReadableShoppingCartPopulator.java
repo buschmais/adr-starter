@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
+import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.Validate;
@@ -12,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductAttributeService;
 import com.salesmanager.core.business.services.shoppingcart.ShoppingCartCalculationService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
@@ -38,6 +39,7 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReadableShoppingCartPopulator.class);
 	
+	private ProductPriceApi productPriceApi;
 	private PricingService pricingService;
     private ShoppingCartCalculationService shoppingCartCalculationService;
     private ProductAttributeService productAttributeService;
@@ -50,7 +52,7 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
     	Validate.notNull(source, "Requires ShoppingCart");
     	Validate.notNull(language, "Requires Language not null");
     	Validate.notNull(store, "Requires MerchantStore not null");
-    	Validate.notNull(pricingService, "Requires to set pricingService");
+    	Validate.notNull(productPriceApi, "Requires to set priceApi");
     	Validate.notNull(productAttributeService, "Requires to set productAttributeService");
     	Validate.notNull(shoppingCartCalculationService, "Requires to set shoppingCartCalculationService");
     	Validate.notNull(imageUtils, "Requires to set imageUtils");
@@ -82,18 +84,18 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
 
 
                     shoppingCartItem.setPrice(item.getItemPrice());
-					shoppingCartItem.setFinalPrice(pricingService.getDisplayAmount(item.getItemPrice(),store));
+					shoppingCartItem.setFinalPrice(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), item.getItemPrice()));
 			
                     shoppingCartItem.setQuantity(item.getQuantity());
                     
                     cartQuantity = cartQuantity + item.getQuantity();
                     
-                    BigDecimal subTotal = pricingService.calculatePriceQuantity(item.getItemPrice(), item.getQuantity());
+                    BigDecimal subTotal = item.getItemPrice().multiply(new BigDecimal(item.getQuantity()));
                     
                     //calculate sub total (price * quantity)
                     shoppingCartItem.setSubTotal(subTotal);
 
-					shoppingCartItem.setDisplaySubTotal(pricingService.getDisplayAmount(subTotal,store));
+					shoppingCartItem.setDisplaySubTotal(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), subTotal));
 
 
                     Set<com.salesmanager.core.model.shoppingcart.ShoppingCartAttributeItem> attributes = item.getAttributes();
@@ -189,11 +191,11 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
             }
             
             target.setSubtotal(orderSummary.getSubTotal());
-            target.setDisplaySubTotal(pricingService.getDisplayAmount(orderSummary.getSubTotal(), store));
+            target.setDisplaySubTotal(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), orderSummary.getSubTotal()));
            
             
             target.setTotal(orderSummary.getTotal());
-            target.setDisplayTotal(pricingService.getDisplayAmount(orderSummary.getTotal(), store));
+            target.setDisplayTotal(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), orderSummary.getTotal()));
 
             
             target.setQuantity(cartQuantity);
@@ -214,12 +216,12 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
 		return null;
 	}
 
-	public PricingService getPricingService() {
-		return pricingService;
+	public ProductPriceApi getProductPriceApi() {
+		return productPriceApi;
 	}
 
-	public void setPricingService(PricingService pricingService) {
-		this.pricingService = pricingService;
+	public void setProductPriceApi(ProductPriceApi productPriceApi) {
+		this.productPriceApi = productPriceApi;
 	}
 
 	public ShoppingCartCalculationService getShoppingCartCalculationService() {
@@ -246,4 +248,11 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
 		this.productAttributeService = productAttributeService;
 	}
 
+	public PricingService getPricingService() {
+		return pricingService;
+	}
+
+	public void setPricingService(PricingService pricingService) {
+		this.pricingService = pricingService;
+	}
 }

@@ -14,6 +14,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -30,7 +31,6 @@ import org.slf4j.LoggerFactory;
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.core.business.services.reference.country.CountryService;
 import com.salesmanager.core.business.utils.DataUtils;
-import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.constants.MeasureUnit;
 import com.salesmanager.core.model.common.Delivery;
 import com.salesmanager.core.model.merchant.MerchantStore;
@@ -60,7 +60,7 @@ public class USPSShippingQuote implements ShippingQuoteModule {
 
 	
 	@Inject
-	private ProductPriceUtils productPriceUtils;
+	private ProductPriceApi productPriceApi;
 	
 	@Inject
 	private CountryService countryService;
@@ -380,7 +380,7 @@ public class USPSShippingQuote implements ShippingQuoteModule {
 				xmldatabuffer.append(pack);
 				xmldatabuffer.append("</MailType>");
 				xmldatabuffer.append("<ValueOfContents>");
-				xmldatabuffer.append(productPriceUtils.getAdminFormatedAmount(store, orderTotal));
+				xmldatabuffer.append(productPriceApi.getAdminFormattedAmount(store.toDTO(), orderTotal));
 				xmldatabuffer.append("</ValueOfContents>");
 				xmldatabuffer.append("<Country>");
 				xmldatabuffer.append(destination.getName());

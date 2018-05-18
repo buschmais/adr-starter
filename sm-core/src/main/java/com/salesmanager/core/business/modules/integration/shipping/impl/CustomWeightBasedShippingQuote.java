@@ -7,12 +7,12 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.services.system.MerchantConfigurationService;
-import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.model.common.Delivery;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.shipping.PackageDetails;
@@ -41,7 +41,7 @@ public class CustomWeightBasedShippingQuote implements ShippingQuoteModule {
 	private MerchantConfigurationService merchantConfigurationService;
 	
 	@Inject
-	private ProductPriceUtils productPriceUtils;
+	private ProductPriceApi productPriceApi;
 
 
 	@Override
@@ -130,7 +130,7 @@ public class CustomWeightBasedShippingQuote implements ShippingQuoteModule {
 								shippingOption.setOptionCode(new StringBuilder().append(CUSTOM_WEIGHT).toString());
 								shippingOption.setOptionId(new StringBuilder().append(CUSTOM_WEIGHT).append("_").append(region.getCustomRegionName()).toString());
 								shippingOption.setOptionPrice(quoteItem.getPrice());
-								shippingOption.setOptionPriceText(productPriceUtils.getStoreFormatedAmountWithCurrency(store, quoteItem.getPrice()));
+								shippingOption.setOptionPriceText(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), quoteItem.getPrice()));
 								break;
 							}
 						}

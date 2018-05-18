@@ -22,12 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductAttributeService;
 import com.salesmanager.core.business.services.order.OrderService;
 import com.salesmanager.core.business.services.shoppingcart.ShoppingCartService;
-import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.customer.Customer;
@@ -100,16 +98,10 @@ public class ShoppingCartController extends AbstractController {
 	private ProductAttributeService productAttributeService;
 
 	@Inject
-	private PricingService pricingService;
-
-	@Inject
 	private OrderService orderService;
 
 	@Inject
 	private ShoppingCartService shoppingCartService;
-
-	@Inject
-	private ProductPriceUtils productPriceUtils;
 
 	@Inject
 	private ShoppingCartFacade shoppingCartFacade;

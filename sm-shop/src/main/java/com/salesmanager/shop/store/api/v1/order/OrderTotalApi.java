@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.order.OrderService;
 import com.salesmanager.core.business.services.shipping.ShippingQuoteService;
@@ -53,7 +53,7 @@ public class OrderTotalApi {
 	private LabelUtils messages;
 	
 	@Inject
-	private PricingService pricingService;
+	private ProductPriceApi productPriceApi;
 	
 	@Inject
 	private CustomerService customerService;
@@ -136,7 +136,7 @@ public class OrderTotalApi {
 			ReadableOrderTotalSummary returnSummary = new ReadableOrderTotalSummary();
 			ReadableOrderSummaryPopulator populator = new ReadableOrderSummaryPopulator();
 			populator.setMessages(messages);
-			populator.setPricingService(pricingService);
+			populator.setProductPriceApi(productPriceApi);
 			populator.populate(orderTotalSummary, returnSummary, merchantStore, language);
 			
 			return returnSummary;

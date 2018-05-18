@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.validator.routines.BigDecimalValidator;
@@ -25,8 +26,6 @@ import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
 import com.salesmanager.catalog.model.product.availability.ProductAvailability;
 import com.salesmanager.catalog.model.product.price.FinalPrice;
 import com.salesmanager.catalog.model.product.price.ProductPrice;
-import com.salesmanager.core.model.merchant.MerchantStore;
-import com.salesmanager.core.model.order.orderproduct.OrderProduct;
 
 
 /**
@@ -54,7 +53,7 @@ public class ProductPriceUtils {
 	 * @param locale
 	 * @return
 	 */
-	public BigDecimal getPrice(MerchantStore store, Product product, Locale locale) {
+	public BigDecimal getPrice(MerchantStoreInfo store, Product product, Locale locale) {
 		
 		BigDecimal defaultPrice = new BigDecimal(0);
 
@@ -183,7 +182,7 @@ public class ProductPriceUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public String getAdminFormatedAmount(MerchantStore store, BigDecimal amount) throws Exception {
+	public String getAdminFormatedAmount(MerchantStoreInfo store, BigDecimal amount) throws Exception {
 			
 		if(amount==null) {
 			return "";
@@ -216,7 +215,7 @@ public class ProductPriceUtils {
 	 * @return String
 	 * @throws Exception
 	 */
-	public String getStoreFormatedAmountWithCurrency(MerchantStore store, BigDecimal amount) throws Exception {
+	public String getStoreFormatedAmountWithCurrency(MerchantStoreInfo store, BigDecimal amount) throws Exception {
 		if(amount==null) {
 			return "";
 		}
@@ -228,8 +227,8 @@ public class ProductPriceUtils {
 		
 		try {
 
-			currency = store.getCurrency().getCurrency();
-			locale = new Locale(store.getDefaultLanguage().getCode(),store.getCountry().getIsoCode());
+			currency = Currency.getInstance(store.getCurrency());
+			locale = new Locale(store.getDefaultLanguage(),store.getCountryIsoCode());
 		} catch (Exception e) {
 			LOGGER.error("Cannot create currency or locale instance for store " + store.getCode());
 		}
@@ -280,7 +279,7 @@ public class ProductPriceUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public String getAdminFormatedAmountWithCurrency(MerchantStore store, BigDecimal amount) throws Exception {
+	public String getAdminFormatedAmountWithCurrency(MerchantStoreInfo store, BigDecimal amount) throws Exception {
 		if(amount==null) {
 			return "";
 		}
@@ -291,7 +290,7 @@ public class ProductPriceUtils {
 		NumberFormat nf = null;
 
 		
-		Currency currency = store.getCurrency().getCurrency();
+		Currency currency = Currency.getInstance(store.getCurrency());
 		nf = NumberFormat.getInstance(Constants.DEFAULT_LOCALE);
 		nf.setMaximumFractionDigits(Integer.parseInt(Character
 				.toString(DECIMALCOUNT)));
@@ -343,12 +342,12 @@ public class ProductPriceUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public String getFormatedAmountWithCurrency(MerchantStore store, BigDecimal amount, Locale locale)
+	public String getFormatedAmountWithCurrency(MerchantStoreInfo store, BigDecimal amount, Locale locale)
 				throws Exception {
 		
 			NumberFormat nf = null;
 
-			Currency currency = store.getCurrency().getCurrency();
+			Currency currency = Currency.getInstance(store.getCurrency());
 			
 			nf = NumberFormat.getInstance(locale);
 			nf.setCurrency(currency);
@@ -443,13 +442,6 @@ public class ProductPriceUtils {
 			}
 		}
 
-	}
-	
-	public BigDecimal getOrderProductTotalPrice(MerchantStore store, OrderProduct orderProduct) {
-		
-		BigDecimal finalPrice = orderProduct.getOneTimeCharge();
-		finalPrice = finalPrice.multiply(new BigDecimal(orderProduct.getProductQuantity()));
-		return finalPrice;
 	}
 	
 	/**

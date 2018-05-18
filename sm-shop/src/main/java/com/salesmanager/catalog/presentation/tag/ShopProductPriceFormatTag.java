@@ -31,7 +31,7 @@ public class ShopProductPriceFormatTag extends RequestContextAwareTag  {
 
 	@Inject
 	private PricingService pricingService;
-	
+
 	@Inject
 	private ProductPriceUtils productPriceUtils;
 	

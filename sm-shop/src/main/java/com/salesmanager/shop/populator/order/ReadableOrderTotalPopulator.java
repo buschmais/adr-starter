@@ -1,8 +1,8 @@
 package com.salesmanager.shop.populator.order;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.OrderTotal;
@@ -19,7 +19,7 @@ public class ReadableOrderTotalPopulator extends
 		AbstractDataPopulator<OrderTotal, ReadableOrderTotal> {
 	
 	
-	private PricingService pricingService;
+	private ProductPriceApi productPriceApi;
 
 
 	private LabelUtils messages;
@@ -32,7 +32,7 @@ public class ReadableOrderTotalPopulator extends
 			ReadableOrderTotal target, MerchantStore store, Language language)
 			throws ConversionException {
 		
-			Validate.notNull(pricingService,"PricingService must be set");
+			Validate.notNull(productPriceApi,"productPriceApi must be set");
 			Validate.notNull(messages,"LabelUtils must be set");
 			
 			Locale locale = LocaleUtils.getLocale(language);
@@ -49,7 +49,7 @@ public class ReadableOrderTotalPopulator extends
 				target.setText(source.getText());
 				
 				target.setValue(source.getValue());
-				target.setTotal(pricingService.getDisplayAmount(source.getValue(), store));
+				target.setTotal(productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), source.getValue()));
 				
 				if(!StringUtils.isBlank(source.getOrderTotalCode())) {
 					if(Constants.OT_DISCOUNT_TITLE.equals(source.getOrderTotalCode())) {
@@ -69,15 +69,15 @@ public class ReadableOrderTotalPopulator extends
 	protected ReadableOrderTotal createTarget() {
 		return new ReadableOrderTotal();
 	}
-	
-	public PricingService getPricingService() {
-		return pricingService;
+
+	public ProductPriceApi getProductPriceApi() {
+		return productPriceApi;
 	}
 
-	public void setPricingService(PricingService pricingService) {
-		this.pricingService = pricingService;
+	public void setProductPriceApi(ProductPriceApi productPriceApi) {
+		this.productPriceApi = productPriceApi;
 	}
-	
+
 	public LabelUtils getMessages() {
 		return messages;
 	}

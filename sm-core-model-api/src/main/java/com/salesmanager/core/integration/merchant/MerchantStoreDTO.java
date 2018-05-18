@@ -15,4 +15,12 @@ public class MerchantStoreDTO extends AbstractCoreDTO {
 
     private String code;
 
+    private String currency;
+
+    private String defaultLanguage;
+
+    private String countryIsoCode;
+
+    private boolean currencyFormatNational;
+
 }

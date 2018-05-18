@@ -1,9 +1,9 @@
 package com.salesmanager.shop.admin.controller.orders;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.core.business.services.order.OrderService;
 import com.salesmanager.core.business.services.system.ModuleConfigurationService;
-import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.core.model.common.CriteriaOrderBy;
@@ -58,7 +58,7 @@ public class OrdersController {
 	LabelUtils messages;
 	
 	@Inject
-	private ProductPriceUtils priceUtil;
+	private ProductPriceApi productPriceApi;
 	
 	@Inject
 	protected ModuleConfigurationService moduleConfigurationService;
@@ -122,7 +122,7 @@ public class OrdersController {
 					Map entry = new HashMap();
 					entry.put("orderId", order.getId());
 					entry.put("customer", order.getBilling().getFirstName() + " " + order.getBilling().getLastName());
-					entry.put("amount", priceUtil.getAdminFormatedAmountWithCurrency(store,order.getTotal()));//todo format total
+					entry.put("amount", productPriceApi.getAdminFormattedAmountWithCurrency(store.toDTO(), order.getTotal()));//todo format total
 					entry.put("date", DateUtil.formatDate(order.getDatePurchased()));
 					entry.put("status", order.getStatus().name());
 					

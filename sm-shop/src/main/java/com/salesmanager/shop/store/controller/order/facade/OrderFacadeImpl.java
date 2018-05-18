@@ -15,6 +15,8 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
+import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.Validate;
@@ -30,7 +32,6 @@ import org.springframework.validation.ObjectError;
 
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductAttributeService;
 import com.salesmanager.catalog.business.service.product.file.DigitalProductService;
@@ -129,7 +130,7 @@ public class OrderFacadeImpl implements OrderFacade {
 	@Inject
 	private CustomerFacade customerFacade;
 	@Inject
-	private PricingService pricingService;
+	private ProductPriceApi productPriceApi;
 	@Inject
 	private ShoppingCartFacade shoppingCartFacade;
 	@Inject
@@ -167,6 +168,9 @@ public class OrderFacadeImpl implements OrderFacade {
 	
 	@Inject
 	private EmailTemplatesUtils emailTemplatesUtils;
+
+	@Inject
+	private PricingService pricingService;
 
 	
 
@@ -969,8 +973,9 @@ public class OrderFacadeImpl implements OrderFacade {
             ReadableOrderProductPopulator orderProductPopulator = new ReadableOrderProductPopulator();
             orderProductPopulator.setLocale(locale);
             orderProductPopulator.setProductService(productService);
-            orderProductPopulator.setPricingService(pricingService);
+            orderProductPopulator.setProductPriceApi(productPriceApi);
             orderProductPopulator.setimageUtils(catalogImageUtils);
+            orderProductPopulator.setPricingService(pricingService);
             ReadableOrderProduct orderProduct = new ReadableOrderProduct();
             orderProductPopulator.populate(p, orderProduct, store, language);
             
@@ -1062,8 +1067,9 @@ public class OrderFacadeImpl implements OrderFacade {
 		for(OrderProduct p : modelOrder.getOrderProducts()) {
 			ReadableOrderProductPopulator orderProductPopulator = new ReadableOrderProductPopulator();
 			orderProductPopulator.setProductService(productService);
-			orderProductPopulator.setPricingService(pricingService);
+			orderProductPopulator.setProductPriceApi(productPriceApi);
 			orderProductPopulator.setimageUtils(catalogImageUtils);
+			orderProductPopulator.setPricingService(pricingService);
 			
 			ReadableOrderProduct orderProduct = new ReadableOrderProduct();
 			orderProductPopulator.populate(p, orderProduct, store, language);
@@ -1203,7 +1209,7 @@ public class OrderFacadeImpl implements OrderFacade {
 			
 			
 			BigDecimal calculatedAmount = orderTotalSummary.getTotal();
-			String strCalculatedTotal = pricingService.getStringAmount(calculatedAmount, store);
+			String strCalculatedTotal = productPriceApi.getAdminFormattedAmount(store.toDTO(), calculatedAmount);
 			
 			//compare both prices
 			if(!submitedAmount.equals(strCalculatedTotal)) {
@@ -1223,7 +1229,7 @@ public class OrderFacadeImpl implements OrderFacade {
 			modelOrder.setOrderTotal(set);
 			
 			PersistablePaymentPopulator paymentPopulator = new PersistablePaymentPopulator();
-			paymentPopulator.setPricingService(pricingService);
+			paymentPopulator.setProductPriceApi(productPriceApi);
 			Payment paymentModel = new Payment();
 			paymentPopulator.populate(order.getPayment(), paymentModel,  store, language);
 
@@ -1309,7 +1315,7 @@ public class OrderFacadeImpl implements OrderFacade {
 		ReadableTransaction transaction = new ReadableTransaction();
 		ReadableTransactionPopulator trxPopulator = new ReadableTransactionPopulator();
 		trxPopulator.setOrderService(orderService);
-		trxPopulator.setPricingService(pricingService);
+		trxPopulator.setProductPriceApi(productPriceApi);
 		
 		trxPopulator.populate(transactionModel, transaction, store, language);
 
