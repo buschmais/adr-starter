@@ -4,7 +4,7 @@ import com.salesmanager.catalog.business.service.product.relationship.ProductRel
 import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
-import com.salesmanager.core.model.catalog.product.relationship.ProductRelationship;
+import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.core.model.content.Content;
 import com.salesmanager.core.model.content.ContentDescription;
 import com.salesmanager.core.model.content.ContentType;

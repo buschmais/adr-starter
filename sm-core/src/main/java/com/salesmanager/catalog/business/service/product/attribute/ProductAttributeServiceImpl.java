@@ -9,8 +9,8 @@ import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import org.springframework.stereotype.Service;
 
 import com.salesmanager.catalog.business.repository.product.attribute.ProductAttributeRepository;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.attribute.ProductAttribute;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 

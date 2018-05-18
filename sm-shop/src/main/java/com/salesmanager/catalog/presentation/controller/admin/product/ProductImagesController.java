@@ -6,8 +6,8 @@ import com.salesmanager.catalog.presentation.controller.admin.ControllerConstant
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.image.ProductImage;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.catalog.presentation.model.admin.cms.ProductImages;
 import com.salesmanager.common.presentation.model.admin.Menu;

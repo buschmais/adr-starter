@@ -1,7 +1,7 @@
 package com.salesmanager.shop.utils;
 
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.manufacturer.Manufacturer;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 
 public interface ImageFilePath {

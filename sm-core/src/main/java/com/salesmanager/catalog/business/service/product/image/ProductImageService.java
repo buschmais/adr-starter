@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.common.business.service.SalesManagerEntityService;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.file.ProductImageSize;
-import com.salesmanager.core.model.catalog.product.image.ProductImage;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.file.ProductImageSize;
+import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.core.model.content.ImageContentFile;
 import com.salesmanager.core.model.content.OutputContentFile;
 

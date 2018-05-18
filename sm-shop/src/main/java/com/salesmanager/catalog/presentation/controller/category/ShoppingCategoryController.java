@@ -8,9 +8,9 @@ import com.salesmanager.catalog.presentation.controller.ControllerConstants;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.CacheUtils;
-import com.salesmanager.core.model.catalog.category.Category;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.ProductCriteria;
+import com.salesmanager.catalog.model.category.Category;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.ProductCriteria;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
@@ -308,10 +308,10 @@ public class ShoppingCategoryController {
 		
 	private List<ReadableManufacturer> getManufacturers(MerchantStore store, List<Long> ids, Language language) throws Exception {
 		List<ReadableManufacturer> manufacturerList = new ArrayList<ReadableManufacturer>();
-		List<com.salesmanager.core.model.catalog.product.manufacturer.Manufacturer> manufacturers = manufacturerService.listByProductsByCategoriesId(store, ids, language);
+		List<com.salesmanager.catalog.model.product.manufacturer.Manufacturer> manufacturers = manufacturerService.listByProductsByCategoriesId(store, ids, language);
 		if(!manufacturers.isEmpty()) {
 			
-			for(com.salesmanager.core.model.catalog.product.manufacturer.Manufacturer manufacturer : manufacturers) {
+			for(com.salesmanager.catalog.model.product.manufacturer.Manufacturer manufacturer : manufacturers) {
 				ReadableManufacturer manuf = new ReadableManufacturerPopulator().populate(manufacturer, new ReadableManufacturer(), store, language);
 				manufacturerList.add(manuf);
 				
@@ -500,7 +500,7 @@ public class ShoppingCategoryController {
 				lang = langs.get(Constants.DEFAULT_LANGUAGE);
 			}
 			
-			List<com.salesmanager.core.model.catalog.product.Product> products = productService.getProducts(ids, lang);
+			List<com.salesmanager.catalog.model.product.Product> products = productService.getProducts(ids, lang);
 			
 			ProductList productList = new ProductList();
 			
@@ -657,7 +657,7 @@ public class ShoppingCategoryController {
 				}
 			}
 
-			com.salesmanager.core.model.catalog.product.ProductList products = productService.listByStore(merchantStore, lang, productCriteria);
+			com.salesmanager.catalog.model.product.ProductList products = productService.listByStore(merchantStore, lang, productCriteria);
 
 			ReadableProductPopulator populator = new ReadableProductPopulator();
 			populator.setPricingService(pricingService);

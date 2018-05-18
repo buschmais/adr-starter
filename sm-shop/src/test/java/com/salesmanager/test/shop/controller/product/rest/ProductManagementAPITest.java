@@ -2,7 +2,7 @@ package com.salesmanager.test.shop.controller.product.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.salesmanager.core.model.catalog.product.attribute.ProductOptionType;
+import com.salesmanager.catalog.model.product.attribute.ProductOptionType;
 import com.salesmanager.catalog.presentation.model.category.Category;
 import com.salesmanager.catalog.presentation.model.manufacturer.Manufacturer;
 import com.salesmanager.catalog.presentation.model.manufacturer.ManufacturerDescription;

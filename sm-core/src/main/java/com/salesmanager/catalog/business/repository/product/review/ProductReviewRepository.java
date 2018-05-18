@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.salesmanager.core.model.catalog.product.review.ProductReview;
+import com.salesmanager.catalog.model.product.review.ProductReview;
 
 public interface ProductReviewRepository extends JpaRepository<ProductReview, Long> {
 

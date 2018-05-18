@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import com.salesmanager.catalog.business.repository.product.image.ProductImageRepository;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.file.ProductImageSize;
-import com.salesmanager.core.model.catalog.product.image.ProductImage;
-import com.salesmanager.core.model.catalog.product.image.ProductImageDescription;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.file.ProductImageSize;
+import com.salesmanager.catalog.model.product.image.ProductImage;
+import com.salesmanager.catalog.model.product.image.ProductImageDescription;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.ImageContentFile;
 import com.salesmanager.core.model.content.OutputContentFile;

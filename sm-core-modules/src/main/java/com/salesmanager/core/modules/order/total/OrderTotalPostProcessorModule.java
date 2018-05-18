@@ -2,7 +2,7 @@ package com.salesmanager.core.modules.order.total;
 
 
 
-import com.salesmanager.core.model.catalog.product.Product;
+import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.OrderSummary;

@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.repository.product.manufacturer.ManufacturerRepository;
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
-import com.salesmanager.core.model.catalog.product.manufacturer.Manufacturer;
-import com.salesmanager.core.model.catalog.product.manufacturer.ManufacturerDescription;
+import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
+import com.salesmanager.catalog.model.product.manufacturer.ManufacturerDescription;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 

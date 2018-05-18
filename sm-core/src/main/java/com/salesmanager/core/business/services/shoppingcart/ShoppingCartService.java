@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.common.business.service.SalesManagerEntityService;
-import com.salesmanager.core.model.catalog.product.Product;
+import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.shipping.ShippingProduct;

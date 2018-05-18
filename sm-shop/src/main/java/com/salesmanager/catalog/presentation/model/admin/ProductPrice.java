@@ -1,7 +1,7 @@
 package com.salesmanager.catalog.presentation.model.admin;
 
-import com.salesmanager.core.model.catalog.product.availability.ProductAvailability;
-import com.salesmanager.core.model.catalog.product.price.ProductPriceDescription;
+import com.salesmanager.catalog.model.product.availability.ProductAvailability;
+import com.salesmanager.catalog.model.product.price.ProductPriceDescription;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 public class ProductPrice {
 	
 	@Valid
-	private com.salesmanager.core.model.catalog.product.price.ProductPrice price = null;
+	private com.salesmanager.catalog.model.product.price.ProductPrice price = null;
 	@Valid
 	private List <ProductPriceDescription> descriptions = new ArrayList<ProductPriceDescription>();
 	private String priceText;
@@ -22,7 +22,7 @@ public class ProductPrice {
 	private String productPriceSpecialStartDate;
 	private String productPriceSpecialEndDate;
 	
-	private com.salesmanager.core.model.catalog.product.Product product;
+	private com.salesmanager.catalog.model.product.Product product;
 	
 	
 	
@@ -46,10 +46,10 @@ public class ProductPrice {
 	public void setPriceText(String priceText) {
 		this.priceText = priceText;
 	}
-	public com.salesmanager.core.model.catalog.product.price.ProductPrice getPrice() {
+	public com.salesmanager.catalog.model.product.price.ProductPrice getPrice() {
 		return price;
 	}
-	public void setPrice(com.salesmanager.core.model.catalog.product.price.ProductPrice price) {
+	public void setPrice(com.salesmanager.catalog.model.product.price.ProductPrice price) {
 		this.price = price;
 	}
 	public String getSpecialPriceText() {
@@ -59,10 +59,10 @@ public class ProductPrice {
 		this.specialPriceText = specialPriceText;
 	}
 
-	public com.salesmanager.core.model.catalog.product.Product getProduct() {
+	public com.salesmanager.catalog.model.product.Product getProduct() {
 		return product;
 	}
-	public void setProduct(com.salesmanager.core.model.catalog.product.Product product) {
+	public void setProduct(com.salesmanager.catalog.model.product.Product product) {
 		this.product = product;
 	}
 	public String getProductPriceSpecialStartDate() {

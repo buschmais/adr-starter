@@ -28,8 +28,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.image.ProductImageService;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.image.ProductImage;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.ImageContentFile;
 import com.salesmanager.core.model.merchant.MerchantStore;

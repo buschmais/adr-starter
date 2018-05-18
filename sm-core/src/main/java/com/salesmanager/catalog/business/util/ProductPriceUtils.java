@@ -20,11 +20,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.salesmanager.common.business.constants.Constants;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.attribute.ProductAttribute;
-import com.salesmanager.core.model.catalog.product.availability.ProductAvailability;
-import com.salesmanager.core.model.catalog.product.price.FinalPrice;
-import com.salesmanager.core.model.catalog.product.price.ProductPrice;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
+import com.salesmanager.catalog.model.product.availability.ProductAvailability;
+import com.salesmanager.catalog.model.product.price.FinalPrice;
+import com.salesmanager.catalog.model.product.price.ProductPrice;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.orderproduct.OrderProduct;
 

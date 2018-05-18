@@ -11,9 +11,9 @@ import com.salesmanager.core.business.services.system.MerchantConfigurationServi
 import com.salesmanager.core.business.utils.CacheUtils;
 import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.catalog.category.Category;
-import com.salesmanager.core.model.catalog.category.CategoryDescription;
-import com.salesmanager.core.model.catalog.product.Product;
+import com.salesmanager.catalog.model.category.Category;
+import com.salesmanager.catalog.model.category.CategoryDescription;
+import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.content.Content;
 import com.salesmanager.core.model.content.ContentDescription;
 import com.salesmanager.core.model.content.ContentType;

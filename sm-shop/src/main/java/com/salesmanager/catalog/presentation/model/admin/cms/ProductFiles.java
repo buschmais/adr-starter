@@ -3,8 +3,8 @@
  */
 package com.salesmanager.catalog.presentation.model.admin.cms;
 
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.file.DigitalProduct;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.file.DigitalProduct;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 

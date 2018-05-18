@@ -2,7 +2,7 @@ package com.salesmanager.catalog.presentation.controller.items.facade;
 
 import java.util.List;
 
-import com.salesmanager.core.model.catalog.product.Product;
+import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductList;

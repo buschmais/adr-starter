@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.repository.product.attribute.ProductOptionValueRepository;
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
-import com.salesmanager.core.model.catalog.product.attribute.ProductAttribute;
-import com.salesmanager.core.model.catalog.product.attribute.ProductOptionValue;
+import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
+import com.salesmanager.catalog.model.product.attribute.ProductOptionValue;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 

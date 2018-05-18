@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.salesmanager.core.model.catalog.category.Category;
+import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.core.model.merchant.MerchantStore;
 
 

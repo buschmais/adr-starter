@@ -5,13 +5,13 @@ import java.util.Locale;
 import java.util.Set;
 
 import com.salesmanager.common.business.constants.Constants;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.attribute.ProductAttribute;
-import com.salesmanager.core.model.catalog.product.attribute.ProductOption;
-import com.salesmanager.core.model.catalog.product.attribute.ProductOptionDescription;
-import com.salesmanager.core.model.catalog.product.attribute.ProductOptionValue;
-import com.salesmanager.core.model.catalog.product.attribute.ProductOptionValueDescription;
-import com.salesmanager.core.model.catalog.product.availability.ProductAvailability;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
+import com.salesmanager.catalog.model.product.attribute.ProductOption;
+import com.salesmanager.catalog.model.product.attribute.ProductOptionDescription;
+import com.salesmanager.catalog.model.product.attribute.ProductOptionValue;
+import com.salesmanager.catalog.model.product.attribute.ProductOptionValueDescription;
+import com.salesmanager.catalog.model.product.availability.ProductAvailability;
 
 
 public class CatalogServiceHelper {

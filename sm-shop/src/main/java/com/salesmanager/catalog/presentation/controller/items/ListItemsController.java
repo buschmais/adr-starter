@@ -2,7 +2,7 @@ package com.salesmanager.catalog.presentation.controller.items;
 
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
 import com.salesmanager.catalog.presentation.controller.ControllerConstants;
-import com.salesmanager.core.model.catalog.product.manufacturer.Manufacturer;
+import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;

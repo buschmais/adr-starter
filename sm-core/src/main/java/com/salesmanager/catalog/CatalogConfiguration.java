@@ -12,6 +12,7 @@ import org.infinispan.tree.TreeCache;
 import org.infinispan.tree.TreeCacheFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
@@ -33,6 +34,7 @@ import javax.persistence.EntityListeners;
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.salesmanager.catalog.business.service", "com.salesmanager.catalog.business.util"})
 @EnableJpaRepositories(basePackages = {"com.salesmanager.catalog.business.repository"})
+@EntityScan(basePackages = {"com.salesmanager.catalog.model"})
 @PropertySource("classpath:catalog.properties")
 @EnableCaching
 public class CatalogConfiguration {

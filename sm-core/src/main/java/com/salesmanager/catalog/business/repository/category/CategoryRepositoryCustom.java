@@ -2,7 +2,7 @@ package com.salesmanager.catalog.business.repository.category;
 
 import java.util.List;
 
-import com.salesmanager.core.model.catalog.category.Category;
+import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.core.model.merchant.MerchantStore;
 
 public interface CategoryRepositoryCustom {

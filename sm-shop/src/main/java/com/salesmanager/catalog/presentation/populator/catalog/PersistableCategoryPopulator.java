@@ -4,7 +4,7 @@ import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
-import com.salesmanager.core.model.catalog.category.Category;
+import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.category.CategoryDescription;
@@ -106,9 +106,9 @@ public class PersistableCategoryPopulator extends
 
 		
 		if(!CollectionUtils.isEmpty(source.getDescriptions())) {
-			List<com.salesmanager.core.model.catalog.category.CategoryDescription> descriptions = new ArrayList<com.salesmanager.core.model.catalog.category.CategoryDescription>();
+			List<com.salesmanager.catalog.model.category.CategoryDescription> descriptions = new ArrayList<com.salesmanager.catalog.model.category.CategoryDescription>();
 			for(CategoryDescription description : source.getDescriptions()) {
-				com.salesmanager.core.model.catalog.category.CategoryDescription desc = new com.salesmanager.core.model.catalog.category.CategoryDescription();
+				com.salesmanager.catalog.model.category.CategoryDescription desc = new com.salesmanager.catalog.model.category.CategoryDescription();
 				desc.setCategory(target);
 				desc.setCategoryHighlight(description.getHighlights());
 				desc.setDescription(description.getDescription());

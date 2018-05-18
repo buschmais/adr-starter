@@ -5,7 +5,7 @@ import com.salesmanager.catalog.presentation.controller.category.facade.Category
 import com.salesmanager.catalog.presentation.model.category.PersistableCategory;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.catalog.presentation.util.RestUtils;
-import com.salesmanager.core.model.catalog.category.Category;
+import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.store.controller.store.facade.StoreFacade;

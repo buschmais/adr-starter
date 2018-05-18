@@ -2,11 +2,11 @@ package com.salesmanager.catalog.presentation.controller.product.facade;
 
 import java.util.List;
 
-import com.salesmanager.core.model.catalog.category.Category;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.ProductCriteria;
-import com.salesmanager.core.model.catalog.product.manufacturer.Manufacturer;
-import com.salesmanager.core.model.catalog.product.review.ProductReview;
+import com.salesmanager.catalog.model.category.Category;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.ProductCriteria;
+import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
+import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.manufacturer.PersistableManufacturer;

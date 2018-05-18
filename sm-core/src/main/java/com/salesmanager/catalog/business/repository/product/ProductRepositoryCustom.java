@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.ProductCriteria;
-import com.salesmanager.core.model.catalog.product.ProductList;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.ProductCriteria;
+import com.salesmanager.catalog.model.product.ProductList;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.model.tax.taxclass.TaxClass;

@@ -6,8 +6,8 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.manufacturer.Manufacturer;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.shop.constants.Constants;

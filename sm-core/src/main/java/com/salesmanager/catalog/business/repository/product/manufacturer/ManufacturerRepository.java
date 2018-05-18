@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.salesmanager.core.model.catalog.product.manufacturer.Manufacturer;
+import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 
 public interface ManufacturerRepository extends JpaRepository<Manufacturer, Long> {
 

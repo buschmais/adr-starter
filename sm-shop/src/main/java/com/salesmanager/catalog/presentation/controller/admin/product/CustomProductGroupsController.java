@@ -7,10 +7,10 @@ import com.salesmanager.catalog.business.service.product.relationship.ProductRel
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
-import com.salesmanager.core.model.catalog.category.Category;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.description.ProductDescription;
-import com.salesmanager.core.model.catalog.product.relationship.ProductRelationship;
+import com.salesmanager.catalog.model.category.Category;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.description.ProductDescription;
+import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;

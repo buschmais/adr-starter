@@ -17,7 +17,7 @@ import org.springframework.util.CollectionUtils;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
-import com.salesmanager.core.model.catalog.category.Category;
+import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.category.PersistableCategory;

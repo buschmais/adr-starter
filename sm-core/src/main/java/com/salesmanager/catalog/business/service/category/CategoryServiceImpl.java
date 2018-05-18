@@ -17,9 +17,9 @@ import org.springframework.util.Assert;
 
 import com.salesmanager.catalog.business.repository.category.CategoryRepository;
 import com.salesmanager.catalog.business.service.product.ProductService;
-import com.salesmanager.core.model.catalog.category.Category;
-import com.salesmanager.core.model.catalog.category.CategoryDescription;
-import com.salesmanager.core.model.catalog.product.Product;
+import com.salesmanager.catalog.model.category.Category;
+import com.salesmanager.catalog.model.category.CategoryDescription;
+import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 

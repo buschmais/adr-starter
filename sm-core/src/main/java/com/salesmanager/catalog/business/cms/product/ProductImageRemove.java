@@ -1,8 +1,8 @@
 package com.salesmanager.catalog.business.cms.product;
 
 import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.image.ProductImage;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.image.ProductImage;
 
 
 public interface ProductImageRemove {

@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.review.ProductReview;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;

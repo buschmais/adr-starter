@@ -23,8 +23,8 @@ import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 
 import com.salesmanager.core.constants.SchemaConstant;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.price.FinalPrice;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.price.FinalPrice;
 import com.salesmanager.core.model.common.audit.AuditListener;
 import com.salesmanager.core.model.common.audit.AuditSection;
 import com.salesmanager.core.model.common.audit.Auditable;

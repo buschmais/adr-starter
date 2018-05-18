@@ -3,15 +3,15 @@ package com.salesmanager.catalog.business.service.search;
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.product.PricingService;
-import com.salesmanager.core.model.catalog.category.Category;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.description.ProductDescription;
-import com.salesmanager.core.model.catalog.product.price.FinalPrice;
+import com.salesmanager.catalog.model.category.Category;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.description.ProductDescription;
+import com.salesmanager.catalog.model.product.price.FinalPrice;
 import com.salesmanager.core.model.merchant.MerchantStore;
-import com.salesmanager.core.model.search.IndexProduct;
-import com.salesmanager.core.model.search.SearchEntry;
-import com.salesmanager.core.model.search.SearchFacet;
-import com.salesmanager.core.model.search.SearchKeywords;
+import com.salesmanager.catalog.model.search.IndexProduct;
+import com.salesmanager.catalog.model.search.SearchEntry;
+import com.salesmanager.catalog.model.search.SearchFacet;
+import com.salesmanager.catalog.model.search.SearchKeywords;
 import com.shopizer.search.services.FacetEntry;
 import com.shopizer.search.services.SearchHit;
 import com.shopizer.search.services.SearchRequest;
@@ -197,7 +197,7 @@ public class SearchServiceImpl implements com.salesmanager.catalog.business.serv
 	}
 	
 
-	public com.salesmanager.core.model.search.SearchResponse search(MerchantStore store, String languageCode, String jsonString, int entriesCount, int startIndex) throws ServiceException {
+	public com.salesmanager.catalog.model.search.SearchResponse search(MerchantStore store, String languageCode, String jsonString, int entriesCount, int startIndex) throws ServiceException {
 		
 
 		try {
@@ -214,7 +214,7 @@ public class SearchServiceImpl implements com.salesmanager.catalog.business.serv
 			
 			SearchResponse response =searchService.search(request);
 			
-			com.salesmanager.core.model.search.SearchResponse resp = new com.salesmanager.core.model.search.SearchResponse();
+			com.salesmanager.catalog.model.search.SearchResponse resp = new com.salesmanager.catalog.model.search.SearchResponse();
 			resp.setTotalCount(0);
 			
 			if(response != null) {

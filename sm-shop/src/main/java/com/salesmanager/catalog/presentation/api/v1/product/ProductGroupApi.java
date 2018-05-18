@@ -7,7 +7,7 @@ import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
 import com.salesmanager.catalog.presentation.util.RestUtils;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
-import com.salesmanager.core.model.catalog.product.Product;
+import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.store.controller.store.facade.StoreFacade;

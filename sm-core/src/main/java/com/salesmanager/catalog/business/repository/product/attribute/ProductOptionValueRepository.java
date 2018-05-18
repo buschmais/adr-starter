@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.salesmanager.core.model.catalog.product.attribute.ProductOptionValue;
+import com.salesmanager.catalog.model.product.attribute.ProductOptionValue;
 
 public interface ProductOptionValueRepository extends JpaRepository<ProductOptionValue, Long> {
 

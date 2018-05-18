@@ -3,8 +3,8 @@ package com.salesmanager.catalog.presentation.model.product;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import com.salesmanager.core.model.catalog.product.ProductCondition;
-import com.salesmanager.core.model.catalog.product.RentalStatus;
+import com.salesmanager.catalog.model.product.ProductCondition;
+import com.salesmanager.catalog.model.product.RentalStatus;
 
 
 /**

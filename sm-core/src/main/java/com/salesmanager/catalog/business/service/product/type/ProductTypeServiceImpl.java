@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.repository.product.type.ProductTypeRepository;
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
-import com.salesmanager.core.model.catalog.product.type.ProductType;
+import com.salesmanager.catalog.model.product.type.ProductType;
 
 @Service("productTypeService")
 public class ProductTypeServiceImpl extends SalesManagerEntityServiceImpl<Long, ProductType>

@@ -1,9 +1,9 @@
 package com.salesmanager.catalog.presentation.model.admin;
 
-import com.salesmanager.core.model.catalog.product.availability.ProductAvailability;
-import com.salesmanager.core.model.catalog.product.description.ProductDescription;
-import com.salesmanager.core.model.catalog.product.image.ProductImage;
-import com.salesmanager.core.model.catalog.product.price.ProductPrice;
+import com.salesmanager.catalog.model.product.availability.ProductAvailability;
+import com.salesmanager.catalog.model.product.description.ProductDescription;
+import com.salesmanager.catalog.model.product.image.ProductImage;
+import com.salesmanager.catalog.model.product.price.ProductPrice;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,7 +25,7 @@ public class Product implements Serializable {
 
 	//provides wrapping to the main product entity
 	@Valid
-	private com.salesmanager.core.model.catalog.product.Product product;
+	private com.salesmanager.catalog.model.product.Product product;
 	
 	@Valid
 	private List<ProductDescription> descriptions = new ArrayList<ProductDescription>();
@@ -53,10 +53,10 @@ public class Product implements Serializable {
 	public void setDateAvailable(String dateAvailable) {
 		this.dateAvailable = dateAvailable;
 	}
-	public com.salesmanager.core.model.catalog.product.Product getProduct() {
+	public com.salesmanager.catalog.model.product.Product getProduct() {
 		return product;
 	}
-	public void setProduct(com.salesmanager.core.model.catalog.product.Product product) {
+	public void setProduct(com.salesmanager.catalog.model.product.Product product) {
 		this.product = product;
 	}
 	

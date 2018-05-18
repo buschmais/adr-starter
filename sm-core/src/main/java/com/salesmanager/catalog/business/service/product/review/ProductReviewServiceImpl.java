@@ -12,8 +12,8 @@ import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.repository.product.review.ProductReviewRepository;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.review.ProductReview;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.reference.language.Language;
 
@@ -107,7 +107,7 @@ public class ProductReviewServiceImpl extends
 	}
 
 	/* (non-Javadoc)
-	 * @see com.salesmanager.catalog.business.service.product.review.ProductReviewService#getByProductNoObjects(com.salesmanager.core.model.catalog.product.Product)
+	 * @see com.salesmanager.catalog.business.service.product.review.ProductReviewService#getByProductNoObjects(com.salesmanager.catalog.model.product.Product)
 	 */
 	@Override
 	public List<ProductReview> getByProductNoCustomers(Product product) {

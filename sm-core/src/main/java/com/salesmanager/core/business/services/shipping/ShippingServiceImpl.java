@@ -10,7 +10,7 @@ import com.salesmanager.core.business.services.reference.loader.ConfigurationMod
 import com.salesmanager.core.business.services.system.MerchantConfigurationService;
 import com.salesmanager.core.business.services.system.MerchantLogService;
 import com.salesmanager.core.business.services.system.ModuleConfigurationService;
-import com.salesmanager.core.model.catalog.product.Product;
+import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.common.Delivery;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.country.Country;

@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.ProductCriteria;
-import com.salesmanager.core.model.catalog.product.relationship.ProductRelationship;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.ProductCriteria;
+import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
@@ -50,7 +50,7 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 		
 
 		productCriteria.setManufacturerId(manufacturerId);
-		com.salesmanager.core.model.catalog.product.ProductList products = productService.listByStore(store, language, productCriteria);
+		com.salesmanager.catalog.model.product.ProductList products = productService.listByStore(store, language, productCriteria);
 
 		
 		ReadableProductPopulator populator = new ReadableProductPopulator();
@@ -88,7 +88,7 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 		productCriteria.setProductIds(ids);
 		
 
-		com.salesmanager.core.model.catalog.product.ProductList products = productService.listByStore(store, language, productCriteria);
+		com.salesmanager.catalog.model.product.ProductList products = productService.listByStore(store, language, productCriteria);
 
 		
 		ReadableProductPopulator populator = new ReadableProductPopulator();

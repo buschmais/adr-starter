@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.repository.product.availability.ProductAvailabilityRepository;
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
-import com.salesmanager.core.model.catalog.product.availability.ProductAvailability;
+import com.salesmanager.catalog.model.product.availability.ProductAvailability;
 
 @Service("productAvailabilityService")
 public class ProductAvailabilityServiceImpl extends

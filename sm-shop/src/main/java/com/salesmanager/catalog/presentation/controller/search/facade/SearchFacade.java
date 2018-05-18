@@ -2,7 +2,7 @@ package com.salesmanager.catalog.presentation.controller.search.facade;
 
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.core.model.search.SearchResponse;
+import com.salesmanager.catalog.model.search.SearchResponse;
 import com.salesmanager.catalog.presentation.model.SearchProductList;
 import com.salesmanager.catalog.presentation.model.SearchProductRequest;
 

@@ -1,7 +1,7 @@
 package com.salesmanager.core.model.shipping;
 
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.price.FinalPrice;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.price.FinalPrice;
 
 public class ShippingProduct {
 	

@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.repository.product.price.ProductPriceRepository;
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
-import com.salesmanager.core.model.catalog.product.price.ProductPrice;
-import com.salesmanager.core.model.catalog.product.price.ProductPriceDescription;
+import com.salesmanager.catalog.model.product.price.ProductPrice;
+import com.salesmanager.catalog.model.product.price.ProductPriceDescription;
 
 @Service("productPrice")
 public class ProductPriceServiceImpl extends SalesManagerEntityServiceImpl<Long, ProductPrice> 

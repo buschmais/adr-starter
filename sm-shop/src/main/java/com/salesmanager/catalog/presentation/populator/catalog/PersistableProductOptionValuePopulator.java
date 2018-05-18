@@ -3,7 +3,7 @@ package com.salesmanager.catalog.presentation.populator.catalog;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
-import com.salesmanager.core.model.catalog.product.attribute.ProductOptionValue;
+import com.salesmanager.catalog.model.product.attribute.ProductOptionValue;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.attribute.PersistableProductOptionValue;
@@ -52,9 +52,9 @@ public class PersistableProductOptionValuePopulator extends
 			target.setCode(source.getCode());
 			
 			if(!CollectionUtils.isEmpty(source.getDescriptions())) {
-				Set<com.salesmanager.core.model.catalog.product.attribute.ProductOptionValueDescription> descriptions = new HashSet<com.salesmanager.core.model.catalog.product.attribute.ProductOptionValueDescription>();
+				Set<com.salesmanager.catalog.model.product.attribute.ProductOptionValueDescription> descriptions = new HashSet<com.salesmanager.catalog.model.product.attribute.ProductOptionValueDescription>();
 				for(ProductOptionValueDescription desc  : source.getDescriptions()) {
-					com.salesmanager.core.model.catalog.product.attribute.ProductOptionValueDescription description = new com.salesmanager.core.model.catalog.product.attribute.ProductOptionValueDescription();
+					com.salesmanager.catalog.model.product.attribute.ProductOptionValueDescription description = new com.salesmanager.catalog.model.product.attribute.ProductOptionValueDescription();
 					Language lang = languageService.getByCode(desc.getLanguage());
 					if(lang==null) {
 						throw new ConversionException("Language is null for code " + description.getLanguage() + " use language ISO code [en, fr ...]");

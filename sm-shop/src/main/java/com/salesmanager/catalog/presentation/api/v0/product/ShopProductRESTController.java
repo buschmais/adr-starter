@@ -11,10 +11,10 @@ import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
-import com.salesmanager.core.model.catalog.category.Category;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.ProductCriteria;
-import com.salesmanager.core.model.catalog.product.review.ProductReview;
+import com.salesmanager.catalog.model.category.Category;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.ProductCriteria;
+import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
@@ -199,7 +199,7 @@ public class ShopProductRESTController {
 			PersistableManufacturerPopulator populator = new PersistableManufacturerPopulator();
 			populator.setLanguageService(languageService);
 			
-			com.salesmanager.core.model.catalog.product.manufacturer.Manufacturer manuf = new com.salesmanager.core.model.catalog.product.manufacturer.Manufacturer();
+			com.salesmanager.catalog.model.product.manufacturer.Manufacturer manuf = new com.salesmanager.catalog.model.product.manufacturer.Manufacturer();
 			
 			populator.populate(manufacturer, manuf, merchantStore, merchantStore.getDefaultLanguage());
 		
@@ -250,7 +250,7 @@ public class ShopProductRESTController {
 			PersistableProductOptionValuePopulator populator = new PersistableProductOptionValuePopulator();
 			populator.setLanguageService(languageService);
 			
-			com.salesmanager.core.model.catalog.product.attribute.ProductOptionValue optValue = new com.salesmanager.core.model.catalog.product.attribute.ProductOptionValue();
+			com.salesmanager.catalog.model.product.attribute.ProductOptionValue optValue = new com.salesmanager.catalog.model.product.attribute.ProductOptionValue();
 			populator.populate(optionValue, optValue, merchantStore, merchantStore.getDefaultLanguage());
 		
 			productOptionValueService.save(optValue);
@@ -300,7 +300,7 @@ public class ShopProductRESTController {
 			PersistableProductOptionPopulator populator = new PersistableProductOptionPopulator();
 			populator.setLanguageService(languageService);
 			
-			com.salesmanager.core.model.catalog.product.attribute.ProductOption opt = new com.salesmanager.core.model.catalog.product.attribute.ProductOption();
+			com.salesmanager.catalog.model.product.attribute.ProductOption opt = new com.salesmanager.catalog.model.product.attribute.ProductOption();
 			populator.populate(option, opt, merchantStore, merchantStore.getDefaultLanguage());
 		
 			productOptionService.save(opt);
@@ -367,7 +367,7 @@ public class ShopProductRESTController {
 			populator.setCustomerService(customerService);
 			populator.setProductService(productService);
 			
-			com.salesmanager.core.model.catalog.product.review.ProductReview rev = new com.salesmanager.core.model.catalog.product.review.ProductReview();
+			com.salesmanager.catalog.model.product.review.ProductReview rev = new com.salesmanager.catalog.model.product.review.ProductReview();
 			populator.populate(review, rev, merchantStore, merchantStore.getDefaultLanguage());
 		
 			productReviewService.create(rev);
@@ -633,7 +633,7 @@ public class ShopProductRESTController {
 				}
 			}
 
-			com.salesmanager.core.model.catalog.product.ProductList products = productService.listByStore(merchantStore, lang, productCriteria);
+			com.salesmanager.catalog.model.product.ProductList products = productService.listByStore(merchantStore, lang, productCriteria);
 
 			
 			ReadableProductPopulator populator = new ReadableProductPopulator();

@@ -4,7 +4,7 @@ package com.salesmanager.catalog.presentation.populator.manufacturer;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
-import com.salesmanager.core.model.catalog.product.manufacturer.Manufacturer;
+import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.manufacturer.ManufacturerDescription;
@@ -42,9 +42,9 @@ public class PersistableManufacturerPopulator extends AbstractDataPopulator<Pers
 			
 
 			if(!CollectionUtils.isEmpty(source.getDescriptions())) {
-				Set<com.salesmanager.core.model.catalog.product.manufacturer.ManufacturerDescription> descriptions = new HashSet<com.salesmanager.core.model.catalog.product.manufacturer.ManufacturerDescription>();
+				Set<com.salesmanager.catalog.model.product.manufacturer.ManufacturerDescription> descriptions = new HashSet<com.salesmanager.catalog.model.product.manufacturer.ManufacturerDescription>();
 				for(ManufacturerDescription description : source.getDescriptions()) {
-					com.salesmanager.core.model.catalog.product.manufacturer.ManufacturerDescription desc = new com.salesmanager.core.model.catalog.product.manufacturer.ManufacturerDescription();
+					com.salesmanager.catalog.model.product.manufacturer.ManufacturerDescription desc = new com.salesmanager.catalog.model.product.manufacturer.ManufacturerDescription();
 					desc.setManufacturer(target);
 					if(desc.getId() != null && desc.getId().longValue()>0) {
 						desc.setId(description.getId());

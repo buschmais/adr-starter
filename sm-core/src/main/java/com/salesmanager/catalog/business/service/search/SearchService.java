@@ -1,10 +1,10 @@
 package com.salesmanager.catalog.business.service.search;
 
 import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.core.model.catalog.product.Product;
+import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.merchant.MerchantStore;
-import com.salesmanager.core.model.search.SearchKeywords;
-import com.salesmanager.core.model.search.SearchResponse;
+import com.salesmanager.catalog.model.search.SearchKeywords;
+import com.salesmanager.catalog.model.search.SearchResponse;
 
 public interface SearchService {
 	

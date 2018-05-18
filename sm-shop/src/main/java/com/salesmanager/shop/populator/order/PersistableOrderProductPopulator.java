@@ -5,8 +5,8 @@ import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductAttributeService;
 import com.salesmanager.catalog.business.service.product.file.DigitalProductService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
-import com.salesmanager.core.model.catalog.product.Product;
-import com.salesmanager.core.model.catalog.product.file.DigitalProduct;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.model.product.file.DigitalProduct;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.orderproduct.OrderProduct;
 import com.salesmanager.core.model.order.orderproduct.OrderProductAttribute;
@@ -118,7 +118,7 @@ public class PersistableOrderProductPopulator extends
 					OrderProductAttribute orderProductAttribute = new OrderProductAttribute();
 					orderProductAttribute.setOrderProduct(target);
 					Long id = attribute.getId();
-					com.salesmanager.core.model.catalog.product.attribute.ProductAttribute attr = productAttributeService.getById(id);
+					com.salesmanager.catalog.model.product.attribute.ProductAttribute attr = productAttributeService.getById(id);
 					if(attr==null) {
 						throw new ConversionException("Attribute id " + id + " does not exists");
 					}
