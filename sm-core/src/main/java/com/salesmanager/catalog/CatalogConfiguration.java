@@ -33,7 +33,7 @@ import javax.persistence.EntityListeners;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"com.salesmanager.catalog.business.service", "com.salesmanager.catalog.business.util", "com.salesmanager.catalog.business.integration"})
-@EnableJpaRepositories(basePackages = {"com.salesmanager.catalog.business.repository"})
+@EnableJpaRepositories(basePackages = {"com.salesmanager.catalog.business.repository","com.salesmanager.catalog.business.integration.core.repository"})
 @EntityScan(basePackages = {"com.salesmanager.catalog.model"})
 @PropertySource("classpath:catalog.properties")
 @EnableCaching
