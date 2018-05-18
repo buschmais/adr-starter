@@ -12,7 +12,7 @@ import com.salesmanager.catalog.presentation.controller.ControllerConstants;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +35,7 @@ import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.SearchProductList;
 import com.salesmanager.catalog.presentation.controller.search.facade.SearchFacade;
 import com.salesmanager.catalog.presentation.model.search.AutoCompleteRequest;
-import com.salesmanager.shop.utils.ImageFilePath;
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 
 @Controller
 public class SearchController {
@@ -60,10 +60,9 @@ public class SearchController {
 	
 	@Inject
 	private SearchFacade searchFacade;
-	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SearchController.class);

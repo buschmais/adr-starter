@@ -1,6 +1,7 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionValueService;
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
@@ -12,12 +13,11 @@ import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
-import com.salesmanager.shop.utils.ImageFilePath;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -53,9 +53,8 @@ public class OptionsValueController {
 	@Inject
 	private ContentService contentService;
 	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(OptionsValueController.class);
 	

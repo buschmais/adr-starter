@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -32,7 +33,6 @@ import com.salesmanager.shop.model.shoppingcart.ReadableShoppingCartAttributeOpt
 import com.salesmanager.shop.model.shoppingcart.ReadableShoppingCartAttributeOptionValue;
 import com.salesmanager.shop.model.shoppingcart.ReadableShoppingCartItem;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
-import com.salesmanager.shop.utils.ImageFilePath;
 
 public class ReadableShoppingCartPopulator extends AbstractDataPopulator<ShoppingCart, ReadableShoppingCart> {
 
@@ -42,7 +42,7 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
     private ShoppingCartCalculationService shoppingCartCalculationService;
     private ProductAttributeService productAttributeService;
     
-    private ImageFilePath imageUtils;
+    private CatalogImageFilePathUtils imageUtils;
 	
 	@Override
 	public ReadableShoppingCart populate(ShoppingCart source, ReadableShoppingCart target, MerchantStore store,
@@ -230,11 +230,11 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
 		this.shoppingCartCalculationService = shoppingCartCalculationService;
 	}
 
-	public ImageFilePath getImageUtils() {
+	public CatalogImageFilePathUtils getImageUtils() {
 		return imageUtils;
 	}
 
-	public void setImageUtils(ImageFilePath imageUtils) {
+	public void setImageUtils(CatalogImageFilePathUtils imageUtils) {
 		this.imageUtils = imageUtils;
 	}
 

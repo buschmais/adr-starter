@@ -9,9 +9,10 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +38,6 @@ import com.salesmanager.common.presentation.model.BreadcrumbItemType;
 import com.salesmanager.common.presentation.model.PageInformation;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
 import com.salesmanager.common.presentation.util.DateUtil;
-import com.salesmanager.shop.utils.ImageFilePath;
 import com.salesmanager.common.presentation.util.LabelUtils;
 
 
@@ -65,9 +65,8 @@ public class LandingController {
 	@Inject
 	private MerchantStoreService merchantService;
 	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(LandingController.class);
 	private final static String HOME_LINK_CODE="HOME";

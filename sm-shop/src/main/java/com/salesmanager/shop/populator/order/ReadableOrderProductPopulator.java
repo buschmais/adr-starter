@@ -1,5 +1,6 @@
 package com.salesmanager.shop.populator.order;
 
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.product.PricingService;
@@ -15,7 +16,6 @@ import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.shop.model.order.ReadableOrderProduct;
 import com.salesmanager.shop.model.order.ReadableOrderProductAttribute;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
-import com.salesmanager.shop.utils.ImageFilePath;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
@@ -29,15 +29,15 @@ public class ReadableOrderProductPopulator extends
 	
 	private ProductService productService;
 	private PricingService pricingService;
-	private ImageFilePath imageUtils;
+	private CatalogImageFilePathUtils imageUtils;
 
 
 
-	public ImageFilePath getimageUtils() {
+	public CatalogImageFilePathUtils getimageUtils() {
 		return imageUtils;
 	}
 
-	public void setimageUtils(ImageFilePath imageUtils) {
+	public void setimageUtils(CatalogImageFilePathUtils imageUtils) {
 		this.imageUtils = imageUtils;
 	}
 

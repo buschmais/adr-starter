@@ -9,10 +9,8 @@ import com.salesmanager.core.model.catalog.category.Category;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
-import com.salesmanager.shop.utils.ImageFilePath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -32,10 +30,6 @@ public class CategoryApi {
 	
 	@Inject
 	private CategoryService categoryService;
-	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
 	
 	@Inject
 	private StoreFacade storeFacade;

@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.salesmanager.catalog.business.service.product.PricingService;
@@ -21,7 +21,7 @@ import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
-import com.salesmanager.shop.utils.ImageFilePath;
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 
 @Component
 public class ProductItemsFacadeImpl implements ProductItemsFacade {
@@ -33,9 +33,8 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 	@Inject
 	PricingService pricingService;
 	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 	
 	@Inject
 	private ProductRelationshipService productRelationshipService;

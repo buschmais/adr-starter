@@ -6,9 +6,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.tags.RequestContextAwareTag;
@@ -23,7 +24,6 @@ import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
-import com.salesmanager.shop.utils.ImageFilePath;
 
 
 
@@ -47,9 +47,8 @@ public class ShopProductRelationshipTag extends RequestContextAwareTag  {
 	@Inject
 	private CacheUtils cache;
 	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 	
 	
 	private String groupName;

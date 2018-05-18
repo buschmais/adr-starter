@@ -12,7 +12,7 @@ import com.salesmanager.catalog.presentation.util.RestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +37,7 @@ import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
 import com.salesmanager.catalog.presentation.controller.product.facade.ProductFacade;
 import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
-import com.salesmanager.shop.utils.ImageFilePath;
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 
 /**
  * API to create, read, update and delete a Product
@@ -65,9 +65,8 @@ public class ProductApi {
 	private ProductFacade productFacade;
 	
 	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 	
 	@Inject
 	private StoreFacade storeFacade;

@@ -22,11 +22,9 @@ import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
 import com.salesmanager.catalog.presentation.controller.items.facade.ProductItemsFacade;
 import com.salesmanager.catalog.presentation.controller.product.facade.ProductFacade;
 import com.salesmanager.common.presentation.util.DateUtil;
-import com.salesmanager.shop.utils.ImageFilePath;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -90,10 +88,6 @@ public class ProductItemsRESTController {
 	
 	@Inject
 	private LanguageService languageService;
-	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
 	
 	@Inject
 	private RestUtils restUtils;

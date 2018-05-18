@@ -3,6 +3,7 @@
  */
 package com.salesmanager.shop.populator.shoppingCart;
 
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.services.shoppingcart.ShoppingCartCalculationService;
@@ -20,7 +21,6 @@ import com.salesmanager.shop.model.order.total.OrderTotal;
 import com.salesmanager.shop.model.shoppingcart.ShoppingCartAttribute;
 import com.salesmanager.shop.model.shoppingcart.ShoppingCartData;
 import com.salesmanager.shop.model.shoppingcart.ShoppingCartItem;
-import com.salesmanager.shop.utils.ImageFilePath;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.configuration.ConversionException;
 import org.apache.commons.lang3.Validate;
@@ -48,16 +48,16 @@ public class ShoppingCartDataPopulator extends AbstractDataPopulator<ShoppingCar
 
     private  ShoppingCartCalculationService shoppingCartCalculationService;
     
-    private ImageFilePath imageUtils;
+    private CatalogImageFilePathUtils imageUtils;
 
-			public ImageFilePath getimageUtils() {
+    public CatalogImageFilePathUtils getimageUtils() {
 				return imageUtils;
 			}
 		
 		
 		
 		
-			public void setimageUtils(ImageFilePath imageUtils) {
+    public void setimageUtils(CatalogImageFilePathUtils imageUtils) {
 				this.imageUtils = imageUtils;
 			}
 

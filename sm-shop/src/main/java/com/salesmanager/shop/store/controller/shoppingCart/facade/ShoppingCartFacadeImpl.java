@@ -13,12 +13,13 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -48,7 +49,6 @@ import com.salesmanager.shop.model.shoppingcart.ShoppingCartItem;
 import com.salesmanager.shop.populator.shoppingCart.ReadableShoppingCartPopulator;
 import com.salesmanager.shop.populator.shoppingCart.ShoppingCartDataPopulator;
 import com.salesmanager.common.presentation.util.DateUtil;
-import com.salesmanager.shop.utils.ImageFilePath;
 
 /**
  * @author Umesh Awasthi
@@ -81,9 +81,8 @@ public class ShoppingCartFacadeImpl
     @Inject
     private ProductAttributeService productAttributeService;
     
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 
     public void deleteShoppingCart(final Long id, final MerchantStore store) throws Exception {
     	ShoppingCart cart = shoppingCartService.getById(id, store);

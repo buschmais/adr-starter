@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableCategoryPopulator;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
-import com.salesmanager.shop.utils.ImageFilePath;
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 
 
 @Service("searchFacade")
@@ -51,9 +51,8 @@ public class SearchFacadeImpl implements SearchFacade {
 	@Inject
 	private PricingService pricingService;
 	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 	
 	@Inject
 	private CoreConfiguration coreConfiguration;

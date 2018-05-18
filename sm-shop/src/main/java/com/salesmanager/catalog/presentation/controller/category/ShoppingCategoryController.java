@@ -26,14 +26,14 @@ import com.salesmanager.catalog.presentation.populator.manufacturer.ReadableManu
 import com.salesmanager.catalog.presentation.model.filter.QueryFilter;
 import com.salesmanager.catalog.presentation.model.filter.QueryFilterType;
 import com.salesmanager.catalog.presentation.util.BreadcrumbsUtils;
-import com.salesmanager.shop.utils.ImageFilePath;
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.catalog.presentation.util.PageBuilderUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -86,9 +86,8 @@ public class ShoppingCategoryController {
 	@Inject
 	private PricingService pricingService;
 	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 	
 
 	

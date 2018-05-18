@@ -15,11 +15,13 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -175,6 +177,9 @@ public class OrderFacadeImpl implements OrderFacade {
 	@Inject
 	@Qualifier("img")
 	private ImageFilePath imageUtils;
+
+	@Autowired
+	private CatalogImageFilePathUtils catalogImageUtils;
 
 
 	@Override
@@ -965,7 +970,7 @@ public class OrderFacadeImpl implements OrderFacade {
             orderProductPopulator.setLocale(locale);
             orderProductPopulator.setProductService(productService);
             orderProductPopulator.setPricingService(pricingService);
-            orderProductPopulator.setimageUtils(imageUtils);
+            orderProductPopulator.setimageUtils(catalogImageUtils);
             ReadableOrderProduct orderProduct = new ReadableOrderProduct();
             orderProductPopulator.populate(p, orderProduct, store, language);
             
@@ -1058,7 +1063,7 @@ public class OrderFacadeImpl implements OrderFacade {
 			ReadableOrderProductPopulator orderProductPopulator = new ReadableOrderProductPopulator();
 			orderProductPopulator.setProductService(productService);
 			orderProductPopulator.setPricingService(pricingService);
-			orderProductPopulator.setimageUtils(imageUtils);
+			orderProductPopulator.setimageUtils(catalogImageUtils);
 			
 			ReadableOrderProduct orderProduct = new ReadableOrderProduct();
 			orderProductPopulator.populate(p, orderProduct, store, language);

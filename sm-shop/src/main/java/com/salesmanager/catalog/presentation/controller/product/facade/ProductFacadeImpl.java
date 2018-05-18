@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.salesmanager.catalog.business.service.category.CategoryService;
@@ -46,7 +46,7 @@ import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductRe
 import com.salesmanager.catalog.presentation.populator.manufacturer.PersistableManufacturerPopulator;
 import com.salesmanager.catalog.presentation.populator.manufacturer.ReadableManufacturerPopulator;
 import com.salesmanager.common.presentation.util.DateUtil;
-import com.salesmanager.shop.utils.ImageFilePath;
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 
 @Service("productFacade")
 public class ProductFacadeImpl implements ProductFacade {
@@ -80,10 +80,9 @@ public class ProductFacadeImpl implements ProductFacade {
 	
 	@Inject
 	private ProductReviewService productReviewService;
-	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 
 	@Override
 	public PersistableProduct saveProduct(MerchantStore store, PersistableProduct product, Language language)

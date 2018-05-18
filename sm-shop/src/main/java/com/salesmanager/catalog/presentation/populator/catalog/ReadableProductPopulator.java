@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +28,6 @@ import com.salesmanager.catalog.presentation.model.product.ReadableImage;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.model.product.RentalOwner;
 import com.salesmanager.common.presentation.util.DateUtil;
-import com.salesmanager.shop.utils.ImageFilePath;
 
 
 
@@ -36,16 +36,16 @@ public class ReadableProductPopulator extends
 	
 	private PricingService pricingService;
 	
-	private ImageFilePath imageUtils;
+	private CatalogImageFilePathUtils imageUtils;
 
-	public ImageFilePath getimageUtils() {
+	public CatalogImageFilePathUtils getimageUtils() {
 		return imageUtils;
 	}
 
 
 
 
-	public void setimageUtils(ImageFilePath imageUtils) {
+	public void setimageUtils(CatalogImageFilePathUtils imageUtils) {
 		this.imageUtils = imageUtils;
 	}
 
@@ -194,7 +194,7 @@ public class ReadableProductPopulator extends
 					prdImage.setDefaultImage(img.isDefaultImage());
 
 					StringBuilder imgPath = new StringBuilder();
-					imgPath.append(contextPath).append(imageUtils.buildProductImageUtils(store, source.getSku(), img.getProductImage()));
+					imgPath.append(contextPath != null ? contextPath : "").append(imageUtils.buildProductImageUtils(store, source.getSku(), img.getProductImage()));
 
 					prdImage.setImageUrl(imgPath.toString());
 					prdImage.setId(img.getId());

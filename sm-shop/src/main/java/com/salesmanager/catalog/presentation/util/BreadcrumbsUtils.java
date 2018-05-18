@@ -11,9 +11,10 @@ import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.common.presentation.model.Breadcrumb;
 import com.salesmanager.common.presentation.model.BreadcrumbItem;
 import com.salesmanager.common.presentation.model.BreadcrumbItemType;
-import com.salesmanager.shop.utils.LocaleUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,15 +25,15 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 @Component
 public class BreadcrumbsUtils {
-	
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(BreadcrumbsUtils.class);
+
+
 	@Inject
 	private LabelUtils messages;
 	
@@ -53,7 +54,7 @@ public class BreadcrumbsUtils {
 		/** Rebuild breadcrumb **/
 		BreadcrumbItem home = new BreadcrumbItem();
 		home.setItemType(BreadcrumbItemType.HOME);
-		home.setLabel(messages.getMessage(Constants.HOME_MENU_KEY, LocaleUtils.getLocale(language)));
+		home.setLabel(messages.getMessage(Constants.HOME_MENU_KEY, new Locale(language.getCode())));
 		home.setUrl(getStoreUri(store, contextPath));
 
 		Breadcrumb breadCrumb = new Breadcrumb();
@@ -104,7 +105,7 @@ public class BreadcrumbsUtils {
 		/** Rebuild breadcrumb **/
 		BreadcrumbItem home = new BreadcrumbItem();
 		home.setItemType(BreadcrumbItemType.HOME);
-		home.setLabel(messages.getMessage(Constants.HOME_MENU_KEY, LocaleUtils.getLocale(language)));
+		home.setLabel(messages.getMessage(Constants.HOME_MENU_KEY, new Locale(language.getCode())));
 		home.setUrl(getStoreUri(store, contextPath));
 
 		Breadcrumb breadCrumb = new Breadcrumb();

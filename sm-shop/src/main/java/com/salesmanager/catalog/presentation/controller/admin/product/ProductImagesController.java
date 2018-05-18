@@ -3,6 +3,7 @@ package com.salesmanager.catalog.presentation.controller.admin.product;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.image.ProductImageService;
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.core.model.catalog.product.Product;
@@ -11,13 +12,12 @@ import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.catalog.presentation.model.admin.cms.ProductImages;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
-import com.salesmanager.shop.utils.ImageFilePath;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -53,9 +53,8 @@ public class ProductImagesController {
 	@Inject
 	private LabelUtils messages;
 	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 	
 
 	@PreAuthorize("hasRole('PRODUCTS')")

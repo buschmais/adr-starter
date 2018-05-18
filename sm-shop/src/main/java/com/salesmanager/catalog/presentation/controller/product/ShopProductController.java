@@ -7,6 +7,7 @@ import com.salesmanager.catalog.business.service.product.attribute.ProductAttrib
 import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
 import com.salesmanager.catalog.presentation.controller.ControllerConstants;
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.core.business.utils.CacheUtils;
 import com.salesmanager.core.model.catalog.product.Product;
 import com.salesmanager.core.model.catalog.product.attribute.ProductAttribute;
@@ -31,14 +32,13 @@ import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductRe
 import com.salesmanager.catalog.presentation.model.store.Attribute;
 import com.salesmanager.catalog.presentation.model.store.AttributeValue;
 import com.salesmanager.catalog.presentation.util.BreadcrumbsUtils;
-import com.salesmanager.shop.utils.ImageFilePath;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.catalog.presentation.util.PageBuilderUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -86,9 +86,8 @@ public class ShopProductController {
 	@Inject
 	private BreadcrumbsUtils breadcrumbsUtils;
 	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 	
 	private static final Logger LOG = LoggerFactory.getLogger(ShopProductController.class);
 	

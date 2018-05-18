@@ -4,10 +4,11 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.tags.RequestContextAwareTag;
@@ -15,7 +16,6 @@ import org.springframework.web.servlet.tags.RequestContextAwareTag;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.shop.utils.FilePathUtils;
-import com.salesmanager.shop.utils.ImageFilePath;
 
 
 
@@ -39,9 +39,8 @@ public class ShopProductImageUrlTag extends RequestContextAwareTag {
 	@Inject
 	private FilePathUtils filePathUtils;
 	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 	
 	public int doStartTagInternal() throws JspException {
 		try {

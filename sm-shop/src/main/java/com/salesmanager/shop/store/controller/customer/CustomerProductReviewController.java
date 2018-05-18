@@ -3,6 +3,7 @@ package com.salesmanager.shop.store.controller.customer;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.model.catalog.product.Product;
@@ -21,10 +22,9 @@ import com.salesmanager.shop.store.controller.AbstractController;
 import com.salesmanager.shop.store.controller.ControllerConstants;
 import com.salesmanager.shop.store.controller.customer.facade.CustomerFacade;
 import com.salesmanager.common.presentation.util.DateUtil;
-import com.salesmanager.shop.utils.ImageFilePath;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,9 +72,8 @@ public class CustomerProductReviewController extends AbstractController {
 	@Inject
 	private LabelUtils messages;
 	
-	@Inject
-	@Qualifier("img")
-	private ImageFilePath imageUtils;
+	@Autowired
+	private CatalogImageFilePathUtils imageUtils;
 
 	@PreAuthorize("hasRole('AUTH_CUSTOMER')")
 	@RequestMapping(value="/review.html", method=RequestMethod.GET)
