@@ -25,6 +25,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
@@ -76,7 +78,7 @@ public class InitializationLoader {
     @Inject
     private ResourceLoader resourceLoader;
 	
-	@PostConstruct
+	@EventListener(ApplicationReadyEvent.class)
 	public void init() {
 		
 		try {
