@@ -1,6 +1,6 @@
 package com.salesmanager.shop.admin.controller.content;
 
-import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
+import com.salesmanager.catalog.api.ProductRelationshipApi;
 import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
@@ -46,7 +46,7 @@ public class ContentPagesController {
 	LanguageService languageService;
 	
 	@Inject
-	ProductRelationshipService productRelationshipService;
+	ProductRelationshipApi productRelationshipApi;
 	
 	
 	@PreAuthorize("hasRole('CONTENT')")
@@ -81,7 +81,7 @@ public class ContentPagesController {
 			content.getDescriptions().add(description);
 		}
 		
-		List<ProductRelationship> relationships = productRelationshipService.getGroups(store);
+		List<ProductRelationship> relationships = productRelationshipApi.getGroups(store.toDTO());
 		if(!CollectionUtils.isEmpty(relationships)) {
 			model.addAttribute("productGroups", relationships);
 		}
@@ -134,7 +134,7 @@ public class ContentPagesController {
 		content.setDescriptions(descriptions);
 		model.addAttribute("content",content);
 		
-		List<ProductRelationship> relationships = productRelationshipService.getGroups(store);
+		List<ProductRelationship> relationships = productRelationshipApi.getGroups(store.toDTO());
 		if(!CollectionUtils.isEmpty(relationships)) {
 			model.addAttribute("productGroups", relationships);
 		}
@@ -284,7 +284,7 @@ public class ContentPagesController {
 
 		contentService.saveOrUpdate(content);
 		
-		List<ProductRelationship> relationships = productRelationshipService.getGroups(store);
+		List<ProductRelationship> relationships = productRelationshipApi.getGroups(store.toDTO());
 		if(!CollectionUtils.isEmpty(relationships)) {
 			model.addAttribute("productGroups", relationships);
 		}

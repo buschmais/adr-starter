@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.salesmanager.catalog.api.ProductRelationshipApi;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.salesmanager.catalog.business.service.product.PricingService;
-import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
 import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.catalog.model.product.Product;
@@ -53,7 +53,7 @@ public class LandingController {
 	private ContentService contentService;
 	
 	@Inject
-	private ProductRelationshipService productRelationshipService;
+	private ProductRelationshipApi productRelationshipApi;
 
 	
 	@Inject
@@ -121,7 +121,7 @@ public class LandingController {
 
 		
 		//featured items
-		List<ProductRelationship> relationships = productRelationshipService.getByType(store, ProductRelationshipType.FEATURED_ITEM, language);
+		List<ProductRelationship> relationships = productRelationshipApi.getByType(store.toDTO(), ProductRelationshipType.FEATURED_ITEM, language);
 		List<ReadableProduct> featuredItems = new ArrayList<ReadableProduct>();
 		Date today = new Date();
 		for(ProductRelationship relationship : relationships) {
