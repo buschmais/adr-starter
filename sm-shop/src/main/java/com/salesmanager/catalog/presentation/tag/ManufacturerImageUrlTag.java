@@ -1,23 +1,25 @@
-package com.salesmanager.shop.tags;
+package com.salesmanager.catalog.presentation.tag;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
-import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.tags.RequestContextAwareTag;
 
-import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.catalog.presentation.model.manufacturer.Manufacturer;
 import com.salesmanager.shop.utils.FilePathUtils;
+import com.salesmanager.shop.utils.ImageFilePath;
 
-public class ProductImageUrlTag extends RequestContextAwareTag {
+
+
+public class ManufacturerImageUrlTag extends RequestContextAwareTag {
 	
 	
 	/**
@@ -25,45 +27,41 @@ public class ProductImageUrlTag extends RequestContextAwareTag {
 	 */
 	private static final long serialVersionUID = 6319855234657139862L;
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ProductImageUrlTag.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ManufacturerImageUrlTag.class);
 
 
 	private String imageName;
 	private String imageType;
-	private Product product;
+	private Manufacturer manufacturer;
 	
 	@Inject
 	private FilePathUtils filePathUtils;
 
-	@Autowired
-	private CatalogImageFilePathUtils imageUtils;
+
+	@Inject
+	@Qualifier("img")
+	private ImageFilePath imageUtils;
 
 	public int doStartTagInternal() throws JspException {
 		try {
-
-
+			
 			if (filePathUtils==null || imageUtils==null) {
 	            WebApplicationContext wac = getRequestContext().getWebApplicationContext();
 	            AutowireCapableBeanFactory factory = wac.getAutowireCapableBeanFactory();
 	            factory.autowireBean(this);
 	        }
 
+
 			HttpServletRequest request = (HttpServletRequest) pageContext
 					.getRequest();
 			
 			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
-
+			
 			StringBuilder imagePath = new StringBuilder();
 			
-			String baseUrl = filePathUtils.buildRelativeStoreUri(request, merchantStore);
+			String baseUrl = filePathUtils.buildStoreUri(merchantStore, request);
 			imagePath.append(baseUrl);
 			
-			imagePath
-
-				.append(imageUtils.buildProductImageUtils(merchantStore, product, this.getImageName())).toString();
-
-			System.out.println("Printing image " + imagePath.toString());
-
 			pageContext.getOut().print(imagePath.toString());
 
 
@@ -95,16 +93,13 @@ public class ProductImageUrlTag extends RequestContextAwareTag {
 		return imageType;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public Manufacturer getManufacturer() {
+		return manufacturer;
 	}
 
-	public Product getProduct() {
-		return product;
+	public void setManufacturer(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
 	}
-
-
-
 
 	
 

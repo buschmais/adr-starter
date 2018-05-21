@@ -1,4 +1,4 @@
-package com.salesmanager.shop.tags;
+package com.salesmanager.catalog.presentation.tag;
 
 import java.util.Map;
 

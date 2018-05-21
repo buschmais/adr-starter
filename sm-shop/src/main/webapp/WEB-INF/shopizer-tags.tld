@@ -74,7 +74,7 @@
 <tag>
  		 <!-- Builds the manufacturer image URL -->
          <name>manufacturerImage</name>
-         <tag-class>com.salesmanager.shop.tags.ManufacturerImageUrlTag</tag-class>
+         <tag-class>com.salesmanager.catalog.presentation.tag.ManufacturerImageUrlTag</tag-class>
          <body-content>scriptless</body-content>
 
  
@@ -98,7 +98,7 @@
 <tag>
  		 <!-- Builds the product image URL -->
          <name>productImage</name>
-         <tag-class>com.salesmanager.shop.tags.ProductImageUrlTag</tag-class>
+         <tag-class>com.salesmanager.catalog.presentation.tag.ProductImageUrlTag</tag-class>
          <body-content>scriptless</body-content>
 
  
@@ -123,7 +123,7 @@
 <tag>
  		 <!-- Builds the product image URL -->
          <name>shopProductImage</name>
-         <tag-class>com.salesmanager.shop.tags.ShopProductImageUrlTag</tag-class>
+         <tag-class>com.salesmanager.catalog.presentation.tag.ShopProductImageUrlTag</tag-class>
          <body-content>scriptless</body-content>
 
  
@@ -154,7 +154,7 @@
 <tag>
  		 <!-- Builds the product image URL -->
          <name>shopProductGroup</name>
-         <tag-class>com.salesmanager.shop.tags.ShopProductRelationshipTag</tag-class>
+         <tag-class>com.salesmanager.catalog.presentation.tag.ShopProductRelationshipTag</tag-class>
          <body-content>scriptless</body-content>
 
  
@@ -173,7 +173,7 @@
 <tag>
  		 <!-- Product price utility -->
          <name>monetary</name>
-         <tag-class>com.salesmanager.shop.tags.ShopProductPriceFormatTag</tag-class>
+         <tag-class>com.salesmanager.catalog.presentation.tag.ShopProductPriceFormatTag</tag-class>
          <body-content>scriptless</body-content>
 
  
@@ -197,7 +197,7 @@
 <tag>
  		 <!-- Builds the admin product download URL -->
          <name>adminProductDownload</name>
-         <tag-class>com.salesmanager.shop.tags.AdminProductDownloadUrlTag</tag-class>
+         <tag-class>com.salesmanager.catalog.presentation.tag.AdminProductDownloadUrlTag</tag-class>
          <body-content>scriptless</body-content>
          
          <attribute>
@@ -273,7 +273,7 @@
 <tag>
  		 <!-- Builds the product URL -->
          <name>productUrl</name>
-         <tag-class>com.salesmanager.shop.tags.ProductDescriptionUrlTag</tag-class>
+         <tag-class>com.salesmanager.catalog.presentation.tag.ProductDescriptionUrlTag</tag-class>
          <body-content>scriptless</body-content>
 
  
