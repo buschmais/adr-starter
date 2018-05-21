@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductAttributeService;
-import com.salesmanager.catalog.business.service.product.file.DigitalProductService;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.reference.currency.CurrencyService;
 import com.salesmanager.core.business.services.shoppingcart.ShoppingCartService;
@@ -39,8 +38,6 @@ public class PersistableOrderApiPopulator extends AbstractDataPopulator<Persista
 	private ShoppingCartService shoppingCartService;
 	private ProductService productService;
 	private ProductAttributeService productAttributeService;
-	private DigitalProductService digitalProductService;
-
 	
 
 
@@ -54,7 +51,6 @@ public class PersistableOrderApiPopulator extends AbstractDataPopulator<Persista
 		Validate.notNull(shoppingCartService,"shoppingCartService must be set");
 		Validate.notNull(productService,"productService must be set");
 		Validate.notNull(productAttributeService,"productAttributeService must be set");
-		Validate.notNull(digitalProductService,"digitalProductService must be set");
 		Validate.notNull(source.getPayment(),"Payment cannot be null");
 		
 		try {
@@ -182,14 +178,6 @@ public class PersistableOrderApiPopulator extends AbstractDataPopulator<Persista
 
 	public void setProductAttributeService(ProductAttributeService productAttributeService) {
 		this.productAttributeService = productAttributeService;
-	}
-
-	public DigitalProductService getDigitalProductService() {
-		return digitalProductService;
-	}
-
-	public void setDigitalProductService(DigitalProductService digitalProductService) {
-		this.digitalProductService = digitalProductService;
 	}
 
 

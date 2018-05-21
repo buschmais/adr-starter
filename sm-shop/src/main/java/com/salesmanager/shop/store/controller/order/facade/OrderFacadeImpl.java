@@ -15,6 +15,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.api.DigitalProductApi;
 import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
@@ -122,7 +123,7 @@ public class OrderFacadeImpl implements OrderFacade {
 	@Inject
 	private ShoppingCartService shoppingCartService;
 	@Inject
-	private DigitalProductService digitalProductService;
+	private DigitalProductApi digitalProductApi;
 	@Inject
 	private CustomerService customerService;
 	@Inject
@@ -369,7 +370,7 @@ public class OrderFacadeImpl implements OrderFacade {
 			}
 			
 			OrderProductPopulator orderProductPopulator = new OrderProductPopulator();
-			orderProductPopulator.setDigitalProductService(digitalProductService);
+			orderProductPopulator.setDigitalProductApi(digitalProductApi);
 			orderProductPopulator.setProductAttributeService(productAttributeService);
 			orderProductPopulator.setProductService(productService);
 			
@@ -1128,7 +1129,6 @@ public class OrderFacadeImpl implements OrderFacade {
 		PersistableOrderApiPopulator populator = new PersistableOrderApiPopulator();
 		populator.setCurrencyService(currencyService);
 		populator.setCustomerService(customerService);
-		populator.setDigitalProductService(digitalProductService);
 		populator.setProductAttributeService(productAttributeService);
 		populator.setProductService(productService);
 		populator.setShoppingCartService(shoppingCartService);
@@ -1153,7 +1153,7 @@ public class OrderFacadeImpl implements OrderFacade {
 			Set<OrderProduct> orderProducts = new LinkedHashSet<OrderProduct>();
 			
 			OrderProductPopulator orderProductPopulator = new OrderProductPopulator();
-			orderProductPopulator.setDigitalProductService(digitalProductService);
+			orderProductPopulator.setDigitalProductApi(digitalProductApi);
 			orderProductPopulator.setProductAttributeService(productAttributeService);
 			orderProductPopulator.setProductService(productService);
 			

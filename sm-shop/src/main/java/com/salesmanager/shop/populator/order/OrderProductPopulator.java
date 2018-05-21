@@ -1,9 +1,9 @@
 package com.salesmanager.shop.populator.order;
 
+import com.salesmanager.catalog.api.DigitalProductApi;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductAttributeService;
-import com.salesmanager.catalog.business.service.product.file.DigitalProductService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
@@ -30,7 +30,7 @@ public class OrderProductPopulator extends
 		AbstractDataPopulator<ShoppingCartItem, OrderProduct> {
 	
 	private ProductService productService;
-	private DigitalProductService digitalProductService;
+	private DigitalProductApi digitalProductApi;
 	private ProductAttributeService productAttributeService;
 
 
@@ -43,12 +43,12 @@ public class OrderProductPopulator extends
 		this.productAttributeService = productAttributeService;
 	}
 
-	public DigitalProductService getDigitalProductService() {
-		return digitalProductService;
+	public DigitalProductApi getDigitalProductApi() {
+		return digitalProductApi;
 	}
 
-	public void setDigitalProductService(DigitalProductService digitalProductService) {
-		this.digitalProductService = digitalProductService;
+	public void setDigitalProductApi(DigitalProductApi digitalProductApi) {
+		this.digitalProductApi = digitalProductApi;
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class OrderProductPopulator extends
 			MerchantStore store, Language language) throws ConversionException {
 		
 		Validate.notNull(productService,"productService must be set");
-		Validate.notNull(digitalProductService,"digitalProductService must be set");
+		Validate.notNull(digitalProductApi,"digitalProductApi must be set");
 		Validate.notNull(productAttributeService,"productAttributeService must be set");
 
 		
@@ -74,7 +74,7 @@ public class OrderProductPopulator extends
 				throw new ConversionException("Invalid product id " + source.getProductId());
 			}
 
-			DigitalProduct digitalProduct = digitalProductService.getByProduct(store, modelProduct);
+			DigitalProduct digitalProduct = digitalProductApi.getByProduct(store.toDTO(), modelProduct);
 			
 			if(digitalProduct!=null) {
 				OrderProductDownload orderProductDownload = new OrderProductDownload();	

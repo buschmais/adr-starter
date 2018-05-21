@@ -1,9 +1,9 @@
 package com.salesmanager.shop.populator.order;
 
+import com.salesmanager.catalog.api.DigitalProductApi;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductAttributeService;
-import com.salesmanager.catalog.business.service.product.file.DigitalProductService;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.reference.country.CountryService;
 import com.salesmanager.core.business.services.reference.currency.CurrencyService;
@@ -44,7 +44,7 @@ public class PersistableOrderPopulator extends
 
 	private ZoneService zoneService;
 	private ProductService productService;
-	private DigitalProductService digitalProductService;
+	private DigitalProductApi digitalProductApi;
 	private ProductAttributeService productAttributeService;
 
 	@Override
@@ -53,7 +53,7 @@ public class PersistableOrderPopulator extends
 		
 		
 		Validate.notNull(productService,"productService must be set");
-		Validate.notNull(digitalProductService,"digitalProductService must be set");
+		Validate.notNull(digitalProductApi,"digitalProductApi must be set");
 		Validate.notNull(productAttributeService,"productAttributeService must be set");
 		Validate.notNull(customerService,"customerService must be set");
 		Validate.notNull(countryService,"countryService must be set");
@@ -142,7 +142,7 @@ public class PersistableOrderPopulator extends
 			com.salesmanager.shop.populator.order.PersistableOrderProductPopulator orderProductPopulator = new PersistableOrderProductPopulator();
 			orderProductPopulator.setProductAttributeService(productAttributeService);
 			orderProductPopulator.setProductService(productService);
-			orderProductPopulator.setDigitalProductService(digitalProductService);
+			orderProductPopulator.setDigitalProductApi(digitalProductApi);
 			
 			for(PersistableOrderProduct orderProduct : products) {
 				OrderProduct modelOrderProduct = new OrderProduct();
@@ -184,12 +184,12 @@ public class PersistableOrderPopulator extends
 		return productService;
 	}
 
-	public void setDigitalProductService(DigitalProductService digitalProductService) {
-		this.digitalProductService = digitalProductService;
+	public DigitalProductApi getDigitalProductApi() {
+		return digitalProductApi;
 	}
 
-	public DigitalProductService getDigitalProductService() {
-		return digitalProductService;
+	public void setDigitalProductApi(DigitalProductApi digitalProductApi) {
+		this.digitalProductApi = digitalProductApi;
 	}
 
 	public void setProductAttributeService(ProductAttributeService productAttributeService) {
