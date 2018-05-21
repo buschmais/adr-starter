@@ -1,6 +1,7 @@
 package com.salesmanager.shop.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.salesmanager.catalog.api.CategoryApi;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.core.business.services.content.ContentService;
@@ -66,6 +67,9 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 	@Inject
 	private ContentService contentService;
 	
+	@Inject
+	private CategoryApi categoryApi;
+
 	@Inject
 	private CategoryService categoryService;
 	
@@ -739,7 +743,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 		   Map<String, List<ReadableCategory>> objects = new ConcurrentHashMap<String, List<ReadableCategory>>();
 		   
 		    /** returns categories with required depth, 0 = root category, 1 = root + 1 layer child ...) **/
-			List<Category> categories = categoryService.listByDepth(store, 0, language);
+			List<Category> categories = categoryApi.listByDepth(store.toDTO(), 0, language);
 			
 			ReadableCategoryPopulator readableCategoryPopulator = new ReadableCategoryPopulator();
 			
