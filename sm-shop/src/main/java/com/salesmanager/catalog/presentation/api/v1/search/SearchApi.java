@@ -4,6 +4,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.RestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,13 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.SearchProductList;
 import com.salesmanager.catalog.presentation.model.SearchProductRequest;
 import com.salesmanager.catalog.presentation.controller.search.facade.SearchFacade;
-import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
-import com.salesmanager.shop.utils.LanguageUtils;
 
 /**
  * Api for searching shopizer catalog based on search term
@@ -38,10 +37,10 @@ public class SearchApi {
 	private SearchFacade searchFacade;
 	
 	@Inject
-	private StoreFacade storeFacade;
-	
-	@Inject
 	private RestUtils restUtils;
+
+	@Inject
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SearchApi.class);
 	
@@ -61,7 +60,7 @@ public class SearchApi {
 		
 		try {
 			
-			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+			MerchantStoreInfo merchantStore = merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			SearchProductList productList = searchFacade.search(merchantStore, language, searchRequest);
 			

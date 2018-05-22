@@ -1,11 +1,13 @@
 package com.salesmanager.catalog.presentation.controller.product;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductAttributeService;
 import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.ControllerConstants;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.core.business.utils.CacheUtils;
@@ -18,7 +20,7 @@ import com.salesmanager.catalog.model.product.price.FinalPrice;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationshipType;
 import com.salesmanager.catalog.model.product.review.ProductReview;
-import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
@@ -88,7 +90,10 @@ public class ShopProductController {
 	
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
-	
+
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
+
 	private static final Logger LOG = LoggerFactory.getLogger(ShopProductController.class);
 	
 
@@ -126,9 +131,10 @@ public class ShopProductController {
 
 
 	public String display(final String reference, final String friendlyUrl, Model model, HttpServletRequest request, HttpServletResponse response, Locale locale) throws Exception {
-		
 
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		Language language = (Language)request.getAttribute("LANGUAGE");
 		
 		Product product = productService.getBySeUrl(store, friendlyUrl, locale);
@@ -334,8 +340,9 @@ public class ShopProductController {
 	public @ResponseBody
 	ReadableProductPrice calculatePrice(@RequestParam(value="attributeIds[]") Long[] attributeIds, @PathVariable final Long productId, final HttpServletRequest request, final HttpServletResponse response, final Locale locale) throws Exception {
 
-    	
-    	MerchantStore store = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		Language language = (Language)request.getAttribute("LANGUAGE");
 		
 		
@@ -393,7 +400,7 @@ public class ShopProductController {
 		
 	}
 	
-	private List<ReadableProduct> relatedItems(MerchantStore store, Product product, Language language) throws Exception {
+	private List<ReadableProduct> relatedItems(MerchantStoreInfo store, Product product, Language language) throws Exception {
 		
 		
 		ReadableProductPopulator populator = new ReadableProductPopulator();

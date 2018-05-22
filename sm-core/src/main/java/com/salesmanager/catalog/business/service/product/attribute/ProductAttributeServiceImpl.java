@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.salesmanager.catalog.business.repository.product.attribute.ProductAttributeRepository;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 
 @Service("productAttributeService")
@@ -35,7 +35,7 @@ public class ProductAttributeServiceImpl extends
 	
 	
 	@Override
-	public List<ProductAttribute> getByOptionId(MerchantStore store,
+	public List<ProductAttribute> getByOptionId(MerchantStoreInfo store,
 			Long id) throws ServiceException {
 		
 		return productAttributeRepository.findByOptionId(store.getId(), id);
@@ -43,7 +43,7 @@ public class ProductAttributeServiceImpl extends
 	}
 	
 	@Override
-	public List<ProductAttribute> getByAttributeIds(MerchantStore store,
+	public List<ProductAttribute> getByAttributeIds(MerchantStoreInfo store,
 			Product product, List<Long> ids) throws ServiceException {
 		
 		return productAttributeRepository.findByAttributeIds(store.getId(), product.getId(), ids);
@@ -51,7 +51,7 @@ public class ProductAttributeServiceImpl extends
 	}
 	
 	@Override
-	public List<ProductAttribute> getByOptionValueId(MerchantStore store,
+	public List<ProductAttribute> getByOptionValueId(MerchantStoreInfo store,
 			Long id) throws ServiceException {
 		
 		return productAttributeRepository.findByOptionValueId(store.getId(), id);
@@ -62,7 +62,7 @@ public class ProductAttributeServiceImpl extends
 	 * Returns all product attributes
 	 */
 	@Override
-	public List<ProductAttribute> getByProductId(MerchantStore store,
+	public List<ProductAttribute> getByProductId(MerchantStoreInfo store,
 			Product product, Language language) throws ServiceException {
 		return productAttributeRepository.findByProductId(store.getId(), product.getId(), language.getId());
 		

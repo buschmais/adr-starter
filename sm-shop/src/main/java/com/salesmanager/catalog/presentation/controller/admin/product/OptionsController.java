@@ -1,11 +1,13 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.attribute.ProductOption;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionDescription;
-import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
@@ -13,6 +15,7 @@ import com.salesmanager.common.presentation.util.LabelUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -41,6 +44,9 @@ public class OptionsController {
 	
 	@Inject
 	LabelUtils messages;
+
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(OptionsController.class);
 	
@@ -76,7 +82,8 @@ public class OptionsController {
 
 		
 		this.setMenu(model, request);
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		List<Language> languages = store.getLanguages();
 
@@ -152,8 +159,9 @@ public class OptionsController {
 
 		//display menu
 		setMenu(model,request);
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		ProductOption dbEntity =	null;	
 
 		if(option.getId() != null && option.getId() >0) { //edit entry
@@ -227,9 +235,10 @@ public class OptionsController {
 		try {
 			
 			
-			Language language = (Language)request.getAttribute("LANGUAGE");	
-		
-			MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+			Language language = (Language)request.getAttribute("LANGUAGE");
+
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			
 			List<ProductOption> options = null;
 					
@@ -301,7 +310,8 @@ public class OptionsController {
 	public @ResponseBody ResponseEntity<String> deleteOption(HttpServletRequest request, HttpServletResponse response, Locale locale) {
 		String sid = request.getParameter("optionId");
 
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		AjaxResponse resp = new AjaxResponse();
 

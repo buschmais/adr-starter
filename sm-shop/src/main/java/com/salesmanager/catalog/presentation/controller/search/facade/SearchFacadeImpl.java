@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -21,7 +23,6 @@ import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
 import com.salesmanager.catalog.model.product.ProductList;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.model.search.IndexProduct;
 import com.salesmanager.catalog.model.search.SearchEntry;
@@ -57,6 +58,9 @@ public class SearchFacadeImpl implements SearchFacade {
 	@Inject
 	private CoreConfiguration coreConfiguration;
 
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
+
     
 	private final static String CATEGORY_FACET_NAME = "categories";
 	private final static String MANUFACTURER_FACET_NAME = "manufacturer";
@@ -68,7 +72,7 @@ public class SearchFacadeImpl implements SearchFacade {
 	 */
 	@Override
 	@Async
-	public void indexAllData(MerchantStore store) throws Exception {
+	public void indexAllData(MerchantStoreInfo store) throws Exception {
 		
 		
 		List<Product> products = productService.listByStore(store);
@@ -80,7 +84,7 @@ public class SearchFacadeImpl implements SearchFacade {
 	}
 
 	@Override
-	public SearchProductList search(MerchantStore store, Language language, SearchProductRequest searchRequest) throws Exception {
+	public SearchProductList search(MerchantStoreInfo store, Language language, SearchProductRequest searchRequest) throws Exception {
 
 		String query = String.format(coreConfiguration.getProperty("SEARCH_QUERY"), searchRequest.getQuery());
 		SearchResponse response =  searchService.search(store, language.getCode(), query, searchRequest.getCount(), searchRequest.getStart());
@@ -88,7 +92,7 @@ public class SearchFacadeImpl implements SearchFacade {
 	}
 
 	@Override
-	public SearchProductList copySearchResponse(SearchResponse searchResponse, MerchantStore merchantStore, int start, int count, Language language) throws Exception {
+	public SearchProductList copySearchResponse(SearchResponse searchResponse, MerchantStoreInfo merchantStore, int start, int count, Language language) throws Exception {
 		
 		SearchProductList returnList = new SearchProductList();
 		List<SearchEntry> entries = searchResponse.getEntries();

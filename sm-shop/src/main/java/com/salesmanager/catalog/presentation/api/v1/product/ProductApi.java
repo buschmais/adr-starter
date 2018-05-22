@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.RestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -30,7 +32,6 @@ import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.PersistableProduct;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
@@ -50,9 +51,6 @@ import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 public class ProductApi {
 	
 	@Inject
-	private MerchantStoreService merchantStoreService;
-	
-	@Inject
 	private CategoryService categoryService;
 	
 	@Inject
@@ -69,7 +67,7 @@ public class ProductApi {
 	private CatalogImageFilePathUtils imageUtils;
 	
 	@Inject
-	private StoreFacade storeFacade;
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	@Inject
 	private RestUtils restUtils;
@@ -84,7 +82,7 @@ public class ProductApi {
 		
 		try {
 			
-			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+			MerchantStoreInfo merchantStore = merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			productFacade.saveProduct(merchantStore, product, language);
@@ -109,7 +107,7 @@ public class ProductApi {
 		
 		try {
 			
-			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 			productFacade.saveProduct(merchantStore, product, merchantStore.getDefaultLanguage());
 			
 			return product;
@@ -471,7 +469,7 @@ public class ProductApi {
 		
 		try {
 			
-			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			
@@ -511,7 +509,7 @@ public class ProductApi {
 	@ResponseBody
 	public ReadableProduct get(@PathVariable final Long id, @RequestParam(value = "lang", required=false) String lang, HttpServletRequest request, HttpServletResponse response) throws Exception {
 	
-		MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+		MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 		Language language = restUtils.getRESTLanguage(request, merchantStore);
 		
 		ReadableProduct product = productFacade.getProduct(merchantStore, id, language);
@@ -532,7 +530,7 @@ public class ProductApi {
     	
 		try {
     	
-	    	MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+	    	MerchantStoreInfo merchantStore = merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 			Language language = restUtils.getRESTLanguage(request, merchantStore);
 	    	
 	    	//get the product
@@ -561,7 +559,7 @@ public class ProductApi {
     	
 		try {
     	
-	    	MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+	    	MerchantStoreInfo merchantStore = merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 			Language language = restUtils.getRESTLanguage(request, merchantStore);
 	    	
 	    	//get the product

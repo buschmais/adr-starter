@@ -1,8 +1,10 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.price.ProductPriceService;
 import com.salesmanager.catalog.business.util.ProductPriceUtils;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
@@ -11,7 +13,7 @@ import com.salesmanager.catalog.model.product.availability.ProductAvailability;
 import com.salesmanager.catalog.model.product.price.ProductPrice;
 import com.salesmanager.catalog.model.product.price.ProductPriceDescription;
 import com.salesmanager.catalog.model.product.price.ProductPriceType;
-import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
@@ -20,6 +22,7 @@ import com.salesmanager.common.presentation.util.LabelUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -54,14 +57,18 @@ public class ProductPriceController {
 	
 	@Inject
 	LabelUtils messages;
+
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	@PreAuthorize("hasRole('PRODUCTS')")
 	@RequestMapping(value="/admin/products/prices.html", method=RequestMethod.GET)
 	public String getProductPrices(@RequestParam("id") long productId,Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		setMenu(model,request);
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 
 		//get the product and validate it belongs to the current merchant
 		Product product = productService.getById(productId);
@@ -93,7 +100,8 @@ public class ProductPriceController {
 	public @ResponseBody ResponseEntity<String> pagePrices(HttpServletRequest request, HttpServletResponse response) {
 
 		String sProductId = request.getParameter("productId");
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		Language language = (Language)request.getAttribute("LANGUAGE");
 		
@@ -202,7 +210,8 @@ public class ProductPriceController {
 	@PreAuthorize("hasRole('PRODUCTS')")
 	@RequestMapping(value="/admin/products/price/edit.html", method=RequestMethod.GET)
 	public String editProductPrice(@RequestParam("id") long productPriceId, @RequestParam("productId") long productId,Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		Product product = productService.getById(productId);
 		
 		if(product==null) {
@@ -222,8 +231,9 @@ public class ProductPriceController {
 	@PreAuthorize("hasRole('PRODUCTS')")
 	@RequestMapping(value="/admin/products/price/create.html", method=RequestMethod.GET)
 	public String displayCreateProductPrice(@RequestParam("productId") long productId,@RequestParam("availabilityId") long avilabilityId, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		Product product = productService.getById(productId);
 		if(product==null) {
 			return "redirect:/admin/products/products.html";
@@ -242,8 +252,9 @@ public class ProductPriceController {
 	
 	private String displayProductPrice(Product product, Long productPriceId, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-	
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 
 		com.salesmanager.catalog.presentation.model.admin.ProductPrice pprice = new com.salesmanager.catalog.presentation.model.admin.ProductPrice();
 		
@@ -341,8 +352,9 @@ public class ProductPriceController {
 		//dates after save
 		
 		setMenu(model,request);
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		Product product = price.getProduct();
 		Product dbProduct = productService.getById(product.getId());
@@ -446,8 +458,9 @@ public class ProductPriceController {
 	public @ResponseBody ResponseEntity<String> deleteProductPrice(HttpServletRequest request, HttpServletResponse response, Locale locale) {
 		String sPriceid = request.getParameter("priceId");
 
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		AjaxResponse resp = new AjaxResponse();
 		final HttpHeaders httpHeaders= new HttpHeaders();
 	    httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);

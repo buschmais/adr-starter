@@ -1,16 +1,18 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.image.ProductImageService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.image.ProductImage;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.catalog.presentation.model.admin.cms.ProductImages;
 import com.salesmanager.common.presentation.model.admin.Menu;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import org.apache.commons.collections4.CollectionUtils;
@@ -55,6 +57,9 @@ public class ProductImagesController {
 	
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
+
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 
 	@PreAuthorize("hasRole('PRODUCTS')")
@@ -63,7 +68,8 @@ public class ProductImagesController {
 		
 		
 		setMenu(model,request);
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		Product product = productService.getById(productId);
 		
@@ -86,7 +92,8 @@ public class ProductImagesController {
 		
 		
 		setMenu(model,request);
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		Product product = productService.getById(productId);
 		
@@ -143,7 +150,8 @@ public class ProductImagesController {
 			
 			product = productService.getById(productId);
 
-			MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			
 			if(product.getMerchantStore().getId().intValue()!=store.getId().intValue()) {
 				resp.setStatus(AjaxPageableResponse.RESPONSE_STATUS_FAIURE);
@@ -218,7 +226,8 @@ public class ProductImagesController {
 			
 			product = productService.getById(productId);
 
-			MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 
 			if(product.getMerchantStore().getId().intValue()!=store.getId().intValue()) {
 				resp.setStatus(AjaxPageableResponse.RESPONSE_STATUS_FAIURE);
@@ -274,8 +283,9 @@ public class ProductImagesController {
 	    
 		this.setMenu(model, request);
 
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 
 		Product product = productService.getById(productImages.getProductId());
 		model.addAttribute("product",product);
@@ -336,7 +346,8 @@ public class ProductImagesController {
 	    
 		this.setMenu(model, request);
 
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
         Map< String, String > mediaTypes = new HashMap<String, String>();  
         mediaTypes.put("0", "IMAGE");  
@@ -384,8 +395,9 @@ public class ProductImagesController {
 	public @ResponseBody ResponseEntity<String> deleteImage(HttpServletRequest request, HttpServletResponse response, Locale locale) {
 		String sImageId = request.getParameter("id");
 
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		AjaxResponse resp = new AjaxResponse();
 		final HttpHeaders httpHeaders= new HttpHeaders();
 	    httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
@@ -435,7 +447,8 @@ public class ProductImagesController {
 												final HttpServletResponse response, 
 												final Locale locale) {
 		final String sImageId = request.getParameter("id");
-		final MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		final AjaxResponse resp = new AjaxResponse();
 		final HttpHeaders httpHeaders= new HttpHeaders();
 	    httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);

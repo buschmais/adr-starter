@@ -1,10 +1,12 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.image.ProductImageService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
 import com.salesmanager.catalog.business.service.product.type.ProductTypeService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.catalog.business.util.ProductPriceUtils;
@@ -23,7 +25,7 @@ import com.salesmanager.catalog.model.product.price.ProductPrice;
 import com.salesmanager.catalog.model.product.price.ProductPriceDescription;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.catalog.model.product.type.ProductType;
-import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.model.tax.taxclass.TaxClass;
 import com.salesmanager.common.presentation.model.admin.Menu;
@@ -33,6 +35,7 @@ import com.salesmanager.common.presentation.util.LabelUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -88,6 +91,9 @@ public class ProductController {
 	@Inject
 	CategoryService categoryService;
 
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
+
 	@PreAuthorize("hasRole('PRODUCTS')")
 	@RequestMapping(value="/admin/products/editProduct.html", method=RequestMethod.GET)
 	public String displayProductEdit(@RequestParam("id") long productId, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -124,9 +130,10 @@ public class ProductController {
 
 		//display menu
 		setMenu(model,request);
-		
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		Language language = (Language)request.getAttribute("LANGUAGE");
 		
 
@@ -268,8 +275,9 @@ public class ProductController {
 		
 		//display menu
 		setMenu(model,request);
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		List<Manufacturer> manufacturers = manufacturerService.listByStore(store, language);
 		
@@ -558,8 +566,9 @@ public class ProductController {
 		
 		//display menu
 		setMenu(model,request);
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		List<Manufacturer> manufacturers = manufacturerService.listByStore(store, language);
 		List<ProductType> productTypes = productTypeService.list();
@@ -750,7 +759,8 @@ public class ProductController {
 	public @ResponseBody ResponseEntity<String> removeImage(HttpServletRequest request, HttpServletResponse response, Locale locale) {
 		String iid = request.getParameter("imageId");
 
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		AjaxResponse resp = new AjaxResponse();
 
@@ -800,7 +810,8 @@ public class ProductController {
 	
 		
 		setMenu(model,request);
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		Language language = (Language)request.getAttribute("LANGUAGE");
 		
 		
@@ -837,7 +848,8 @@ public class ProductController {
 	public @ResponseBody ResponseEntity<String> pageProductCategories(HttpServletRequest request, HttpServletResponse response) {
 
 		String sProductId = request.getParameter("productId");
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		
 		AjaxResponse resp = new AjaxResponse();
@@ -919,8 +931,9 @@ public class ProductController {
 	public @ResponseBody ResponseEntity<String> deleteProductFromCategory(HttpServletRequest request, HttpServletResponse response, Locale locale) {
 		String sCategoryid = request.getParameter("categoryId");
 		String sProductId = request.getParameter("productId");
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		AjaxResponse resp = new AjaxResponse();
 		
@@ -976,7 +989,8 @@ public class ProductController {
 	public String addProductToCategory(@RequestParam("productId") long productId, @RequestParam("id") long categoryId, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		setMenu(model,request);
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		Language language = (Language)request.getAttribute("LANGUAGE");
 		
 		

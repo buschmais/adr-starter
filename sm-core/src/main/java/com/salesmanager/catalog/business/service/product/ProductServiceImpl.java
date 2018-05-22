@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,6 @@ import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.ImageContentFile;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.model.tax.taxclass.TaxClass;
 
@@ -135,7 +135,7 @@ public class ProductServiceImpl extends SalesManagerEntityServiceImpl<Long, Prod
 	}
 	
 	@Override
-	public Product getBySeUrl(MerchantStore store, String seUrl, Locale locale) {
+	public Product getBySeUrl(MerchantStoreInfo store, String seUrl, Locale locale) {
 		return productRepository.getByFriendlyUrl(store, seUrl, locale);
 	}
 
@@ -181,14 +181,14 @@ public class ProductServiceImpl extends SalesManagerEntityServiceImpl<Long, Prod
 	}
 	
 	@Override
-	public ProductList listByStore(MerchantStore store,
+	public ProductList listByStore(MerchantStoreInfo store,
 			Language language, ProductCriteria criteria) {
 		
 		return productRepository.listByStore(store, language, criteria);
 	}
 	
 	@Override
-	public List<Product> listByStore(MerchantStore store) {
+	public List<Product> listByStore(MerchantStoreInfo store) {
 		
 		return productRepository.listByStore(store);
 	}

@@ -1,9 +1,11 @@
 package com.salesmanager.catalog.presentation.controller.items;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.ControllerConstants;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
-import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufacturer;
@@ -12,6 +14,7 @@ import com.salesmanager.catalog.presentation.populator.manufacturer.ReadableManu
 import com.salesmanager.catalog.presentation.util.PageBuilderUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,13 +35,17 @@ public class ListItemsController {
 	
 	@Inject
 	ManufacturerService manufacturerService;
+
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ListItemsController.class);
 	
 	@RequestMapping("/shop/listing/{url}.html")
 	public String displayListingPage(@PathVariable String url, Model model, HttpServletRequest request, HttpServletResponse response, Locale locale) throws Exception {
 		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		Language language = (Language)request.getAttribute("LANGUAGE");
 		

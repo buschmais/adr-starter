@@ -1,6 +1,8 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.CoreConfiguration;
@@ -8,7 +10,7 @@ import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.catalog.model.product.manufacturer.ManufacturerDescription;
-import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
@@ -16,6 +18,7 @@ import com.salesmanager.common.presentation.util.LabelUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -46,6 +49,9 @@ public class ManufacturerController {
 	
 	@Inject
 	LabelUtils messages;
+
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	@Inject
 	private CoreConfiguration configuration;
@@ -82,7 +88,8 @@ public class ManufacturerController {
 		setMenu(model,request);
 		
 		//List<Language> languages = languageService.getLanguages();
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		List<Language> languages = store.getLanguages();
 		
 		
@@ -163,7 +170,8 @@ public class ManufacturerController {
 		this.setMenu(model, request);
 		//save or edit a manufacturer
 
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		List<Language> languages = languageService.getLanguages();
 
 		if(manufacturer.getDescriptions()!=null && manufacturer.getDescriptions().size()>0) {
@@ -327,8 +335,9 @@ public class ManufacturerController {
 		AjaxResponse resp = new AjaxResponse();
 		try {
 			
-			Language language = (Language)request.getAttribute("LANGUAGE");	
-			MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+			Language language = (Language)request.getAttribute("LANGUAGE");
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			
 			List<Manufacturer> manufacturers = null;				
 			manufacturers = manufacturerService.listByStore(store, language);
@@ -372,7 +381,8 @@ public class ManufacturerController {
 	
 	
 		AjaxResponse resp = new AjaxResponse();
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		final HttpHeaders httpHeaders= new HttpHeaders();
 	    httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
 		
@@ -420,7 +430,8 @@ public class ManufacturerController {
 
 		final HttpHeaders httpHeaders= new HttpHeaders();
 	    httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		
 		AjaxResponse resp = new AjaxResponse();

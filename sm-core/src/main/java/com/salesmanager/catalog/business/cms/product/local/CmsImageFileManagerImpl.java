@@ -8,12 +8,12 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.core.business.modules.cms.impl.LocalCacheManagerImpl;
 import com.salesmanager.catalog.business.cms.product.ProductImageGet;
 import com.salesmanager.catalog.business.cms.product.ProductImagePut;
 import com.salesmanager.catalog.business.cms.product.ProductImageRemove;
@@ -23,7 +23,6 @@ import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.ImageContentFile;
 import com.salesmanager.core.model.content.OutputContentFile;
-import com.salesmanager.core.model.merchant.MerchantStore;
 
 /**
  * Manager for storing and deleting image files from the CMS which is a web server
@@ -139,7 +138,7 @@ public class CmsImageFileManagerImpl
     }
 
 
-    public List<OutputContentFile> getImages( MerchantStore store, FileContentType imageContentType )
+    public List<OutputContentFile> getImages(MerchantStoreInfo store, FileContentType imageContentType )
         throws ServiceException
     {
 

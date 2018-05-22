@@ -1,7 +1,7 @@
 package com.salesmanager.catalog.presentation.util;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import org.apache.commons.lang3.StringUtils;
@@ -24,7 +24,7 @@ public class RestUtils {
      * @return
      * @throws Exception
      */
-    public Language getRESTLanguage(HttpServletRequest request, MerchantStore store) throws Exception {
+    public Language getRESTLanguage(HttpServletRequest request, MerchantStoreInfo store) throws Exception {
 
         Validate.notNull(request,"HttpServletRequest must not be null");
         Validate.notNull(store,"MerchantStore must not be null");

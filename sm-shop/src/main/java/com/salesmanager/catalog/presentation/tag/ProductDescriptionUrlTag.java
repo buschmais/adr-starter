@@ -4,15 +4,18 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.tags.RequestContextAwareTag;
 
 import com.salesmanager.catalog.model.product.description.ProductDescription;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.shop.utils.FilePathUtils;
 
@@ -34,6 +37,9 @@ public class ProductDescriptionUrlTag extends RequestContextAwareTag {
 	@Inject
 	private FilePathUtils filePathUtils;
 
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
+
 	/**
 	 * Created the product url for the store front
 	 */
@@ -48,11 +54,13 @@ public class ProductDescriptionUrlTag extends RequestContextAwareTag {
 
 			HttpServletRequest request = (HttpServletRequest) pageContext
 					.getRequest();
-			
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
+
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
+			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			//*** IF USED FROM ADMIN THE STORE WILL BE NULL, THEN TRY TO USE ADMIN STORE
 			if(merchantStore==null) {
-				merchantStore = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+				storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+				merchantStore = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			}
 			
 			

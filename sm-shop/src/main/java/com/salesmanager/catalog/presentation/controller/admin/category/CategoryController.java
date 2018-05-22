@@ -12,9 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,12 +34,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.salesmanager.catalog.business.service.category.CategoryService;
-import com.salesmanager.core.business.services.reference.country.CountryService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.category.CategoryDescription;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
@@ -55,10 +57,10 @@ public class CategoryController {
 	CategoryService categoryService;
 	
 	@Inject
-	CountryService countryService;
-	
-	@Inject
 	LabelUtils messages;
+
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
 
 	@PreAuthorize("hasRole('PRODUCTS')")
 	@RequestMapping(value="/admin/categories/editCategory.html", method=RequestMethod.GET)
@@ -81,9 +83,10 @@ public class CategoryController {
 
 		//display menu
 		setMenu(model,request);
-		
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		Language language = (Language)request.getAttribute("LANGUAGE");
 		
 		//get parent categories
@@ -153,8 +156,9 @@ public class CategoryController {
 		
 		//display menu
 		setMenu(model,request);
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 
 		if(category.getId() != null && category.getId() >0) { //edit entry
 			
@@ -258,9 +262,10 @@ public class CategoryController {
 		try {
 			
 			Language language = (Language)request.getAttribute("LANGUAGE");
-				
-		
-			MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			
 			List<Category> categories = null;
 					
@@ -323,7 +328,8 @@ public class CategoryController {
 		
 		//get the list of categories
 		Language language = (Language)request.getAttribute("LANGUAGE");
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		List<Category> categories = categoryService.listByStore(store, language);
 		
@@ -337,7 +343,8 @@ public class CategoryController {
 	public @ResponseBody ResponseEntity<String> deleteCategory(HttpServletRequest request, HttpServletResponse response, Locale locale) {
 		String sid = request.getParameter("categoryId");
 
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		AjaxResponse resp = new AjaxResponse();
 
@@ -379,7 +386,8 @@ public class CategoryController {
 		String parentid = request.getParameter("parentId");
 		String childid = request.getParameter("childId");
 
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		AjaxResponse resp = new AjaxResponse();
 		final HttpHeaders httpHeaders= new HttpHeaders();
@@ -441,7 +449,8 @@ public class CategoryController {
 		String id = request.getParameter("id");
 
 
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		
 		AjaxResponse resp = new AjaxResponse();

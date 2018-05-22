@@ -1,10 +1,10 @@
 package com.salesmanager.catalog.presentation.populator.catalog;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.product.attribute.ProductOption;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.attribute.PersistableProductOption;
 import com.salesmanager.catalog.presentation.model.product.attribute.ProductOptionDescription;
@@ -32,7 +32,7 @@ public class PersistableProductOptionPopulator extends
 
 	@Override
 	public ProductOption populate(PersistableProductOption source,
-			ProductOption target, MerchantStore store, Language language)
+								  ProductOption target, MerchantStoreInfo store, Language language)
 			throws ConversionException {
 		Validate.notNull(languageService, "Requires to set LanguageService");
 		

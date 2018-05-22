@@ -1,11 +1,11 @@
 
 package com.salesmanager.catalog.presentation.populator.manufacturer;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.manufacturer.ManufacturerDescription;
 import com.salesmanager.catalog.presentation.model.manufacturer.PersistableManufacturer;
@@ -30,7 +30,7 @@ public class PersistableManufacturerPopulator extends AbstractDataPopulator<Pers
 
 	@Override
 	public Manufacturer populate(PersistableManufacturer source,
-			Manufacturer target, MerchantStore store, Language language)
+								 Manufacturer target, MerchantStoreInfo store, Language language)
 			throws ConversionException {
 		
 		Validate.notNull(languageService, "Requires to set LanguageService");

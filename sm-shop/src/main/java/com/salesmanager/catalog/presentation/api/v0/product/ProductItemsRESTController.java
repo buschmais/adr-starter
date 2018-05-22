@@ -1,5 +1,6 @@
 package com.salesmanager.catalog.presentation.api.v0.product;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
@@ -8,14 +9,14 @@ import com.salesmanager.catalog.business.service.product.attribute.ProductOption
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
 import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.RestUtils;
 import com.salesmanager.core.business.services.customer.CustomerService;
-import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
-import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
@@ -51,7 +52,7 @@ import java.util.Map;
 public class ProductItemsRESTController {
 	
 	@Inject
-	private MerchantStoreService merchantStoreService;
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	@Inject
 	private CategoryService categoryService;
@@ -131,19 +132,23 @@ public class ProductItemsRESTController {
 			 * http://codetutr.com/2013/04/09/spring-mvc-easy-rest-based-json-services-with-responsebody/
 			 */
 			
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
+			MerchantStoreDTO merchantStoreDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
 			
 			
 			Map<String,Language> langs = languageService.getLanguagesMap();
 			
-			if(merchantStore!=null) {
-				if(!merchantStore.getCode().equals(store)) {
-					merchantStore = null; //reset for the current request
+			if(merchantStoreDTO!=null) {
+				if(!merchantStoreDTO.getCode().equals(store)) {
+					merchantStoreDTO = null; //reset for the current request
 				}
 			}
-			
-			if(merchantStore== null) {
-				merchantStore = merchantStoreService.getByCode(store);
+
+			MerchantStoreInfo merchantStore;
+
+			if(merchantStoreDTO== null) {
+				merchantStore = this.merchantStoreInfoService.findbyCode(store);
+			} else {
+				merchantStore = this.merchantStoreInfoService.findbyCode(merchantStoreDTO.getCode());
 			}
 			
 			if(merchantStore==null) {
@@ -193,19 +198,23 @@ public class ProductItemsRESTController {
 		
 		try {
 
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
+			MerchantStoreDTO merchantStoreDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
 
 			
-			if(merchantStore!=null) {
-				if(!merchantStore.getCode().equals(store)) {
-					merchantStore = null; //reset for the current request
+			if(merchantStoreDTO!=null) {
+				if(!merchantStoreDTO.getCode().equals(store)) {
+					merchantStoreDTO = null; //reset for the current request
 				}
 			}
-			
-			if(merchantStore== null) {
-				merchantStore = merchantStoreService.getByCode(store);
+
+			MerchantStoreInfo merchantStore;
+
+			if(merchantStoreDTO== null) {
+				merchantStore = this.merchantStoreInfoService.findbyCode(store);
+			} else {
+				 merchantStore = this.merchantStoreInfoService.findbyCode(merchantStoreDTO.getCode());
 			}
-			
+
 			if(merchantStore==null) {
 				LOGGER.error("Merchant store is null for code " + store);
 				response.sendError(503, "Merchant store is null for code " + store);//TODO localized message

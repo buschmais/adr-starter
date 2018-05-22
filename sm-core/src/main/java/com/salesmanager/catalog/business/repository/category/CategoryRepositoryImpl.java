@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.salesmanager.catalog.model.category.Category;
-import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 
 
 public class CategoryRepositoryImpl implements CategoryRepositoryCustom {
@@ -17,7 +17,7 @@ public class CategoryRepositoryImpl implements CategoryRepositoryCustom {
     private EntityManager em;
 	
 	@Override
-	public List<Object[]> countProductsByCategories(MerchantStore store, List<Long> categoryIds) {
+	public List<Object[]> countProductsByCategories(MerchantStoreInfo store, List<Long> categoryIds) {
 
 		
 		StringBuilder qs = new StringBuilder();
@@ -46,7 +46,7 @@ public class CategoryRepositoryImpl implements CategoryRepositoryCustom {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Category> listByStoreAndParent(MerchantStore store, Category category) {
+	public List<Category> listByStoreAndParent(MerchantStoreInfo store, Category category) {
 		
 		StringBuilder queryBuilder = new StringBuilder();
 		queryBuilder.append("select c from Category c join fetch c.merchantStore cm ");

@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.io.IOUtils;
 import org.infinispan.tree.Fqn;
 import org.infinispan.tree.Node;
@@ -19,7 +20,6 @@ import org.slf4j.LoggerFactory;
 
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.core.business.modules.cms.impl.CacheManager;
 import com.salesmanager.catalog.business.cms.product.ProductImageGet;
 import com.salesmanager.catalog.business.cms.product.ProductImagePut;
 import com.salesmanager.catalog.business.cms.product.ProductImageRemove;
@@ -29,7 +29,6 @@ import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.ImageContentFile;
 import com.salesmanager.core.model.content.OutputContentFile;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -150,7 +149,7 @@ public class CmsImageFileManagerImpl
     }
 
 
-    public List<OutputContentFile> getImages( MerchantStore store, FileContentType imageContentType )
+    public List<OutputContentFile> getImages(MerchantStoreInfo store, FileContentType imageContentType )
         throws ServiceException
     {
 

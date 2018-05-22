@@ -3,6 +3,7 @@ package com.salesmanager.catalog.business.service.product.file;
 import javax.inject.Inject;
 
 import com.salesmanager.catalog.business.cms.product.StaticProductFileManager;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -14,7 +15,6 @@ import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.file.DigitalProduct;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.InputContentFile;
-import com.salesmanager.core.model.merchant.MerchantStore;
 
 @Service("digitalProductService")
 public class DigitalProductServiceImpl extends SalesManagerEntityServiceImpl<Long, DigitalProduct> 
@@ -70,7 +70,7 @@ public class DigitalProductServiceImpl extends SalesManagerEntityServiceImpl<Lon
 	}
 	
 	@Override
-	public DigitalProduct getByProduct(MerchantStore store, Product product) throws ServiceException {
+	public DigitalProduct getByProduct(MerchantStoreInfo store, Product product) throws ServiceException {
 		return digitalProductRepository.findByProduct(store.getId(), product.getId());
 	}
 	

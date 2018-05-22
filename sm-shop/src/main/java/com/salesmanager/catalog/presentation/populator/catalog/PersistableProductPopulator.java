@@ -1,5 +1,6 @@
 package com.salesmanager.catalog.presentation.populator.catalog;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionService;
@@ -20,7 +21,6 @@ import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.catalog.model.product.price.ProductPrice;
 import com.salesmanager.catalog.model.product.price.ProductPriceDescription;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.PersistableImage;
 import com.salesmanager.catalog.presentation.model.product.PersistableProduct;
@@ -52,7 +52,7 @@ public class PersistableProductPopulator extends
 
 	@Override
 	public Product populate(PersistableProduct source,
-			Product target, MerchantStore store, Language language)
+							Product target, MerchantStoreInfo store, Language language)
 			throws ConversionException {
 		
 			Validate.notNull(manufacturerService, "Requires to set ManufacturerService");

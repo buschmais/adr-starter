@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.Validate;
@@ -20,7 +21,6 @@ import com.salesmanager.catalog.model.product.description.ProductDescription;
 import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.catalog.model.product.manufacturer.ManufacturerDescription;
 import com.salesmanager.catalog.model.product.price.FinalPrice;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufacturer;
@@ -68,7 +68,7 @@ public class ReadableProductPopulator extends
 
 	@Override
 	public ReadableProduct populate(Product source,
-			ReadableProduct target, MerchantStore store, Language language)
+									ReadableProduct target, MerchantStoreInfo store, Language language)
 			throws ConversionException {
 		Validate.notNull(pricingService, "Requires to set PricingService");
 		Validate.notNull(imageUtils, "Requires to set imageUtils");

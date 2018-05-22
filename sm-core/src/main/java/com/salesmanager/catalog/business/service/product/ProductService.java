@@ -3,6 +3,7 @@ package com.salesmanager.catalog.business.service.product;
 import java.util.List;
 import java.util.Locale;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.common.business.service.SalesManagerEntityService;
 import com.salesmanager.catalog.model.category.Category;
@@ -10,7 +11,6 @@ import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
 import com.salesmanager.catalog.model.product.ProductList;
 import com.salesmanager.catalog.model.product.description.ProductDescription;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.model.tax.taxclass.TaxClass;
 
@@ -30,17 +30,17 @@ public interface ProductService extends SalesManagerEntityService<Long, Product>
 
 
 
-	ProductList listByStore(MerchantStore store, Language language,
+	ProductList listByStore(MerchantStoreInfo store, Language language,
 			ProductCriteria criteria);
 
-	List<Product> listByStore(MerchantStore store);
+	List<Product> listByStore(MerchantStoreInfo store);
 
 	List<Product> listByTaxClass(TaxClass taxClass);
 
 	List<Product> getProducts(List<Long> categoryIds, Language language)
 			throws ServiceException;
 
-	Product getBySeUrl(MerchantStore store, String seUrl, Locale locale);
+	Product getBySeUrl(MerchantStoreInfo store, String seUrl, Locale locale);
 
 	/**
 	 * Get a product by sku (code) field  and the language

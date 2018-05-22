@@ -1,11 +1,11 @@
 package com.salesmanager.catalog.business.service.product.file;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.common.business.service.SalesManagerEntityService;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.file.DigitalProduct;
 import com.salesmanager.core.model.content.InputContentFile;
-import com.salesmanager.core.model.merchant.MerchantStore;
 
 
 public interface DigitalProductService extends SalesManagerEntityService<Long, DigitalProduct> {
@@ -17,7 +17,7 @@ public interface DigitalProductService extends SalesManagerEntityService<Long, D
 
 
 
-	DigitalProduct getByProduct(MerchantStore store, Product product)
+	DigitalProduct getByProduct(MerchantStoreInfo store, Product product)
 			throws ServiceException;
 
 	

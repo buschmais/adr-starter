@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,6 @@ import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.catalog.model.category.Category;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.category.PersistableCategory;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
@@ -38,7 +38,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 	private final static String FEATURED_CATEGORY = "featured";
 
 	@Override
-	public List<ReadableCategory> getCategoryHierarchy(MerchantStore store,
+	public List<ReadableCategory> getCategoryHierarchy(MerchantStoreInfo store,
 			int depth, Language language, String filter) throws Exception {
 		
 		
@@ -105,7 +105,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 	}
 
 	@Override
-	public void saveCategory(MerchantStore store, PersistableCategory category)
+	public void saveCategory(MerchantStoreInfo store, PersistableCategory category)
 			throws Exception {
 		
 		PersistableCategoryPopulator populator = new PersistableCategoryPopulator();
@@ -130,7 +130,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 		
 	}
 	
-	private void saveCategory(MerchantStore store, Category c, Category parent) throws ServiceException {
+	private void saveCategory(MerchantStoreInfo store, Category c, Category parent) throws ServiceException {
 		
 		
 		/**
@@ -180,7 +180,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 	}
 
 	@Override
-	public ReadableCategory getById(MerchantStore store, Long id, Language language) throws Exception {
+	public ReadableCategory getById(MerchantStoreInfo store, Long id, Language language) throws Exception {
 		Category categoryModel = categoryService.getByLanguage(id, language);
 		
 		if(categoryModel == null)
@@ -234,7 +234,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 	}
 
 	@Override
-	public ReadableCategory getByCode(MerchantStore store, String code, Language language) throws Exception {
+	public ReadableCategory getByCode(MerchantStoreInfo store, String code, Language language) throws Exception {
 
 		Validate.notNull(code,"category code must not be null");
 		ReadableCategoryPopulator categoryPopulator = new ReadableCategoryPopulator();

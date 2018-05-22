@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.RestUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
@@ -32,11 +34,9 @@ import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.ImageContentFile;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.PersistableImage;
 import com.salesmanager.catalog.presentation.populator.catalog.PersistableImagePopulator;
-import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
 
 @Controller
 @RequestMapping("/api/v1")
@@ -46,7 +46,7 @@ public class ProductImageApi {
 	private ProductImageService productImageService;
 	
 	@Inject
-	private StoreFacade storeFacade;
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	@Inject
 	private RestUtils restUtils;
@@ -141,7 +141,7 @@ public class ProductImageApi {
      	
  		try {
      	
- 	    	MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+ 	    	MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
  			Language language = restUtils.getRESTLanguage(request, merchantStore);
  	    	
  	    	//get the product

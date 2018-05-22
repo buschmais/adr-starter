@@ -1,12 +1,12 @@
 package com.salesmanager.catalog.presentation.populator.catalog;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.lang.Validate;
 
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.product.price.FinalPrice;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductPrice;
 
@@ -26,7 +26,7 @@ public class ReadableFinalPricePopulator extends
 
 	@Override
 	public ReadableProductPrice populate(FinalPrice source,
-			ReadableProductPrice target, MerchantStore store, Language language)
+										 ReadableProductPrice target, MerchantStoreInfo store, Language language)
 			throws ConversionException {
 		Validate.notNull(pricingService,"pricingService must be set");
 		

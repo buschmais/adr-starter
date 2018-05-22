@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,6 @@ import com.salesmanager.catalog.business.repository.product.manufacturer.Manufac
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.catalog.model.product.manufacturer.ManufacturerDescription;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 
 
@@ -48,17 +48,17 @@ public class ManufacturerServiceImpl extends
 	
 	
 	@Override
-	public List<Manufacturer> listByStore(MerchantStore store, Language language) throws ServiceException {
+	public List<Manufacturer> listByStore(MerchantStoreInfo store, Language language) throws ServiceException {
 		return manufacturerRepository.findByStoreAndLanguage(store.getId(), language.getId());
 	}
 	
 	@Override
-	public List<Manufacturer> listByStore(MerchantStore store) throws ServiceException {
+	public List<Manufacturer> listByStore(MerchantStoreInfo store) throws ServiceException {
 		return manufacturerRepository.findByStore(store.getId());
 	}
 	
 	@Override
-	public List<Manufacturer> listByProductsByCategoriesId(MerchantStore store, List<Long> ids, Language language) throws ServiceException {
+	public List<Manufacturer> listByProductsByCategoriesId(MerchantStoreInfo store, List<Long> ids, Language language) throws ServiceException {
 		return manufacturerRepository.findByCategoriesAndLanguage(ids, language.getId());
 	}
 
@@ -91,7 +91,7 @@ public class ManufacturerServiceImpl extends
 	}
 
 	@Override
-	public Manufacturer getByCode(com.salesmanager.core.model.merchant.MerchantStore store, String code) {
+	public Manufacturer getByCode(MerchantStoreInfo store, String code) {
 		return manufacturerRepository.findByCodeAndMerchandStore(code, store.getId());
 	}
 }

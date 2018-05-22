@@ -1,14 +1,14 @@
 package com.salesmanager.catalog.presentation.api.v1.category;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.category.facade.CategoryFacade;
 import com.salesmanager.catalog.presentation.model.category.PersistableCategory;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.catalog.presentation.util.RestUtils;
 import com.salesmanager.catalog.model.category.Category;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -32,7 +32,7 @@ public class CategoryApi {
 	private CategoryService categoryService;
 	
 	@Inject
-	private StoreFacade storeFacade;
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	@Inject
 	private RestUtils restUtils;
@@ -45,7 +45,7 @@ public class CategoryApi {
 	public ReadableCategory get(@PathVariable final Long id, @RequestParam(value = "lang", required=false) String lang, HttpServletRequest request, HttpServletResponse response) throws Exception {
 	
 		try {
-			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			ReadableCategory category  = categoryFacade.getById(merchantStore, id, language);
@@ -86,7 +86,8 @@ public class CategoryApi {
 			String lang, HttpServletRequest request, HttpServletResponse response) throws Exception {
 	
 		try {
-			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+
 			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			List <ReadableCategory> category  = categoryFacade.getCategoryHierarchy(merchantStore, 0, language, filter);
@@ -116,7 +117,8 @@ public class CategoryApi {
 		try {
 
 
-			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+
 			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			categoryFacade.saveCategory(merchantStore, category);
 
@@ -140,8 +142,9 @@ public class CategoryApi {
     public @ResponseBody PersistableCategory update(@PathVariable Long id, @Valid @RequestBody PersistableCategory category, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		try {
-			
-			MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+
+			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+
 			categoryFacade.saveCategory(merchantStore, category);
 
 			return category;

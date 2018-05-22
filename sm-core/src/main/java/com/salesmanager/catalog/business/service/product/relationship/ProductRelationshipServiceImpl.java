@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.springframework.stereotype.Service;
 
 import com.salesmanager.common.business.exception.ServiceException;
@@ -12,7 +13,6 @@ import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationshipType;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 
 @Service("productRelationshipService")
@@ -45,7 +45,7 @@ public class ProductRelationshipServiceImpl extends
 	
 	
 	@Override
-	public void addGroup(MerchantStore store, String groupName) throws ServiceException {
+	public void addGroup(MerchantStoreInfo store, String groupName) throws ServiceException {
 		ProductRelationship relationship = new ProductRelationship();
 		relationship.setCode(groupName);
 		relationship.setStore(store);
@@ -54,12 +54,12 @@ public class ProductRelationshipServiceImpl extends
 	}
 	
 	@Override
-	public List<ProductRelationship> getGroups(MerchantStore store) {
+	public List<ProductRelationship> getGroups(MerchantStoreInfo store) {
 		return productRelationshipRepository.getGroups(store);
 	}
 	
 	@Override
-	public void deleteGroup(MerchantStore store, String groupName) throws ServiceException {
+	public void deleteGroup(MerchantStoreInfo store, String groupName) throws ServiceException {
 		List<ProductRelationship> entities = productRelationshipRepository.getByGroup(store, groupName);
 		for(ProductRelationship relation : entities) {
 			this.delete(relation);
@@ -67,7 +67,7 @@ public class ProductRelationshipServiceImpl extends
 	}
 	
 	@Override
-	public void deactivateGroup(MerchantStore store, String groupName) throws ServiceException {
+	public void deactivateGroup(MerchantStoreInfo store, String groupName) throws ServiceException {
 		List<ProductRelationship> entities = productRelationshipRepository.getByGroup(store, groupName);
 		for(ProductRelationship relation : entities) {
 			relation.setActive(false);
@@ -76,7 +76,7 @@ public class ProductRelationshipServiceImpl extends
 	}
 	
 	@Override
-	public void activateGroup(MerchantStore store, String groupName) throws ServiceException {
+	public void activateGroup(MerchantStoreInfo store, String groupName) throws ServiceException {
 		List<ProductRelationship> entities = this.getByGroup(store, groupName);
 		for(ProductRelationship relation : entities) {
 			relation.setActive(true);
@@ -102,40 +102,40 @@ public class ProductRelationshipServiceImpl extends
 	
 	
 	@Override
-	public List<ProductRelationship> getByType(MerchantStore store, Product product, ProductRelationshipType type, Language language) throws ServiceException {
+	public List<ProductRelationship> getByType(MerchantStoreInfo store, Product product, ProductRelationshipType type, Language language) throws ServiceException {
 
 		return productRelationshipRepository.getByType(store, type.name(), product, language);
 
 	}
 	
 	@Override
-	public List<ProductRelationship> getByType(MerchantStore store, ProductRelationshipType type, Language language) throws ServiceException {
+	public List<ProductRelationship> getByType(MerchantStoreInfo store, ProductRelationshipType type, Language language) throws ServiceException {
 		return productRelationshipRepository.getByType(store, type.name(), language);
 	}
 	
 	@Override
-	public List<ProductRelationship> getByType(MerchantStore store, ProductRelationshipType type) throws ServiceException {
+	public List<ProductRelationship> getByType(MerchantStoreInfo store, ProductRelationshipType type) throws ServiceException {
 
 		return productRelationshipRepository.getByType(store, type.name());
 
 	}
 	
 	@Override
-	public List<ProductRelationship> getByGroup(MerchantStore store, String groupName) throws ServiceException {
+	public List<ProductRelationship> getByGroup(MerchantStoreInfo store, String groupName) throws ServiceException {
 
 		return productRelationshipRepository.getByType(store, groupName);
 
 	}
 	
 	@Override
-	public List<ProductRelationship> getByGroup(MerchantStore store, String groupName, Language language) throws ServiceException {
+	public List<ProductRelationship> getByGroup(MerchantStoreInfo store, String groupName, Language language) throws ServiceException {
 
 		return productRelationshipRepository.getByType(store, groupName, language);
 
 	}
 	
 	@Override
-	public List<ProductRelationship> getByType(MerchantStore store, Product product, ProductRelationshipType type) throws ServiceException {
+	public List<ProductRelationship> getByType(MerchantStoreInfo store, Product product, ProductRelationshipType type) throws ServiceException {
 		
 
 		return productRelationshipRepository.getByType(store, type.name(), product);

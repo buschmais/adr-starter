@@ -1,11 +1,11 @@
 package com.salesmanager.catalog.presentation.populator.catalog;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.category.Category;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.category.CategoryDescription;
 import com.salesmanager.catalog.presentation.model.category.PersistableCategory;
@@ -44,7 +44,7 @@ public class PersistableCategoryPopulator extends
 
 	@Override
 	public Category populate(PersistableCategory source, Category target,
-			MerchantStore store, Language language)
+							 MerchantStoreInfo store, Language language)
 			throws ConversionException {
 		
 		try {

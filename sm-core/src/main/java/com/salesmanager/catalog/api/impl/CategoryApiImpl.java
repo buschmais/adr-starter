@@ -6,7 +6,6 @@ import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,5 +1,6 @@
 package com.salesmanager.catalog.business.service.search;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.product.PricingService;
@@ -7,7 +8,6 @@ import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.description.ProductDescription;
 import com.salesmanager.catalog.model.product.price.FinalPrice;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.catalog.model.search.IndexProduct;
 import com.salesmanager.catalog.model.search.SearchEntry;
 import com.salesmanager.catalog.model.search.SearchFacet;
@@ -54,7 +54,7 @@ public class SearchServiceImpl implements com.salesmanager.catalog.business.serv
 
 	@Async
 	@SuppressWarnings("rawtypes")
-	public void index(MerchantStore store, Product product)
+	public void index(MerchantStoreInfo store, Product product)
 			throws ServiceException {
 		
 		/**
@@ -145,7 +145,7 @@ public class SearchServiceImpl implements com.salesmanager.catalog.business.serv
 	}
 
 
-	public void deleteIndex(MerchantStore store, Product product) throws ServiceException {
+	public void deleteIndex(MerchantStoreInfo store, Product product) throws ServiceException {
 		
 		if(environment.getProperty(INDEX_PRODUCTS)==null || environment.getProperty(INDEX_PRODUCTS).equals(Constants.FALSE)) {
 			return;
@@ -197,7 +197,7 @@ public class SearchServiceImpl implements com.salesmanager.catalog.business.serv
 	}
 	
 
-	public com.salesmanager.catalog.model.search.SearchResponse search(MerchantStore store, String languageCode, String jsonString, int entriesCount, int startIndex) throws ServiceException {
+	public com.salesmanager.catalog.model.search.SearchResponse search(MerchantStoreInfo store, String languageCode, String jsonString, int entriesCount, int startIndex) throws ServiceException {
 		
 
 		try {

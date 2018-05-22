@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.springframework.stereotype.Service;
 
 import com.salesmanager.common.business.exception.ServiceException;
@@ -11,7 +12,6 @@ import com.salesmanager.catalog.business.repository.product.attribute.ProductOpt
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionValue;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 
 @Service("productOptionValueService")
@@ -33,19 +33,19 @@ public class ProductOptionValueServiceImpl extends
 	
 	
 	@Override
-	public List<ProductOptionValue> listByStore(MerchantStore store, Language language) throws ServiceException {
+	public List<ProductOptionValue> listByStore(MerchantStoreInfo store, Language language) throws ServiceException {
 		
 		return productOptionValueRepository.findByStoreId(store.getId(), language.getId());
 	}
 	
 	@Override
-	public List<ProductOptionValue> listByStoreNoReadOnly(MerchantStore store, Language language) throws ServiceException {
+	public List<ProductOptionValue> listByStoreNoReadOnly(MerchantStoreInfo store, Language language) throws ServiceException {
 		
 		return productOptionValueRepository.findByReadOnly(store.getId(), language.getId(), false);
 	}
 
 	@Override
-	public List<ProductOptionValue> getByName(MerchantStore store, String name, Language language) throws ServiceException {
+	public List<ProductOptionValue> getByName(MerchantStoreInfo store, String name, Language language) throws ServiceException {
 		
 		try {
 			return productOptionValueRepository.findByName(store.getId(), name, language.getId());
@@ -91,13 +91,13 @@ public class ProductOptionValueServiceImpl extends
 	}
 	
 	@Override
-	public ProductOptionValue getByCode(MerchantStore store, String optionValueCode) {
+	public ProductOptionValue getByCode(MerchantStoreInfo store, String optionValueCode) {
 		return productOptionValueRepository.findByCode(store.getId(), optionValueCode);
 	}
 
 
 	@Override
-	public ProductOptionValue getById(MerchantStore store, Long optionValueId) {
+	public ProductOptionValue getById(MerchantStoreInfo store, Long optionValueId) {
 		return productOptionValueRepository.findOne(store.getId(), optionValueId);
 	}
 

@@ -1,15 +1,17 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionValueService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionValue;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionValueDescription;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.InputContentFile;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
@@ -55,6 +57,9 @@ public class OptionsValueController {
 	
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
+
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(OptionsValueController.class);
 	
@@ -91,7 +96,8 @@ public class OptionsValueController {
 
 		
 		this.setMenu(model, request);
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		List<Language> languages = store.getLanguages();
 
@@ -168,8 +174,9 @@ public class OptionsValueController {
 
 		//display menu
 		setMenu(model,request);
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		ProductOptionValue dbEntity =	null;	
 
 		if(optionValue.getId() != null && optionValue.getId() >0) { //edit entry
@@ -284,9 +291,10 @@ public class OptionsValueController {
 		try {
 			
 			
-			Language language = (Language)request.getAttribute("LANGUAGE");	
-		
-			MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+			Language language = (Language)request.getAttribute("LANGUAGE");
+
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			
 			List<ProductOptionValue> options = null;
 					
@@ -341,7 +349,8 @@ public class OptionsValueController {
 	public @ResponseBody ResponseEntity<String> deleteOptionValue(HttpServletRequest request, HttpServletResponse response, Locale locale) {
 		String sid = request.getParameter("optionValueId");
 
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		AjaxResponse resp = new AjaxResponse();
 
@@ -382,7 +391,8 @@ public class OptionsValueController {
 	public @ResponseBody ResponseEntity<String> removeImage(HttpServletRequest request, HttpServletResponse response, Locale locale) {
 		String optionValueId = request.getParameter("optionId");
 
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		AjaxResponse resp = new AjaxResponse();
 

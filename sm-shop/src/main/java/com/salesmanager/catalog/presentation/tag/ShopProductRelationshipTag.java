@@ -6,7 +6,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +22,6 @@ import com.salesmanager.catalog.business.service.product.relationship.ProductRel
 import com.salesmanager.core.business.utils.CacheUtils;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
@@ -49,6 +51,9 @@ public class ShopProductRelationshipTag extends RequestContextAwareTag  {
 	
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
+
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	
 	private String groupName;
@@ -78,7 +83,8 @@ public class ShopProductRelationshipTag extends RequestContextAwareTag  {
 		HttpServletRequest request = (HttpServletRequest) pageContext
 		.getRequest();
 
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		Language language = (Language)request.getAttribute(Constants.LANGUAGE);
 
@@ -133,8 +139,9 @@ public class ShopProductRelationshipTag extends RequestContextAwareTag  {
 	}
 	
 	private List<ReadableProduct> getProducts(HttpServletRequest request) throws Exception {
-		
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		Language language = (Language)request.getAttribute(Constants.LANGUAGE);
 
 		List<ProductRelationship> relationships = productRelationshipService.getByGroup(store, this.getGroupName(), language);

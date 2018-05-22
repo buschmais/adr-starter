@@ -1,17 +1,18 @@
 package com.salesmanager.catalog.presentation.controller.category;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.ControllerConstants;
-import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.CacheUtils;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
-import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.ProductList;
@@ -66,7 +67,7 @@ public class ShoppingCategoryController {
 	private LanguageService languageService;
 	
 	@Inject
-	private MerchantStoreService merchantStoreService;
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	@Inject
 	private ProductService productService;
@@ -133,7 +134,8 @@ public class ShoppingCategoryController {
 	@SuppressWarnings("unchecked")
 	private String displayCategory(final String friendlyUrl, final String ref, Model model, HttpServletRequest request, HttpServletResponse response, Locale locale) throws Exception {
 
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		
 		
@@ -261,7 +263,7 @@ public class ShoppingCategoryController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private List<ReadableManufacturer> getManufacturersByProductAndCategory(MerchantStore store, Category category, List<Long> subCategoryIds, Language language) throws Exception {
+	private List<ReadableManufacturer> getManufacturersByProductAndCategory(MerchantStoreInfo store, Category category, List<Long> subCategoryIds, Language language) throws Exception {
 
 		List<ReadableManufacturer> manufacturerList = null;
 		/** List of manufacturers **/
@@ -306,7 +308,7 @@ public class ShoppingCategoryController {
 		return manufacturerList;
 	}
 		
-	private List<ReadableManufacturer> getManufacturers(MerchantStore store, List<Long> ids, Language language) throws Exception {
+	private List<ReadableManufacturer> getManufacturers(MerchantStoreInfo store, List<Long> ids, Language language) throws Exception {
 		List<ReadableManufacturer> manufacturerList = new ArrayList<ReadableManufacturer>();
 		List<com.salesmanager.catalog.model.product.manufacturer.Manufacturer> manufacturers = manufacturerService.listByProductsByCategoriesId(store, ids, language);
 		if(!manufacturers.isEmpty()) {
@@ -320,7 +322,7 @@ public class ShoppingCategoryController {
 		return manufacturerList;
 	}
 	
-	private Map<Long,Long> getProductsByCategory(MerchantStore store, Category category, String lineage, List<Long> subIds) throws Exception {
+	private Map<Long,Long> getProductsByCategory(MerchantStoreInfo store, Category category, String lineage, List<Long> subIds) throws Exception {
 
 		if(subIds.isEmpty()) {
 			return null;
@@ -356,7 +358,7 @@ public class ShoppingCategoryController {
 		
 	}
 	
-	private List<ReadableCategory> getSubCategories(MerchantStore store, Category category, Map<Long,Long> productCount, Language language, Locale locale) throws Exception {
+	private List<ReadableCategory> getSubCategories(MerchantStoreInfo store, Category category, Map<Long,Long> productCount, Language language, Locale locale) throws Exception {
 		
 		
 		//sub categories
@@ -396,17 +398,21 @@ public class ShoppingCategoryController {
 		if(l==null) {
 			l = languageService.getByCode(Constants.DEFAULT_LANGUAGE);
 		}
-		
-		MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
 
-		if(merchantStore!=null) {
-			if(!merchantStore.getCode().equals(store)) {
-				merchantStore = null; //reset for the current request
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
+
+		if(storeDTO!=null) {
+			if(!storeDTO.getCode().equals(store)) {
+				storeDTO = null; //reset for the current request
 			}
 		}
+
+		MerchantStoreInfo merchantStore;
 		
-		if(merchantStore== null) {
-			merchantStore = merchantStoreService.getByCode(store);
+		if(storeDTO== null) {
+			merchantStore = merchantStoreInfoService.findbyCode(store);
+		} else {
+			merchantStore = merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		}
 		
 		if(merchantStore==null) {
@@ -455,18 +461,22 @@ public class ShoppingCategoryController {
 			 * How to Spring MVC Rest web service - ajax / jquery
 			 * http://codetutr.com/2013/04/09/spring-mvc-easy-rest-based-json-services-with-responsebody/
 			 */
-			
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
+
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
 			Map<String,Language> langs = languageService.getLanguagesMap();
 
-			if(merchantStore!=null) {
-				if(!merchantStore.getCode().equals(store)) {
-					merchantStore = null; //reset for the current request
+			if(storeDTO!=null) {
+				if(!storeDTO.getCode().equals(store)) {
+					storeDTO = null; //reset for the current request
 				}
 			}
-			
-			if(merchantStore== null) {
-				merchantStore = merchantStoreService.getByCode(store);
+
+			MerchantStoreInfo merchantStore;
+
+			if(storeDTO== null) {
+				merchantStore = merchantStoreInfoService.findbyCode(store);
+			} else {
+				merchantStore = merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			}
 			
 			if(merchantStore==null) {
@@ -593,19 +603,23 @@ public class ShoppingCategoryController {
 		try {
 
 
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
 			List<BigDecimal> prices = new ArrayList<BigDecimal>();
 			
 			Map<String,Language> langs = languageService.getLanguagesMap();
 			
-			if(merchantStore!=null) {
-				if(!merchantStore.getCode().equals(store)) {
-					merchantStore = null; //reset for the current request
+			if(storeDTO!=null) {
+				if(!storeDTO.getCode().equals(store)) {
+					storeDTO = null; //reset for the current request
 				}
 			}
+
+			MerchantStoreInfo merchantStore;
 			
-			if(merchantStore== null) {
-				merchantStore = merchantStoreService.getByCode(store);
+			if(storeDTO== null) {
+				merchantStore = merchantStoreInfoService.findbyCode(store);
+			} else {
+				merchantStore = merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			}
 			
 			if(merchantStore==null) {

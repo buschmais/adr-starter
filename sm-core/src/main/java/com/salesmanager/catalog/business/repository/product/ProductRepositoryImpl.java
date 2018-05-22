@@ -11,6 +11,7 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,7 +20,6 @@ import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
 import com.salesmanager.catalog.model.product.ProductList;
 import com.salesmanager.catalog.model.product.attribute.AttributeCriteria;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.model.tax.taxclass.TaxClass;
 
@@ -148,7 +148,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 		
 	}
 	
-    public Product getByFriendlyUrl(MerchantStore store,String seUrl, Locale locale) {
+    public Product getByFriendlyUrl(MerchantStoreInfo store, String seUrl, Locale locale) {
 		
 		
 		List regionList = new ArrayList();
@@ -216,7 +216,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 	}
 
     @Override
-	public List<Product> getProductsForLocale(MerchantStore store, Set<Long> categoryIds, Language language, Locale locale) {
+	public List<Product> getProductsForLocale(MerchantStoreInfo store, Set<Long> categoryIds, Language language, Locale locale) {
 		
 		ProductList products = this.getProductsListForLocale(store, categoryIds, language, locale, 0, -1);
 		
@@ -434,7 +434,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 	 * so the listing page can display everything related to all products
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
-	private ProductList getProductsListForLocale(MerchantStore store, Set categoryIds, Language language, Locale locale, int first, int max) {
+	private ProductList getProductsListForLocale(MerchantStoreInfo store, Set categoryIds, Language language, Locale locale, int first, int max) {
 		
 
 				List regionList = new ArrayList();
@@ -543,7 +543,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 	 * @return
 	 */
 	@Override
-	public ProductList listByStore(MerchantStore store, Language language, ProductCriteria criteria) {
+	public ProductList listByStore(MerchantStoreInfo store, Language language, ProductCriteria criteria) {
 
 		ProductList productList = new ProductList();
 
@@ -846,7 +846,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 	}
 
 	@Override
-	public List<Product> listByStore(MerchantStore store) {
+	public List<Product> listByStore(MerchantStoreInfo store) {
 
 		
 		/**

@@ -1,5 +1,6 @@
 package com.salesmanager.catalog.presentation.api.v0.product;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
@@ -7,15 +8,15 @@ import com.salesmanager.catalog.business.service.product.attribute.ProductOption
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionValueService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.business.services.customer.CustomerService;
-import com.salesmanager.core.business.services.merchant.MerchantStoreService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
 import com.salesmanager.catalog.model.product.review.ProductReview;
-import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.manufacturer.PersistableManufacturer;
@@ -60,7 +61,7 @@ import java.util.Map;
 public class ShopProductRESTController {
 	
 	@Inject
-	private MerchantStoreService merchantStoreService;
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	@Inject
 	private CategoryService categoryService;
@@ -104,7 +105,24 @@ public class ShopProductRESTController {
 
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ShopProductRESTController.class);
-	
+
+	private MerchantStoreInfo getMerchantStoreFromRequest(HttpServletRequest request, String store) {
+		MerchantStoreDTO merchantStoreDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
+
+		if(merchantStoreDTO!=null) {
+			if(!merchantStoreDTO.getCode().equals(store)) {
+				merchantStoreDTO = null;
+			}
+		}
+		MerchantStoreInfo merchantStore;
+
+		if(merchantStoreDTO== null) {
+			merchantStore = merchantStoreInfoService.findbyCode(store);
+		} else {
+			merchantStore = this.merchantStoreInfoService.findbyCode(merchantStoreDTO.getCode());
+		}
+		return merchantStore;
+	}
 	
 	/**
 	 * Create new product for a given MerchantStore
@@ -116,17 +134,8 @@ public class ShopProductRESTController {
 
 		
 		try {
-			
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
-			if(merchantStore!=null) {
-				if(!merchantStore.getCode().equals(store)) {
-					merchantStore = null;
-				}
-			}
-			
-			if(merchantStore== null) {
-				merchantStore = merchantStoreService.getByCode(store);
-			}
+
+			MerchantStoreInfo merchantStore = getMerchantStoreFromRequest(request, store);
 			
 			if(merchantStore==null) {
 				LOGGER.error("Merchant store is null for code " + store);
@@ -178,17 +187,8 @@ public class ShopProductRESTController {
 
 		
 		try {
-			
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
-			if(merchantStore!=null) {
-				if(!merchantStore.getCode().equals(store)) {
-					merchantStore = null;
-				}
-			}
-			
-			if(merchantStore== null) {
-				merchantStore = merchantStoreService.getByCode(store);
-			}
+
+			MerchantStoreInfo merchantStore = getMerchantStoreFromRequest(request, store);
 			
 			if(merchantStore==null) {
 				LOGGER.error("Merchant store is null for code " + store);
@@ -229,17 +229,8 @@ public class ShopProductRESTController {
 
 		
 		try {
-			
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
-			if(merchantStore!=null) {
-				if(!merchantStore.getCode().equals(store)) {
-					merchantStore = null;
-				}
-			}
-			
-			if(merchantStore== null) {
-				merchantStore = merchantStoreService.getByCode(store);
-			}
+
+			MerchantStoreInfo merchantStore = getMerchantStoreFromRequest(request, store);
 			
 			if(merchantStore==null) {
 				LOGGER.error("Merchant store is null for code " + store);
@@ -279,17 +270,8 @@ public class ShopProductRESTController {
 
 		
 		try {
-			
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
-			if(merchantStore!=null) {
-				if(!merchantStore.getCode().equals(store)) {
-					merchantStore = null;
-				}
-			}
-			
-			if(merchantStore== null) {
-				merchantStore = merchantStoreService.getByCode(store);
-			}
+
+			MerchantStoreInfo merchantStore = getMerchantStoreFromRequest(request, store);
 			
 			if(merchantStore==null) {
 				LOGGER.error("Merchant store is null for code " + store);
@@ -328,17 +310,8 @@ public class ShopProductRESTController {
 
 		
 		try {
-			
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
-			if(merchantStore!=null) {
-				if(!merchantStore.getCode().equals(store)) {
-					merchantStore = null;
-				}
-			}
-			
-			if(merchantStore== null) {
-				merchantStore = merchantStoreService.getByCode(store);
-			}
+
+			MerchantStoreInfo merchantStore = getMerchantStoreFromRequest(request, store);
 			
 			if(merchantStore==null) {
 				LOGGER.error("Merchant store is null for code " + store);
@@ -395,17 +368,8 @@ public class ShopProductRESTController {
 		
 		
 		/** default routine **/
-		
-		MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
-		if(merchantStore!=null) {
-			if(!merchantStore.getCode().equals(store)) {
-				merchantStore = null;
-			}
-		}
-		
-		if(merchantStore== null) {
-			merchantStore = merchantStoreService.getByCode(store);
-		}
+
+		MerchantStoreInfo merchantStore = getMerchantStoreFromRequest(request, store);
 		
 		if(merchantStore==null) {
 			LOGGER.error("Merchant store is null for code " + store);
@@ -565,21 +529,10 @@ public class ShopProductRESTController {
 			 * How to Spring MVC Rest web service - ajax / jquery
 			 * http://codetutr.com/2013/04/09/spring-mvc-easy-rest-based-json-services-with-responsebody/
 			 */
-			
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
-			
+
+			MerchantStoreInfo merchantStore = getMerchantStoreFromRequest(request, store);
 			
 			Map<String,Language> langs = languageService.getLanguagesMap();
-			
-			if(merchantStore!=null) {
-				if(!merchantStore.getCode().equals(store)) {
-					merchantStore = null; //reset for the current request
-				}
-			}
-			
-			if(merchantStore== null) {
-				merchantStore = merchantStoreService.getByCode(store);
-			}
 			
 			if(merchantStore==null) {
 				LOGGER.error("Merchant store is null for code " + store);
@@ -672,16 +625,7 @@ public class ShopProductRESTController {
 
 		
 		/** bcz of the filter **/
-		MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
-		if(merchantStore!=null) {
-			if(!merchantStore.getCode().equals(store)) {
-				merchantStore = null;
-			}
-		}
-
-		if(store!=null) {
-			merchantStore = merchantStoreService.getByCode(store);
-		}
+		MerchantStoreInfo merchantStore = getMerchantStoreFromRequest(request, store);
 		
 		if(merchantStore==null) {
 			LOGGER.error("Merchant store is null for code " + store);
@@ -722,21 +666,13 @@ public class ShopProductRESTController {
 
 		
 		try {
-			
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
-			if(merchantStore!=null) {
-				if(!merchantStore.getCode().equals(store)) {
-					merchantStore = null;
-				}
-			}
-			
+
+			MerchantStoreInfo merchantStore = getMerchantStoreFromRequest(request, store);
+
 			String lang = request.getParameter("lang");
 			Language language = null;
-			
-			if(merchantStore== null) {
-				merchantStore = merchantStoreService.getByCode(store);
-			}
-			
+
+
 			if(merchantStore==null) {
 				LOGGER.error("Merchant store is null for code " + store);
 				response.sendError(503, "Merchant store is null for code " + store);
@@ -789,21 +725,13 @@ public class ShopProductRESTController {
 
 		
 		try {
-			
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
-			if(merchantStore!=null) {
-				if(!merchantStore.getCode().equals(store)) {
-					merchantStore = null;
-				}
-			}
-			
+
+			MerchantStoreInfo merchantStore = getMerchantStoreFromRequest(request, store);
+
 			String lang = request.getParameter("lang");
 			Language language = null;
-			
-			if(merchantStore== null) {
-				merchantStore = merchantStoreService.getByCode(store);
-			}
-			
+
+
 			if(merchantStore==null) {
 				LOGGER.error("Merchant store is null for code " + store);
 				response.sendError(503, "Merchant store is null for code " + store);

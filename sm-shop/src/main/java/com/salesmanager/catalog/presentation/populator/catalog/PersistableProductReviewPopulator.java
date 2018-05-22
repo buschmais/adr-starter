@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.lang.Validate;
 
 import com.salesmanager.core.business.exception.ConversionException;
@@ -15,7 +16,6 @@ import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.catalog.model.product.review.ProductReviewDescription;
 import com.salesmanager.core.model.customer.Customer;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.PersistableProductReview;
 import com.salesmanager.common.presentation.util.DateUtil;
@@ -48,7 +48,7 @@ public class PersistableProductReviewPopulator extends
 
 	@Override
 	public ProductReview populate(PersistableProductReview source,
-			ProductReview target, MerchantStore store, Language language)
+								  ProductReview target, MerchantStoreInfo store, Language language)
 			throws ConversionException {
 		
 		

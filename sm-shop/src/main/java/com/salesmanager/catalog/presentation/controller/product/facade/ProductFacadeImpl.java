@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
@@ -29,7 +30,6 @@ import com.salesmanager.catalog.model.product.availability.ProductAvailability;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.catalog.model.product.price.ProductPrice;
 import com.salesmanager.catalog.model.product.review.ProductReview;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.manufacturer.PersistableManufacturer;
 import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufacturer;
@@ -85,7 +85,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	private CatalogImageFilePathUtils imageUtils;
 
 	@Override
-	public PersistableProduct saveProduct(MerchantStore store, PersistableProduct product, Language language)
+	public PersistableProduct saveProduct(MerchantStoreInfo store, PersistableProduct product, Language language)
 			throws Exception {
 		
 
@@ -138,7 +138,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public ReadableProduct getProduct(MerchantStore store, Long id, Language language)
+	public ReadableProduct getProduct(MerchantStoreInfo store, Long id, Language language)
 			throws Exception {
 
 		Product product = productService.getById(id);
@@ -159,7 +159,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public ReadableProduct getProduct(MerchantStore store, String sku,
+	public ReadableProduct getProduct(MerchantStoreInfo store, String sku,
 			Language language) throws Exception {
 		
 		Product product = productService.getByCode(sku, language);
@@ -255,7 +255,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public ReadableProductList getProductListsByCriterias(MerchantStore store, Language language,
+	public ReadableProductList getProductListsByCriterias(MerchantStoreInfo store, Language language,
 			ProductCriteria criterias) throws Exception {
 
 		
@@ -355,7 +355,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public ReadableProduct getProductByCode(MerchantStore store, String uniqueCode, Language language)
+	public ReadableProduct getProductByCode(MerchantStoreInfo store, String uniqueCode, Language language)
 			throws Exception {
 		
 		Product product = productService.getByCode(uniqueCode, language);
@@ -373,7 +373,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public void saveOrUpdateReview(PersistableProductReview review, MerchantStore store, Language language) throws Exception {
+	public void saveOrUpdateReview(PersistableProductReview review, MerchantStoreInfo store, Language language) throws Exception {
 		PersistableProductReviewPopulator populator = new PersistableProductReviewPopulator();
 		populator.setLanguageService(languageService);
 		populator.setCustomerService(customerService);
@@ -394,13 +394,13 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public void deleteReview(ProductReview review, MerchantStore store, Language language) throws Exception {
+	public void deleteReview(ProductReview review, MerchantStoreInfo store, Language language) throws Exception {
 		productReviewService.delete(review);
 		
 	}
 
 	@Override
-	public List<ReadableProductReview> getProductReviews(Product product, MerchantStore store, Language language)
+	public List<ReadableProductReview> getProductReviews(Product product, MerchantStoreInfo store, Language language)
 			throws Exception {
 		
 		
@@ -422,7 +422,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public void saveOrUpdateManufacturer(PersistableManufacturer manufacturer, MerchantStore store, Language language)
+	public void saveOrUpdateManufacturer(PersistableManufacturer manufacturer, MerchantStoreInfo store, Language language)
 			throws Exception {
 		
 		PersistableManufacturerPopulator populator = new PersistableManufacturerPopulator();
@@ -439,13 +439,13 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public void deleteManufacturer(Manufacturer manufacturer, MerchantStore store, Language language) throws Exception {
+	public void deleteManufacturer(Manufacturer manufacturer, MerchantStoreInfo store, Language language) throws Exception {
 		manufacturerService.delete(manufacturer);
 		
 	}
 
 	@Override
-	public ReadableManufacturer getManufacturer(Long id, MerchantStore store, Language language) throws Exception {
+	public ReadableManufacturer getManufacturer(Long id, MerchantStoreInfo store, Language language) throws Exception {
 		Manufacturer manufacturer = manufacturerService.getById(id);
 		
 		if(manufacturer==null) {
@@ -462,7 +462,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public List<ReadableManufacturer> getAllManufacturers(MerchantStore store, Language language) throws Exception {
+	public List<ReadableManufacturer> getAllManufacturers(MerchantStoreInfo store, Language language) throws Exception {
 		
 		
 		List<Manufacturer> manufacturers = manufacturerService.listByStore(store);

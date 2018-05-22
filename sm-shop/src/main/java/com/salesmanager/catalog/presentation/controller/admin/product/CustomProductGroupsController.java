@@ -1,9 +1,11 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
@@ -11,7 +13,7 @@ import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.description.ProductDescription;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
-import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
@@ -19,6 +21,7 @@ import com.salesmanager.common.presentation.util.LabelUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -52,6 +55,9 @@ public class CustomProductGroupsController {
 	
 	@Inject
 	LabelUtils messages;
+
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	@PreAuthorize("hasRole('PRODUCTS')")
 	@RequestMapping(value="/admin/products/groups/list.html", method=RequestMethod.GET)
@@ -59,9 +65,6 @@ public class CustomProductGroupsController {
 		
 		
 		setMenu(model,request);
-		
-		Language language = (Language)request.getAttribute("LANGUAGE");
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
 		
 		ProductRelationship group = new ProductRelationship();
 		
@@ -83,7 +86,8 @@ public class CustomProductGroupsController {
 		
 		try {
 
-			MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			
 
 			List<ProductRelationship> relationships = productRelationshipService.getGroups(store);
@@ -124,7 +128,8 @@ public class CustomProductGroupsController {
 	public String saveCustomProductGroup(@ModelAttribute("group") ProductRelationship group, BindingResult result, Model model, HttpServletRequest request, HttpServletResponse response, Locale locale) throws Exception {
 		
 		setMenu(model,request);
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		
 		//check if group already exist
@@ -176,7 +181,8 @@ public class CustomProductGroupsController {
 
 
 		try {
-			MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			productRelationshipService.deleteGroup(store, groupCode);
 			resp.setStatus(AjaxResponse.RESPONSE_OPERATION_COMPLETED);
 
@@ -208,7 +214,8 @@ public class CustomProductGroupsController {
 			Map conf = mapper.readValue(values, Map.class);
 			String groupCode = (String)conf.get("code");
 
-			MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			
 			//get groups
 			List<ProductRelationship> groups = productRelationshipService.getGroups(store);
@@ -244,7 +251,8 @@ public class CustomProductGroupsController {
 		setMenu(model,request);
 		
 		Language language = (Language)request.getAttribute("LANGUAGE");
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
 		List<Category> categories = categoryService.listByStore(store,language);//for categories
 		
@@ -270,7 +278,8 @@ public class CustomProductGroupsController {
 
 			
 			Language language = (Language)request.getAttribute("LANGUAGE");
-			MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			
 
 			List<ProductRelationship> relationships = productRelationshipService.getByGroup(store, code, language);
@@ -332,7 +341,8 @@ public class CustomProductGroupsController {
 
 			Long lProductId = Long.parseLong(productId);
 
-			MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			
 			Product product = productService.getById(lProductId);
 			
@@ -387,7 +397,8 @@ public class CustomProductGroupsController {
 
 			Long lproductId = Long.parseLong(productId);
 
-			MerchantStore store = (MerchantStore)request.getAttribute(Constants.ADMIN_STORE);
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
+			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			
 			Product product = productService.getById(lproductId);
 			

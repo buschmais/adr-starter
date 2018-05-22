@@ -1,8 +1,8 @@
 package com.salesmanager.catalog.business.service.search;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.model.product.Product;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.catalog.model.search.SearchKeywords;
 import com.salesmanager.catalog.model.search.SearchResponse;
 
@@ -15,7 +15,7 @@ public interface SearchService {
 	 * @param product
 	 * @throws ServiceException
 	 */
-	void index(MerchantStore store, Product product) throws ServiceException;
+	void index(MerchantStoreInfo store, Product product) throws ServiceException;
 
 	/**
 	 * Deletes an index in the appropriate language. Must be invoked when a product is deleted
@@ -23,7 +23,7 @@ public interface SearchService {
 	 * @param product
 	 * @throws ServiceException
 	 */
-	void deleteIndex(MerchantStore store, Product product)
+	void deleteIndex(MerchantStoreInfo store, Product product)
 			throws ServiceException;
 
 	/**
@@ -47,8 +47,8 @@ public interface SearchService {
 	 * @param startIndex
 	 * @throws ServiceException
 	 */
-	SearchResponse search(MerchantStore store, String languageCode, String jsonString,
-			int entriesCount, int startIndex) throws ServiceException;
+	SearchResponse search(MerchantStoreInfo store, String languageCode, String jsonString,
+						  int entriesCount, int startIndex) throws ServiceException;
 
 	/**
 	 * Initializes search service in order to avoid lazy initialization

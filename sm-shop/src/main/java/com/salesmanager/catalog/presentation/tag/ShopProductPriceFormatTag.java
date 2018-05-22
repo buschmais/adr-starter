@@ -5,15 +5,18 @@ import java.math.BigDecimal;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.tags.RequestContextAwareTag;
 
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.util.ProductPriceUtils;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.currency.Currency;
 import com.salesmanager.shop.constants.Constants;
 
@@ -34,6 +37,9 @@ public class ShopProductPriceFormatTag extends RequestContextAwareTag  {
 
 	@Inject
 	private ProductPriceUtils productPriceUtils;
+
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	
 	
@@ -69,7 +75,8 @@ public class ShopProductPriceFormatTag extends RequestContextAwareTag  {
 		HttpServletRequest request = (HttpServletRequest) pageContext
 		.getRequest();
 
-		MerchantStore store = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 
 		String formatedPrice = null;
 		

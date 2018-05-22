@@ -9,9 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 
 
@@ -22,7 +22,7 @@ public class ProductRelationshipRepositoryImpl implements ProductRelationshipRep
     private EntityManager em;
     
 	@Override
-	public List<ProductRelationship> getByType(MerchantStore store, String type, Product product, Language language) {
+	public List<ProductRelationship> getByType(MerchantStoreInfo store, String type, Product product, Language language) {
 
 		StringBuilder qs = new StringBuilder();
 		qs.append("select distinct pr from ProductRelationship as pr ");
@@ -58,7 +58,7 @@ public class ProductRelationshipRepositoryImpl implements ProductRelationshipRep
 	}
 	
 	@Override
-	public List<ProductRelationship> getByType(MerchantStore store, String type, Language language) {
+	public List<ProductRelationship> getByType(MerchantStoreInfo store, String type, Language language) {
 
 		StringBuilder qs = new StringBuilder();
 		qs.append("select distinct pr from ProductRelationship as pr ");
@@ -106,7 +106,7 @@ public class ProductRelationshipRepositoryImpl implements ProductRelationshipRep
 	}
 	
 	@Override
-	public List<ProductRelationship> getByGroup(MerchantStore store, String group) {
+	public List<ProductRelationship> getByGroup(MerchantStoreInfo store, String group) {
 	
 		StringBuilder qs = new StringBuilder();
 		qs.append("select distinct pr from ProductRelationship as pr ");
@@ -153,7 +153,7 @@ public class ProductRelationshipRepositoryImpl implements ProductRelationshipRep
 	}
 	
 	@Override
-	public List<ProductRelationship> getGroups(MerchantStore store) {
+	public List<ProductRelationship> getGroups(MerchantStoreInfo store) {
 
 		StringBuilder qs = new StringBuilder();
 		qs.append("select distinct pr from ProductRelationship as pr ");
@@ -190,7 +190,7 @@ public class ProductRelationshipRepositoryImpl implements ProductRelationshipRep
 	
 	
 	@Override
-	public List<ProductRelationship> getByType(MerchantStore store, String type) {
+	public List<ProductRelationship> getByType(MerchantStoreInfo store, String type) {
 
 		StringBuilder qs = new StringBuilder();
 		qs.append("select distinct pr from ProductRelationship as pr ");
@@ -254,7 +254,7 @@ public class ProductRelationshipRepositoryImpl implements ProductRelationshipRep
 	}
 	
 	@Override
-	public List<ProductRelationship> getByType(MerchantStore store, String type, Product product) {
+	public List<ProductRelationship> getByType(MerchantStoreInfo store, String type, Product product) {
 		
 		StringBuilder qs = new StringBuilder();
 		

@@ -2,13 +2,13 @@ package com.salesmanager.catalog.presentation.populator.catalog;
 
 
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.lang.Validate;
 
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.category.CategoryDescription;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 
@@ -17,7 +17,7 @@ public class ReadableCategoryPopulator extends
 
 	@Override
 	public ReadableCategory populate(Category source, ReadableCategory target,
-			MerchantStore store, Language language) throws ConversionException {
+									 MerchantStoreInfo store, Language language) throws ConversionException {
 		
 		
 		Validate.notNull(source,"Category must not be null");

@@ -4,7 +4,10 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +16,6 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.tags.RequestContextAwareTag;
 
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.shop.utils.FilePathUtils;
 
@@ -41,6 +43,9 @@ public class ShopProductImageUrlTag extends RequestContextAwareTag {
 	
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
+
+	@Autowired
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	public int doStartTagInternal() throws JspException {
 		try {
@@ -53,8 +58,9 @@ public class ShopProductImageUrlTag extends RequestContextAwareTag {
 
 			HttpServletRequest request = (HttpServletRequest) pageContext
 					.getRequest();
-			
-			MerchantStore merchantStore = (MerchantStore)request.getAttribute(Constants.MERCHANT_STORE);
+
+			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
+			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 
 			StringBuilder imagePath = new StringBuilder();
 			

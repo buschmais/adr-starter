@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
@@ -20,7 +21,6 @@ import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.category.CategoryDescription;
 import com.salesmanager.catalog.model.product.Product;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 
 @Service("categoryService")
@@ -62,7 +62,7 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	}
 	
 	@Override
-	public List<Object[]> countProductsByCategories(MerchantStore store,
+	public List<Object[]> countProductsByCategories(MerchantStoreInfo store,
 			List<Long> categoryIds) throws ServiceException {
 		
 		return categoryRepository.countProductsByCategories(store, categoryIds);
@@ -70,13 +70,13 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	}
 	
 	@Override
-	public List<Category> listByCodes(MerchantStore store, List<String> codes,
+	public List<Category> listByCodes(MerchantStoreInfo store, List<String> codes,
 			Language language) {
 		return categoryRepository.findByCodes(store.getId(), codes, language.getId());
 	}
 	
 	@Override
-	public List<Category> listByIds(MerchantStore store, List<Long> ids,
+	public List<Category> listByIds(MerchantStoreInfo store, List<Long> ids,
 			Language language) {
 		return categoryRepository.findByIds(store.getId(), ids, language.getId());
 	}
@@ -104,7 +104,7 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	}
 
 	@Override
-	public List<Category> listByLineage(MerchantStore store, String lineage) throws ServiceException {
+	public List<Category> listByLineage(MerchantStoreInfo store, String lineage) throws ServiceException {
 		try {
 			return categoryRepository.findByLineage(store.getId(), lineage);
 		} catch (Exception e) {
@@ -127,7 +127,7 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	
 
 	@Override
-	public List<Category> listBySeUrl(MerchantStore store, String seUrl) throws ServiceException{
+	public List<Category> listBySeUrl(MerchantStoreInfo store, String seUrl) throws ServiceException{
 		
 		try {
 			return categoryRepository.listByFriendlyUrl(store.getId(), seUrl);
@@ -138,13 +138,13 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	}
 	
 	@Override
-	public Category getBySeUrl(MerchantStore store,String seUrl) {
+	public Category getBySeUrl(MerchantStoreInfo store,String seUrl) {
 		return categoryRepository.findByFriendlyUrl(store.getId(), seUrl);
 	}
 	
 	
 	@Override
-	public Category getByCode(MerchantStore store, String code) throws ServiceException {
+	public Category getByCode(MerchantStoreInfo store, String code) throws ServiceException {
 		
 		try {
 			return categoryRepository.findByCode(store.getId(), code);
@@ -185,7 +185,7 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	}
 	
 	@Override
-	public List<Category> listByStoreAndParent(MerchantStore store, Category category) throws ServiceException {
+	public List<Category> listByStoreAndParent(MerchantStoreInfo store, Category category) throws ServiceException {
 		
 		try {
 			return categoryRepository.listByStoreAndParent(store, category);
@@ -353,22 +353,22 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	}
 	
 	@Override
-	public List<Category> listByDepth(MerchantStore store, int depth) {
+	public List<Category> listByDepth(MerchantStoreInfo store, int depth) {
 		return categoryRepository.findByDepth(store.getId(), depth);
 	}
 	
 	@Override
-	public List<Category> listByDepth(MerchantStore store, int depth, Language language) {
+	public List<Category> listByDepth(MerchantStoreInfo store, int depth, Language language) {
 		return categoryRepository.findByDepth(store.getId(), depth, language.getId());
 	}
 	
 	@Override
-	public List<Category> listByDepthFilterByFeatured(MerchantStore store, int depth, Language language) {
+	public List<Category> listByDepthFilterByFeatured(MerchantStoreInfo store, int depth, Language language) {
 		return categoryRepository.findByDepthFilterByFeatured(store.getId(), depth, language.getId());
 	}
 
 	@Override
-	public List<Category> getByName(MerchantStore store, String name, Language language) throws ServiceException {
+	public List<Category> getByName(MerchantStoreInfo store, String name, Language language) throws ServiceException {
 		
 		try {
 			return categoryRepository.findByName(store.getId(), name, language.getId());
@@ -382,7 +382,7 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	
 
 	@Override
-	public List<Category> listByStore(MerchantStore store)
+	public List<Category> listByStore(MerchantStoreInfo store)
 			throws ServiceException {
 
 		try {
@@ -393,7 +393,7 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	}
 	
 	@Override
-	public List<Category> listByStore(MerchantStore store, Language language)
+	public List<Category> listByStore(MerchantStoreInfo store, Language language)
 			throws ServiceException {
 
 		try {

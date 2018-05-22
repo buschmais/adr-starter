@@ -1,9 +1,9 @@
 package com.salesmanager.catalog.presentation.util;
 
 import com.salesmanager.catalog.business.service.category.CategoryService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.catalog.model.category.Category;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
@@ -49,7 +49,7 @@ public class BreadcrumbsUtils {
 
 	private static final String STORE_URI_KEY = "STORE_URI";
 	
-	public Breadcrumb buildCategoryBreadcrumb(ReadableCategory categoryClicked, MerchantStore store, Language language, String contextPath) throws Exception {
+	public Breadcrumb buildCategoryBreadcrumb(ReadableCategory categoryClicked, MerchantStoreInfo store, Language language, String contextPath) throws Exception {
 		
 		/** Rebuild breadcrumb **/
 		BreadcrumbItem home = new BreadcrumbItem();
@@ -100,7 +100,7 @@ public class BreadcrumbsUtils {
 	}
 	
 	
-	public Breadcrumb buildProductBreadcrumb(String refContent, ReadableProduct productClicked, MerchantStore store, Language language, String contextPath) throws Exception {
+	public Breadcrumb buildProductBreadcrumb(String refContent, ReadableProduct productClicked, MerchantStoreInfo store, Language language, String contextPath) throws Exception {
 		
 		/** Rebuild breadcrumb **/
 		BreadcrumbItem home = new BreadcrumbItem();
@@ -201,7 +201,7 @@ public class BreadcrumbsUtils {
 		
 	}
 
-	private String buildCategoryUrl(MerchantStore store, String contextPath, String url) {
+	private String buildCategoryUrl(MerchantStoreInfo store, String contextPath, String url) {
 		StringBuilder resourcePath = new StringBuilder();
 		resourcePath.append(getStoreUri(store, contextPath))
 
@@ -216,7 +216,7 @@ public class BreadcrumbsUtils {
 
 	}
 
-	private String buildProductUrl(MerchantStore store, String contextPath, String url) {
+	private String buildProductUrl(MerchantStoreInfo store, String contextPath, String url) {
 		StringBuilder resourcePath = new StringBuilder();
 		resourcePath.append(getStoreUri(store, contextPath))
 				.append(Constants.SHOP_URI)
@@ -229,7 +229,7 @@ public class BreadcrumbsUtils {
 
 	}
 
-	private String getStoreUri(MerchantStore store, String contextPath) {
+	private String getStoreUri(MerchantStoreInfo store, String contextPath) {
 		MultiValueMap<String, Object> parameter = new LinkedMultiValueMap<>();
 		parameter.add("store", store.toDTO());
 		parameter.add("contextPath", contextPath);
