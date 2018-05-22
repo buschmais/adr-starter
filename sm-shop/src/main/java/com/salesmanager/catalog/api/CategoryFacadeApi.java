@@ -1,4 +1,4 @@
-package com.salesmanager.catalog.presentation.api;
+package com.salesmanager.catalog.api;
 
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;

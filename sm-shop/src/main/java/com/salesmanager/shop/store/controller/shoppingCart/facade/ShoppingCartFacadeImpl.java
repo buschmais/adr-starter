@@ -15,6 +15,7 @@ import javax.persistence.NoResultException;
 
 import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.business.service.product.PricingService;
+import com.salesmanager.catalog.api.CatalogImageFilePathApi;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -82,7 +83,10 @@ public class ShoppingCartFacadeImpl
     private ProductAttributeService productAttributeService;
     
 	@Autowired
-	private CatalogImageFilePathUtils imageUtils;
+	private CatalogImageFilePathApi imageFilePathApi;
+
+	@Autowired
+    private CatalogImageFilePathUtils imageUtils;
 
     public void deleteShoppingCart(final Long id, final MerchantStore store) throws Exception {
     	ShoppingCart cart = shoppingCartService.getById(id, store);
@@ -173,7 +177,7 @@ public class ShoppingCartFacadeImpl
         ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
         shoppingCartDataPopulator.setShoppingCartCalculationService( shoppingCartCalculationService );
         shoppingCartDataPopulator.setProductPriceApi(productPriceApi);
-        shoppingCartDataPopulator.setimageUtils(imageUtils);
+        shoppingCartDataPopulator.setImageFilePathApi(imageFilePathApi);
 
         return shoppingCartDataPopulator.populate( cartModel, store, language );
     }
@@ -423,7 +427,7 @@ public class ShoppingCartFacadeImpl
         ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
         shoppingCartDataPopulator.setShoppingCartCalculationService( shoppingCartCalculationService );
         shoppingCartDataPopulator.setProductPriceApi(productPriceApi);
-        shoppingCartDataPopulator.setimageUtils(imageUtils);
+        shoppingCartDataPopulator.setImageFilePathApi(imageFilePathApi);
 
         //Language language = (Language) getKeyValue( Constants.LANGUAGE );
         MerchantStore merchantStore = (MerchantStore) getKeyValue( Constants.MERCHANT_STORE );
@@ -459,7 +463,7 @@ public class ShoppingCartFacadeImpl
         ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
         shoppingCartDataPopulator.setShoppingCartCalculationService( shoppingCartCalculationService );
         shoppingCartDataPopulator.setProductPriceApi(productPriceApi);
-        shoppingCartDataPopulator.setimageUtils(imageUtils);
+        shoppingCartDataPopulator.setImageFilePathApi(imageFilePathApi);
         //Language language = (Language) getKeyValue( Constants.LANGUAGE );
         MerchantStore merchantStore = (MerchantStore) getKeyValue( Constants.MERCHANT_STORE );
         return shoppingCartDataPopulator.populate( shoppingCartModel, merchantStore, language );
@@ -497,7 +501,7 @@ public class ShoppingCartFacadeImpl
                     ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
                     shoppingCartDataPopulator.setShoppingCartCalculationService( shoppingCartCalculationService );
                     shoppingCartDataPopulator.setProductPriceApi(productPriceApi);
-                    shoppingCartDataPopulator.setimageUtils(imageUtils);
+                    shoppingCartDataPopulator.setImageFilePathApi(imageFilePathApi);
                     return shoppingCartDataPopulator.populate( cartModel, store, language );
                 }
             }
@@ -541,7 +545,7 @@ public class ShoppingCartFacadeImpl
                 ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
                 shoppingCartDataPopulator.setShoppingCartCalculationService( shoppingCartCalculationService );
                 shoppingCartDataPopulator.setProductPriceApi(productPriceApi);
-                shoppingCartDataPopulator.setimageUtils(imageUtils);
+                shoppingCartDataPopulator.setImageFilePathApi(imageFilePathApi);
                 return shoppingCartDataPopulator.populate( cartModel, store, language );
 
             }
@@ -600,7 +604,7 @@ public class ShoppingCartFacadeImpl
             ShoppingCartDataPopulator shoppingCartDataPopulator = new ShoppingCartDataPopulator();
             shoppingCartDataPopulator.setShoppingCartCalculationService( shoppingCartCalculationService );
             shoppingCartDataPopulator.setProductPriceApi(productPriceApi);
-            shoppingCartDataPopulator.setimageUtils(imageUtils);
+            shoppingCartDataPopulator.setImageFilePathApi(imageFilePathApi);
             return shoppingCartDataPopulator.populate( cartModel, store, language );
 
         }

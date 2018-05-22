@@ -1,8 +1,8 @@
-package com.salesmanager.catalog.presentation.api.impl;
+package com.salesmanager.catalog.api.impl;
 
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
-import com.salesmanager.catalog.presentation.api.CategoryFacadeApi;
+import com.salesmanager.catalog.api.CategoryFacadeApi;
 import com.salesmanager.catalog.presentation.controller.category.facade.CategoryFacade;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
