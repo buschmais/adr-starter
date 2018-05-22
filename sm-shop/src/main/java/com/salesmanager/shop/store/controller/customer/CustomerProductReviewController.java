@@ -1,5 +1,7 @@
 package com.salesmanager.shop.store.controller.customer;
 
+import com.salesmanager.catalog.api.CatalogImageFilePathApi;
+import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
@@ -16,8 +18,8 @@ import com.salesmanager.catalog.presentation.model.product.PersistableProductRev
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductReview;
 import com.salesmanager.catalog.presentation.populator.catalog.PersistableProductReviewPopulator;
-import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
-import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductReviewPopulator;
+import com.salesmanager.shop.populator.catalog.ReadableProductPopulator;
+import com.salesmanager.shop.populator.catalog.ReadableProductReviewPopulator;
 import com.salesmanager.shop.store.controller.AbstractController;
 import com.salesmanager.shop.store.controller.ControllerConstants;
 import com.salesmanager.shop.store.controller.customer.facade.CustomerFacade;
@@ -75,6 +77,12 @@ public class CustomerProductReviewController extends AbstractController {
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
 
+	@Autowired
+	private CatalogImageFilePathApi imageFilePathApi;
+
+	@Autowired
+	private ProductPriceApi productPriceApi;
+
 	@PreAuthorize("hasRole('AUTH_CUSTOMER')")
 	@RequestMapping(value="/review.html", method=RequestMethod.GET)
 	public String displayProductReview(@RequestParam Long productId, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -101,7 +109,9 @@ public class CustomerProductReviewController extends AbstractController {
         ReadableProductPopulator readableProductPopulator = new ReadableProductPopulator();
         readableProductPopulator.setPricingService(pricingService);
         readableProductPopulator.setimageUtils(imageUtils);
-        readableProductPopulator.populate(product, readableProduct,  store, language);
+		readableProductPopulator.setImageFilePathApi(imageFilePathApi);
+		readableProductPopulator.setProductPriceApi(productPriceApi);
+		readableProductPopulator.populate(product, readableProduct,  store, language);
         model.addAttribute("product", readableProduct);
         
 
@@ -177,6 +187,8 @@ public class CustomerProductReviewController extends AbstractController {
         ReadableProductPopulator readableProductPopulator = new ReadableProductPopulator();
         readableProductPopulator.setPricingService(pricingService);
         readableProductPopulator.setimageUtils(imageUtils);
+        readableProductPopulator.setProductPriceApi(productPriceApi);
+        readableProductPopulator.setImageFilePathApi(imageFilePathApi);
         readableProductPopulator.populate(product, readableProduct,  store, language);
         model.addAttribute("product", readableProduct);
 	    

@@ -9,8 +9,11 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.salesmanager.catalog.api.CatalogImageFilePathApi;
+import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.api.ProductRelationshipApi;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
+import com.salesmanager.shop.populator.catalog.ReadableProductPopulator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +39,6 @@ import com.salesmanager.common.presentation.model.Breadcrumb;
 import com.salesmanager.common.presentation.model.BreadcrumbItem;
 import com.salesmanager.common.presentation.model.BreadcrumbItemType;
 import com.salesmanager.common.presentation.model.PageInformation;
-import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
 import com.salesmanager.common.presentation.util.DateUtil;
 import com.salesmanager.common.presentation.util.LabelUtils;
 
@@ -67,6 +69,12 @@ public class LandingController {
 	
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
+
+	@Autowired
+	private CatalogImageFilePathApi imageFilePathApi;
+
+	@Autowired
+	private ProductPriceApi productPriceApi;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(LandingController.class);
 	private final static String HOME_LINK_CODE="HOME";
@@ -118,6 +126,8 @@ public class LandingController {
 		ReadableProductPopulator populator = new ReadableProductPopulator();
 		populator.setPricingService(pricingService);
 		populator.setimageUtils(imageUtils);
+		populator.setProductPriceApi(productPriceApi);
+		populator.setImageFilePathApi(imageFilePathApi);
 
 		
 		//featured items

@@ -33,7 +33,7 @@ import com.salesmanager.common.presentation.model.Breadcrumb;
 import com.salesmanager.common.presentation.model.BreadcrumbItem;
 import com.salesmanager.common.presentation.model.BreadcrumbItemType;
 import com.salesmanager.common.presentation.model.PageInformation;
-import com.salesmanager.catalog.presentation.populator.catalog.ReadableCategoryPopulator;
+import com.salesmanager.shop.populator.catalog.ReadableCategoryPopulator;
 import com.salesmanager.shop.utils.GeoLocationUtils;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.shop.utils.LanguageUtils;

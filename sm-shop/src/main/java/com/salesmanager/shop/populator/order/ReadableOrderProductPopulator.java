@@ -1,10 +1,10 @@
 package com.salesmanager.shop.populator.order;
 
+import com.salesmanager.catalog.api.CatalogImageFilePathApi;
 import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.product.Product;
@@ -16,7 +16,7 @@ import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.shop.model.order.ReadableOrderProduct;
 import com.salesmanager.shop.model.order.ReadableOrderProductAttribute;
-import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
+import com.salesmanager.shop.populator.catalog.ReadableProductPopulator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
@@ -31,6 +31,7 @@ public class ReadableOrderProductPopulator extends
 	private ProductService productService;
 	private ProductPriceApi productPriceApi;
 	private PricingService pricingService;
+	private CatalogImageFilePathApi imageFilePathApi;
 	private CatalogImageFilePathUtils imageUtils;
 
 
@@ -99,6 +100,8 @@ public class ReadableOrderProductPopulator extends
 					ReadableProductPopulator populator = new ReadableProductPopulator();
 					populator.setPricingService(pricingService);
 					populator.setimageUtils(imageUtils);
+					populator.setImageFilePathApi(imageFilePathApi);
+					populator.setProductPriceApi(productPriceApi);
 					
 					ReadableProduct productProxy = populator.populate(product, new ReadableProduct(), store, language);
 					target.setProduct(productProxy);
@@ -153,5 +156,13 @@ public class ReadableOrderProductPopulator extends
 
 	public void setPricingService(PricingService pricingService) {
 		this.pricingService = pricingService;
+	}
+
+	public CatalogImageFilePathApi getImageFilePathApi() {
+		return imageFilePathApi;
+	}
+
+	public void setImageFilePathApi(CatalogImageFilePathApi imageFilePathApi) {
+		this.imageFilePathApi = imageFilePathApi;
 	}
 }

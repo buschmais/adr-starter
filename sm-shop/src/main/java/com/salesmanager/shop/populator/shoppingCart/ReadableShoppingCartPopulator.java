@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.business.service.product.PricingService;
+import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.Validate;
@@ -33,7 +34,6 @@ import com.salesmanager.shop.model.shoppingcart.ReadableShoppingCartAttribute;
 import com.salesmanager.shop.model.shoppingcart.ReadableShoppingCartAttributeOption;
 import com.salesmanager.shop.model.shoppingcart.ReadableShoppingCartAttributeOptionValue;
 import com.salesmanager.shop.model.shoppingcart.ReadableShoppingCartItem;
-import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
 
 public class ReadableShoppingCartPopulator extends AbstractDataPopulator<ShoppingCart, ReadableShoppingCart> {
 

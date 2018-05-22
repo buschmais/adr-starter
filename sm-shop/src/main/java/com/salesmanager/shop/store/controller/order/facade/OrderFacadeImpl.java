@@ -15,6 +15,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.api.CatalogImageFilePathApi;
 import com.salesmanager.catalog.api.DigitalProductApi;
 import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.business.service.product.PricingService;
@@ -185,6 +186,9 @@ public class OrderFacadeImpl implements OrderFacade {
 
 	@Autowired
 	private CatalogImageFilePathUtils catalogImageUtils;
+
+	@Autowired
+	private CatalogImageFilePathApi imageFilePathApi;
 
 
 	@Override
@@ -977,6 +981,7 @@ public class OrderFacadeImpl implements OrderFacade {
             orderProductPopulator.setProductPriceApi(productPriceApi);
             orderProductPopulator.setimageUtils(catalogImageUtils);
             orderProductPopulator.setPricingService(pricingService);
+            orderProductPopulator.setImageFilePathApi(imageFilePathApi);
             ReadableOrderProduct orderProduct = new ReadableOrderProduct();
             orderProductPopulator.populate(p, orderProduct, store, language);
             
@@ -1071,7 +1076,7 @@ public class OrderFacadeImpl implements OrderFacade {
 			orderProductPopulator.setProductPriceApi(productPriceApi);
 			orderProductPopulator.setimageUtils(catalogImageUtils);
 			orderProductPopulator.setPricingService(pricingService);
-			
+			orderProductPopulator.setImageFilePathApi(imageFilePathApi);
 			ReadableOrderProduct orderProduct = new ReadableOrderProduct();
 			orderProductPopulator.populate(p, orderProduct, store, language);
 			orderProducts.add(orderProduct);
