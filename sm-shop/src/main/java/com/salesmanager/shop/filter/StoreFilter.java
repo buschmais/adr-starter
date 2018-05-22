@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salesmanager.catalog.api.CategoryApi;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.ProductService;
+import com.salesmanager.catalog.presentation.api.CategoryFacadeApi;
 import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;
@@ -33,7 +34,6 @@ import com.salesmanager.common.presentation.model.BreadcrumbItem;
 import com.salesmanager.common.presentation.model.BreadcrumbItemType;
 import com.salesmanager.common.presentation.model.PageInformation;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableCategoryPopulator;
-import com.salesmanager.catalog.presentation.controller.category.facade.CategoryFacade;
 import com.salesmanager.shop.utils.GeoLocationUtils;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.shop.utils.LanguageUtils;
@@ -101,7 +101,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 	private WebApplicationCacheUtils webApplicationCache;
 	
 	@Inject
-	private CategoryFacade categoryFacade;
+	private CategoryFacadeApi categoryFacadeApi;
 	
 	@Inject
 	private CoreConfiguration coreConfiguration;
@@ -614,7 +614,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 			
 			if(objects==null) {
 				//load categories
-				loadedCategories = categoryFacade.getCategoryHierarchy(store, 0, language, null);//null filter
+				loadedCategories = categoryFacadeApi.getCategoryHierarchy(store.toDTO(), 0, language, null);//null filter
 				objects = new ConcurrentHashMap<String, List<ReadableCategory>>();
 				objects.put(language.getCode(), loadedCategories);
 				webApplicationCache.putInCache(categoriesKey.toString(), objects);
@@ -624,7 +624,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 			}
 			
 		} else {
-			loadedCategories = categoryFacade.getCategoryHierarchy(store, 0, language, null);//null filter
+			loadedCategories = categoryFacadeApi.getCategoryHierarchy(store.toDTO(), 0, language, null);//null filter
 		}
 		
 		if(loadedCategories!=null) {
