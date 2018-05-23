@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.Validate;
@@ -13,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.product.PricingService;
-import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.availability.ProductAvailability;

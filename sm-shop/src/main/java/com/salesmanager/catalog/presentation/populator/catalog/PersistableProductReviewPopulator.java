@@ -5,13 +5,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import org.apache.commons.lang.Validate;
 
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
-import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.catalog.model.product.review.ProductReviewDescription;

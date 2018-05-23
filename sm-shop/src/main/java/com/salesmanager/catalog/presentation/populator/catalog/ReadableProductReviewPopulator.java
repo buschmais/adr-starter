@@ -3,8 +3,8 @@ package com.salesmanager.catalog.presentation.populator.catalog;
 import java.util.Set;
 
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.catalog.model.product.review.ProductReviewDescription;
 import com.salesmanager.core.model.reference.language.Language;

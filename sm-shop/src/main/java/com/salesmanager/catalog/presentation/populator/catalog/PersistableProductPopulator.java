@@ -1,6 +1,7 @@
 package com.salesmanager.catalog.presentation.populator.catalog;
 
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionService;
@@ -9,7 +10,6 @@ import com.salesmanager.catalog.business.service.product.manufacturer.Manufactur
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
-import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.attribute.ProductAttribute;

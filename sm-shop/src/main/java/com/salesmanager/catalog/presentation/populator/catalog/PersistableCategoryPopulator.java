@@ -1,10 +1,10 @@
 package com.salesmanager.catalog.presentation.populator.catalog;
 
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
-import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.category.CategoryDescription;
