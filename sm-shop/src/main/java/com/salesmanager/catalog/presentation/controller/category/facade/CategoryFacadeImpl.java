@@ -120,7 +120,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 			target = new Category();
 		}
 		
-		Category dbCategory = populator.populate(category, target, store, store.getDefaultLanguage());
+		Category dbCategory = populator.populate(category, target, store, languageService.getByCode(store.getDefaultLanguage()));
 		
 		this.saveCategory(store, dbCategory, null);
 		

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -67,7 +68,8 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 		Zone zone = zoneService.getByCode("VT");
 		Language en = languageService.getByCode("en");
 		
-		MerchantStore merchant = merchantService.getByCode( MerchantStore.DEFAULT_STORE );	
+		MerchantStore merchant = merchantService.getByCode( MerchantStore.DEFAULT_STORE );
+		MerchantStoreInfo storeInfo = merchantStoreInfoService.findbyCode(merchant.getCode());
 	
 		/** Create a customer **/
 		Customer customer = new Customer();	
@@ -112,7 +114,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	     * Create the category
 	     */
 	    Category shirts = new Category();
-	    shirts.setMerchantStore(merchant);
+	    shirts.setMerchantStore(storeInfo);
 	    shirts.setCode("shirts");
 
 	    CategoryDescription shirtsEnglishDescription = new CategoryDescription();
@@ -132,7 +134,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	     * Create a manufacturer
 	     */
 	    Manufacturer addidas = new Manufacturer();
-	    addidas.setMerchantStore(merchant);
+	    addidas.setMerchantStore(storeInfo);
 	    addidas.setCode("addidas");
 
 	    ManufacturerDescription addidasDesc = new ManufacturerDescription();
@@ -147,7 +149,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	     * Create an option
 	     */
 	    ProductOption option = new ProductOption();
-	    option.setMerchantStore(merchant);
+	    option.setMerchantStore(storeInfo);
 	    option.setCode("color");
 	    option.setProductOptionType(ProductOptionType.Radio.name());
 	    
@@ -164,7 +166,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	    
 	    /** first option value **/
 	    ProductOptionValue white = new ProductOptionValue();
-	    white.setMerchantStore(merchant);
+	    white.setMerchantStore(storeInfo);
 	    white.setCode("white");
 	    
 	    ProductOptionValueDescription whiteDescription = new ProductOptionValueDescription();
@@ -179,7 +181,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	    
 	    
 	    ProductOptionValue black = new ProductOptionValue();
-	    black.setMerchantStore(merchant);
+	    black.setMerchantStore(storeInfo);
 	    black.setCode("black");
 	    
 	    /** second option value **/
@@ -204,7 +206,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	    product.setSku("TB12345");
 	    product.setManufacturer(addidas);
 	    product.setType(generalType);
-	    product.setMerchantStore(merchant);
+	    product.setMerchantStore(storeInfo);
 
 	    // Product description
 	    ProductDescription description = new ProductDescription();

@@ -7,8 +7,8 @@ import java.util.Set;
 
 import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.business.service.product.PricingService;
-import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
+import com.salesmanager.shop.populator.catalog.ReadableProductPopulator;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;

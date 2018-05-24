@@ -7,6 +7,7 @@ package com.salesmanager.test.common;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -145,6 +146,9 @@ public class AbstractSalesManagerCoreTestCase {
 	
 	@Inject
 	protected EmailService emailService;
+
+	@Inject
+	protected MerchantStoreInfoService merchantStoreInfoService;
 	
 	@Before
 	public void init() throws ServiceException {

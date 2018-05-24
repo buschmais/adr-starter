@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -54,6 +55,7 @@ public class ShoppingCartTest extends com.salesmanager.test.common.AbstractSales
 	public void createShoppingCart() throws Exception {
 
         MerchantStore store = merchantService.getByCode( MerchantStore.DEFAULT_STORE );
+		MerchantStoreInfo storeInfo = merchantStoreInfoService.findbyCode(store.getCode());
         
 		
 	    Language en = languageService.getByCode("en");
@@ -67,7 +69,7 @@ public class ShoppingCartTest extends com.salesmanager.test.common.AbstractSales
 	     * Create the category
 	     */
 	    Category shirts = new Category();
-	    shirts.setMerchantStore(store);
+	    shirts.setMerchantStore(storeInfo);
 	    shirts.setCode("shirts");
 
 	    CategoryDescription shirtsEnglishDescription = new CategoryDescription();
@@ -87,7 +89,7 @@ public class ShoppingCartTest extends com.salesmanager.test.common.AbstractSales
 	     * Create a manufacturer
 	     */
 	    Manufacturer addidas = new Manufacturer();
-	    addidas.setMerchantStore(store);
+	    addidas.setMerchantStore(storeInfo);
 	    addidas.setCode("addidas");
 
 	    ManufacturerDescription addidasDesc = new ManufacturerDescription();
@@ -102,7 +104,7 @@ public class ShoppingCartTest extends com.salesmanager.test.common.AbstractSales
 	     * Create an option
 	     */
 	    ProductOption option = new ProductOption();
-	    option.setMerchantStore(store);
+	    option.setMerchantStore(storeInfo);
 	    option.setCode("color");
 	    option.setProductOptionType(ProductOptionType.Radio.name());
 	    
@@ -119,7 +121,7 @@ public class ShoppingCartTest extends com.salesmanager.test.common.AbstractSales
 	    
 	    /** first option value **/
 	    ProductOptionValue white = new ProductOptionValue();
-	    white.setMerchantStore(store);
+	    white.setMerchantStore(storeInfo);
 	    white.setCode("white");
 	    
 	    ProductOptionValueDescription whiteDescription = new ProductOptionValueDescription();
@@ -134,7 +136,7 @@ public class ShoppingCartTest extends com.salesmanager.test.common.AbstractSales
 	    
 	    
 	    ProductOptionValue black = new ProductOptionValue();
-	    black.setMerchantStore(store);
+	    black.setMerchantStore(storeInfo);
 	    black.setCode("black");
 	    
 	    /** second option value **/
@@ -159,7 +161,7 @@ public class ShoppingCartTest extends com.salesmanager.test.common.AbstractSales
 	    product.setSku("TB12345");
 	    product.setManufacturer(addidas);
 	    product.setType(generalType);
-	    product.setMerchantStore(store);
+	    product.setMerchantStore(storeInfo);
 
 	    // Product description
 	    ProductDescription description = new ProductDescription();

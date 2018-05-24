@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.junit.Ignore;
 import org.springframework.util.Assert;
 
@@ -64,6 +65,7 @@ public class ShippingQuoteByWeightTest extends com.salesmanager.test.common.Abst
 	    Zone zone = zoneService.getByCode("QC");
 
 	    MerchantStore store = merchantService.getByCode(MerchantStore.DEFAULT_STORE);
+		MerchantStoreInfo storeInfo = merchantStoreInfoService.findbyCode(store.getCode());
 	    ProductType generalType = productTypeService.getProductType(ProductType.GENERAL_TYPE);
 	    
 	    //set valid store postal code
@@ -76,7 +78,7 @@ public class ShippingQuoteByWeightTest extends com.salesmanager.test.common.Abst
 	    product.setProductWeight(new BigDecimal(8));
 	    product.setSku("TESTSKU");
 	    product.setType(generalType);
-	    product.setMerchantStore(store);
+	    product.setMerchantStore(storeInfo);
 
 	    // Product description
 	    ProductDescription description = new ProductDescription();

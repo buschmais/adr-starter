@@ -96,7 +96,7 @@ public class ShoppingCategoryRESTController {
 				return null;
 			}
 			
-			Language language = merchantStore.getDefaultLanguage();
+			Language language = languageService.getByCode(merchantStore.getDefaultLanguage());
 			
 			Map<String,Language> langs = languageService.getLanguagesMap();
 
@@ -109,7 +109,7 @@ public class ShoppingCategoryRESTController {
 			}
 			
 			if(language==null) {
-				language = merchantStore.getDefaultLanguage();
+				language = languageService.getByCode(merchantStore.getDefaultLanguage());
 			}
 			
 			

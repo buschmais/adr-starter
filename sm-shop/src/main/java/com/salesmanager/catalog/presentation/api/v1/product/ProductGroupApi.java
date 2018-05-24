@@ -1,5 +1,6 @@
 package com.salesmanager.catalog.presentation.api.v1.product;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
@@ -48,6 +49,9 @@ public class ProductGroupApi {
 	
 	@Inject
 	private StoreFacade storeFacade;
+
+	@Inject
+	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductGroupApi.class);
 	
@@ -71,7 +75,7 @@ public class ProductGroupApi {
 		
 		try {
 
-			MerchantStoreInfo merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+			MerchantStoreInfo merchantStore = merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			
@@ -100,7 +104,7 @@ public class ProductGroupApi {
     	
 		try {
     	
-	    	MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+	    	MerchantStoreInfo merchantStore = merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 			Language language = restUtils.getRESTLanguage(request, merchantStore);
 	    	
 	    	//get the product
@@ -132,7 +136,7 @@ public class ProductGroupApi {
     	
 		try {
     	
-	    	MerchantStore merchantStore = storeFacade.getByCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
+	    	MerchantStoreInfo merchantStore = merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 			Language language = restUtils.getRESTLanguage(request, merchantStore);
 	    	
 	    	//get the product

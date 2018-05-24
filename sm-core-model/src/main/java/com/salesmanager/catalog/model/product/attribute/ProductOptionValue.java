@@ -21,13 +21,14 @@ import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Pattern;
+
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.springframework.web.multipart.MultipartFile;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.salesmanager.core.constants.SchemaConstant;
 import com.salesmanager.common.model.SalesManagerEntity;
-import com.salesmanager.core.model.merchant.MerchantStore;
 
 
 @Entity
@@ -75,7 +76,7 @@ public class ProductOptionValue extends SalesManagerEntity<Long, ProductOptionVa
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="MERCHANT_ID", nullable=false)
-	private MerchantStore merchantStore;
+	private MerchantStoreInfo merchantStore;
 	
 	public ProductOptionValue() {
 	}
@@ -114,11 +115,11 @@ public class ProductOptionValue extends SalesManagerEntity<Long, ProductOptionVa
 		this.descriptions = descriptions;
 	}
 
-	public MerchantStore getMerchantStore() {
+	public MerchantStoreInfo getMerchantStore() {
 		return merchantStore;
 	}
 
-	public void setMerchantStore(MerchantStore merchantStore) {
+	public void setMerchantStore(MerchantStoreInfo merchantStore) {
 		this.merchantStore = merchantStore;
 	}
 

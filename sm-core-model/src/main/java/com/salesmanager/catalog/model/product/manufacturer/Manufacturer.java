@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.salesmanager.core.constants.SchemaConstant;
@@ -26,7 +27,6 @@ import com.salesmanager.core.model.common.audit.AuditListener;
 import com.salesmanager.core.model.common.audit.AuditSection;
 import com.salesmanager.core.model.common.audit.Auditable;
 import com.salesmanager.common.model.SalesManagerEntity;
-import com.salesmanager.core.model.merchant.MerchantStore;
 
 @Entity
 @EntityListeners(value = AuditListener.class)
@@ -55,7 +55,7 @@ public class Manufacturer extends SalesManagerEntity<Long, Manufacturer> impleme
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="MERCHANT_ID", nullable=false)
-	private MerchantStore merchantStore;
+	private MerchantStoreInfo merchantStore;
 	
 	@NotEmpty
 	@Column(name="CODE", length=100, nullable=false)
@@ -102,11 +102,11 @@ public class Manufacturer extends SalesManagerEntity<Long, Manufacturer> impleme
 
 
 
-	public MerchantStore getMerchantStore() {
+	public MerchantStoreInfo getMerchantStore() {
 		return merchantStore;
 	}
 
-	public void setMerchantStore(MerchantStore merchantStore) {
+	public void setMerchantStore(MerchantStoreInfo merchantStore) {
 		this.merchantStore = merchantStore;
 	}
 

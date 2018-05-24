@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -67,7 +68,7 @@ public class ProductTest extends com.salesmanager.test.common.AbstractSalesManag
 	    Language en = languageService.getByCode("en");
 	    Language fr = languageService.getByCode("fr");
 
-	    MerchantStore store = merchantService.getByCode(MerchantStore.DEFAULT_STORE);
+	    MerchantStoreInfo store = merchantStoreInfoService.findbyCode(MerchantStore.DEFAULT_STORE);
 	    ProductType generalType = productTypeService.getProductType(ProductType.GENERAL_TYPE);
 
 	    Category book = new Category();
@@ -435,7 +436,7 @@ public class ProductTest extends com.salesmanager.test.common.AbstractSalesManag
 		 * An attribute can be created dynamicaly but the attached Option and Option value need to exist
 		 */
 		
-		MerchantStore store = product.getMerchantStore();
+		MerchantStoreInfo store = product.getMerchantStore();
 		
 		Language en = languageService.getByCode("en");
 		
@@ -593,7 +594,7 @@ public class ProductTest extends com.salesmanager.test.common.AbstractSalesManag
 	
 	private void testCreateRelationShip(Product product) throws Exception {
 		
-		MerchantStore store = merchantService.getByCode(MerchantStore.DEFAULT_STORE);
+		MerchantStoreInfo store = merchantStoreInfoService.findbyCode(MerchantStore.DEFAULT_STORE);
 		Language en = languageService.getByCode("en");
 		Manufacturer oreilley = manufacturerService.getByCode(store, "oreilley");
 		ProductType generalType = productTypeService.getProductType(ProductType.GENERAL_TYPE);

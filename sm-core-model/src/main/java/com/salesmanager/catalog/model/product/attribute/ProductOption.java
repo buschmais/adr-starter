@@ -23,12 +23,11 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Pattern;
 
 
-
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.salesmanager.core.constants.SchemaConstant;
 import com.salesmanager.common.model.SalesManagerEntity;
-import com.salesmanager.core.model.merchant.MerchantStore;
 
 
 @Entity
@@ -58,7 +57,7 @@ public class ProductOption extends SalesManagerEntity<Long, ProductOption> {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="MERCHANT_ID", nullable=false)
-	private MerchantStore merchantStore;
+	private MerchantStoreInfo merchantStore;
 	
 	@Column(name="PRODUCT_OPTION_READ")
 	private boolean readOnly;
@@ -108,11 +107,11 @@ public class ProductOption extends SalesManagerEntity<Long, ProductOption> {
 
 
 
-	public MerchantStore getMerchantStore() {
+	public MerchantStoreInfo getMerchantStore() {
 		return merchantStore;
 	}
 
-	public void setMerchantStore(MerchantStore merchantStore) {
+	public void setMerchantStore(MerchantStoreInfo merchantStore) {
 		this.merchantStore = merchantStore;
 	}
 

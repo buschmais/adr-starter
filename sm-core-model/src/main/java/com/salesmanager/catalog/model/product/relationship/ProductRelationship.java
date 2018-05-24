@@ -12,10 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.constants.SchemaConstant;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.common.model.SalesManagerEntity;
-import com.salesmanager.core.model.merchant.MerchantStore;
 
 @Entity
 @Table(name = "PRODUCT_RELATIONSHIP", schema=SchemaConstant.SALESMANAGER_SCHEMA)
@@ -28,9 +28,9 @@ public class ProductRelationship extends SalesManagerEntity<Long, ProductRelatio
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN")
 	private Long id;
 	
-	@ManyToOne(targetEntity = MerchantStore.class)
+	@ManyToOne(targetEntity = MerchantStoreInfo.class)
 	@JoinColumn(name="MERCHANT_ID",nullable=false)  
-	private MerchantStore store;
+	private MerchantStoreInfo store;
 	
 	@ManyToOne(targetEntity = Product.class)
 	@JoinColumn(name="PRODUCT_ID",updatable=false,nullable=true) 
@@ -99,11 +99,11 @@ public class ProductRelationship extends SalesManagerEntity<Long, ProductRelatio
 
 
 
-	public MerchantStore getStore() {
+	public MerchantStoreInfo getStore() {
 		return store;
 	}
 
-	public void setStore(MerchantStore store) {
+	public void setStore(MerchantStoreInfo store) {
 		this.store = store;
 	}
 

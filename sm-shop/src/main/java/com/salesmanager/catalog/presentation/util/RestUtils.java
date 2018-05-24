@@ -38,7 +38,7 @@ public class RestUtils {
             //try with HttpSession
             language = (Language) request.getSession().getAttribute(Constants.LANGUAGE);
             if(language==null) {
-                language = store.getDefaultLanguage();
+                language = languageService.getByCode(store.getDefaultLanguage());
             }
 
             if(language==null) {
@@ -49,7 +49,7 @@ public class RestUtils {
             if(language==null) {
                 language = (Language) request.getSession().getAttribute(Constants.LANGUAGE);
                 if(language==null) {
-                    language = store.getDefaultLanguage();
+                    language = languageService.getByCode(store.getDefaultLanguage());
                 }
 
                 if(language==null) {

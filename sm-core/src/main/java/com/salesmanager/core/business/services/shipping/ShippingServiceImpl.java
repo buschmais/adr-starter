@@ -1,6 +1,7 @@
 package com.salesmanager.core.business.services.shipping;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.core.business.constants.ShippingConstants;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.product.PricingService;
@@ -55,7 +56,7 @@ public class ShippingServiceImpl implements ShippingService {
 	
 
 	@Inject
-	private PricingService pricingService;
+	private ProductPriceApi productPriceApi;
 	
 	@Inject
 	private ModuleConfigurationService moduleConfigurationService;
@@ -574,7 +575,7 @@ public class ShippingServiceImpl implements ShippingService {
 						selectedOption = option;
 					}
 					//set price text
-					String priceText = pricingService.getDisplayAmount(option.getOptionPrice(), store);
+					String priceText = productPriceApi.getStoreFormattedAmountWithCurrency(store.toDTO(), option.getOptionPrice());
 					option.setOptionPriceText(priceText);
 					option.setShippingModuleCode(moduleName);
 				

@@ -1,5 +1,6 @@
 package com.salesmanager.shop.admin.controller.orders;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.order.OrderService;
@@ -80,7 +81,9 @@ private static final Logger LOGGER = LoggerFactory.getLogger(OrderActionsControl
 	
 	@Inject
 	EmailTemplatesUtils emailTemplatesUtils;
-	
+
+	@Inject
+	private ProductPriceApi productPriceApi;
 	
 	
 	@PreAuthorize("hasRole('ORDER')")
@@ -340,7 +343,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(OrderActionsControl
 					entry.put("transactionDate", DateUtil.formatLongDate(transaction.getTransactionDate()));
 					entry.put("transactionType", transaction.getTransactionType().name());
 					entry.put("paymentType", transaction.getPaymentType().name());
-					entry.put("transactionAmount", pricingService.getStringAmount(transaction.getAmount(), store));
+					entry.put("transactionAmount", productPriceApi.getAdminFormattedAmount(store.toDTO(), transaction.getAmount()));
 					entry.put("transactionDetails", transaction.getTransactionDetails());
 					resp.addDataEntry(entry);
 				}

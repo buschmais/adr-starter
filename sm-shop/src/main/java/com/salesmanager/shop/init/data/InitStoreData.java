@@ -1,5 +1,7 @@
 package com.salesmanager.shop.init.data;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.ProductService;
@@ -137,6 +139,9 @@ public class InitStoreData implements InitData {
 	@Inject
 	private ProductRelationshipService productRelationshipService;
 
+	@Inject
+	private MerchantStoreInfoService merchantStoreInfoService;
+
 	public void initInitialData() throws ServiceException {
 		
 
@@ -152,11 +157,12 @@ public class InitStoreData implements InitData {
 		
 		//create a merchant
 		MerchantStore store = merchantService.getMerchantStore(MerchantStore.DEFAULT_STORE);
+		MerchantStoreInfo storeInfo = merchantStoreInfoService.findbyCode(store.getCode());
 		ProductType generalType = productTypeService.getProductType(ProductType.GENERAL_TYPE);
 		
 		
 		 Category book = new Category();
-		    book.setMerchantStore(store);
+		    book.setMerchantStore(storeInfo);
 		    book.setCode("computerbooks");
 		    book.setVisible(true);
 
@@ -181,7 +187,7 @@ public class InitStoreData implements InitData {
 		    categoryService.create(book);
 
 		    Category novs = new Category();
-		    novs.setMerchantStore(store);
+		    novs.setMerchantStore(storeInfo);
 		    novs.setCode("novels");
 		    novs.setVisible(false);
 
@@ -206,7 +212,7 @@ public class InitStoreData implements InitData {
 		    categoryService.create(novs);
 		    
 		    Category tech = new Category();
-		    tech.setMerchantStore(store);
+		    tech.setMerchantStore(storeInfo);
 		    tech.setCode("tech");
 
 		    CategoryDescription techEnglishDescription = new CategoryDescription();
@@ -233,7 +239,7 @@ public class InitStoreData implements InitData {
 		    categoryService.addChild(book, tech);
 
 		    Category web = new Category();
-		    web.setMerchantStore(store);
+		    web.setMerchantStore(storeInfo);
 		    web.setCode("web");
 		    web.setVisible(true);
 
@@ -263,7 +269,7 @@ public class InitStoreData implements InitData {
 
 
 		    Category fiction = new Category();
-		    fiction.setMerchantStore(store);
+		    fiction.setMerchantStore(storeInfo);
 		    fiction.setCode("fiction");
 		    fiction.setVisible(true);
 
@@ -292,7 +298,7 @@ public class InitStoreData implements InitData {
 		    
 		    
 		    Category business = new Category();
-		    business.setMerchantStore(store);
+		    business.setMerchantStore(storeInfo);
 		    business.setCode("business");
 		    business.setVisible(true);
 
@@ -320,7 +326,7 @@ public class InitStoreData implements InitData {
 		   		    
 		    
 		    Category cloud = new Category();
-		    cloud.setMerchantStore(store);
+		    cloud.setMerchantStore(storeInfo);
 		    cloud.setCode("cloud");
 		    cloud.setVisible(true);
 
@@ -351,7 +357,7 @@ public class InitStoreData implements InitData {
 		    // ProductType generalType = productTypeService.
 
 		    Manufacturer oreilley = new Manufacturer();
-		    oreilley.setMerchantStore(store);
+		    oreilley.setMerchantStore(storeInfo);
 		    oreilley.setCode("oreilley");
 
 		    ManufacturerDescription oreilleyd = new ManufacturerDescription();
@@ -364,7 +370,7 @@ public class InitStoreData implements InitData {
 		    
 		    
 		    Manufacturer sams = new Manufacturer();
-		    sams.setMerchantStore(store);
+		    sams.setMerchantStore(storeInfo);
 		    sams.setCode("sams");
 
 		    ManufacturerDescription samsd = new ManufacturerDescription();
@@ -376,7 +382,7 @@ public class InitStoreData implements InitData {
 		    manufacturerService.create(sams);
 		    
 		    Manufacturer packt = new Manufacturer();
-		    packt.setMerchantStore(store);
+		    packt.setMerchantStore(storeInfo);
 		    packt.setCode("packt");
 
 		    ManufacturerDescription packtd = new ManufacturerDescription();
@@ -388,7 +394,7 @@ public class InitStoreData implements InitData {
 		    manufacturerService.create(packt);
 
 		    Manufacturer manning = new Manufacturer();
-		    manning.setMerchantStore(store);
+		    manning.setMerchantStore(storeInfo);
 		    manning.setCode("manning");
 
 		    ManufacturerDescription manningd = new ManufacturerDescription();
@@ -400,7 +406,7 @@ public class InitStoreData implements InitData {
 		    manufacturerService.create(manning);
 
 		    Manufacturer novells = new Manufacturer();
-		    novells.setMerchantStore(store);
+		    novells.setMerchantStore(storeInfo);
 		    novells.setCode("novells");
 
 		    ManufacturerDescription novellsd = new ManufacturerDescription();
@@ -421,7 +427,7 @@ public class InitStoreData implements InitData {
 		    product.setSku("TB12345");
 		    product.setManufacturer(manning);
 		    product.setType(generalType);
-		    product.setMerchantStore(store);
+		    product.setMerchantStore(storeInfo);
 		    product.setProductShipeable(true);
 		    
 		    // Availability
@@ -481,7 +487,7 @@ public class InitStoreData implements InitData {
 		    product2.setSku("TB2468");
 		    product2.setManufacturer(packt);
 		    product2.setType(generalType);
-		    product2.setMerchantStore(store);
+		    product2.setMerchantStore(storeInfo);
 		    product2.setProductShipeable(true);
 
 		    // Product description
@@ -539,7 +545,7 @@ public class InitStoreData implements InitData {
 		    product3.setSku("NB1111");
 		    product3.setManufacturer(oreilley);
 		    product3.setType(generalType);
-		    product3.setMerchantStore(store);
+		    product3.setMerchantStore(storeInfo);
 		    product3.setProductShipeable(true);
 
 		    // Product description
@@ -595,7 +601,7 @@ public class InitStoreData implements InitData {
 		    product4.setSku("SF333345");
 		    product4.setManufacturer(sams);
 		    product4.setType(generalType);
-		    product4.setMerchantStore(store);
+		    product4.setMerchantStore(storeInfo);
 		    product4.setProductShipeable(true);
 
 		    // Product description
@@ -652,7 +658,7 @@ public class InitStoreData implements InitData {
 		    product5.setSku("SF333346");
 		    product5.setManufacturer(packt);
 		    product5.setType(generalType);
-		    product5.setMerchantStore(store);
+		    product5.setMerchantStore(storeInfo);
 		    product5.setProductShipeable(true);
 
 		    // Product description
@@ -712,7 +718,7 @@ public class InitStoreData implements InitData {
 		    product6.setSku("LL333444");
 		    product6.setManufacturer(novells);
 		    product6.setType(generalType);
-		    product6.setMerchantStore(store);
+		    product6.setMerchantStore(storeInfo);
 		    product6.setProductShipeable(true);
 
 		    // Product description
@@ -768,7 +774,7 @@ public class InitStoreData implements InitData {
 			ProductRelationship relationship = new ProductRelationship();
 			relationship.setActive(true);
 			relationship.setCode(ProductRelationshipType.FEATURED_ITEM.name());
-			relationship.setStore(store);
+			relationship.setStore(storeInfo);
 			relationship.setRelatedProduct(product);
 			
 			productRelationshipService.saveOrUpdate(relationship);
@@ -776,7 +782,7 @@ public class InitStoreData implements InitData {
 			relationship = new ProductRelationship();
 			relationship.setActive(true);
 			relationship.setCode(ProductRelationshipType.FEATURED_ITEM.name());
-			relationship.setStore(store);
+			relationship.setStore(storeInfo);
 			relationship.setRelatedProduct(product6);
 			
 			productRelationshipService.saveOrUpdate(relationship);
@@ -785,7 +791,7 @@ public class InitStoreData implements InitData {
 			relationship = new ProductRelationship();
 			relationship.setActive(true);
 			relationship.setCode(ProductRelationshipType.FEATURED_ITEM.name());
-			relationship.setStore(store);
+			relationship.setStore(storeInfo);
 			relationship.setRelatedProduct(product5);
 			
 			productRelationshipService.saveOrUpdate(relationship);
@@ -794,7 +800,7 @@ public class InitStoreData implements InitData {
 			relationship = new ProductRelationship();
 			relationship.setActive(true);
 			relationship.setCode(ProductRelationshipType.FEATURED_ITEM.name());
-			relationship.setStore(store);
+			relationship.setStore(storeInfo);
 			relationship.setRelatedProduct(product2);
 			
 			productRelationshipService.saveOrUpdate(relationship);

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.api.ProductPriceApi;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -16,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.merchant.MerchantStore;
@@ -64,7 +64,7 @@ public class PayPalExpressCheckoutPayment implements PaymentModule {
 	
 	
 	@Inject
-	private PricingService pricingService;
+	private ProductPriceApi productPriceApi;
 	
 	@Inject
 	private CoreConfiguration coreConfiguration;
@@ -174,7 +174,7 @@ public class PayPalExpressCheckoutPayment implements PaymentModule {
 				PaymentDetailsItemType item = new PaymentDetailsItemType();
 				BasicAmountType amt = new BasicAmountType();
 				amt.setCurrencyID(urn.ebay.apis.eBLBaseComponents.CurrencyCodeType.fromValue(payment.getCurrency().getCode()));
-				amt.setValue(pricingService.getStringAmount(cartItem.getFinalPrice().getFinalPrice(), store));
+				amt.setValue(productPriceApi.getAdminFormattedAmount(store.toDTO(), cartItem.getFinalPrice().getFinalPrice()));
 				//itemsTotal = itemsTotal.add(cartItem.getSubTotal());
 				int itemQuantity = cartItem.getQuantity();
 				item.setQuantity(itemQuantity);
@@ -193,7 +193,7 @@ public class PayPalExpressCheckoutPayment implements PaymentModule {
 				if(total.getModule().equals(Constants.OT_SHIPPING_MODULE_CODE)) {
 					BasicAmountType shipping = new BasicAmountType();
 					shipping.setCurrencyID(urn.ebay.apis.eBLBaseComponents.CurrencyCodeType.fromValue(store.getCurrency().getCode()));
-					shipping.setValue(pricingService.getStringAmount(total.getValue(), store));
+					shipping.setValue(productPriceApi.getAdminFormattedAmount(store.toDTO(), total.getValue()));
 					//System.out.println(pricingService.getStringAmount(total.getValue(), store));
 					paymentDetails.setShippingTotal(shipping);
 				}
@@ -201,7 +201,7 @@ public class PayPalExpressCheckoutPayment implements PaymentModule {
 				if(total.getModule().equals(Constants.OT_HANDLING_MODULE_CODE)) {
 					BasicAmountType handling = new BasicAmountType();
 					handling.setCurrencyID(urn.ebay.apis.eBLBaseComponents.CurrencyCodeType.fromValue(store.getCurrency().getCode()));
-					handling.setValue(pricingService.getStringAmount(total.getValue(), store));
+					handling.setValue(productPriceApi.getAdminFormattedAmount(store.toDTO(), total.getValue()));
 					//System.out.println(pricingService.getStringAmount(total.getValue(), store));
 					paymentDetails.setHandlingTotal(handling);
 				}
@@ -218,7 +218,7 @@ public class PayPalExpressCheckoutPayment implements PaymentModule {
 			if(tax!=null) {
 				BasicAmountType taxAmnt = new BasicAmountType();
 				taxAmnt.setCurrencyID(urn.ebay.apis.eBLBaseComponents.CurrencyCodeType.fromValue(store.getCurrency().getCode()));
-				taxAmnt.setValue(pricingService.getStringAmount(tax, store));
+				taxAmnt.setValue(productPriceApi.getAdminFormattedAmount(store.toDTO(), tax));
 				//System.out.println(pricingService.getStringAmount(tax, store));
 				paymentDetails.setTaxTotal(taxAmnt);
 			}
@@ -227,13 +227,13 @@ public class PayPalExpressCheckoutPayment implements PaymentModule {
 
 			BasicAmountType itemTotal = new BasicAmountType();
 			itemTotal.setCurrencyID(urn.ebay.apis.eBLBaseComponents.CurrencyCodeType.fromValue(store.getCurrency().getCode()));
-			itemTotal.setValue(pricingService.getStringAmount(summary.getSubTotal(), store));
+			itemTotal.setValue(productPriceApi.getAdminFormattedAmount(store.toDTO(), summary.getSubTotal()));
 			paymentDetails.setItemTotal(itemTotal);
 			
 			paymentDetails.setPaymentDetailsItem(lineItems);
 			BasicAmountType orderTotal = new BasicAmountType();
 			orderTotal.setCurrencyID(urn.ebay.apis.eBLBaseComponents.CurrencyCodeType.fromValue(store.getCurrency().getCode()));
-			orderTotal.setValue(pricingService.getStringAmount(summary.getTotal(), store));
+			orderTotal.setValue(productPriceApi.getAdminFormattedAmount(store.toDTO(), summary.getTotal()));
 			//System.out.println(pricingService.getStringAmount(itemsTotal, store));
 			paymentDetails.setOrderTotal(orderTotal);
 			List<PaymentDetailsType> paymentDetailsList = new ArrayList<PaymentDetailsType>();
@@ -373,7 +373,7 @@ public class PayPalExpressCheckoutPayment implements PaymentModule {
 			 refundTransactionRequest.setRefundType(refundType);
 			 
 			 BasicAmountType refundAmount = new BasicAmountType();
-			 refundAmount.setValue(pricingService.getStringAmount(amount, store));
+			 refundAmount.setValue(productPriceApi.getAdminFormattedAmount(store.toDTO(), amount));
 			 refundAmount.setCurrencyID(urn.ebay.apis.eBLBaseComponents.CurrencyCodeType.fromValue(order.getCurrency().getCode()));
 
 			 refundTransactionRequest.setAmount(refundAmount);
@@ -472,7 +472,7 @@ public class PayPalExpressCheckoutPayment implements PaymentModule {
 			 /** IPN **/
 			 //paymentDetail.setNotifyURL("http://replaceIpnUrl.com");
 			 BasicAmountType orderTotal = new BasicAmountType();
-			 orderTotal.setValue(pricingService.getStringAmount(amount, store));
+			 orderTotal.setValue(productPriceApi.getAdminFormattedAmount(store.toDTO(), amount));
 			 orderTotal.setCurrencyID(urn.ebay.apis.eBLBaseComponents.CurrencyCodeType.fromValue(payment.getCurrency().getCode()));
 			 paymentDetail.setOrderTotal(orderTotal);
 			 paymentDetail.setButtonSource("Shopizer_Cart_AP");
@@ -580,7 +580,7 @@ public class PayPalExpressCheckoutPayment implements PaymentModule {
 
 				
 				 BasicAmountType amount = new BasicAmountType();
-				 amount.setValue(pricingService.getStringAmount(order.getTotal(), store));
+				 amount.setValue(productPriceApi.getAdminFormattedAmount(store.toDTO(), order.getTotal()));
 				 amount.setCurrencyID(urn.ebay.apis.eBLBaseComponents.CurrencyCodeType.fromValue(order.getCurrency().getCode()));
 
 				// DoCaptureRequest which takes mandatory params:

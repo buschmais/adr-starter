@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -61,6 +63,9 @@ public class InitializationDatabaseImpl implements InitializationDatabase {
 	
 	@Inject
 	protected MerchantStoreService merchantService;
+
+	@Inject
+	private MerchantStoreInfoService merchantStoreInfoService;
 		
 	@Inject
 	protected ProductTypeService productTypeService;
@@ -222,6 +227,7 @@ public class InitializationDatabaseImpl implements InitializationDatabase {
 		store.setLanguages(supportedLanguages);
 		
 		merchantService.create(store);
+		MerchantStoreInfo storeInfo = this.merchantStoreInfoService.findbyCode(store.getCode());
 		
 		
 		TaxClass taxclass = new TaxClass(TaxClass.DEFAULT_TAX_CLASS);
@@ -232,7 +238,7 @@ public class InitializationDatabaseImpl implements InitializationDatabase {
 		//create default manufacturer
 		Manufacturer defaultManufacturer = new Manufacturer();
 		defaultManufacturer.setCode("DEFAULT");
-		defaultManufacturer.setMerchantStore(store);
+		defaultManufacturer.setMerchantStore(storeInfo);
 		
 		ManufacturerDescription manufacturerDescription = new ManufacturerDescription();
 		manufacturerDescription.setLanguage(en);

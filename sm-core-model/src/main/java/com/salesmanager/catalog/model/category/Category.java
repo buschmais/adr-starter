@@ -20,13 +20,13 @@ import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.salesmanager.core.constants.SchemaConstant;
 import com.salesmanager.core.model.common.audit.AuditSection;
 import com.salesmanager.core.model.common.audit.Auditable;
 import com.salesmanager.common.model.SalesManagerEntity;
-import com.salesmanager.core.model.merchant.MerchantStore;
 
 @Entity
 @EntityListeners(value = com.salesmanager.core.model.common.audit.AuditListener.class)
@@ -52,7 +52,7 @@ public class Category extends SalesManagerEntity<Long, Category> implements Audi
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="MERCHANT_ID", nullable=false)
-	private MerchantStore merchantStore;
+	private MerchantStoreInfo merchantStore;
 	
 	@ManyToOne
 	@JoinColumn(name = "PARENT_ID")
@@ -97,7 +97,7 @@ public class Category extends SalesManagerEntity<Long, Category> implements Audi
 	public Category() {
 	}
 	
-	public Category(MerchantStore store) {
+	public Category(MerchantStoreInfo store) {
 		this.merchantStore = store;
 		this.id = 0L;
 	}
@@ -189,11 +189,11 @@ public class Category extends SalesManagerEntity<Long, Category> implements Audi
 
 
 
-	public MerchantStore getMerchantStore() {
+	public MerchantStoreInfo getMerchantStore() {
 		return merchantStore;
 	}
 
-	public void setMerchantStore(MerchantStore merchantStore) {
+	public void setMerchantStore(MerchantStoreInfo merchantStore) {
 		this.merchantStore = merchantStore;
 	}
 

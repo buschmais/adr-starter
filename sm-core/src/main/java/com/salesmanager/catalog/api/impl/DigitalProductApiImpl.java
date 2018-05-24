@@ -6,6 +6,7 @@ import com.salesmanager.catalog.business.service.product.file.DigitalProductServ
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.file.DigitalProduct;
+import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ public class DigitalProductApiImpl implements DigitalProductApi {
     }
 
     @Override
-    public DigitalProduct getByProduct(MerchantStoreDTO store, Product product) {
+    public DigitalProduct getByProduct(MerchantStoreDTO store, Product product) throws ServiceException {
         MerchantStoreInfo storeInfo = this.merchantStoreInfoService.findbyCode(store.getCode());
         return digitalProductService.getByProduct(storeInfo, product);
     }

@@ -26,6 +26,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Pattern;
 
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -43,7 +44,6 @@ import com.salesmanager.core.model.common.audit.AuditSection;
 import com.salesmanager.core.model.common.audit.Auditable;
 import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.common.model.SalesManagerEntity;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.tax.taxclass.TaxClass;
 
 
@@ -81,7 +81,7 @@ public class Product extends SalesManagerEntity<Long, Product> implements Audita
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="MERCHANT_ID", nullable=false)
-	private MerchantStore merchantStore;
+	private MerchantStoreInfo merchantStore;
 	
 	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.REFRESH})
 	@JoinTable(name = "PRODUCT_CATEGORY", schema=SchemaConstant.SALESMANAGER_SCHEMA, joinColumns = { 
@@ -402,11 +402,11 @@ public class Product extends SalesManagerEntity<Long, Product> implements Audita
 		this.categories = categories;
 	}
 
-	public MerchantStore getMerchantStore() {
+	public MerchantStoreInfo getMerchantStore() {
 		return merchantStore;
 	}
 
-	public void setMerchantStore(MerchantStore merchantStore) {
+	public void setMerchantStore(MerchantStoreInfo merchantStore) {
 		this.merchantStore = merchantStore;
 	}
 
