@@ -141,7 +141,7 @@ public class ProductController {
 		
 		List<ProductType> productTypes = productTypeService.list();
 		
-		List<TaxClass> taxClasses = taxClassService.listByStore(store);
+		List<TaxClass> taxClasses = taxClassService.listByStore(store.getId());
 		
 		List<Language> languages = store.getLanguages();
 		
@@ -283,7 +283,7 @@ public class ProductController {
 		
 		List<ProductType> productTypes = productTypeService.list();
 		
-		List<TaxClass> taxClasses = taxClassService.listByStore(store);
+		List<TaxClass> taxClasses = taxClassService.listByStore(store.getId());
 		
 		List<Language> languages = store.getLanguages();
 		
@@ -572,7 +572,7 @@ public class ProductController {
 		
 		List<Manufacturer> manufacturers = manufacturerService.listByStore(store, language);
 		List<ProductType> productTypes = productTypeService.list();
-		List<TaxClass> taxClasses = taxClassService.listByStore(store);
+		List<TaxClass> taxClasses = taxClassService.listByStore(store.getId());
 
 		model.addAttribute("manufacturers", manufacturers);
 		model.addAttribute("productTypes", productTypes);

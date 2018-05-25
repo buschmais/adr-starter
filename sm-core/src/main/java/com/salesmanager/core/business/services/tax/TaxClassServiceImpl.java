@@ -29,7 +29,12 @@ public class TaxClassServiceImpl extends SalesManagerEntityServiceImpl<Long, Tax
 	public List<TaxClass> listByStore(MerchantStore store) throws ServiceException {	
 		return taxClassRepository.findByStore(store.getId());
 	}
-	
+
+	@Override
+	public List<TaxClass> listByStore(Integer storeId) throws ServiceException {
+		return taxClassRepository.findByStore(storeId);
+	}
+
 	@Override
 	public TaxClass getByCode(String code) throws ServiceException {
 		return taxClassRepository.findByCode(code);
