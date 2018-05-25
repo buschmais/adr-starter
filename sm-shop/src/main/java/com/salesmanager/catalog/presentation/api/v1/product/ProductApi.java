@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.RestUtils;
+import com.salesmanager.core.business.services.reference.language.LanguageService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,6 +72,9 @@ public class ProductApi {
 	
 	@Inject
 	private RestUtils restUtils;
+
+	@Inject
+	private LanguageService languageService;
 	
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductApi.class);
@@ -108,7 +112,8 @@ public class ProductApi {
 		try {
 			
 			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			productFacade.saveProduct(merchantStore, product, merchantStore.getDefaultLanguage());
+			Language language = languageService.getByCode(merchantStore.getDefaultLanguage());
+			productFacade.saveProduct(merchantStore, product, language);
 			
 			return product;
 			
