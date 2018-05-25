@@ -3,6 +3,7 @@ package com.salesmanager.core.model.merchant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -352,7 +353,18 @@ public class MerchantStore extends SalesManagerEntity<Integer, MerchantStore> im
 
 	@Override
 	public MerchantStoreDTO toDTO() {
-		return new MerchantStoreDTO(this.id, this.code, this.currency.getCode(), this.defaultLanguage.getCode(), this.country.getIsoCode(), this.currencyFormatNational);
+		List<String> languages = this.languages.stream().map(Language::getCode).collect(Collectors.toList());
+		return new MerchantStoreDTO(
+				this.id,
+				this.code,
+				this.currency.getCode(),
+				this.defaultLanguage.getCode(),
+				this.country.getIsoCode(),
+				this.currencyFormatNational,
+				this.useCache,
+				this.storeTemplate,
+				this.domainName,
+				languages);
 	}
 
 }

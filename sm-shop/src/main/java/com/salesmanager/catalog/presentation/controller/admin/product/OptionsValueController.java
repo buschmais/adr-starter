@@ -404,8 +404,7 @@ public class OptionsValueController {
 			ProductOptionValue optionValue = productOptionValueService.getById(store, id);
 
 			contentService.removeFile(store.getCode(), FileContentType.PROPERTY, optionValue.getProductOptionValueImage());
-			
-			store.setStoreLogo(null);
+
 			optionValue.setProductOptionValueImage(null);
 			productOptionValueService.update(optionValue);
 		

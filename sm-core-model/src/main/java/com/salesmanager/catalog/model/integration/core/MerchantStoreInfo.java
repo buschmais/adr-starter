@@ -1,12 +1,14 @@
 package com.salesmanager.catalog.model.integration.core;
 
 import com.salesmanager.core.constants.SchemaConstant;
-import com.salesmanager.core.model.reference.currency.Currency;
+import com.salesmanager.core.model.reference.language.Language;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "MERCHANT_STORE_INFO", schema = SchemaConstant.SALESMANAGER_SCHEMA)
@@ -37,4 +39,18 @@ public class MerchantStoreInfo {
 
     @Column(name = "CURRENCY_FORMAT_NATIONAL")
     private boolean currencyFormatNational;
+
+    @Column(name = "USE_CACHE")
+    private boolean useCache = false;
+
+    @Column(name="STORE_TEMPLATE", length=25)
+    private String storeTemplate;
+
+    @Column(name="DOMAIN_NAME", length=80)
+    private String domainName;
+
+    @NotEmpty
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "MERCHANT_INFO_LANGUAGE")
+    private List<Language> languages = new ArrayList<>();
 }

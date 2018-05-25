@@ -4,6 +4,7 @@ import com.salesmanager.core.integration.AbstractCoreDTO;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,5 +23,13 @@ public class MerchantStoreDTO extends AbstractCoreDTO {
     private String countryIsoCode;
 
     private boolean currencyFormatNational;
+
+    private boolean useCache;
+
+    private String storeTemplate;
+
+    private String domainName;
+
+    private List<String> languages;
 
 }
