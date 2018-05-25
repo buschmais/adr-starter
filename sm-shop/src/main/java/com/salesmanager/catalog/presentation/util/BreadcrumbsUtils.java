@@ -231,7 +231,7 @@ public class BreadcrumbsUtils {
 
 	private String getStoreUri(MerchantStoreInfo store, String contextPath) {
 		MultiValueMap<String, Object> parameter = new LinkedMultiValueMap<>();
-		parameter.add("store", store.toDTO());
+		parameter.add("store", store.getCode());
 		parameter.add("contextPath", contextPath);
 
 		if (catalogCache.get(STORE_URI_KEY) == null) {

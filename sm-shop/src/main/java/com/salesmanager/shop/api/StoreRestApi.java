@@ -25,8 +25,8 @@ public class StoreRestApi {
 
     @RequestMapping(value = "/shop/uri", method = POST)
     @ResponseBody
-    public String getStoreUri(@RequestPart(name = "store", value = "store") MerchantStoreDTO storeDTO, @RequestParam("contextPath") String contextPath) throws ServiceException {
-        MerchantStore store = merchantStoreService.getByCode(storeDTO.getCode());
+    public String getStoreUri(@RequestParam("store") String storeCode, @RequestParam("contextPath") String contextPath) throws ServiceException {
+        MerchantStore store = merchantStoreService.getByCode(storeCode);
         return filePathUtils.buildStoreUri(store, contextPath)  + Constants.SHOP_URI;
     }
 
