@@ -23,11 +23,18 @@ public class StoreRestApi {
     @Inject
     MerchantStoreService merchantStoreService;
 
-    @RequestMapping(value = "/shop/uri", method = POST)
+    @RequestMapping(value = "/uri", method = POST)
     @ResponseBody
     public String getStoreUri(@RequestParam("store") String storeCode, @RequestParam("contextPath") String contextPath) throws ServiceException {
         MerchantStore store = merchantStoreService.getByCode(storeCode);
-        return filePathUtils.buildStoreUri(store, contextPath)  + Constants.SHOP_URI;
+        return filePathUtils.buildStoreUri(store, contextPath);
+    }
+
+    @RequestMapping(value = "/uri/relative", method = POST)
+    @ResponseBody
+    public String getRelativeStoreUri(@RequestParam("store") String storeCode, @RequestParam("contextPath") String contextPath) throws ServiceException {
+        MerchantStore store = merchantStoreService.getByCode(storeCode);
+        return filePathUtils.buildRelativeStoreUri(store, contextPath);
     }
 
 }

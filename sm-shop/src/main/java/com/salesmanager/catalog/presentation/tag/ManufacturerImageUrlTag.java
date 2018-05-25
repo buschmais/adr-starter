@@ -6,6 +6,7 @@ import javax.servlet.jsp.JspException;
 
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.catalog.presentation.util.UriUtils;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +49,9 @@ public class ManufacturerImageUrlTag extends RequestContextAwareTag {
 	@Autowired
 	private MerchantStoreInfoService merchantStoreInfoService;
 
+	@Autowired
+	private UriUtils uriUtils;
+
 	public int doStartTagInternal() throws JspException {
 		try {
 			
@@ -66,7 +70,7 @@ public class ManufacturerImageUrlTag extends RequestContextAwareTag {
 			
 			StringBuilder imagePath = new StringBuilder();
 			
-			String baseUrl = filePathUtils.buildStoreUri(merchantStore, request);
+			String baseUrl = uriUtils.getStoreUri(merchantStore, request.getContextPath());
 			imagePath.append(baseUrl);
 			
 			pageContext.getOut().print(imagePath.toString());

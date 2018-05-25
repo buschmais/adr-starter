@@ -33,21 +33,14 @@ public class BreadcrumbsUtils {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(BreadcrumbsUtils.class);
 
+	@Autowired
+	private UriUtils uriUtils;
 
-	@Inject
-	private LabelUtils messages;
-	
 	@Inject
 	private CategoryService categoryService;
 
-	@Value("#{catalogEhCacheManager.getCache('catalogCache')}")
-	private Cache catalogCache;
-
-	@Autowired
-	@Qualifier("coreRestTemplate")
-	private RestTemplate coreRestTemplate;
-
-	private static final String STORE_URI_KEY = "STORE_URI";
+	@Inject
+	private LabelUtils messages;
 	
 	public Breadcrumb buildCategoryBreadcrumb(ReadableCategory categoryClicked, MerchantStoreInfo store, Language language, String contextPath) throws Exception {
 		
@@ -55,7 +48,7 @@ public class BreadcrumbsUtils {
 		BreadcrumbItem home = new BreadcrumbItem();
 		home.setItemType(BreadcrumbItemType.HOME);
 		home.setLabel(messages.getMessage(Constants.HOME_MENU_KEY, new Locale(language.getCode())));
-		home.setUrl(getStoreUri(store, contextPath));
+		home.setUrl(uriUtils.getStoreUri(store, contextPath) + Constants.SHOP_URI);
 
 		Breadcrumb breadCrumb = new Breadcrumb();
 		breadCrumb.setLanguage(language.getCode());
@@ -106,7 +99,7 @@ public class BreadcrumbsUtils {
 		BreadcrumbItem home = new BreadcrumbItem();
 		home.setItemType(BreadcrumbItemType.HOME);
 		home.setLabel(messages.getMessage(Constants.HOME_MENU_KEY, new Locale(language.getCode())));
-		home.setUrl(getStoreUri(store, contextPath));
+		home.setUrl(uriUtils.getStoreUri(store, contextPath) + Constants.SHOP_URI);
 
 		Breadcrumb breadCrumb = new Breadcrumb();
 		breadCrumb.setLanguage(language.getCode());
@@ -203,7 +196,7 @@ public class BreadcrumbsUtils {
 
 	private String buildCategoryUrl(MerchantStoreInfo store, String contextPath, String url) {
 		StringBuilder resourcePath = new StringBuilder();
-		resourcePath.append(getStoreUri(store, contextPath))
+		resourcePath.append(uriUtils.getStoreUri(store, contextPath))
 
 				.append(Constants.SHOP_URI)
 
@@ -218,7 +211,7 @@ public class BreadcrumbsUtils {
 
 	private String buildProductUrl(MerchantStoreInfo store, String contextPath, String url) {
 		StringBuilder resourcePath = new StringBuilder();
-		resourcePath.append(getStoreUri(store, contextPath))
+		resourcePath.append(uriUtils.getStoreUri(store, contextPath))
 				.append(Constants.SHOP_URI)
 				.append(Constants.PRODUCT_URI)
 				.append(Constants.SLASH)
@@ -227,18 +220,6 @@ public class BreadcrumbsUtils {
 
 		return resourcePath.toString();
 
-	}
-
-	private String getStoreUri(MerchantStoreInfo store, String contextPath) {
-		MultiValueMap<String, Object> parameter = new LinkedMultiValueMap<>();
-		parameter.add("store", store.getCode());
-		parameter.add("contextPath", contextPath);
-
-		if (catalogCache.get(STORE_URI_KEY) == null) {
-			String shopUrl = coreRestTemplate.postForObject("/store/shop/uri", parameter, String.class);
-			catalogCache.put(STORE_URI_KEY, shopUrl);
-		}
-		return (String) catalogCache.get(STORE_URI_KEY).get();
 	}
 
 }

@@ -9,6 +9,7 @@ import javax.servlet.jsp.JspException;
 
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.catalog.presentation.util.CatalogFilePathUtils;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,6 @@ import org.springframework.web.servlet.tags.RequestContextAwareTag;
 
 import com.salesmanager.catalog.model.product.file.DigitalProduct;
 import com.salesmanager.shop.constants.Constants;
-import com.salesmanager.shop.utils.FilePathUtils;
 
 
 
@@ -36,7 +36,7 @@ public class AdminProductDownloadUrlTag extends RequestContextAwareTag {
 	private DigitalProduct digitalProduct;
 	
 	@Inject
-	private FilePathUtils filePathUtils;
+	private CatalogFilePathUtils filePathUtils;
 
 	@Autowired
 	private MerchantStoreInfoService merchantStoreInfoService;

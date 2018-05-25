@@ -7,6 +7,7 @@ import javax.servlet.jsp.JspException;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
+import com.salesmanager.catalog.presentation.util.UriUtils;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,6 @@ import org.springframework.web.servlet.tags.RequestContextAwareTag;
 
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.shop.constants.Constants;
-import com.salesmanager.shop.utils.FilePathUtils;
 
 public class ProductImageUrlTag extends RequestContextAwareTag {
 	
@@ -35,7 +35,7 @@ public class ProductImageUrlTag extends RequestContextAwareTag {
 	private Product product;
 	
 	@Inject
-	private FilePathUtils filePathUtils;
+	private UriUtils filePathUtils;
 
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
@@ -61,7 +61,7 @@ public class ProductImageUrlTag extends RequestContextAwareTag {
 
 			StringBuilder imagePath = new StringBuilder();
 			
-			String baseUrl = filePathUtils.buildRelativeStoreUri(request, merchantStore);
+			String baseUrl = filePathUtils.getRelativeStoreUri(merchantStore, request.getContextPath());
 			imagePath.append(baseUrl);
 			
 			imagePath

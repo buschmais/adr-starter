@@ -25,9 +25,6 @@ public class FilePathUtils {
 	@Qualifier("img")
 	private ImageFilePath imageUtils;
 	
-	
-	private final static String DOWNLOADS = "/downloads/";
-	
 	private final static String DOUBLE_SLASH = "://";
 	
 	
@@ -40,10 +37,6 @@ public class FilePathUtils {
 	 */
 	public String buildStaticFilePath(MerchantStore store, String imageName) {
 		return new StringBuilder().append(Constants.FILES_URI).append(Constants.SLASH).append(store.getCode()).append(Constants.SLASH).append(imageName).toString();
-	}
-	
-	public String buildAdminDownloadProductFilePath(MerchantStore store, DigitalProduct digitalProduct) {
-		return new StringBuilder().append(Constants.ADMIN_URI).append(Constants.FILES_URI).append(DOWNLOADS).append(store.getCode()).append(Constants.SLASH).append(digitalProduct.getProductFileName()).toString();
 	}
 	
 	public String buildOrderDownloadProductFilePath(MerchantStore store, ReadableOrderProductDownload digitalProduct, Long orderId) {
@@ -123,18 +116,22 @@ public class FilePathUtils {
 	}
 	
 	public String buildRelativeStoreUri(HttpServletRequest request, MerchantStore store) {
-		
+		return buildRelativeStoreUri(store, request.getContextPath());
+	}
+
+	public String buildRelativeStoreUri(MerchantStore store, String contextPath) {
+
 		StringBuilder resourcePath = new StringBuilder();
-		
-		String path = request.getContextPath();
+
+		String path = contextPath;
 		if(Constants.SLASH.equals(path)) {
 			path = Constants.BLANK;
 		}
 
 		resourcePath.append(path);
-		
+
 		return resourcePath.toString();
-		
+
 	}
 	
 	private String buildBaseUrl(HttpServletRequest request, MerchantStore store) {

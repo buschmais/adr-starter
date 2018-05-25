@@ -6,6 +6,7 @@ import javax.servlet.jsp.JspException;
 
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.catalog.presentation.util.UriUtils;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ public class ProductDescriptionUrlTag extends RequestContextAwareTag {
 	private ProductDescription productDescription;
 	
 	@Inject
-	private FilePathUtils filePathUtils;
+	private UriUtils filePathUtils;
 
 	@Autowired
 	private MerchantStoreInfoService merchantStoreInfoService;
@@ -66,7 +67,7 @@ public class ProductDescriptionUrlTag extends RequestContextAwareTag {
 			
 			StringBuilder productPath = new StringBuilder();
 			
-			String baseUrl = filePathUtils.buildStoreUri(merchantStore, request);
+			String baseUrl = filePathUtils.getStoreUri(merchantStore, request.getContextPath());
 			productPath.append(baseUrl);
 			
 			if(!StringUtils.isBlank(this.getProductDescription().getSeUrl())) {
