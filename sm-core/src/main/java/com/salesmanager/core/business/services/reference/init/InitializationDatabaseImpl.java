@@ -92,11 +92,11 @@ public class InitializationDatabaseImpl implements InitializationDatabase {
 	public boolean isEmpty() {
 		return languageService.count() == 0;
 	}
-	
+
 	@Transactional
-	public void populate(String contextName) throws ServiceException {
+	public void initCore(String contextName) throws ServiceException {
 		this.name =  contextName;
-		
+
 		createLanguages();
 		createCountries();
 		createZones();
@@ -104,10 +104,14 @@ public class InitializationDatabaseImpl implements InitializationDatabase {
 		createSubReferences();
 		createModules();
 		createMerchant();
-
-
 	}
-	
+
+	@Transactional
+	public void initCatalog(String contextName) throws ServiceException {
+		this.name = contextName;
+
+		createManufacturer();
+	}
 
 
 	private void createCurrencies() throws ServiceException {
@@ -227,27 +231,12 @@ public class InitializationDatabaseImpl implements InitializationDatabase {
 		store.setLanguages(supportedLanguages);
 		
 		merchantService.create(store);
-		MerchantStoreInfo storeInfo = this.merchantStoreInfoService.findbyCode(store.getCode());
 		
 		
 		TaxClass taxclass = new TaxClass(TaxClass.DEFAULT_TAX_CLASS);
 		taxclass.setMerchantStore(store);
 		
 		taxClassService.create(taxclass);
-		
-		//create default manufacturer
-		Manufacturer defaultManufacturer = new Manufacturer();
-		defaultManufacturer.setCode("DEFAULT");
-		defaultManufacturer.setMerchantStore(storeInfo);
-		
-		ManufacturerDescription manufacturerDescription = new ManufacturerDescription();
-		manufacturerDescription.setLanguage(en);
-		manufacturerDescription.setName("DEFAULT");
-		manufacturerDescription.setManufacturer(defaultManufacturer);
-		manufacturerDescription.setDescription("DEFAULT");
-		defaultManufacturer.getDescriptions().add(manufacturerDescription);
-		
-		manufacturerService.create(defaultManufacturer);
 		
 		
 	}
@@ -278,10 +267,25 @@ public class InitializationDatabaseImpl implements InitializationDatabase {
 		ProductType productType = new ProductType();
 		productType.setCode(ProductType.GENERAL_TYPE);
 		productTypeService.create(productType);
-
-
 		
-		
+	}
+
+	private void createManufacturer() throws ServiceException {
+		MerchantStoreInfo storeInfo = this.merchantStoreInfoService.findbyCode(MerchantStore.DEFAULT_STORE);
+		Language en = languageService.getByCode("en");
+		//create default manufacturer
+		Manufacturer defaultManufacturer = new Manufacturer();
+		defaultManufacturer.setCode("DEFAULT");
+		defaultManufacturer.setMerchantStore(storeInfo);
+
+		ManufacturerDescription manufacturerDescription = new ManufacturerDescription();
+		manufacturerDescription.setLanguage(en);
+		manufacturerDescription.setName("DEFAULT");
+		manufacturerDescription.setManufacturer(defaultManufacturer);
+		manufacturerDescription.setDescription("DEFAULT");
+		defaultManufacturer.getDescriptions().add(manufacturerDescription);
+
+		manufacturerService.create(defaultManufacturer);
 	}
 	
 

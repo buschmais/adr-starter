@@ -165,7 +165,8 @@ public class AbstractSalesManagerCoreTestCase {
 	private void populate() throws ServiceException {
 		
 		
-		initializationDatabase.populate("TEST");
+		initializationDatabase.initCore("TEST");
+		initializationDatabase.initCatalog("TEST");
 		
 
 	}

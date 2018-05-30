@@ -6,6 +6,9 @@ public interface InitializationDatabase {
 	
 	boolean isEmpty();
 	
-	void populate(String name) throws ServiceException;
+	void initCore(String name) throws ServiceException;
+
+	void initCatalog(String name) throws ServiceException;
+
 
 }

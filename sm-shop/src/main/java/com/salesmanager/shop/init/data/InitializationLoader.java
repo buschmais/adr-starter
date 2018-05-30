@@ -101,7 +101,8 @@ public class InitializationLoader {
 				
 				LOGGER.info(String.format("%s : Shopizer database is empty, populate it....", "sm-shop"));
 		
-				 initializationDatabase.populate("sm-shop");
+				 initializationDatabase.initCore("sm-shop");
+				 initializationDatabase.initCatalog("sm-shop");
 				
 				 MerchantStore store = merchantService.getByCode(MerchantStore.DEFAULT_STORE);
 				
