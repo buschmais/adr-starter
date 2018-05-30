@@ -17,6 +17,7 @@ import javax.inject.Inject;
 
 import com.salesmanager.catalog.api.CatalogImageFilePathApi;
 import com.salesmanager.catalog.api.DigitalProductApi;
+import com.salesmanager.catalog.api.ProductApi;
 import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
@@ -119,6 +120,10 @@ public class OrderFacadeImpl implements OrderFacade {
 	private OrderService orderService;
 	@Inject
 	private ProductService productService;
+
+	@Autowired
+	private ProductApi productApi;
+
 	@Inject
 	private ProductAttributeService productAttributeService;
 	@Inject
@@ -977,7 +982,7 @@ public class OrderFacadeImpl implements OrderFacade {
         for(OrderProduct p : order.getOrderProducts()) {
             ReadableOrderProductPopulator orderProductPopulator = new ReadableOrderProductPopulator();
             orderProductPopulator.setLocale(locale);
-            orderProductPopulator.setProductService(productService);
+            orderProductPopulator.setProductApi(productApi);
             orderProductPopulator.setProductPriceApi(productPriceApi);
             orderProductPopulator.setimageUtils(catalogImageUtils);
             orderProductPopulator.setPricingService(pricingService);
@@ -1072,7 +1077,7 @@ public class OrderFacadeImpl implements OrderFacade {
 		List<ReadableOrderProduct> orderProducts = new ArrayList<ReadableOrderProduct>();
 		for(OrderProduct p : modelOrder.getOrderProducts()) {
 			ReadableOrderProductPopulator orderProductPopulator = new ReadableOrderProductPopulator();
-			orderProductPopulator.setProductService(productService);
+			orderProductPopulator.setProductApi(productApi);
 			orderProductPopulator.setProductPriceApi(productPriceApi);
 			orderProductPopulator.setimageUtils(catalogImageUtils);
 			orderProductPopulator.setPricingService(pricingService);

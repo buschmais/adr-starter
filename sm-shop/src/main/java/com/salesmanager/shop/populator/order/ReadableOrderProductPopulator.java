@@ -1,19 +1,19 @@
 package com.salesmanager.shop.populator.order;
 
 import com.salesmanager.catalog.api.CatalogImageFilePathApi;
+import com.salesmanager.catalog.api.ProductApi;
 import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.business.service.product.PricingService;
-import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
-import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.catalog.business.service.product.ProductService;
-import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.image.ProductImage;
+import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
+import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
+import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.orderproduct.OrderProduct;
 import com.salesmanager.core.model.order.orderproduct.OrderProductAttribute;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.shop.model.order.ReadableOrderProduct;
 import com.salesmanager.shop.model.order.ReadableOrderProductAttribute;
 import com.salesmanager.shop.populator.catalog.ReadableProductPopulator;
@@ -28,7 +28,7 @@ import java.util.Set;
 public class ReadableOrderProductPopulator extends
 		AbstractDataPopulator<OrderProduct, ReadableOrderProduct> {
 	
-	private ProductService productService;
+	private ProductApi productApi;
 	private ProductPriceApi productPriceApi;
 	private PricingService pricingService;
 	private CatalogImageFilePathApi imageFilePathApi;
@@ -49,7 +49,7 @@ public class ReadableOrderProductPopulator extends
 			ReadableOrderProduct target, MerchantStore store, Language language)
 			throws ConversionException {
 		
-		Validate.notNull(productService,"Requires ProductService");
+		Validate.notNull(productApi,"Requires ProductAPI");
 		Validate.notNull(productPriceApi,"Requires productPriceApi");
 		Validate.notNull(imageUtils,"Requires imageUtils");
 		target.setId(source.getId());
@@ -94,7 +94,7 @@ public class ReadableOrderProductPopulator extends
 
 			String productSku = source.getSku();
 			if(!StringUtils.isBlank(productSku)) {
-				Product product = productService.getByCode(productSku, language);
+				Product product = productApi.getByCode(productSku, language.toDTO());
 				if(product!=null) {
 
 					ReadableProductPopulator populator = new ReadableProductPopulator();
@@ -134,14 +134,6 @@ public class ReadableOrderProductPopulator extends
 		return null;
 	}
 
-	public ProductService getProductService() {
-		return productService;
-	}
-
-	public void setProductService(ProductService productService) {
-		this.productService = productService;
-	}
-
 	public ProductPriceApi getProductPriceApi() {
 		return productPriceApi;
 	}
@@ -164,5 +156,14 @@ public class ReadableOrderProductPopulator extends
 
 	public void setImageFilePathApi(CatalogImageFilePathApi imageFilePathApi) {
 		this.imageFilePathApi = imageFilePathApi;
+	}
+
+	public ProductApi getProductApi() {
+		return productApi;
+	}
+
+
+	public void setProductApi(ProductApi productApi) {
+		this.productApi = productApi;
 	}
 }

@@ -1,45 +1,36 @@
 package com.salesmanager.shop.store.controller.shoppingCart;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
-
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.salesmanager.catalog.business.service.product.ProductService;
+import com.salesmanager.catalog.api.ProductApi;
 import com.salesmanager.catalog.business.service.product.attribute.ProductAttributeService;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.common.presentation.model.PageInformation;
+import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.core.business.services.order.OrderService;
 import com.salesmanager.core.business.services.shoppingcart.ShoppingCartService;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
-import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
-import com.salesmanager.common.presentation.model.PageInformation;
 import com.salesmanager.shop.model.shoppingcart.ShoppingCartData;
 import com.salesmanager.shop.model.shoppingcart.ShoppingCartItem;
 import com.salesmanager.shop.store.controller.AbstractController;
 import com.salesmanager.shop.store.controller.ControllerConstants;
 import com.salesmanager.shop.store.controller.shoppingCart.facade.ShoppingCartFacade;
-import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.shop.utils.LanguageUtils;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 
 /**
@@ -91,8 +82,9 @@ import com.salesmanager.shop.utils.LanguageUtils;
 public class ShoppingCartController extends AbstractController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ShoppingCartController.class);
-	@Inject
-	private ProductService productService;
+
+	@Autowired
+	private ProductApi productApi;
 
 	@Inject
 	private ProductAttributeService productAttributeService;
@@ -256,7 +248,7 @@ public class ShoppingCartController extends AbstractController {
         List<ShoppingCartItem> items = shoppingCart.getShoppingCartItems();
         for(ShoppingCartItem item : items) {
         	String code = item.getProductCode();
-        	Product p =productService.getByCode(code, lang);
+        	Product p =productApi.getByCode(code, lang.toDTO());
         	if(!p.isAvailable()) {
         		unavailables.add(item);
         	} else {
@@ -309,7 +301,7 @@ public class ShoppingCartController extends AbstractController {
 	        List<ShoppingCartItem> items = cart.getShoppingCartItems();
 	        for(ShoppingCartItem item : items) {
 	        	String code = item.getProductCode();
-	        	Product p =productService.getByCode(code, lang);
+	        	Product p =productApi.getByCode(code, lang.toDTO());
 	        	if(!p.isAvailable()) {
 	        		unavailables.add(item);
 	        	} else {

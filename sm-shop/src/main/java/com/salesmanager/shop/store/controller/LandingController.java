@@ -131,7 +131,7 @@ public class LandingController {
 
 		
 		//featured items
-		List<ProductRelationship> relationships = productRelationshipApi.getByType(store.toDTO(), ProductRelationshipType.FEATURED_ITEM, language);
+		List<ProductRelationship> relationships = productRelationshipApi.getByType(store.toDTO(), ProductRelationshipType.FEATURED_ITEM, language.toDTO());
 		List<ReadableProduct> featuredItems = new ArrayList<ReadableProduct>();
 		Date today = new Date();
 		for(ProductRelationship relationship : relationships) {

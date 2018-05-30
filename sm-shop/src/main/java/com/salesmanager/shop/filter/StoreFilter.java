@@ -2,9 +2,17 @@ package com.salesmanager.shop.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salesmanager.catalog.api.CategoryApi;
-import com.salesmanager.catalog.business.service.category.CategoryService;
-import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.api.CategoryFacadeApi;
+import com.salesmanager.catalog.api.ProductApi;
+import com.salesmanager.catalog.model.category.Category;
+import com.salesmanager.catalog.model.category.CategoryDescription;
+import com.salesmanager.catalog.model.product.Product;
+import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
+import com.salesmanager.common.presentation.model.Breadcrumb;
+import com.salesmanager.common.presentation.model.BreadcrumbItem;
+import com.salesmanager.common.presentation.model.BreadcrumbItemType;
+import com.salesmanager.common.presentation.model.PageInformation;
+import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;
@@ -13,9 +21,6 @@ import com.salesmanager.core.business.services.system.MerchantConfigurationServi
 import com.salesmanager.core.business.utils.CacheUtils;
 import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.catalog.model.category.Category;
-import com.salesmanager.catalog.model.category.CategoryDescription;
-import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.content.Content;
 import com.salesmanager.core.model.content.ContentDescription;
 import com.salesmanager.core.model.content.ContentType;
@@ -26,16 +31,10 @@ import com.salesmanager.core.model.system.MerchantConfig;
 import com.salesmanager.core.model.system.MerchantConfiguration;
 import com.salesmanager.core.model.system.MerchantConfigurationType;
 import com.salesmanager.shop.constants.Constants;
-import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.shop.model.customer.Address;
 import com.salesmanager.shop.model.customer.AnonymousCustomer;
-import com.salesmanager.common.presentation.model.Breadcrumb;
-import com.salesmanager.common.presentation.model.BreadcrumbItem;
-import com.salesmanager.common.presentation.model.BreadcrumbItemType;
-import com.salesmanager.common.presentation.model.PageInformation;
 import com.salesmanager.shop.populator.catalog.ReadableCategoryPopulator;
 import com.salesmanager.shop.utils.GeoLocationUtils;
-import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.shop.utils.LanguageUtils;
 import com.salesmanager.shop.utils.WebApplicationCacheUtils;
 import org.apache.commons.collections4.CollectionUtils;
@@ -71,10 +70,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 	private CategoryApi categoryApi;
 
 	@Inject
-	private CategoryService categoryService;
-	
-	@Inject
-	private ProductService productService;
+	protected ProductApi productApi;
 
 	@Inject
 	private MerchantStoreService merchantService;
@@ -614,7 +610,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 			
 			if(objects==null) {
 				//load categories
-				loadedCategories = categoryFacadeApi.getCategoryHierarchy(store.toDTO(), 0, language, null);//null filter
+				loadedCategories = categoryFacadeApi.getCategoryHierarchy(store.toDTO(), 0, language.toDTO(), null);//null filter
 				objects = new ConcurrentHashMap<String, List<ReadableCategory>>();
 				objects.put(language.getCode(), loadedCategories);
 				webApplicationCache.putInCache(categoriesKey.toString(), objects);
@@ -624,7 +620,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 			}
 			
 		} else {
-			loadedCategories = categoryFacadeApi.getCategoryHierarchy(store.toDTO(), 0, language, null);//null filter
+			loadedCategories = categoryFacadeApi.getCategoryHierarchy(store.toDTO(), 0, language.toDTO(), null);//null filter
 		}
 		
 		if(loadedCategories!=null) {
@@ -743,7 +739,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 		   Map<String, List<ReadableCategory>> objects = new ConcurrentHashMap<String, List<ReadableCategory>>();
 		   
 		    /** returns categories with required depth, 0 = root category, 1 = root + 1 layer child ...) **/
-			List<Category> categories = categoryApi.listByDepth(store.toDTO(), 0, language);
+			List<Category> categories = categoryApi.listByDepth(store.toDTO(), 0, language.toDTO());
 			
 			ReadableCategoryPopulator readableCategoryPopulator = new ReadableCategoryPopulator();
 			
@@ -882,7 +878,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 								homeItem.setUrl(Constants.HOME_URL);
 								items.add(homeItem);
 							} else if(item.getItemType().name().equals(BreadcrumbItemType.PRODUCT)) {
-								Product product = productService.getProductForLocale(item.getId(), language, locale);
+								Product product = productApi.getProductForLocale(item.getId(), language.toDTO(), locale);
 								if(product!=null) {
 									BreadcrumbItem productItem = new  BreadcrumbItem();
 									productItem.setId(product.getId());
@@ -892,7 +888,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 									items.add(productItem);
 								}
 							}else if(item.getItemType().name().equals(BreadcrumbItemType.CATEGORY)) {
-								Category category = categoryService.getByLanguage(item.getId(), language);
+								Category category = categoryApi.getByLanguage(item.getId(), language.toDTO());
 								if(category!=null) {
 									BreadcrumbItem categoryItem = new  BreadcrumbItem();
 									categoryItem.setId(category.getId());
