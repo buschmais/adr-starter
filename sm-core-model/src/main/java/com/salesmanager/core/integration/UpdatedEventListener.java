@@ -1,7 +1,9 @@
 package com.salesmanager.core.integration;
 
+import com.salesmanager.core.integration.language.LanguageUpdatedEvent;
 import com.salesmanager.core.integration.merchant.MerchantStoreUpdatedEvent;
 import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.core.model.reference.language.Language;
 import org.hibernate.event.spi.PostUpdateEvent;
 import org.hibernate.event.spi.PostUpdateEventListener;
 import org.hibernate.persister.entity.EntityPersister;
@@ -20,6 +22,9 @@ public class UpdatedEventListener implements PostUpdateEventListener, Applicatio
         if (event.getEntity() instanceof MerchantStore) {
             MerchantStore store = ((MerchantStore) event.getEntity());
             applicationEventPublisher.publishEvent(new MerchantStoreUpdatedEvent(store.toDTO()));
+        } else if (event.getEntity() instanceof Language) {
+            Language language = ((Language) event.getEntity());
+            applicationEventPublisher.publishEvent(new LanguageUpdatedEvent(language.toDTO()));
         }
     }
 

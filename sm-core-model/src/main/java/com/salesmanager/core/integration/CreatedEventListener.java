@@ -1,7 +1,9 @@
 package com.salesmanager.core.integration;
 
+import com.salesmanager.core.integration.language.LanguageCreatedEvent;
 import com.salesmanager.core.integration.merchant.MerchantStoreCreatedEvent;
 import com.salesmanager.core.model.merchant.MerchantStore;
+import com.salesmanager.core.model.reference.language.Language;
 import org.hibernate.event.spi.PostInsertEvent;
 import org.hibernate.event.spi.PostInsertEventListener;
 import org.hibernate.persister.entity.EntityPersister;
@@ -20,6 +22,9 @@ public class CreatedEventListener implements PostInsertEventListener, Applicatio
         if (event.getEntity() instanceof MerchantStore) {
             MerchantStore store = ((MerchantStore) event.getEntity());
             applicationEventPublisher.publishEvent(new MerchantStoreCreatedEvent(store.toDTO()));
+        } else if (event.getEntity() instanceof Language) {
+            Language language = ((Language) event.getEntity());
+            applicationEventPublisher.publishEvent(new LanguageCreatedEvent(language.toDTO()));
         }
     }
 
