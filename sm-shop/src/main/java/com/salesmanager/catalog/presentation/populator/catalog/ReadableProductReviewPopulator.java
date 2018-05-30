@@ -25,7 +25,7 @@ public class ReadableProductReviewPopulator extends
 		try {
 			ReadableCustomerPopulator populator = new ReadableCustomerPopulator();
 			ReadableCustomer customer = new ReadableCustomer();
-			populator.populate(source.getCustomer(), customer, store, language);
+			populator.populate(source.getCustomer(), customer, null, language);
 
 			target.setId(source.getId());
 			target.setDate(DateUtil.formatDate(source.getReviewDate()));

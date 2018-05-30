@@ -1,28 +1,26 @@
-package com.salesmanager.shop.store.controller.customer;
+package com.salesmanager.catalog.presentation.controller.product;
 
-import com.salesmanager.catalog.api.CatalogImageFilePathApi;
-import com.salesmanager.catalog.api.ProductPriceApi;
+import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
+import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.catalog.PersistableProductReviewPopulator;
+import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
+import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductReviewPopulator;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.review.ProductReview;
+import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.customer.Customer;
-import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.product.PersistableProductReview;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductReview;
-import com.salesmanager.shop.populator.catalog.ReadableProductPopulator;
-import com.salesmanager.shop.populator.catalog.ReadableProductReviewPopulator;
-import com.salesmanager.shop.store.controller.AbstractController;
 import com.salesmanager.shop.store.controller.ControllerConstants;
-import com.salesmanager.shop.store.controller.customer.facade.CustomerFacade;
 import com.salesmanager.common.presentation.util.DateUtil;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -51,7 +49,7 @@ import java.util.Locale;
  */
 @Controller
 @RequestMapping(Constants.SHOP_URI + "/customer")
-public class CustomerProductReviewController extends AbstractController {
+public class CustomerProductReviewController {
 	
 	@Inject
 	private ProductService productService;
@@ -69,29 +67,23 @@ public class CustomerProductReviewController extends AbstractController {
 	private CustomerService customerService;
 	
 	@Inject
-	private CustomerFacade customerFacade;
-	
-	@Inject
 	private LabelUtils messages;
 	
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
 
 	@Autowired
-	private CatalogImageFilePathApi imageFilePathApi;
-
-	@Autowired
-	private ProductPriceApi productPriceApi;
+	private MerchantStoreInfoService merchantStoreInfoService;
 
 	@PreAuthorize("hasRole('AUTH_CUSTOMER')")
 	@RequestMapping(value="/review.html", method=RequestMethod.GET)
 	public String displayProductReview(@RequestParam Long productId, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 
-	    MerchantStore store = getSessionAttribute(Constants.MERCHANT_STORE, request);
-	    Language language = super.getLanguage(request);
+	    MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getSession().getAttribute(Constants.MERCHANT_STORE_DTO);
+	    Language language = (Language) request.getAttribute(Constants.LANGUAGE);
 
-        
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
         
         //get product
         Product product = productService.getById(productId);
@@ -99,7 +91,7 @@ public class CustomerProductReviewController extends AbstractController {
         	return "redirect:" + Constants.SHOP_URI;
         }
         
-        if(product.getMerchantStore().getId().intValue()!=store.getId().intValue()) {
+        if(product.getMerchantStore().getId().intValue()!=storeDTO.getId().intValue()) {
         	return "redirect:" + Constants.SHOP_URI;
         }
         
@@ -109,13 +101,11 @@ public class CustomerProductReviewController extends AbstractController {
         ReadableProductPopulator readableProductPopulator = new ReadableProductPopulator();
         readableProductPopulator.setPricingService(pricingService);
         readableProductPopulator.setimageUtils(imageUtils);
-		readableProductPopulator.setImageFilePathApi(imageFilePathApi);
-		readableProductPopulator.setProductPriceApi(productPriceApi);
 		readableProductPopulator.populate(product, readableProduct,  store, language);
         model.addAttribute("product", readableProduct);
         
 
-        Customer customer =  customerFacade.getCustomerByUserName(request.getRemoteUser(), store);
+        Customer customer =  customerService.getByNick(request.getRemoteUser(), store.getId());
         
         List<ProductReview> reviews = productReviewService.getByProduct(product, language);
 	    for(ProductReview r : reviews) {
@@ -154,12 +144,14 @@ public class CustomerProductReviewController extends AbstractController {
 	@PreAuthorize("hasRole('AUTH_CUSTOMER')")
 	@RequestMapping(value="/review/submit.html", method=RequestMethod.POST)
 	public String submitProductReview(@ModelAttribute("review") PersistableProductReview review, BindingResult bindingResult, Model model, HttpServletRequest request, HttpServletResponse response, Locale locale) throws Exception {
-		
 
-	    MerchantStore store = getSessionAttribute(Constants.MERCHANT_STORE, request);
-	    Language language = getLanguage(request);
-	    
-        Customer customer =  customerFacade.getCustomerByUserName(request.getRemoteUser(), store);
+
+		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getSession().getAttribute(Constants.MERCHANT_STORE_DTO);
+		Language language = (Language) request.getAttribute(Constants.LANGUAGE);
+
+		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
+
+		Customer customer =  customerService.getByNick(request.getRemoteUser(), store.getId());
         
         if(customer==null) {
         	return "redirect:" + Constants.SHOP_URI;
@@ -187,8 +179,6 @@ public class CustomerProductReviewController extends AbstractController {
         ReadableProductPopulator readableProductPopulator = new ReadableProductPopulator();
         readableProductPopulator.setPricingService(pricingService);
         readableProductPopulator.setimageUtils(imageUtils);
-        readableProductPopulator.setProductPriceApi(productPriceApi);
-        readableProductPopulator.setImageFilePathApi(imageFilePathApi);
         readableProductPopulator.populate(product, readableProduct,  store, language);
         model.addAttribute("product", readableProduct);
 	    
