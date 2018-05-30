@@ -9,10 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
-import com.salesmanager.core.model.reference.language.Language;
 
 
 public class ProductRelationshipRepositoryImpl implements ProductRelationshipRepositoryCustom {
@@ -22,7 +22,7 @@ public class ProductRelationshipRepositoryImpl implements ProductRelationshipRep
     private EntityManager em;
     
 	@Override
-	public List<ProductRelationship> getByType(MerchantStoreInfo store, String type, Product product, Language language) {
+	public List<ProductRelationship> getByType(MerchantStoreInfo store, String type, Product product, LanguageInfo language) {
 
 		StringBuilder qs = new StringBuilder();
 		qs.append("select distinct pr from ProductRelationship as pr ");
@@ -58,7 +58,7 @@ public class ProductRelationshipRepositoryImpl implements ProductRelationshipRep
 	}
 	
 	@Override
-	public List<ProductRelationship> getByType(MerchantStoreInfo store, String type, Language language) {
+	public List<ProductRelationship> getByType(MerchantStoreInfo store, String type, LanguageInfo language) {
 
 		StringBuilder qs = new StringBuilder();
 		qs.append("select distinct pr from ProductRelationship as pr ");

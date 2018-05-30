@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.common.business.exception.ServiceException;
@@ -21,7 +22,6 @@ import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.category.CategoryDescription;
 import com.salesmanager.catalog.model.product.Product;
-import com.salesmanager.core.model.reference.language.Language;
 
 @Service("categoryService")
 public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Category> implements CategoryService {
@@ -71,18 +71,18 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	
 	@Override
 	public List<Category> listByCodes(MerchantStoreInfo store, List<String> codes,
-			Language language) {
+									  LanguageInfo language) {
 		return categoryRepository.findByCodes(store.getId(), codes, language.getId());
 	}
 	
 	@Override
 	public List<Category> listByIds(MerchantStoreInfo store, List<Long> ids,
-			Language language) {
+									LanguageInfo language) {
 		return categoryRepository.findByIds(store.getId(), ids, language.getId());
 	}
 	
 	@Override
-	public Category getByLanguage(long categoryId, Language language) {
+	public Category getByLanguage(long categoryId, LanguageInfo language) {
 		return categoryRepository.findById(categoryId, language.getId());
 	}
 	
@@ -196,7 +196,7 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	}
 	
 	@Override
-	public List<Category> listByParent(Category category, Language language) {
+	public List<Category> listByParent(Category category, LanguageInfo language) {
 		Assert.notNull(category, "Category cannot be null");
 		Assert.notNull(language, "Language cannot be null");
 		Assert.notNull(category.getMerchantStore(), "category.merchantStore cannot be null");
@@ -283,7 +283,7 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 
 
 	@Override
-	public CategoryDescription getDescription(Category category, Language language) {
+	public CategoryDescription getDescription(Category category, LanguageInfo language) {
 		
 		
 		for (CategoryDescription description : category.getDescriptions()) {
@@ -358,17 +358,17 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	}
 	
 	@Override
-	public List<Category> listByDepth(MerchantStoreInfo store, int depth, Language language) {
+	public List<Category> listByDepth(MerchantStoreInfo store, int depth, LanguageInfo language) {
 		return categoryRepository.findByDepth(store.getId(), depth, language.getId());
 	}
 	
 	@Override
-	public List<Category> listByDepthFilterByFeatured(MerchantStoreInfo store, int depth, Language language) {
+	public List<Category> listByDepthFilterByFeatured(MerchantStoreInfo store, int depth, LanguageInfo language) {
 		return categoryRepository.findByDepthFilterByFeatured(store.getId(), depth, language.getId());
 	}
 
 	@Override
-	public List<Category> getByName(MerchantStoreInfo store, String name, Language language) throws ServiceException {
+	public List<Category> getByName(MerchantStoreInfo store, String name, LanguageInfo language) throws ServiceException {
 		
 		try {
 			return categoryRepository.findByName(store.getId(), name, language.getId());
@@ -393,7 +393,7 @@ public class CategoryServiceImpl extends SalesManagerEntityServiceImpl<Long, Cat
 	}
 	
 	@Override
-	public List<Category> listByStore(MerchantStoreInfo store, Language language)
+	public List<Category> listByStore(MerchantStoreInfo store, LanguageInfo language)
 			throws ServiceException {
 
 		try {

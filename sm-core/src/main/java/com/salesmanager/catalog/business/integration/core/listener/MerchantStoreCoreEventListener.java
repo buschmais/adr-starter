@@ -1,14 +1,13 @@
 package com.salesmanager.catalog.business.integration.core.listener;
 
 import com.salesmanager.catalog.business.integration.core.repository.MerchantStoreInfoRepository;
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.model.integration.CreatedEvent;
 import com.salesmanager.common.model.integration.DeletedEvent;
 import com.salesmanager.common.model.integration.UpdatedEvent;
-import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.language.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
@@ -24,12 +23,12 @@ public class MerchantStoreCoreEventListener {
 
     private MerchantStoreInfoRepository merchantStoreInfoRepository;
 
-    private LanguageService languageService;
+    private LanguageInfoService languageInfoService;
 
     @Autowired
-    public MerchantStoreCoreEventListener(MerchantStoreInfoRepository merchantStoreInfoRepository, LanguageService languageService) {
+    public MerchantStoreCoreEventListener(MerchantStoreInfoRepository merchantStoreInfoRepository, LanguageInfoService languageInfoService) {
         this.merchantStoreInfoRepository = merchantStoreInfoRepository;
-        this.languageService = languageService;
+        this.languageInfoService = languageInfoService;
     }
 
     @TransactionalEventListener
@@ -81,14 +80,10 @@ public class MerchantStoreCoreEventListener {
         }
     }
 
-    private List<Language> getLanguages(MerchantStoreDTO storeDTO) {
-        List<Language> languages = storeDTO.getLanguages().stream()
+    private List<LanguageInfo> getLanguages(MerchantStoreDTO storeDTO) {
+        List<LanguageInfo> languages = storeDTO.getLanguages().stream()
                 .map(code -> {
-                    try {
-                        return languageService.getByCode(code);
-                    } catch (ServiceException e) {
-                        return null;
-                    }
+                    return languageInfoService.findbyCode(code);
                 })
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());

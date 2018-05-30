@@ -50,7 +50,7 @@ public class MerchantStoreInfo {
     private String domainName;
 
     @NotEmpty
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "MERCHANT_INFO_LANGUAGE")
-    private List<Language> languages = new ArrayList<>();
+    private List<LanguageInfo> languages = new ArrayList<>();
 }

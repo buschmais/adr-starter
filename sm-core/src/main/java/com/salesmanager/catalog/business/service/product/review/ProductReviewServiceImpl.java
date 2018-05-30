@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import org.apache.commons.lang.Validate;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,6 @@ import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.core.model.customer.Customer;
-import com.salesmanager.core.model.reference.language.Language;
 
 @Service("productReviewService")
 public class ProductReviewServiceImpl extends
@@ -51,7 +51,7 @@ public class ProductReviewServiceImpl extends
 	}
 	
 	@Override
-	public List<ProductReview> getByProduct(Product product, Language language) {
+	public List<ProductReview> getByProduct(Product product, LanguageInfo language) {
 		return productReviewRepository.findByProduct(product.getId(), language.getId());
 	}
 	

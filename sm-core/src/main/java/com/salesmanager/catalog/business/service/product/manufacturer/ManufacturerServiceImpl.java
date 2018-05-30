@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,6 @@ import com.salesmanager.catalog.business.repository.product.manufacturer.Manufac
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.catalog.model.product.manufacturer.ManufacturerDescription;
-import com.salesmanager.core.model.reference.language.Language;
 
 
 
@@ -48,7 +48,7 @@ public class ManufacturerServiceImpl extends
 	
 	
 	@Override
-	public List<Manufacturer> listByStore(MerchantStoreInfo store, Language language) throws ServiceException {
+	public List<Manufacturer> listByStore(MerchantStoreInfo store, LanguageInfo language) throws ServiceException {
 		return manufacturerRepository.findByStoreAndLanguage(store.getId(), language.getId());
 	}
 	
@@ -58,7 +58,7 @@ public class ManufacturerServiceImpl extends
 	}
 	
 	@Override
-	public List<Manufacturer> listByProductsByCategoriesId(MerchantStoreInfo store, List<Long> ids, Language language) throws ServiceException {
+	public List<Manufacturer> listByProductsByCategoriesId(MerchantStoreInfo store, List<Long> ids, LanguageInfo language) throws ServiceException {
 		return manufacturerRepository.findByCategoriesAndLanguage(ids, language.getId());
 	}
 

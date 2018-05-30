@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -39,7 +40,6 @@ import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.ImageContentFile;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.model.tax.taxclass.TaxClass;
 
 @Service("productService")
@@ -114,7 +114,7 @@ public class ProductServiceImpl extends SalesManagerEntityServiceImpl<Long, Prod
 	}
 	
 	@Override
-	public List<Product> getProducts(List<Long> categoryIds, Language language) throws ServiceException {
+	public List<Product> getProducts(List<Long> categoryIds, LanguageInfo language) throws ServiceException {
 		
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		Set<Long> ids = new HashSet(categoryIds);
@@ -125,7 +125,7 @@ public class ProductServiceImpl extends SalesManagerEntityServiceImpl<Long, Prod
 
 
 	@Override
-	public ProductDescription getProductDescription(Product product, Language language) {
+	public ProductDescription getProductDescription(Product product, LanguageInfo language) {
 		for (ProductDescription description : product.getDescriptions()) {
 			if (description.getLanguage().equals(language)) {
 				return description;
@@ -140,7 +140,7 @@ public class ProductServiceImpl extends SalesManagerEntityServiceImpl<Long, Prod
 	}
 
 	@Override
-	public Product getProductForLocale(long productId, Language language, Locale locale)
+	public Product getProductForLocale(long productId, LanguageInfo language, Locale locale)
 			throws ServiceException {
 		Product product =  productRepository.getProductForLocale(productId, language, locale);
 		if(product==null) {
@@ -154,7 +154,7 @@ public class ProductServiceImpl extends SalesManagerEntityServiceImpl<Long, Prod
 
 	@Override
 	public List<Product> getProductsForLocale(Category category,
-			Language language, Locale locale) throws ServiceException {
+											  LanguageInfo language, Locale locale) throws ServiceException {
 		
 		if(category==null) {
 			throw new ServiceException("The category is null");
@@ -182,7 +182,7 @@ public class ProductServiceImpl extends SalesManagerEntityServiceImpl<Long, Prod
 	
 	@Override
 	public ProductList listByStore(MerchantStoreInfo store,
-			Language language, ProductCriteria criteria) {
+								   LanguageInfo language, ProductCriteria criteria) {
 		
 		return productRepository.listByStore(store, language, criteria);
 	}
@@ -199,7 +199,7 @@ public class ProductServiceImpl extends SalesManagerEntityServiceImpl<Long, Prod
 	}
 	
 	@Override
-	public Product getByCode(String productCode, Language language) {
+	public Product getByCode(String productCode, LanguageInfo language) {
 		return productRepository.getByCode(productCode, language);
 	}
 		

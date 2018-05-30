@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.salesmanager.catalog.business.repository.product.attribute.ProductAttributeRepository;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
-import com.salesmanager.core.model.reference.language.Language;
 
 @Service("productAttributeService")
 public class ProductAttributeServiceImpl extends
@@ -63,7 +63,7 @@ public class ProductAttributeServiceImpl extends
 	 */
 	@Override
 	public List<ProductAttribute> getByProductId(MerchantStoreInfo store,
-			Product product, Language language) throws ServiceException {
+			Product product, LanguageInfo language) throws ServiceException {
 		return productAttributeRepository.findByProductId(store.getId(), product.getId(), language.getId());
 		
 	}

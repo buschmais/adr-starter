@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,6 @@ import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationshipType;
-import com.salesmanager.core.model.reference.language.Language;
 
 @Service("productRelationshipService")
 public class ProductRelationshipServiceImpl extends
@@ -102,14 +102,14 @@ public class ProductRelationshipServiceImpl extends
 	
 	
 	@Override
-	public List<ProductRelationship> getByType(MerchantStoreInfo store, Product product, ProductRelationshipType type, Language language) throws ServiceException {
+	public List<ProductRelationship> getByType(MerchantStoreInfo store, Product product, ProductRelationshipType type, LanguageInfo language) throws ServiceException {
 
 		return productRelationshipRepository.getByType(store, type.name(), product, language);
 
 	}
 	
 	@Override
-	public List<ProductRelationship> getByType(MerchantStoreInfo store, ProductRelationshipType type, Language language) throws ServiceException {
+	public List<ProductRelationship> getByType(MerchantStoreInfo store, ProductRelationshipType type, LanguageInfo language) throws ServiceException {
 		return productRelationshipRepository.getByType(store, type.name(), language);
 	}
 	
@@ -128,7 +128,7 @@ public class ProductRelationshipServiceImpl extends
 	}
 	
 	@Override
-	public List<ProductRelationship> getByGroup(MerchantStoreInfo store, String groupName, Language language) throws ServiceException {
+	public List<ProductRelationship> getByGroup(MerchantStoreInfo store, String groupName, LanguageInfo language) throws ServiceException {
 
 		return productRelationshipRepository.getByType(store, groupName, language);
 
