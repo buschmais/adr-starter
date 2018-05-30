@@ -72,7 +72,6 @@ public class ProductRelationshipRepositoryImpl implements ProductRelationshipRep
 		qs.append("left join fetch rp.owner rpo ");
 		qs.append("left join fetch rp.images pd ");
 		qs.append("left join fetch rp.merchantStore rpm ");
-		qs.append("left join fetch rpm.currency rpmc ");
 		qs.append("left join fetch rp.availabilities pa ");
 		qs.append("left join fetch rp.manufacturer m ");
 		qs.append("left join fetch m.descriptions md ");
@@ -120,7 +119,6 @@ public class ProductRelationshipRepositoryImpl implements ProductRelationshipRep
 		qs.append("left join fetch rp.owner rpo ");
 		qs.append("left join fetch rp.images pd ");
 		qs.append("left join fetch rp.merchantStore rpm ");
-		qs.append("left join fetch rpm.currency rpmc ");
 		qs.append("left join fetch rp.availabilities pa ");
 		qs.append("left join fetch pa.prices pap ");
 		qs.append("left join fetch pap.descriptions papd ");
@@ -269,7 +267,6 @@ public class ProductRelationshipRepositoryImpl implements ProductRelationshipRep
 		qs.append("left join fetch rp.owner rpo ");
 		qs.append("left join fetch rp.images pd ");
 		qs.append("left join fetch rp.merchantStore rpm ");
-		qs.append("left join fetch rpm.currency rpmc ");
 		qs.append("left join fetch rp.availabilities pa ");
 		qs.append("left join fetch pa.prices pap ");
 		qs.append("left join fetch pap.descriptions papd ");
