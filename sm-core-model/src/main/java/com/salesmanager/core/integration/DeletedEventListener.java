@@ -1,7 +1,9 @@
 package com.salesmanager.core.integration;
 
+import com.salesmanager.core.integration.customer.CustomerDeletedEvent;
 import com.salesmanager.core.integration.language.LanguageDeletedEvent;
 import com.salesmanager.core.integration.merchant.MerchantStoreDeletedEvent;
+import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import org.hibernate.event.spi.PostDeleteEvent;
@@ -25,6 +27,9 @@ public class DeletedEventListener implements PostDeleteEventListener, Applicatio
         } else if (event.getEntity() instanceof Language) {
             Language language = ((Language) event.getEntity());
             applicationEventPublisher.publishEvent(new LanguageDeletedEvent(language.toDTO()));
+        } else if (event.getEntity() instanceof Customer) {
+            Customer customer = ((Customer) event.getEntity());
+            applicationEventPublisher.publishEvent(new CustomerDeletedEvent(customer.toDTO()));
         }
     }
 
