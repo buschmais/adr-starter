@@ -1,7 +1,6 @@
 package com.salesmanager.catalog.model.integration.core;
 
 import com.salesmanager.core.constants.SchemaConstant;
-import com.salesmanager.core.model.reference.language.Language;
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
 

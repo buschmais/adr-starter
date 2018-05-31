@@ -20,9 +20,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.salesmanager.catalog.model.common.Description;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.core.constants.SchemaConstant;
-import com.salesmanager.core.model.common.description.Description;
-import com.salesmanager.core.model.reference.language.Language;
 
 @Entity
 @Table(name = "PRODUCT_REVIEW_DESCRIPTION", schema = SchemaConstant.SALESMANAGER_SCHEMA, uniqueConstraints={
@@ -41,7 +41,7 @@ public class ProductReviewDescription extends Description {
 	public ProductReviewDescription() {
 	}
 
-	public ProductReviewDescription(Language language, String name) {
+	public ProductReviewDescription(LanguageInfo language, String name) {
 		this.setLanguage(language);
 		this.setName(name);
 	}

@@ -6,8 +6,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.salesmanager.catalog.model.common.Description;
 import com.salesmanager.core.constants.SchemaConstant;
-import com.salesmanager.core.model.common.description.Description;
 
 @Entity
 @Table(name="PRODUCT_PRICE_DESCRIPTION", schema=SchemaConstant.SALESMANAGER_SCHEMA, uniqueConstraints={

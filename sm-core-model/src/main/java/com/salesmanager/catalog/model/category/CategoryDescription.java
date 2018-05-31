@@ -8,9 +8,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.salesmanager.catalog.model.common.Description;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.core.constants.SchemaConstant;
-import com.salesmanager.core.model.common.description.Description;
-import com.salesmanager.core.model.reference.language.Language;
 
 
 @Entity
@@ -55,7 +55,7 @@ public class CategoryDescription extends Description {
 	public CategoryDescription() {
 	}
 	
-	public CategoryDescription(String name, Language language) {
+	public CategoryDescription(String name, LanguageInfo language) {
 		this.setName(name);
 		this.setLanguage(language);
 		super.setId(0L);
