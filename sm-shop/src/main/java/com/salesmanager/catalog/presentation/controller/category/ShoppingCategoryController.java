@@ -1,19 +1,20 @@
 package com.salesmanager.catalog.presentation.controller.category;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.ControllerConstants;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.CacheUtils;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
+import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.ProductList;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
@@ -64,9 +65,6 @@ public class ShoppingCategoryController {
 	private CategoryService categoryService;
 	
 	@Inject
-	private LanguageService languageService;
-	
-	@Inject
 	private MerchantStoreInfoService merchantStoreInfoService;
 	
 	@Inject
@@ -89,6 +87,9 @@ public class ShoppingCategoryController {
 	
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
+
+	@Autowired
+	private LanguageInfoService languageInfoService;
 	
 
 	
@@ -142,8 +143,9 @@ public class ShoppingCategoryController {
 		
 		//get category
 		Category category = categoryService.getBySeUrl(store, friendlyUrl);
-		
-		Language language = (Language)request.getAttribute("LANGUAGE");
+
+		LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+		LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 		
 		if(category==null) {
 			LOGGER.error("No category found for friendlyUrl " + friendlyUrl);
@@ -263,7 +265,7 @@ public class ShoppingCategoryController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private List<ReadableManufacturer> getManufacturersByProductAndCategory(MerchantStoreInfo store, Category category, List<Long> subCategoryIds, Language language) throws Exception {
+	private List<ReadableManufacturer> getManufacturersByProductAndCategory(MerchantStoreInfo store, Category category, List<Long> subCategoryIds, LanguageInfo language) throws Exception {
 
 		List<ReadableManufacturer> manufacturerList = null;
 		/** List of manufacturers **/
@@ -308,7 +310,7 @@ public class ShoppingCategoryController {
 		return manufacturerList;
 	}
 		
-	private List<ReadableManufacturer> getManufacturers(MerchantStoreInfo store, List<Long> ids, Language language) throws Exception {
+	private List<ReadableManufacturer> getManufacturers(MerchantStoreInfo store, List<Long> ids, LanguageInfo language) throws Exception {
 		List<ReadableManufacturer> manufacturerList = new ArrayList<ReadableManufacturer>();
 		List<com.salesmanager.catalog.model.product.manufacturer.Manufacturer> manufacturers = manufacturerService.listByProductsByCategoriesId(store, ids, language);
 		if(!manufacturers.isEmpty()) {
@@ -358,7 +360,7 @@ public class ShoppingCategoryController {
 		
 	}
 	
-	private List<ReadableCategory> getSubCategories(MerchantStoreInfo store, Category category, Map<Long,Long> productCount, Language language, Locale locale) throws Exception {
+	private List<ReadableCategory> getSubCategories(MerchantStoreInfo store, Category category, Map<Long,Long> productCount, LanguageInfo language, Locale locale) throws Exception {
 		
 		
 		//sub categories
@@ -393,10 +395,10 @@ public class ShoppingCategoryController {
 	@ResponseBody
 	public List<ReadableCategory> getCategories(@PathVariable final String language, @PathVariable final String store, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		Map<String,Language> langs = languageService.getLanguagesMap();
-		Language l = langs.get(language);
+		Map<String,LanguageInfo> langs = languageInfoService.getLanguagesMap();
+		LanguageInfo l = langs.get(language);
 		if(l==null) {
-			l = languageService.getByCode(Constants.DEFAULT_LANGUAGE);
+			l = languageInfoService.findbyCode(Constants.DEFAULT_LANGUAGE);
 		}
 
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
@@ -463,7 +465,7 @@ public class ShoppingCategoryController {
 			 */
 
 			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
-			Map<String,Language> langs = languageService.getLanguagesMap();
+			Map<String,LanguageInfo> langs = languageInfoService.getLanguagesMap();
 
 			if(storeDTO!=null) {
 				if(!storeDTO.getCode().equals(store)) {
@@ -505,7 +507,7 @@ public class ShoppingCategoryController {
 			} 
 			ids.add(cat.getId());
 			
-			Language lang = langs.get(language);
+			LanguageInfo lang = langs.get(language);
 			if(lang==null) {
 				lang = langs.get(Constants.DEFAULT_LANGUAGE);
 			}
@@ -606,7 +608,7 @@ public class ShoppingCategoryController {
 			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
 			List<BigDecimal> prices = new ArrayList<BigDecimal>();
 			
-			Map<String,Language> langs = languageService.getLanguagesMap();
+			Map<String,LanguageInfo> langs = languageInfoService.getLanguagesMap();
 			
 			if(storeDTO!=null) {
 				if(!storeDTO.getCode().equals(store)) {
@@ -652,7 +654,7 @@ public class ShoppingCategoryController {
 			ids.add(cat.getId());
 			
 
-			Language lang = langs.get(language);
+			LanguageInfo lang = langs.get(language);
 			if(lang==null) {
 				lang = langs.get(Constants.DEFAULT_LANGUAGE);
 			}

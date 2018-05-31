@@ -1,5 +1,7 @@
 package com.salesmanager.catalog.presentation.populator.catalog;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import com.salesmanager.core.business.exception.ConversionException;
@@ -8,7 +10,6 @@ import com.salesmanager.catalog.business.service.product.attribute.ProductOption
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionValueService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
 import com.salesmanager.core.business.services.customer.CustomerService;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
@@ -21,7 +22,6 @@ import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.catalog.model.product.price.ProductPrice;
 import com.salesmanager.catalog.model.product.price.ProductPriceDescription;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.PersistableImage;
 import com.salesmanager.catalog.presentation.model.product.PersistableProduct;
 import com.salesmanager.catalog.presentation.model.product.ProductPriceEntity;
@@ -43,7 +43,7 @@ public class PersistableProductPopulator extends
 	private CategoryService categoryService;
 	private ManufacturerService manufacturerService;
 	private TaxClassService taxClassService;
-	private LanguageService languageService;
+	private LanguageInfoService languageInfoService;
 	
 	private ProductOptionService productOptionService;
 	private ProductOptionValueService productOptionValueService;
@@ -52,11 +52,11 @@ public class PersistableProductPopulator extends
 
 	@Override
 	public Product populate(PersistableProduct source,
-							Product target, MerchantStoreInfo store, Language language)
+							Product target, MerchantStoreInfo store, LanguageInfo language)
 			throws ConversionException {
 		
 			Validate.notNull(manufacturerService, "Requires to set ManufacturerService");
-			Validate.notNull(languageService, "Requires to set LanguageService");
+			Validate.notNull(languageInfoService, "Requires to set LanguageInfoService");
 			Validate.notNull(categoryService, "Requires to set CategoryService");
 			Validate.notNull(taxClassService, "Requires to set TaxClassService");
 			Validate.notNull(customerService, "Requires to set CustomerService");//RENTAL
@@ -117,7 +117,7 @@ public class PersistableProductPopulator extends
 			
 			target.setMerchantStore(store);
 			
-			List<Language> languages = new ArrayList<Language>();
+			List<LanguageInfo> languages = new ArrayList<LanguageInfo>();
 			Set<ProductDescription> descriptions = new HashSet<ProductDescription>();
 			if(!CollectionUtils.isEmpty(source.getDescriptions())) {
 				for(com.salesmanager.catalog.presentation.model.product.ProductDescription description : source.getDescriptions()) {
@@ -137,7 +137,7 @@ public class PersistableProductPopulator extends
 					productDescription.setMetatagDescription(description.getMetaDescription());
 					productDescription.setTitle(description.getTitle());
 					
-					Language lang = languageService.getByCode(description.getLanguage());
+					LanguageInfo lang = languageInfoService.findbyCode(description.getLanguage());
 					if(lang==null) {
 						throw new ConversionException("Language code " + description.getLanguage() + " is invalid, use ISO code (en, fr ...)");
 					}
@@ -198,7 +198,7 @@ public class PersistableProductPopulator extends
 					}
 					productAvailability.getPrices().add(price);
 					target.getAvailabilities().add(productAvailability);
-					for(Language lang : languages) {
+					for(LanguageInfo lang : languages) {
 						ProductPriceDescription ppd = new ProductPriceDescription();
 						ppd.setProductPrice(price);
 						ppd.setLanguage(lang);
@@ -222,7 +222,7 @@ public class PersistableProductPopulator extends
 				price.setProductAvailability(productAvailability);
 				productAvailability.getPrices().add(price);
 				target.getAvailabilities().add(productAvailability);
-				for(Language lang : languages) {
+				for(LanguageInfo lang : languages) {
 					ProductPriceDescription ppd = new ProductPriceDescription();
 					ppd.setProductPrice(price);
 					ppd.setLanguage(lang);
@@ -351,12 +351,12 @@ public class PersistableProductPopulator extends
 	}
 
 
-	public LanguageService getLanguageService() {
-		return languageService;
+	public LanguageInfoService getLanguageInfoService() {
+		return languageInfoService;
 	}
 
-	public void setLanguageService(LanguageService languageService) {
-		this.languageService = languageService;
+	public void setLanguageInfoService(LanguageInfoService languageInfoService) {
+		this.languageInfoService = languageInfoService;
 	}
 
 	public ProductOptionService getProductOptionService() {

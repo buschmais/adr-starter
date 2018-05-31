@@ -2,13 +2,13 @@ package com.salesmanager.catalog.presentation.api.v1.category;
 
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.category.facade.CategoryFacade;
 import com.salesmanager.catalog.presentation.model.category.PersistableCategory;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.catalog.presentation.util.RestUtils;
 import com.salesmanager.catalog.model.category.Category;
-import com.salesmanager.core.model.reference.language.Language;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -46,7 +46,7 @@ public class CategoryApi {
 	
 		try {
 			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			ReadableCategory category  = categoryFacade.getById(merchantStore, id, language);
 			
@@ -88,7 +88,7 @@ public class CategoryApi {
 		try {
 			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			List <ReadableCategory> category  = categoryFacade.getCategoryHierarchy(merchantStore, 0, language, filter);
 
@@ -119,7 +119,6 @@ public class CategoryApi {
 
 			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
 
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
 			categoryFacade.saveCategory(merchantStore, category);
 
 			

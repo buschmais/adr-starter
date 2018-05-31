@@ -1,17 +1,18 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.catalog.model.product.manufacturer.ManufacturerDescription;
+import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.common.presentation.util.LabelUtils;
@@ -40,19 +41,19 @@ import java.util.*;
 
 @Controller
 public class ManufacturerController {
-	
-	@Inject
-	private LanguageService languageService;
-	
+
 	@Inject
 	private ManufacturerService manufacturerService;
-	
+
 	@Inject
 	LabelUtils messages;
 
 	@Autowired
 	private MerchantStoreInfoService merchantStoreInfoService;
-	
+
+	@Inject
+	private LanguageInfoService languageInfoService;
+
 	@Inject
 	private CoreConfiguration configuration;
 	
@@ -90,7 +91,7 @@ public class ManufacturerController {
 		//List<Language> languages = languageService.getLanguages();
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
-		List<Language> languages = store.getLanguages();
+		List<LanguageInfo> languages = store.getLanguages();
 		
 		
 		com.salesmanager.catalog.presentation.model.admin.Manufacturer manufacturer = new com.salesmanager.catalog.presentation.model.admin.Manufacturer();
@@ -113,7 +114,7 @@ public class ManufacturerController {
 			Set<ManufacturerDescription> manufacturerDescriptions = dbManufacturer.getDescriptions();
 
 			
-			for(Language l : languages) {
+			for(LanguageInfo l : languages) {
 				
 				ManufacturerDescription manufDescription = null;
 				if(manufacturerDescriptions!=null) {
@@ -147,7 +148,7 @@ public class ManufacturerController {
 			Manufacturer manufacturerTmp = new Manufacturer();
 			manufacturer.setManufacturer( manufacturerTmp );
 			
-			for(Language l : languages) {// for each store language
+			for(LanguageInfo l : languages) {// for each store language
 				
 				ManufacturerDescription manufacturerDesc = new ManufacturerDescription();
 				manufacturerDesc.setLanguage(l);
@@ -172,7 +173,7 @@ public class ManufacturerController {
 
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
-		List<Language> languages = languageService.getLanguages();
+		List<LanguageInfo> languages = languageInfoService.getLanguages();
 
 		if(manufacturer.getDescriptions()!=null && manufacturer.getDescriptions().size()>0) {
 
@@ -334,8 +335,9 @@ public class ManufacturerController {
 		
 		AjaxResponse resp = new AjaxResponse();
 		try {
-			
-			Language language = (Language)request.getAttribute("LANGUAGE");
+
+			LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+			LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			

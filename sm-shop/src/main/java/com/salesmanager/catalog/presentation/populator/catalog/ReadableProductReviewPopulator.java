@@ -2,12 +2,12 @@ package com.salesmanager.catalog.presentation.populator.catalog;
 
 import java.util.Set;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.catalog.model.product.review.ProductReviewDescription;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductReview;
 import com.salesmanager.shop.model.customer.ReadableCustomer;
 import com.salesmanager.shop.populator.customer.ReadableCustomerPopulator;
@@ -18,14 +18,14 @@ public class ReadableProductReviewPopulator extends
 
 	@Override
 	public ReadableProductReview populate(ProductReview source,
-										  ReadableProductReview target, MerchantStoreInfo store, Language language)
+										  ReadableProductReview target, MerchantStoreInfo store, LanguageInfo language)
 			throws ConversionException {
 
 		
 		try {
 			ReadableCustomerPopulator populator = new ReadableCustomerPopulator();
 			ReadableCustomer customer = new ReadableCustomer();
-			populator.populate(source.getCustomer(), customer, null, language);
+			populator.populate(source.getCustomer(), customer, null, null);
 
 			target.setId(source.getId());
 			target.setDate(DateUtil.formatDate(source.getReviewDate()));

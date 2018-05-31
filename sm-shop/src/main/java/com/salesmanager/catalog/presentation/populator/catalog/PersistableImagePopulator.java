@@ -1,5 +1,6 @@
 package com.salesmanager.catalog.presentation.populator.catalog;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import org.apache.commons.lang.Validate;
@@ -7,7 +8,6 @@ import org.apache.commons.lang.Validate;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.image.ProductImage;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.PersistableImage;
 
 public class PersistableImagePopulator extends AbstractDataPopulator<PersistableImage, ProductImage> {
@@ -16,7 +16,7 @@ public class PersistableImagePopulator extends AbstractDataPopulator<Persistable
 	private Product product;
 	
 	@Override
-	public ProductImage populate(PersistableImage source, ProductImage target, MerchantStoreInfo store, Language language)
+	public ProductImage populate(PersistableImage source, ProductImage target, MerchantStoreInfo store, LanguageInfo language)
 			throws ConversionException {
 		
 		Validate.notNull(product,"Must set a product setProduct(Product)");

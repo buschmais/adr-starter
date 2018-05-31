@@ -1,12 +1,12 @@
 package com.salesmanager.catalog.presentation.populator.catalog;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.category.CategoryService;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.catalog.model.category.Category;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.category.CategoryDescription;
 import com.salesmanager.catalog.presentation.model.category.PersistableCategory;
 import org.apache.commons.collections4.CollectionUtils;
@@ -22,7 +22,7 @@ public class PersistableCategoryPopulator extends
 	
 	
 	private CategoryService categoryService;
-	private LanguageService languageService;
+	private LanguageInfoService languageInfoService;
 
 
 	public void setCategoryService(CategoryService categoryService) {
@@ -33,25 +33,24 @@ public class PersistableCategoryPopulator extends
 		return categoryService;
 	}
 
-	public void setLanguageService(LanguageService languageService) {
-		this.languageService = languageService;
+	public void setLanguageInfoService(LanguageInfoService languageInfoService) {
+		this.languageInfoService = languageInfoService;
 	}
 
-	public LanguageService getLanguageService() {
-		return languageService;
+	public LanguageInfoService getLanguageInfoService() {
+		return languageInfoService;
 	}
-
 
 	@Override
 	public Category populate(PersistableCategory source, Category target,
-							 MerchantStoreInfo store, Language language)
+							 MerchantStoreInfo store, LanguageInfo language)
 			throws ConversionException {
 		
 		try {
 
 		
 		Validate.notNull(categoryService, "Requires to set CategoryService");
-		Validate.notNull(languageService, "Requires to set LanguageService");
+		Validate.notNull(languageInfoService, "Requires to set LanguageInfoService");
 		
 		target.setMerchantStore(store);
 		target.setCode(source.getCode());
@@ -116,7 +115,7 @@ public class PersistableCategoryPopulator extends
 				desc.setMetatagDescription(description.getMetaDescription());
 				desc.setMetatagTitle(description.getTitle());
 				desc.setSeUrl(description.getFriendlyUrl());
-				Language lang = languageService.getByCode(description.getLanguage());
+				LanguageInfo lang = languageInfoService.findbyCode(description.getLanguage());
 				if(lang==null) {
 					throw new ConversionException("Language is null for code " + description.getLanguage() + " use language ISO code [en, fr ...]");
 				}

@@ -9,6 +9,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
@@ -17,9 +19,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.category.CategoryService;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.catalog.model.category.Category;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.category.PersistableCategory;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.catalog.presentation.populator.catalog.PersistableCategoryPopulator;
@@ -33,13 +33,13 @@ public class CategoryFacadeImpl implements CategoryFacade {
 	private CategoryService categoryService;
 	
 	@Inject
-	private LanguageService languageService;
+	private LanguageInfoService languageInfoService;
 	
 	private final static String FEATURED_CATEGORY = "featured";
 
 	@Override
 	public List<ReadableCategory> getCategoryHierarchy(MerchantStoreInfo store,
-			int depth, Language language, String filter) throws Exception {
+													   int depth, LanguageInfo language, String filter) throws Exception {
 		
 		
 		List<Category> categories = null;
@@ -110,7 +110,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 		
 		PersistableCategoryPopulator populator = new PersistableCategoryPopulator();
 		populator.setCategoryService(categoryService);
-		populator.setLanguageService(languageService);
+		populator.setLanguageInfoService(languageInfoService);
 		
 		Category target = null;
 		
@@ -120,7 +120,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 			target = new Category();
 		}
 		
-		Category dbCategory = populator.populate(category, target, store, languageService.getByCode(store.getDefaultLanguage()));
+		Category dbCategory = populator.populate(category, target, store, languageInfoService.findbyCode(store.getDefaultLanguage()));
 		
 		this.saveCategory(store, dbCategory, null);
 		
@@ -180,7 +180,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 	}
 
 	@Override
-	public ReadableCategory getById(MerchantStoreInfo store, Long id, Language language) throws Exception {
+	public ReadableCategory getById(MerchantStoreInfo store, Long id, LanguageInfo language) throws Exception {
 		Category categoryModel = categoryService.getByLanguage(id, language);
 		
 		if(categoryModel == null)
@@ -234,7 +234,7 @@ public class CategoryFacadeImpl implements CategoryFacade {
 	}
 
 	@Override
-	public ReadableCategory getByCode(MerchantStoreInfo store, String code, Language language) throws Exception {
+	public ReadableCategory getByCode(MerchantStoreInfo store, String code, LanguageInfo language) throws Exception {
 
 		Validate.notNull(code,"category code must not be null");
 		ReadableCategoryPopulator categoryPopulator = new ReadableCategoryPopulator();

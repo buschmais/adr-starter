@@ -1,6 +1,8 @@
 package com.salesmanager.shop.init.data;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.category.CategoryService;
@@ -142,6 +144,9 @@ public class InitStoreData implements InitData {
 	@Inject
 	private MerchantStoreInfoService merchantStoreInfoService;
 
+	@Inject
+	private LanguageInfoService languageInfoService;
+
 	public void initInitialData() throws ServiceException {
 		
 
@@ -151,6 +156,9 @@ public class InitStoreData implements InitData {
 		//2 languages by default
 		Language en = languageService.getByCode("en");
 		Language fr = languageService.getByCode("fr");
+
+		LanguageInfo enInfo = languageInfoService.findbyCode("en");
+		LanguageInfo frInfo = languageInfoService.findbyCode("fr");
 		
 		Country canada = countryService.getByCode("CA");
 		Zone zone = zoneService.getByCode("QC");
@@ -169,13 +177,13 @@ public class InitStoreData implements InitData {
 		    CategoryDescription bookEnglishDescription = new CategoryDescription();
 		    bookEnglishDescription.setName("Computer Books");
 		    bookEnglishDescription.setCategory(book);
-		    bookEnglishDescription.setLanguage(en);
+		    bookEnglishDescription.setLanguage(enInfo);
 		    bookEnglishDescription.setSeUrl("computer-books");
 
 		    CategoryDescription bookFrenchDescription = new CategoryDescription();
 		    bookFrenchDescription.setName("Livres d'informatique");
 		    bookFrenchDescription.setCategory(book);
-		    bookFrenchDescription.setLanguage(fr);
+		    bookFrenchDescription.setLanguage(frInfo);
 		    bookFrenchDescription.setSeUrl("livres-informatiques");
 
 		    List<CategoryDescription> descriptions = new ArrayList<CategoryDescription>();
@@ -194,13 +202,13 @@ public class InitStoreData implements InitData {
 		    CategoryDescription novsEnglishDescription = new CategoryDescription();
 		    novsEnglishDescription.setName("Novels");
 		    novsEnglishDescription.setCategory(novs);
-		    novsEnglishDescription.setLanguage(en);
+		    novsEnglishDescription.setLanguage(enInfo);
 		    novsEnglishDescription.setSeUrl("novels");
 
 		    CategoryDescription novsFrenchDescription = new CategoryDescription();
 		    novsFrenchDescription.setName("Romans");
 		    novsFrenchDescription.setCategory(novs);
-		    novsFrenchDescription.setLanguage(fr);
+		    novsFrenchDescription.setLanguage(frInfo);
 		    novsFrenchDescription.setSeUrl("romans");
 
 		    List<CategoryDescription> descriptions2 = new ArrayList<CategoryDescription>();
@@ -218,13 +226,13 @@ public class InitStoreData implements InitData {
 		    CategoryDescription techEnglishDescription = new CategoryDescription();
 		    techEnglishDescription.setName("Technology");
 		    techEnglishDescription.setCategory(tech);
-		    techEnglishDescription.setLanguage(en);
+		    techEnglishDescription.setLanguage(enInfo);
 		    techEnglishDescription.setSeUrl("technology");
 
 		    CategoryDescription techFrenchDescription = new CategoryDescription();
 		    techFrenchDescription.setName("Technologie");
 		    techFrenchDescription.setCategory(tech);
-		    techFrenchDescription.setLanguage(fr);
+		    techFrenchDescription.setLanguage(frInfo);
 		    techFrenchDescription.setSeUrl("technologie");
 
 		    List<CategoryDescription> descriptions4 = new ArrayList<CategoryDescription>();
@@ -246,13 +254,13 @@ public class InitStoreData implements InitData {
 		    CategoryDescription webEnglishDescription = new CategoryDescription();
 		    webEnglishDescription.setName("Web");
 		    webEnglishDescription.setCategory(web);
-		    webEnglishDescription.setLanguage(en);
+		    webEnglishDescription.setLanguage(enInfo);
 		    webEnglishDescription.setSeUrl("the-web");
 
 		    CategoryDescription webFrenchDescription = new CategoryDescription();
 		    webFrenchDescription.setName("Web");
 		    webFrenchDescription.setCategory(web);
-		    webFrenchDescription.setLanguage(fr);
+		    webFrenchDescription.setLanguage(frInfo);
 		    webFrenchDescription.setSeUrl("le-web");
 
 		    List<CategoryDescription> descriptions3 = new ArrayList<CategoryDescription>();
@@ -276,13 +284,13 @@ public class InitStoreData implements InitData {
 		    CategoryDescription fictionEnglishDescription = new CategoryDescription();
 		    fictionEnglishDescription.setName("Fiction");
 		    fictionEnglishDescription.setCategory(fiction);
-		    fictionEnglishDescription.setLanguage(en);
+		    fictionEnglishDescription.setLanguage(enInfo);
 		    fictionEnglishDescription.setSeUrl("fiction");
 
 		    CategoryDescription fictionFrenchDescription = new CategoryDescription();
 		    fictionFrenchDescription.setName("Sc Fiction");
 		    fictionFrenchDescription.setCategory(fiction);
-		    fictionFrenchDescription.setLanguage(fr);
+		    fictionFrenchDescription.setLanguage(frInfo);
 		    fictionFrenchDescription.setSeUrl("fiction");
 
 		    List<CategoryDescription> fictiondescriptions = new ArrayList<CategoryDescription>();
@@ -305,13 +313,13 @@ public class InitStoreData implements InitData {
 		    CategoryDescription businessEnglishDescription = new CategoryDescription();
 		    businessEnglishDescription.setName("Business");
 		    businessEnglishDescription.setCategory(business);
-		    businessEnglishDescription.setLanguage(en);
+		    businessEnglishDescription.setLanguage(enInfo);
 		    businessEnglishDescription.setSeUrl("business");
 
 		    CategoryDescription businessFrenchDescription = new CategoryDescription();
 		    businessFrenchDescription.setName("Affaires");
 		    businessFrenchDescription.setCategory(business);
-		    businessFrenchDescription.setLanguage(fr);
+		    businessFrenchDescription.setLanguage(frInfo);
 		    businessFrenchDescription.setSeUrl("affaires");
 
 		    List<CategoryDescription> businessdescriptions = new ArrayList<CategoryDescription>();
@@ -333,13 +341,13 @@ public class InitStoreData implements InitData {
 		    CategoryDescription cloudEnglishDescription = new CategoryDescription();
 		    cloudEnglishDescription.setName("Cloud computing");
 		    cloudEnglishDescription.setCategory(cloud);
-		    cloudEnglishDescription.setLanguage(en);
+		    cloudEnglishDescription.setLanguage(enInfo);
 		    cloudEnglishDescription.setSeUrl("cloud-computing");
 
 		    CategoryDescription cloudFrenchDescription = new CategoryDescription();
 		    cloudFrenchDescription.setName("Programmation pour le cloud");
 		    cloudFrenchDescription.setCategory(cloud);
-		    cloudFrenchDescription.setLanguage(fr);
+		    cloudFrenchDescription.setLanguage(frInfo);
 		    cloudFrenchDescription.setSeUrl("programmation-cloud");
 
 		    List<CategoryDescription> clouddescriptions = new ArrayList<CategoryDescription>();
@@ -361,7 +369,7 @@ public class InitStoreData implements InitData {
 		    oreilley.setCode("oreilley");
 
 		    ManufacturerDescription oreilleyd = new ManufacturerDescription();
-		    oreilleyd.setLanguage(en);
+		    oreilleyd.setLanguage(enInfo);
 		    oreilleyd.setName("O\'Reilley");
 		    oreilleyd.setManufacturer(oreilley);
 		    oreilley.getDescriptions().add(oreilleyd);
@@ -374,7 +382,7 @@ public class InitStoreData implements InitData {
 		    sams.setCode("sams");
 
 		    ManufacturerDescription samsd = new ManufacturerDescription();
-		    samsd.setLanguage(en);
+		    samsd.setLanguage(enInfo);
 		    samsd.setName("Sams");
 		    samsd.setManufacturer(sams);
 		    sams.getDescriptions().add(samsd);
@@ -386,7 +394,7 @@ public class InitStoreData implements InitData {
 		    packt.setCode("packt");
 
 		    ManufacturerDescription packtd = new ManufacturerDescription();
-		    packtd.setLanguage(en);
+		    packtd.setLanguage(enInfo);
 		    packtd.setName("Packt");
 		    packtd.setManufacturer(packt);
 		    packt.getDescriptions().add(packtd);
@@ -398,7 +406,7 @@ public class InitStoreData implements InitData {
 		    manning.setCode("manning");
 
 		    ManufacturerDescription manningd = new ManufacturerDescription();
-		    manningd.setLanguage(en);
+		    manningd.setLanguage(enInfo);
 		    manningd.setManufacturer(manning);
 		    manningd.setName("Manning");
 		    manning.getDescriptions().add(manningd);
@@ -410,7 +418,7 @@ public class InitStoreData implements InitData {
 		    novells.setCode("novells");
 
 		    ManufacturerDescription novellsd = new ManufacturerDescription();
-		    novellsd.setLanguage(en);
+		    novellsd.setLanguage(enInfo);
 		    novellsd.setManufacturer(novells);
 		    novellsd.setName("Novells publishing");
 		    novells.getDescriptions().add(novellsd);
@@ -447,7 +455,7 @@ public class InitStoreData implements InitData {
 		    ProductPriceDescription dpd = new ProductPriceDescription();
 		    dpd.setName("Base price");
 		    dpd.setProductPrice(dprice);
-		    dpd.setLanguage(en);
+		    dpd.setLanguage(enInfo);
 
 		    dprice.getDescriptions().add(dpd);
 		    
@@ -457,7 +465,7 @@ public class InitStoreData implements InitData {
 		    // Product description
 		    ProductDescription description = new ProductDescription();
 		    description.setName("Spring in Action");
-		    description.setLanguage(en);
+		    description.setLanguage(enInfo);
 		    description.setSeUrl("Spring-in-Action");
 		    description.setProduct(product);
 
@@ -493,7 +501,7 @@ public class InitStoreData implements InitData {
 		    // Product description
 		    description = new ProductDescription();
 		    description.setName("Node Web Development");
-		    description.setLanguage(en);
+		    description.setLanguage(enInfo);
 		    description.setProduct(product2);
 		    description.setSeUrl("Node-Web-Development");
 
@@ -517,7 +525,7 @@ public class InitStoreData implements InitData {
 		    dpd = new ProductPriceDescription();
 		    dpd.setName("Base price");
 		    dpd.setProductPrice(dprice2);
-		    dpd.setLanguage(en);
+		    dpd.setLanguage(enInfo);
 
 		    dprice2.getDescriptions().add(dpd);
 		    
@@ -551,7 +559,7 @@ public class InitStoreData implements InitData {
 		    // Product description
 		    description = new ProductDescription();
 		    description.setName("Programming for PAAS");
-		    description.setLanguage(en);
+		    description.setLanguage(enInfo);
 		    description.setProduct(product3);
 		    description.setSeUrl("programming-for-paas");
 
@@ -574,7 +582,7 @@ public class InitStoreData implements InitData {
 		    dpd = new ProductPriceDescription();
 		    dpd.setName("Base price");
 		    dpd.setProductPrice(dprice3);
-		    dpd.setLanguage(en);
+		    dpd.setLanguage(enInfo);
 
 		    dprice3.getDescriptions().add(dpd);
 		    
@@ -607,7 +615,7 @@ public class InitStoreData implements InitData {
 		    // Product description
 		    description = new ProductDescription();
 		    description.setName("Android development");
-		    description.setLanguage(en);
+		    description.setLanguage(enInfo);
 		    description.setProduct(product4);
 		    description.setSeUrl("android-application-development");
 
@@ -631,7 +639,7 @@ public class InitStoreData implements InitData {
 		    dpd = new ProductPriceDescription();
 		    dpd.setName("Base price");
 		    dpd.setProductPrice(dprice4);
-		    dpd.setLanguage(en);
+		    dpd.setLanguage(enInfo);
 
 		    dprice4.getDescriptions().add(dpd);
 		    
@@ -664,7 +672,7 @@ public class InitStoreData implements InitData {
 		    // Product description
 		    description = new ProductDescription();
 		    description.setName("Android 3.0 Cookbook");
-		    description.setLanguage(en);
+		    description.setLanguage(enInfo);
 		    description.setProduct(product5);
 		    description.setSeUrl("android-3-cookbook");
 
@@ -690,7 +698,7 @@ public class InitStoreData implements InitData {
 		    dpd = new ProductPriceDescription();
 		    dpd.setName("Base price");
 		    dpd.setProductPrice(dprice5);
-		    dpd.setLanguage(en);
+		    dpd.setLanguage(enInfo);
 
 		    dprice5.getDescriptions().add(dpd);
 
@@ -724,7 +732,7 @@ public class InitStoreData implements InitData {
 		    // Product description
 		    description = new ProductDescription();
 		    description.setName("The Big Switch");
-		    description.setLanguage(en);
+		    description.setLanguage(enInfo);
 		    description.setProduct(product6);
 		    description.setSeUrl("the-big-switch");
 
@@ -749,7 +757,7 @@ public class InitStoreData implements InitData {
 		    dpd = new ProductPriceDescription();
 		    dpd.setName("Base price");
 		    dpd.setProductPrice(dprice6);
-		    dpd.setLanguage(en);
+		    dpd.setLanguage(enInfo);
 
 		    dprice6.getDescriptions().add(dpd);
 

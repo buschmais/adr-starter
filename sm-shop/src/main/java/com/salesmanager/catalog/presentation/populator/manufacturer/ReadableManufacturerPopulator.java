@@ -1,11 +1,11 @@
 package com.salesmanager.catalog.presentation.populator.manufacturer;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.model.product.manufacturer.ManufacturerDescription;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufacturer;
 
 import java.util.Set;
@@ -19,7 +19,7 @@ public class ReadableManufacturerPopulator extends AbstractDataPopulator<Manufac
 	@Override
 	public ReadableManufacturer populate(
 			com.salesmanager.catalog.model.product.manufacturer.Manufacturer source,
-			ReadableManufacturer target, MerchantStoreInfo store, Language language) throws ConversionException {
+			ReadableManufacturer target, MerchantStoreInfo store, LanguageInfo language) throws ConversionException {
 		target.setId(source.getId());
 		if(source.getDescriptions()!=null && source.getDescriptions().size()>0) {
 			

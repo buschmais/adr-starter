@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.junit.Ignore;
 import org.springframework.util.Assert;
@@ -61,6 +62,7 @@ public class ShippingQuoteByWeightTest extends com.salesmanager.test.common.Abst
 	public void testGetCustomShippingQuotesByWeight() throws ServiceException {
 
 	    Language en = languageService.getByCode("en");
+		LanguageInfo enInfo = languageInfoService.findbyCode("en");
 	    Country country = countryService.getByCode("CA");
 	    Zone zone = zoneService.getByCode("QC");
 
@@ -83,7 +85,7 @@ public class ShippingQuoteByWeightTest extends com.salesmanager.test.common.Abst
 	    // Product description
 	    ProductDescription description = new ProductDescription();
 	    description.setName("Product 1");
-	    description.setLanguage(en);
+	    description.setLanguage(enInfo);
 	    description.setProduct(product);
 
 	    product.getDescriptions().add(description);
@@ -111,7 +113,7 @@ public class ShippingQuoteByWeightTest extends com.salesmanager.test.common.Abst
 	    ProductPriceDescription dpd = new ProductPriceDescription();
 	    dpd.setName("Base price");
 	    dpd.setProductPrice(dprice);
-	    dpd.setLanguage(en);
+	    dpd.setLanguage(enInfo);
 
 	    dprice.getDescriptions().add(dpd);
 	    availability.getPrices().add(dprice);
@@ -119,7 +121,7 @@ public class ShippingQuoteByWeightTest extends com.salesmanager.test.common.Abst
 	    productPriceService.create(dprice);
 	    
 	    //get product
-	    product = productService.getByCode("TESTSKU", en);
+	    product = productService.getByCode("TESTSKU", enInfo);
 
 
 	    

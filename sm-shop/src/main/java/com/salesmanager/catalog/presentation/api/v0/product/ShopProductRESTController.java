@@ -1,5 +1,6 @@
 package com.salesmanager.catalog.presentation.api.v0.product;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.PricingService;
@@ -8,16 +9,15 @@ import com.salesmanager.catalog.business.service.product.attribute.ProductOption
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionValueService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.business.services.customer.CustomerService;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
 import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.manufacturer.PersistableManufacturer;
 import com.salesmanager.catalog.presentation.model.product.*;
@@ -97,7 +97,7 @@ public class ShopProductRESTController {
 	private ManufacturerService manufacturerService;
 	
 	@Inject
-	private LanguageService languageService;
+	private LanguageInfoService languageInfoService;
 	
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
@@ -143,7 +143,7 @@ public class ShopProductRESTController {
 				return null;
 			}
 			
-			productFacade.saveProduct(merchantStore, product, languageService.getByCode(merchantStore.getDefaultLanguage()));
+			productFacade.saveProduct(merchantStore, product, languageInfoService.findbyCode(merchantStore.getDefaultLanguage()));
 			
 			return product;
 			
@@ -197,11 +197,11 @@ public class ShopProductRESTController {
 			}
 
 			PersistableManufacturerPopulator populator = new PersistableManufacturerPopulator();
-			populator.setLanguageService(languageService);
+			populator.setLanguageInfoService(languageInfoService);
 			
 			com.salesmanager.catalog.model.product.manufacturer.Manufacturer manuf = new com.salesmanager.catalog.model.product.manufacturer.Manufacturer();
 			
-			populator.populate(manufacturer, manuf, merchantStore, languageService.getByCode(merchantStore.getDefaultLanguage()));
+			populator.populate(manufacturer, manuf, merchantStore, languageInfoService.findbyCode(merchantStore.getDefaultLanguage()));
 		
 			manufacturerService.save(manuf);
 			
@@ -239,10 +239,10 @@ public class ShopProductRESTController {
 			}
 
 			PersistableProductOptionValuePopulator populator = new PersistableProductOptionValuePopulator();
-			populator.setLanguageService(languageService);
+			populator.setLanguageInfoService(languageInfoService);
 			
 			com.salesmanager.catalog.model.product.attribute.ProductOptionValue optValue = new com.salesmanager.catalog.model.product.attribute.ProductOptionValue();
-			populator.populate(optionValue, optValue, merchantStore, languageService.getByCode(merchantStore.getDefaultLanguage()));
+			populator.populate(optionValue, optValue, merchantStore, languageInfoService.findbyCode(merchantStore.getDefaultLanguage()));
 		
 			productOptionValueService.save(optValue);
 			
@@ -280,10 +280,10 @@ public class ShopProductRESTController {
 			}
 
 			PersistableProductOptionPopulator populator = new PersistableProductOptionPopulator();
-			populator.setLanguageService(languageService);
+			populator.setLanguageInfoService(languageInfoService);
 			
 			com.salesmanager.catalog.model.product.attribute.ProductOption opt = new com.salesmanager.catalog.model.product.attribute.ProductOption();
-			populator.populate(option, opt, merchantStore, languageService.getByCode(merchantStore.getDefaultLanguage()));
+			populator.populate(option, opt, merchantStore, languageInfoService.findbyCode(merchantStore.getDefaultLanguage()));
 		
 			productOptionService.save(opt);
 			
@@ -336,12 +336,12 @@ public class ShopProductRESTController {
 			
 
 			PersistableProductReviewPopulator populator = new PersistableProductReviewPopulator();
-			populator.setLanguageService(languageService);
+			populator.setLanguageInfoService(languageInfoService);
 			populator.setCustomerService(customerService);
 			populator.setProductService(productService);
 			
 			com.salesmanager.catalog.model.product.review.ProductReview rev = new com.salesmanager.catalog.model.product.review.ProductReview();
-			populator.populate(review, rev, merchantStore, languageService.getByCode(merchantStore.getDefaultLanguage()));
+			populator.populate(review, rev, merchantStore, languageInfoService.findbyCode(merchantStore.getDefaultLanguage()));
 		
 			productReviewService.create(rev);
 
@@ -377,7 +377,7 @@ public class ShopProductRESTController {
 			return null;
 		}
 		
-		Language l = languageService.getByCode(merchantStore.getDefaultLanguage());
+		LanguageInfo l = languageInfoService.findbyCode(merchantStore.getDefaultLanguage());
 		
 		String lang = l.getCode();
 		
@@ -532,7 +532,7 @@ public class ShopProductRESTController {
 
 			MerchantStoreInfo merchantStore = getMerchantStoreFromRequest(request, store);
 			
-			Map<String,Language> langs = languageService.getLanguagesMap();
+			Map<String,LanguageInfo> langs = languageInfoService.getLanguagesMap();
 			
 			if(merchantStore==null) {
 				LOGGER.error("Merchant store is null for code " + store);
@@ -542,7 +542,7 @@ public class ShopProductRESTController {
 			
 
 
-			Language lang = langs.get(language);
+			LanguageInfo lang = langs.get(language);
 			if(lang==null) {
 				lang = langs.get(Constants.DEFAULT_LANGUAGE);
 			}
@@ -633,14 +633,14 @@ public class ShopProductRESTController {
 			return null;
 		}
 
-		Language language = null;
+		LanguageInfo language = null;
 		
 		if(!StringUtils.isBlank(lang)) {
-			language = languageService.getByCode(lang);
+			language = languageInfoService.findbyCode(lang);
 		}
 		
 		if(language==null) {
-			language = languageService.getByCode(merchantStore.getDefaultLanguage());
+			language = languageInfoService.findbyCode(merchantStore.getDefaultLanguage());
 		}
 		
 		ReadableProduct product = productFacade.getProduct(merchantStore, id, language);
@@ -670,7 +670,7 @@ public class ShopProductRESTController {
 			MerchantStoreInfo merchantStore = getMerchantStoreFromRequest(request, store);
 
 			String lang = request.getParameter("lang");
-			Language language = null;
+			LanguageInfo language = null;
 
 
 			if(merchantStore==null) {
@@ -680,13 +680,13 @@ public class ShopProductRESTController {
 			}
 			
 			if(StringUtils.isBlank(lang)) {
-				language = languageService.getByCode(merchantStore.getDefaultLanguage());
+				language = languageInfoService.findbyCode(merchantStore.getDefaultLanguage());
 			} else {
-				language = languageService.getByCode(lang);
+				language = languageInfoService.findbyCode(lang);
 			}
 			
 			if(language==null) {
-				language = languageService.getByCode(merchantStore.getDefaultLanguage());
+				language = languageInfoService.findbyCode(merchantStore.getDefaultLanguage());
 			}
 			
 			ReadableProduct product = productFacade.getProduct(merchantStore, sku, language);
@@ -729,7 +729,7 @@ public class ShopProductRESTController {
 			MerchantStoreInfo merchantStore = getMerchantStoreFromRequest(request, store);
 
 			String lang = request.getParameter("lang");
-			Language language = null;
+			LanguageInfo language = null;
 
 
 			if(merchantStore==null) {
@@ -739,13 +739,13 @@ public class ShopProductRESTController {
 			}
 			
 			if(StringUtils.isBlank(lang)) {
-				language = languageService.getByCode(merchantStore.getDefaultLanguage());
+				language = languageInfoService.findbyCode(merchantStore.getDefaultLanguage());
 			} else {
-				language = languageService.getByCode(lang);
+				language = languageInfoService.findbyCode(lang);
 			}
 			
 			if(language==null) {
-				language = languageService.getByCode(merchantStore.getDefaultLanguage());
+				language = languageInfoService.findbyCode(merchantStore.getDefaultLanguage());
 			}
 			
 			ReadableProduct product = productFacade.getProduct(merchantStore, sku, language);

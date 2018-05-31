@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
@@ -65,8 +66,8 @@ public class ProductTest extends com.salesmanager.test.common.AbstractSalesManag
 	@Test
 	public void testCreateProduct() throws Exception {
 
-	    Language en = languageService.getByCode("en");
-	    Language fr = languageService.getByCode("fr");
+	    LanguageInfo en = languageInfoService.findbyCode("en");
+	    LanguageInfo fr = languageInfoService.findbyCode("fr");
 
 	    MerchantStoreInfo store = merchantStoreInfoService.findbyCode(MerchantStore.DEFAULT_STORE);
 	    ProductType generalType = productTypeService.getProductType(ProductType.GENERAL_TYPE);
@@ -438,7 +439,7 @@ public class ProductTest extends com.salesmanager.test.common.AbstractSalesManag
 		
 		MerchantStoreInfo store = product.getMerchantStore();
 		
-		Language en = languageService.getByCode("en");
+		LanguageInfo en = languageInfoService.findbyCode("en");
 		
 	    /**
 	     * Create an option
@@ -595,7 +596,7 @@ public class ProductTest extends com.salesmanager.test.common.AbstractSalesManag
 	private void testCreateRelationShip(Product product) throws Exception {
 		
 		MerchantStoreInfo store = merchantStoreInfoService.findbyCode(MerchantStore.DEFAULT_STORE);
-		Language en = languageService.getByCode("en");
+		LanguageInfo en = languageInfoService.findbyCode("en");
 		Manufacturer oreilley = manufacturerService.getByCode(store, "oreilley");
 		ProductType generalType = productTypeService.getProductType(ProductType.GENERAL_TYPE);
 		

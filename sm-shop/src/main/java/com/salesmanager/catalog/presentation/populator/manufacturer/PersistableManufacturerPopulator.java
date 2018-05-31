@@ -1,12 +1,12 @@
 
 package com.salesmanager.catalog.presentation.populator.manufacturer;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.manufacturer.ManufacturerDescription;
 import com.salesmanager.catalog.presentation.model.manufacturer.PersistableManufacturer;
 import org.apache.commons.collections4.CollectionUtils;
@@ -26,14 +26,14 @@ public class PersistableManufacturerPopulator extends AbstractDataPopulator<Pers
 {
 	
 	
-	private LanguageService languageService;
+	private LanguageInfoService languageInfoService;
 
 	@Override
 	public Manufacturer populate(PersistableManufacturer source,
-								 Manufacturer target, MerchantStoreInfo store, Language language)
+								 Manufacturer target, MerchantStoreInfo store, LanguageInfo language)
 			throws ConversionException {
 		
-		Validate.notNull(languageService, "Requires to set LanguageService");
+		Validate.notNull(languageInfoService, "Requires to set LanguageInfoService");
 		
 		try {
 			
@@ -51,7 +51,7 @@ public class PersistableManufacturerPopulator extends AbstractDataPopulator<Pers
 					}
 					desc.setDescription(description.getDescription());
 					desc.setName(description.getName());
-					Language lang = languageService.getByCode(description.getLanguage());
+					LanguageInfo lang = languageInfoService.findbyCode(description.getLanguage());
 					if(lang==null) {
 						throw new ConversionException("Language is null for code " + description.getLanguage() + " use language ISO code [en, fr ...]");
 					}
@@ -75,13 +75,11 @@ public class PersistableManufacturerPopulator extends AbstractDataPopulator<Pers
 		return null;
 	}
 
-	public void setLanguageService(LanguageService languageService) {
-		this.languageService = languageService;
+	public LanguageInfoService getLanguageInfoService() {
+		return languageInfoService;
 	}
 
-	public LanguageService getLanguageService() {
-		return languageService;
+	public void setLanguageInfoService(LanguageInfoService languageInfoService) {
+		this.languageInfoService = languageInfoService;
 	}
-
-
 }

@@ -1,10 +1,12 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
@@ -13,8 +15,8 @@ import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.description.ProductDescription;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
+import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.common.presentation.util.LabelUtils;
@@ -58,6 +60,9 @@ public class CustomProductGroupsController {
 
 	@Autowired
 	private MerchantStoreInfoService merchantStoreInfoService;
+
+	@Autowired
+	private LanguageInfoService languageInfoService;
 	
 	@PreAuthorize("hasRole('PRODUCTS')")
 	@RequestMapping(value="/admin/products/groups/list.html", method=RequestMethod.GET)
@@ -249,8 +254,9 @@ public class CustomProductGroupsController {
 		
 		
 		setMenu(model,request);
-		
-		Language language = (Language)request.getAttribute("LANGUAGE");
+
+		LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+		LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
@@ -274,10 +280,11 @@ public class CustomProductGroupsController {
 		AjaxResponse resp = new AjaxResponse();
 		
 		try {
-			
 
-			
-			Language language = (Language)request.getAttribute("LANGUAGE");
+
+
+			LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+			LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			

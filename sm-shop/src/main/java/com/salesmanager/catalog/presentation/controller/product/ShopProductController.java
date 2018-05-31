@@ -1,5 +1,6 @@
 package com.salesmanager.catalog.presentation.controller.product;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.PricingService;
@@ -7,6 +8,7 @@ import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductAttributeService;
 import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.ControllerConstants;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
@@ -20,8 +22,8 @@ import com.salesmanager.catalog.model.product.price.FinalPrice;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationshipType;
 import com.salesmanager.catalog.model.product.review.ProductReview;
+import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductPrice;
@@ -94,6 +96,9 @@ public class ShopProductController {
 	@Autowired
 	private MerchantStoreInfoService merchantStoreInfoService;
 
+	@Autowired
+	private LanguageInfoService languageInfoService;
+
 	private static final Logger LOG = LoggerFactory.getLogger(ShopProductController.class);
 	
 
@@ -135,7 +140,8 @@ public class ShopProductController {
 
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
-		Language language = (Language)request.getAttribute("LANGUAGE");
+		LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+		LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 		
 		Product product = productService.getBySeUrl(store, friendlyUrl, locale);
 				
@@ -343,7 +349,8 @@ public class ShopProductController {
 
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
-		Language language = (Language)request.getAttribute("LANGUAGE");
+		LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+		LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 		
 		
 		Product product = productService.getById(productId);
@@ -367,7 +374,7 @@ public class ShopProductController {
     	
     }
 	
-	private Attribute createAttribute(ProductAttribute productAttribute, Language language) {
+	private Attribute createAttribute(ProductAttribute productAttribute, LanguageInfo language) {
 		
 		Attribute attribute = new Attribute();
 		attribute.setId(productAttribute.getProductOption().getId());//attribute of the option
@@ -400,7 +407,7 @@ public class ShopProductController {
 		
 	}
 	
-	private List<ReadableProduct> relatedItems(MerchantStoreInfo store, Product product, Language language) throws Exception {
+	private List<ReadableProduct> relatedItems(MerchantStoreInfo store, Product product, LanguageInfo language) throws Exception {
 		
 		
 		ReadableProductPopulator populator = new ReadableProductPopulator();

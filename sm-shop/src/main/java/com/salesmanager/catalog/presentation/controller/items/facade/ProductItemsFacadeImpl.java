@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.Validate;
@@ -17,7 +18,6 @@ import com.salesmanager.catalog.business.service.product.relationship.ProductRel
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
@@ -41,7 +41,7 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 
 	@Override
 	public ReadableProductList listItemsByManufacturer(MerchantStoreInfo store,
-			Language language, Long manufacturerId, int startCount, int maxCount) throws Exception {
+													   LanguageInfo language, Long manufacturerId, int startCount, int maxCount) throws Exception {
 		
 		
 		ProductCriteria productCriteria = new ProductCriteria();
@@ -74,7 +74,7 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 	}
 	
 	@Override
-	public ReadableProductList listItemsByIds(MerchantStoreInfo store, Language language, List<Long> ids, int startCount,
+	public ReadableProductList listItemsByIds(MerchantStoreInfo store, LanguageInfo language, List<Long> ids, int startCount,
 			int maxCount) throws Exception {
 		
 		if(CollectionUtils.isEmpty(ids)) {
@@ -112,7 +112,7 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 	}
 
 	@Override
-	public ReadableProductList listItemsByGroup(String group, MerchantStoreInfo store, Language language) throws Exception {
+	public ReadableProductList listItemsByGroup(String group, MerchantStoreInfo store, LanguageInfo language) throws Exception {
 
 
 		//get product group
@@ -133,7 +133,7 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 	}
 
 	@Override
-	public ReadableProductList addItemToGroup(Product product, String group, MerchantStoreInfo store, Language language)
+	public ReadableProductList addItemToGroup(Product product, String group, MerchantStoreInfo store, LanguageInfo language)
 			throws Exception {
 		
 		Validate.notNull(product,"Product muust not be null");
@@ -153,7 +153,7 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 
 	@Override
 	public ReadableProductList removeItemFromGroup(Product product, String group, MerchantStoreInfo store,
-			Language language) throws Exception {
+			LanguageInfo language) throws Exception {
 		
 		ProductRelationship relationship = null;
 		List<ProductRelationship> relationships = productRelationshipService.getByGroup(store, group);

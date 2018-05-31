@@ -1,8 +1,10 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.ProductService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
@@ -11,8 +13,8 @@ import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
 import com.salesmanager.catalog.model.product.ProductList;
 import com.salesmanager.catalog.model.product.description.ProductDescription;
+import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.common.presentation.util.LabelUtils;
@@ -50,6 +52,9 @@ public class ProductsController {
 
 	@Autowired
 	private MerchantStoreInfoService merchantStoreInfoService;
+
+	@Autowired
+	private LanguageInfoService languageInfoService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductsController.class);
 	
@@ -59,8 +64,9 @@ public class ProductsController {
 		
 		
 		setMenu(model,request);
-		
-		Language language = (Language)request.getAttribute("LANGUAGE");
+
+		LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+		LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
@@ -94,8 +100,9 @@ public class ProductsController {
 		
 			int startRow = Integer.parseInt(request.getParameter("_startRow"));
 			int endRow = Integer.parseInt(request.getParameter("_endRow"));
-			
-			Language language = (Language)request.getAttribute("LANGUAGE");
+
+			LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+			LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			

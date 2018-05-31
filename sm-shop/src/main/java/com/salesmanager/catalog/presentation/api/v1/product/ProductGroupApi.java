@@ -3,14 +3,12 @@ package com.salesmanager.catalog.presentation.api.v1.product;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.items.facade.ProductItemsFacade;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
 import com.salesmanager.catalog.presentation.util.RestUtils;
-import com.salesmanager.core.business.services.merchant.MerchantStoreService;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.catalog.model.product.Product;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.store.controller.store.facade.StoreFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +29,6 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/api/v1")
 public class ProductGroupApi {
-	
-	@Inject
-	private LanguageService languageService;
 	
 	@Inject
 	private RestUtils restUtils;
@@ -76,7 +71,7 @@ public class ProductGroupApi {
 		try {
 
 			MerchantStoreInfo merchantStore = merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			
 			ReadableProductList list = productItemsFacade.listItemsByGroup(code, merchantStore, language);
@@ -105,7 +100,7 @@ public class ProductGroupApi {
 		try {
     	
 	    	MerchantStoreInfo merchantStore = merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 	    	
 	    	//get the product
 	    	Product product = productService.getById(productId);
@@ -137,7 +132,7 @@ public class ProductGroupApi {
 		try {
     	
 	    	MerchantStoreInfo merchantStore = merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 	    	
 	    	//get the product
 	    	Product product = productService.getById(productId);

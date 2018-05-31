@@ -6,9 +6,12 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
+import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +25,6 @@ import com.salesmanager.catalog.business.service.product.relationship.ProductRel
 import com.salesmanager.core.business.utils.CacheUtils;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
@@ -54,6 +56,9 @@ public class ShopProductRelationshipTag extends RequestContextAwareTag  {
 
 	@Autowired
 	private MerchantStoreInfoService merchantStoreInfoService;
+
+	@Autowired
+	private LanguageInfoService languageInfoService;
 	
 	
 	private String groupName;
@@ -86,7 +91,7 @@ public class ShopProductRelationshipTag extends RequestContextAwareTag  {
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
-		Language language = (Language)request.getAttribute(Constants.LANGUAGE);
+		LanguageDTO languageDTO = (LanguageDTO) request.getAttribute(Constants.LANGUAGE_DTO);
 
 		StringBuilder groupKey = new StringBuilder();
 		groupKey
@@ -96,7 +101,7 @@ public class ShopProductRelationshipTag extends RequestContextAwareTag  {
 		.append("-")
 		.append(this.getGroupName())
 		.append("_")
-		.append(language.getCode());
+		.append(languageDTO.getCode());
 		
 		StringBuilder groupKeyMissed = new StringBuilder();
 		groupKeyMissed
@@ -142,7 +147,8 @@ public class ShopProductRelationshipTag extends RequestContextAwareTag  {
 
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
-		Language language = (Language)request.getAttribute(Constants.LANGUAGE);
+		LanguageDTO languageDTO = (LanguageDTO) request.getAttribute(Constants.LANGUAGE_DTO);
+		LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 
 		List<ProductRelationship> relationships = productRelationshipService.getByGroup(store, this.getGroupName(), language);
 		

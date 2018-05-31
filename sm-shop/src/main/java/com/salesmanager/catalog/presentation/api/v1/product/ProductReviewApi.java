@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.RestUtils;
 import org.slf4j.Logger;
@@ -25,7 +26,6 @@ import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.review.ProductReview;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.product.PersistableProductReview;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductReview;
@@ -63,7 +63,7 @@ public class ProductReviewApi {
 		try {
 			
 			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			//rating already exist
 			ProductReview prodReview = productReviewService.getByProductAndCustomer(review.getProductId(), review.getCustomerId());
@@ -106,7 +106,7 @@ public class ProductReviewApi {
 		try {
 			
 			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			//product exist
 			Product product = productService.getById(id);
@@ -143,7 +143,7 @@ public class ProductReviewApi {
 		try {
 			
 			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			ProductReview prodReview = productReviewService.getById(reviewId);
 			if(prodReview==null) {
@@ -189,7 +189,7 @@ public class ProductReviewApi {
 		try {
 			
 			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			ProductReview prodReview = productReviewService.getById(reviewId);
 			if(prodReview==null) {

@@ -1,8 +1,10 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
@@ -10,8 +12,8 @@ import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.catalog.model.product.review.ProductReviewDescription;
+import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.common.presentation.util.LabelUtils;
@@ -52,6 +54,9 @@ public class ProductReviewController {
 
 	@Autowired
 	private MerchantStoreInfoService merchantStoreInfoService;
+
+	@Autowired
+	private LanguageInfoService languageInfoService;
 	
 	
 	@PreAuthorize("hasRole('PRODUCTS')")
@@ -59,8 +64,9 @@ public class ProductReviewController {
 	public String displayProductReviews(@RequestParam("id") long productId,Model model, HttpServletRequest request, HttpServletResponse response, Locale locale) throws Exception {
 		
 		setMenu(model, request);
-		
-		Language language = (Language)request.getAttribute("LANGUAGE");
+
+		LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+		LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 
 
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
@@ -128,9 +134,10 @@ public class ProductReviewController {
 				String returnString = resp.toJSONString();
 				return new ResponseEntity<String>(returnString,httpHeaders,HttpStatus.OK);
 			}
-			
-			
-			Language language = (Language)request.getAttribute("LANGUAGE");
+
+
+			LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+			LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 
 			
 			List<ProductReview> reviews = productReviewService.getByProduct(product);

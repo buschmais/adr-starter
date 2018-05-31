@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.Validate;
@@ -21,7 +23,6 @@ import com.salesmanager.catalog.business.service.product.attribute.ProductOption
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
 import com.salesmanager.core.business.services.customer.CustomerService;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
@@ -30,7 +31,6 @@ import com.salesmanager.catalog.model.product.availability.ProductAvailability;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.catalog.model.product.price.ProductPrice;
 import com.salesmanager.catalog.model.product.review.ProductReview;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.manufacturer.PersistableManufacturer;
 import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufacturer;
 import com.salesmanager.catalog.presentation.model.product.PersistableProduct;
@@ -58,9 +58,6 @@ public class ProductFacadeImpl implements ProductFacade {
 	private ManufacturerService manufacturerService;
 	
 	@Inject
-	private LanguageService languageService;
-	
-	@Inject
 	private ProductOptionService productOptionService;
 	
 	@Inject
@@ -84,8 +81,11 @@ public class ProductFacadeImpl implements ProductFacade {
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
 
+	@Autowired
+	private LanguageInfoService languageInfoService;
+
 	@Override
-	public PersistableProduct saveProduct(MerchantStoreInfo store, PersistableProduct product, Language language)
+	public PersistableProduct saveProduct(MerchantStoreInfo store, PersistableProduct product, LanguageInfo language)
 			throws Exception {
 		
 
@@ -112,7 +112,7 @@ public class ProductFacadeImpl implements ProductFacade {
 		
 		persistableProductPopulator.setCategoryService(categoryService);
 		persistableProductPopulator.setManufacturerService(manufacturerService);
-		persistableProductPopulator.setLanguageService(languageService);
+		persistableProductPopulator.setLanguageInfoService(languageInfoService);
 		persistableProductPopulator.setProductOptionService(productOptionService);
 		persistableProductPopulator.setProductOptionValueService(productOptionValueService);
 		persistableProductPopulator.setTaxClassService(taxClassService);
@@ -138,7 +138,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public ReadableProduct getProduct(MerchantStoreInfo store, Long id, Language language)
+	public ReadableProduct getProduct(MerchantStoreInfo store, Long id, LanguageInfo language)
 			throws Exception {
 
 		Product product = productService.getById(id);
@@ -160,7 +160,7 @@ public class ProductFacadeImpl implements ProductFacade {
 
 	@Override
 	public ReadableProduct getProduct(MerchantStoreInfo store, String sku,
-			Language language) throws Exception {
+			LanguageInfo language) throws Exception {
 		
 		Product product = productService.getByCode(sku, language);
 		
@@ -181,7 +181,7 @@ public class ProductFacadeImpl implements ProductFacade {
 
 	@Override
 	public ReadableProduct updateProductPrice(ReadableProduct product,
-			ProductPriceEntity price, Language language) throws Exception {
+			ProductPriceEntity price, LanguageInfo language) throws Exception {
 		
 		
 		Product persistable = productService.getById(product.getId());
@@ -223,7 +223,7 @@ public class ProductFacadeImpl implements ProductFacade {
 
 	@Override
 	public ReadableProduct updateProductQuantity(ReadableProduct product,
-			int quantity, Language language) throws Exception {
+			int quantity, LanguageInfo language) throws Exception {
 		Product persistable = productService.getById(product.getId());
 		
 		if(persistable==null) {
@@ -255,7 +255,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public ReadableProductList getProductListsByCriterias(MerchantStoreInfo store, Language language,
+	public ReadableProductList getProductListsByCriterias(MerchantStoreInfo store, LanguageInfo language,
 			ProductCriteria criterias) throws Exception {
 
 		
@@ -311,7 +311,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public ReadableProduct addProductToCategory(Category category, Product product, Language language) throws Exception {
+	public ReadableProduct addProductToCategory(Category category, Product product, LanguageInfo language) throws Exception {
 		
 		Validate.notNull(category,"Category cannot be null");
 		Validate.notNull(product,"Product cannot be null");
@@ -334,7 +334,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public ReadableProduct removeProductFromCategory(Category category, Product product, Language language)
+	public ReadableProduct removeProductFromCategory(Category category, Product product, LanguageInfo language)
 			throws Exception {
 		
 		Validate.notNull(category,"Category cannot be null");
@@ -355,7 +355,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public ReadableProduct getProductByCode(MerchantStoreInfo store, String uniqueCode, Language language)
+	public ReadableProduct getProductByCode(MerchantStoreInfo store, String uniqueCode, LanguageInfo language)
 			throws Exception {
 		
 		Product product = productService.getByCode(uniqueCode, language);
@@ -373,9 +373,9 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public void saveOrUpdateReview(PersistableProductReview review, MerchantStoreInfo store, Language language) throws Exception {
+	public void saveOrUpdateReview(PersistableProductReview review, MerchantStoreInfo store, LanguageInfo language) throws Exception {
 		PersistableProductReviewPopulator populator = new PersistableProductReviewPopulator();
-		populator.setLanguageService(languageService);
+		populator.setLanguageInfoService(languageInfoService);
 		populator.setCustomerService(customerService);
 		populator.setProductService(productService);
 		
@@ -394,13 +394,13 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public void deleteReview(ProductReview review, MerchantStoreInfo store, Language language) throws Exception {
+	public void deleteReview(ProductReview review, MerchantStoreInfo store, LanguageInfo language) throws Exception {
 		productReviewService.delete(review);
 		
 	}
 
 	@Override
-	public List<ReadableProductReview> getProductReviews(Product product, MerchantStoreInfo store, Language language)
+	public List<ReadableProductReview> getProductReviews(Product product, MerchantStoreInfo store, LanguageInfo language)
 			throws Exception {
 		
 		
@@ -422,11 +422,11 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public void saveOrUpdateManufacturer(PersistableManufacturer manufacturer, MerchantStoreInfo store, Language language)
+	public void saveOrUpdateManufacturer(PersistableManufacturer manufacturer, MerchantStoreInfo store, LanguageInfo language)
 			throws Exception {
 		
 		PersistableManufacturerPopulator populator = new PersistableManufacturerPopulator();
-		populator.setLanguageService(languageService);
+		populator.setLanguageInfoService(languageInfoService);
 
 		
 		Manufacturer manuf = new Manufacturer();
@@ -439,13 +439,13 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public void deleteManufacturer(Manufacturer manufacturer, MerchantStoreInfo store, Language language) throws Exception {
+	public void deleteManufacturer(Manufacturer manufacturer, MerchantStoreInfo store, LanguageInfo language) throws Exception {
 		manufacturerService.delete(manufacturer);
 		
 	}
 
 	@Override
-	public ReadableManufacturer getManufacturer(Long id, MerchantStoreInfo store, Language language) throws Exception {
+	public ReadableManufacturer getManufacturer(Long id, MerchantStoreInfo store, LanguageInfo language) throws Exception {
 		Manufacturer manufacturer = manufacturerService.getById(id);
 		
 		if(manufacturer==null) {
@@ -462,7 +462,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	}
 
 	@Override
-	public List<ReadableManufacturer> getAllManufacturers(MerchantStoreInfo store, Language language) throws Exception {
+	public List<ReadableManufacturer> getAllManufacturers(MerchantStoreInfo store, LanguageInfo language) throws Exception {
 		
 		
 		List<Manufacturer> manufacturers = manufacturerService.listByStore(store);

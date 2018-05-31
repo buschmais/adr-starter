@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -67,6 +68,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 		Country country = countryService.getByCode("US");
 		Zone zone = zoneService.getByCode("VT");
 		Language en = languageService.getByCode("en");
+		LanguageInfo enInfo = languageInfoService.findbyCode("en");
 		
 		MerchantStore merchant = merchantService.getByCode( MerchantStore.DEFAULT_STORE );
 		MerchantStoreInfo storeInfo = merchantStoreInfoService.findbyCode(merchant.getCode());
@@ -120,7 +122,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	    CategoryDescription shirtsEnglishDescription = new CategoryDescription();
 	    shirtsEnglishDescription.setName("Shirts");
 	    shirtsEnglishDescription.setCategory(shirts);
-	    shirtsEnglishDescription.setLanguage(en);
+	    shirtsEnglishDescription.setLanguage(enInfo);
 
 	    List<CategoryDescription> descriptions = new ArrayList<CategoryDescription>();
 	    descriptions.add(shirtsEnglishDescription);
@@ -138,7 +140,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	    addidas.setCode("addidas");
 
 	    ManufacturerDescription addidasDesc = new ManufacturerDescription();
-	    addidasDesc.setLanguage(en);
+	    addidasDesc.setLanguage(enInfo);
 	    addidasDesc.setManufacturer(addidas);
 	    addidasDesc.setName("Addidas");
 	    addidas.getDescriptions().add(addidasDesc);
@@ -154,7 +156,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	    option.setProductOptionType(ProductOptionType.Radio.name());
 	    
 	    ProductOptionDescription optionDescription = new ProductOptionDescription();
-	    optionDescription.setLanguage(en);
+	    optionDescription.setLanguage(enInfo);
 	    optionDescription.setName("Color");
 	    optionDescription.setDescription("Item color");
 	    optionDescription.setProductOption(option);
@@ -170,7 +172,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	    white.setCode("white");
 	    
 	    ProductOptionValueDescription whiteDescription = new ProductOptionValueDescription();
-	    whiteDescription.setLanguage(en);
+	    whiteDescription.setLanguage(enInfo);
 	    whiteDescription.setName("White");
 	    whiteDescription.setDescription("White color");
 	    whiteDescription.setProductOptionValue(white);
@@ -186,7 +188,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	    
 	    /** second option value **/
 	    ProductOptionValueDescription blackDesc = new ProductOptionValueDescription();
-	    blackDesc.setLanguage(en);
+	    blackDesc.setLanguage(enInfo);
 	    blackDesc.setName("Black");
 	    blackDesc.setDescription("Black color");
 	    blackDesc.setProductOptionValue(black);
@@ -211,7 +213,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	    // Product description
 	    ProductDescription description = new ProductDescription();
 	    description.setName("Short sleeves shirt");
-	    description.setLanguage(en);
+	    description.setLanguage(enInfo);
 	    description.setProduct(product);
 
 	    product.getDescriptions().add(description);
@@ -236,7 +238,7 @@ public class OrderTest extends com.salesmanager.test.common.AbstractSalesManager
 	    ProductPriceDescription dpd = new ProductPriceDescription();
 	    dpd.setName("Base price");
 	    dpd.setProductPrice(dprice);
-	    dpd.setLanguage(en);
+	    dpd.setLanguage(enInfo);
 
 	    dprice.getDescriptions().add(dpd);
 	    availability.getPrices().add(dprice);

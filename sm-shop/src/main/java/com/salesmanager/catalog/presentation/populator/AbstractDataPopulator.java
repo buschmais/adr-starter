@@ -3,9 +3,9 @@
  */
 package com.salesmanager.catalog.presentation.populator;
 
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.core.model.reference.language.Language;
 
 import java.util.Locale;
 
@@ -30,7 +30,7 @@ public abstract class AbstractDataPopulator<Source,Target> implements DataPopula
 	
 
 	@Override
-	public Target populate(Source source, MerchantStoreInfo store, Language language) throws ConversionException{
+	public Target populate(Source source, MerchantStoreInfo store, LanguageInfo language) throws ConversionException{
 	   return populate(source,createTarget(), store, language);
 	}
 	

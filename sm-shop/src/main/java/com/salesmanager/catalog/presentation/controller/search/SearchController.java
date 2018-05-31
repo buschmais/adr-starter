@@ -8,7 +8,9 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.ControllerConstants;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
@@ -27,9 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.catalog.business.service.search.SearchService;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.model.search.SearchKeywords;
 import com.salesmanager.catalog.model.search.SearchResponse;
 import com.salesmanager.shop.constants.Constants;
@@ -43,9 +43,6 @@ public class SearchController {
 	
 	@Inject
 	private MerchantStoreInfoService merchantStoreInfoService;
-	
-	@Inject
-	private LanguageService languageService;
 	
 	@Inject
 	private SearchService searchService;
@@ -64,6 +61,9 @@ public class SearchController {
 
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
+
+	@Autowired
+	private LanguageInfoService languageInfoService;
 
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SearchController.class);
@@ -155,7 +155,7 @@ public class SearchController {
 			IOUtils.copy(request.getInputStream(), writer, "UTF-8");
 			json = writer.toString();
 			
-			Map<String,Language> langs = languageService.getLanguagesMap();
+			Map<String,LanguageInfo> langs = languageInfoService.getLanguagesMap();
 			
 			if(merchantStoreDTO!=null) {
 				if(!merchantStoreDTO.getCode().equals(store)) {
@@ -177,9 +177,9 @@ public class SearchController {
 				return null;
 			}
 			
-			Language l = langs.get(language);
+			LanguageInfo l = langs.get(language);
 			if(l==null) {
-				l = languageService.getByCode(Constants.DEFAULT_LANGUAGE);
+				l = languageInfoService.findbyCode(Constants.DEFAULT_LANGUAGE);
 			}
 
 			SearchResponse resp = searchService.search(merchantStore, language, json, max, start);

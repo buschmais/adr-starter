@@ -1,5 +1,6 @@
 package com.salesmanager.catalog.presentation.api.v0.product;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.PricingService;
@@ -9,15 +10,14 @@ import com.salesmanager.catalog.business.service.product.attribute.ProductOption
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
 import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.RestUtils;
 import com.salesmanager.core.business.services.customer.CustomerService;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductList;
 import com.salesmanager.catalog.presentation.controller.items.facade.ProductItemsFacade;
@@ -88,7 +88,7 @@ public class ProductItemsRESTController {
 	private ManufacturerService manufacturerService;
 	
 	@Inject
-	private LanguageService languageService;
+	private LanguageInfoService languageInfoService;
 	
 	@Inject
 	private RestUtils restUtils;
@@ -135,7 +135,7 @@ public class ProductItemsRESTController {
 			MerchantStoreDTO merchantStoreDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
 			
 			
-			Map<String,Language> langs = languageService.getLanguagesMap();
+			Map<String,LanguageInfo> langs = languageInfoService.getLanguagesMap();
 			
 			if(merchantStoreDTO!=null) {
 				if(!merchantStoreDTO.getCode().equals(store)) {
@@ -159,7 +159,7 @@ public class ProductItemsRESTController {
 			
 	
 	
-			Language lang = langs.get(language);
+			LanguageInfo lang = langs.get(language);
 			if(lang==null) {
 				lang = langs.get(Constants.DEFAULT_LANGUAGE);
 			}
@@ -223,7 +223,7 @@ public class ProductItemsRESTController {
 			
 	
 	
-			Language lang = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo lang = restUtils.getRESTLanguage(request, merchantStore);
 			
 			//get product group
 			List<ProductRelationship> group = productRelationshipService.getByGroup(merchantStore, code, lang);

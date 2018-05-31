@@ -1,18 +1,19 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionValueService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.core.business.services.content.ContentService;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionValue;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionValueDescription;
+import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.InputContentFile;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.common.presentation.util.LabelUtils;
@@ -42,9 +43,6 @@ import java.util.*;
 @Controller
 public class OptionsValueController {
 	
-	@Inject
-	LanguageService languageService;
-	
 
 	@Inject
 	ProductOptionValueService productOptionValueService;
@@ -60,6 +58,9 @@ public class OptionsValueController {
 
 	@Autowired
 	private MerchantStoreInfoService merchantStoreInfoService;
+
+	@Autowired
+	private LanguageInfoService languageInfoService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(OptionsValueController.class);
 	
@@ -99,7 +100,7 @@ public class OptionsValueController {
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
-		List<Language> languages = store.getLanguages();
+		List<LanguageInfo> languages = store.getLanguages();
 
 		Set<ProductOptionValueDescription> descriptions = new HashSet<ProductOptionValueDescription>();
 		
@@ -118,7 +119,7 @@ public class OptionsValueController {
 			
 			
 			
-			for(Language l : languages) {
+			for(LanguageInfo l : languages) {
 			
 				ProductOptionValueDescription optionDescription = null;
 				
@@ -146,7 +147,7 @@ public class OptionsValueController {
 
 		} else {
 			
-			for(Language l : languages) {
+			for(LanguageInfo l : languages) {
 				
 				ProductOptionValueDescription desc = new ProductOptionValueDescription();
 				desc.setLanguage(l);
@@ -203,7 +204,7 @@ public class OptionsValueController {
 
 
 			
-		Map<String,Language> langs = languageService.getLanguagesMap();
+		Map<String,LanguageInfo> langs = languageInfoService.getLanguagesMap();
 			
 
 		List<ProductOptionValueDescription> descriptions = optionValue.getDescriptionsList();
@@ -225,7 +226,7 @@ public class OptionsValueController {
 							
 						
 							String code = description.getLanguage().getCode();
-							Language l = langs.get(code);
+							LanguageInfo l = langs.get(code);
 							description.setLanguage(l);
 							description.setProductOptionValue(optionValue);
 							descs.add(description);
@@ -289,9 +290,10 @@ public class OptionsValueController {
 
 		
 		try {
-			
-			
-			Language language = (Language)request.getAttribute("LANGUAGE");
+
+
+			LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+			LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 
 			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());

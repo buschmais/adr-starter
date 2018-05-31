@@ -1,9 +1,11 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.price.ProductPriceService;
 import com.salesmanager.catalog.business.util.ProductPriceUtils;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
@@ -13,8 +15,8 @@ import com.salesmanager.catalog.model.product.availability.ProductAvailability;
 import com.salesmanager.catalog.model.product.price.ProductPrice;
 import com.salesmanager.catalog.model.product.price.ProductPriceDescription;
 import com.salesmanager.catalog.model.product.price.ProductPriceType;
+import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.common.presentation.util.DateUtil;
@@ -60,6 +62,9 @@ public class ProductPriceController {
 
 	@Autowired
 	private MerchantStoreInfoService merchantStoreInfoService;
+
+	@Autowired
+	private LanguageInfoService languageInfoService;
 	
 	@PreAuthorize("hasRole('PRODUCTS')")
 	@RequestMapping(value="/admin/products/prices.html", method=RequestMethod.GET)
@@ -103,7 +108,8 @@ public class ProductPriceController {
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
-		Language language = (Language)request.getAttribute("LANGUAGE");
+		LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+		LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 		
 		
 		AjaxResponse resp = new AjaxResponse();
@@ -297,14 +303,14 @@ public class ProductPriceController {
 		}
 		
 		//descriptions
-		List<Language> languages = store.getLanguages();
+		List<LanguageInfo> languages = store.getLanguages();
 		
 		Set<ProductPriceDescription> productPriceDescriptions = productPrice.getDescriptions();
 		List<ProductPriceDescription> descriptions = new ArrayList<ProductPriceDescription>();
-		for(Language l : languages) {
+		for(LanguageInfo l : languages) {
 			ProductPriceDescription productPriceDesc = null;
 			for(ProductPriceDescription desc : productPriceDescriptions) {
-				Language lang = desc.getLanguage();
+				LanguageInfo lang = desc.getLanguage();
 				if(lang.getCode().equals(l.getCode())) {
 					productPriceDesc = desc;
 				}

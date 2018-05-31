@@ -7,10 +7,12 @@ package com.salesmanager.test.common;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -149,6 +151,9 @@ public class AbstractSalesManagerCoreTestCase {
 
 	@Inject
 	protected MerchantStoreInfoService merchantStoreInfoService;
+
+	@Autowired
+	protected LanguageInfoService languageInfoService;
 	
 	@Before
 	public void init() throws ServiceException {

@@ -2,6 +2,7 @@ package com.salesmanager.catalog.presentation.controller.admin.product;
 
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.ProductService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
@@ -9,7 +10,6 @@ import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.description.ProductDescription;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.admin.Keyword;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
@@ -188,7 +188,7 @@ public class ProductKeywordsController {
 			Set<ProductDescription> editedDescriptions = new HashSet<ProductDescription>();
 			for(ProductDescription description : descriptions) {
 
-				Language lang = description.getLanguage();
+				LanguageInfo lang = description.getLanguage();
 				if(!lang.getCode().equals(languageCode)){
 					editedDescriptions.add(description);
 					continue;
@@ -292,7 +292,7 @@ public class ProductKeywordsController {
 			for(ProductDescription description : descriptions) {
 				
 				
-				Language lang = description.getLanguage();
+				LanguageInfo lang = description.getLanguage();
 				
 				
 				String keywords = description.getMetatagKeywords();

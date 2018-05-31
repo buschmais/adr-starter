@@ -9,7 +9,9 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,6 +86,9 @@ public class InitializationDatabaseImpl implements InitializationDatabase {
 	
 	@Inject
 	private ModuleConfigurationService moduleConfigurationService;
+
+	@Inject
+	private LanguageInfoService languageInfoService;
 	
 
 	
@@ -272,7 +277,7 @@ public class InitializationDatabaseImpl implements InitializationDatabase {
 
 	private void createManufacturer() throws ServiceException {
 		MerchantStoreInfo storeInfo = this.merchantStoreInfoService.findbyCode(MerchantStore.DEFAULT_STORE);
-		Language en = languageService.getByCode("en");
+		LanguageInfo en = languageInfoService.findbyCode("en");
 		//create default manufacturer
 		Manufacturer defaultManufacturer = new Manufacturer();
 		defaultManufacturer.setCode("DEFAULT");

@@ -1,10 +1,10 @@
 package com.salesmanager.catalog.presentation.util;
 
 import com.salesmanager.catalog.business.service.category.CategoryService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import com.salesmanager.catalog.model.category.Category;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
@@ -16,13 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.Cache;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
 
 import javax.inject.Inject;
 import java.util.*;
@@ -42,7 +36,7 @@ public class BreadcrumbsUtils {
 	@Inject
 	private LabelUtils messages;
 	
-	public Breadcrumb buildCategoryBreadcrumb(ReadableCategory categoryClicked, MerchantStoreInfo store, Language language, String contextPath) throws Exception {
+	public Breadcrumb buildCategoryBreadcrumb(ReadableCategory categoryClicked, MerchantStoreInfo store, LanguageInfo language, String contextPath) throws Exception {
 		
 		/** Rebuild breadcrumb **/
 		BreadcrumbItem home = new BreadcrumbItem();
@@ -93,7 +87,7 @@ public class BreadcrumbsUtils {
 	}
 	
 	
-	public Breadcrumb buildProductBreadcrumb(String refContent, ReadableProduct productClicked, MerchantStoreInfo store, Language language, String contextPath) throws Exception {
+	public Breadcrumb buildProductBreadcrumb(String refContent, ReadableProduct productClicked, MerchantStoreInfo store, LanguageInfo language, String contextPath) throws Exception {
 		
 		/** Rebuild breadcrumb **/
 		BreadcrumbItem home = new BreadcrumbItem();

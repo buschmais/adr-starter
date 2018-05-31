@@ -6,6 +6,7 @@ import com.salesmanager.catalog.api.CategoryFacadeApi;
 import com.salesmanager.catalog.api.ProductApi;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.category.CategoryDescription;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.common.presentation.model.Breadcrumb;
@@ -758,7 +759,7 @@ public class StoreFilter extends HandlerInterceptorAdapter {
 							List<CategoryDescription> descriptions = category.getDescriptions();
 							for(CategoryDescription description : descriptions) {
 								
-								Language lang = description.getLanguage();
+								LanguageInfo lang = description.getLanguage();
 								
 								ReadableCategory readableCategory = new ReadableCategory();
 								readableCategoryPopulator.populate(category, readableCategory, store, language);

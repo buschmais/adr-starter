@@ -1,14 +1,15 @@
 package com.salesmanager.catalog.presentation.controller.admin.product;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.attribute.ProductOption;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionDescription;
+import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.common.presentation.util.LabelUtils;
@@ -37,7 +38,7 @@ import java.util.*;
 public class OptionsController {
 	
 	@Inject
-	LanguageService languageService;
+	LanguageInfoService languageInfoService;
 	
 	@Inject
 	ProductOptionService productOptionService;
@@ -85,7 +86,7 @@ public class OptionsController {
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		
-		List<Language> languages = store.getLanguages();
+		List<LanguageInfo> languages = store.getLanguages();
 
 		Set<ProductOptionDescription> descriptions = new HashSet<ProductOptionDescription>();
 		
@@ -105,7 +106,7 @@ public class OptionsController {
 			
 			
 			
-			for(Language l : languages) {
+			for(LanguageInfo l : languages) {
 			
 				ProductOptionDescription optionDescription = null;
 				
@@ -133,7 +134,7 @@ public class OptionsController {
 
 		} else {
 			
-			for(Language l : languages) {
+			for(LanguageInfo l : languages) {
 				
 				ProductOptionDescription desc = new ProductOptionDescription();
 				desc.setLanguage(l);
@@ -181,7 +182,7 @@ public class OptionsController {
 		}
 
 			
-		Map<String,Language> langs = languageService.getLanguagesMap();
+		Map<String,LanguageInfo> langs = languageInfoService.getLanguagesMap();
 			
 
 		List<ProductOptionDescription> descriptions = option.getDescriptionsList();
@@ -191,7 +192,7 @@ public class OptionsController {
 				for(ProductOptionDescription description : descriptions) {
 					
 					String code = description.getLanguage().getCode();
-					Language l = langs.get(code);
+					LanguageInfo l = langs.get(code);
 					description.setLanguage(l);
 					description.setProductOption(option);
 	
@@ -235,7 +236,8 @@ public class OptionsController {
 		try {
 			
 			
-			Language language = (Language)request.getAttribute("LANGUAGE");
+			LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE");
+			LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 
 			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 			MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());

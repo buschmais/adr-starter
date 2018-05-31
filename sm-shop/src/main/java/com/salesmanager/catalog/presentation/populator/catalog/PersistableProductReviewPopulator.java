@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import org.apache.commons.lang.Validate;
@@ -11,12 +13,10 @@ import org.apache.commons.lang.Validate;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.core.business.services.customer.CustomerService;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.catalog.model.product.review.ProductReviewDescription;
 import com.salesmanager.core.model.customer.Customer;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.PersistableProductReview;
 import com.salesmanager.common.presentation.util.DateUtil;
 
@@ -34,27 +34,25 @@ public class PersistableProductReviewPopulator extends
 	private ProductService productService;
 	
 
-	private LanguageService languageService;
-	
+	private LanguageInfoService languageInfoService;
 
-
-	public LanguageService getLanguageService() {
-		return languageService;
+	public LanguageInfoService getLanguageInfoService() {
+		return languageInfoService;
 	}
 
-	public void setLanguageService(LanguageService languageService) {
-		this.languageService = languageService;
+	public void setLanguageInfoService(LanguageInfoService languageInfoService) {
+		this.languageInfoService = languageInfoService;
 	}
 
 	@Override
 	public ProductReview populate(PersistableProductReview source,
-								  ProductReview target, MerchantStoreInfo store, Language language)
+								  ProductReview target, MerchantStoreInfo store, LanguageInfo language)
 			throws ConversionException {
 		
 		
 		Validate.notNull(customerService,"customerService cannot be null");
 		Validate.notNull(productService,"productService cannot be null");
-		Validate.notNull(languageService,"languageService cannot be null");
+		Validate.notNull(languageInfoService,"languageInfoService cannot be null");
 		Validate.notNull(source.getRating(),"Rating cannot bot be null");
 		
 		try {
@@ -87,7 +85,7 @@ public class PersistableProductReviewPopulator extends
 			
 			target.setProduct(product);
 			
-			Language lang = languageService.getByCode(language.getCode());
+			LanguageInfo lang = languageInfoService.findbyCode(language.getCode());
 			if(lang ==null) {
 				throw new ConversionException("Invalid language code, use iso codes (en, fr ...)");
 			}

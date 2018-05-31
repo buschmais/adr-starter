@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -34,11 +37,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.salesmanager.catalog.business.service.category.CategoryService;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.category.CategoryDescription;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.common.presentation.util.LabelUtils;
@@ -49,18 +50,18 @@ import com.salesmanager.common.presentation.util.LabelUtils;
 public class CategoryController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
-	
-	@Inject
-	LanguageService languageService;
-	
+
 	@Inject
 	CategoryService categoryService;
-	
+
 	@Inject
 	LabelUtils messages;
 
 	@Autowired
 	private MerchantStoreInfoService merchantStoreInfoService;
+
+	@Autowired
+	private LanguageInfoService languageInfoService;
 
 	@PreAuthorize("hasRole('PRODUCTS')")
 	@RequestMapping(value="/admin/categories/editCategory.html", method=RequestMethod.GET)
@@ -87,13 +88,14 @@ public class CategoryController {
 
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
-		Language language = (Language)request.getAttribute("LANGUAGE");
+		LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+		LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 		
 		//get parent categories
 		List<Category> categories = categoryService.listByStore(store,language);
 		
 
-		List<Language> languages = store.getLanguages();
+		List<LanguageInfo> languages = store.getLanguages();
 		Category category = new Category();
 		
 		if(categoryId!=null && categoryId!=0) {//edit mode
@@ -112,7 +114,7 @@ public class CategoryController {
 		
 		List<CategoryDescription> descriptions = new ArrayList<CategoryDescription>();
 		
-		for(Language l : languages) {
+		for(LanguageInfo l : languages) {
 			
 			CategoryDescription description = null;
 			if(category!=null) {
@@ -152,7 +154,8 @@ public class CategoryController {
 	@RequestMapping(value="/admin/categories/save.html", method=RequestMethod.POST)
 	public String saveCategory(@Valid @ModelAttribute("category") Category category, BindingResult result, Model model, HttpServletRequest request) throws Exception {
 
-		Language language = (Language)request.getAttribute("LANGUAGE");
+		LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+		LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 		
 		//display menu
 		setMenu(model,request);
@@ -172,7 +175,7 @@ public class CategoryController {
 		}
 
 			
-			Map<String,Language> langs = languageService.getLanguagesMap();
+			Map<String,LanguageInfo> langs = languageInfoService.getLanguagesMap();
 			
 
 
@@ -182,7 +185,7 @@ public class CategoryController {
 				for(CategoryDescription description : descriptions) {
 					
 					String code = description.getLanguage().getCode();
-					Language l = langs.get(code);
+					LanguageInfo l = langs.get(code);
 					description.setLanguage(l);
 					description.setCategory(category);
 					
@@ -260,8 +263,9 @@ public class CategoryController {
 
 		
 		try {
-			
-			Language language = (Language)request.getAttribute("LANGUAGE");
+
+			LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+			LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 
 
 			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
@@ -327,7 +331,8 @@ public class CategoryController {
 		setMenu(model,request);
 		
 		//get the list of categories
-		Language language = (Language)request.getAttribute("LANGUAGE");
+		LanguageDTO languageDTO = (LanguageDTO) request.getAttribute("LANGUAGE_DTO");
+		LanguageInfo language = this.languageInfoService.findbyCode(languageDTO.getCode());
 		MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 		

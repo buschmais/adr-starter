@@ -1,11 +1,11 @@
 package com.salesmanager.catalog.presentation.populator.catalog;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import com.salesmanager.core.business.exception.ConversionException;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionValue;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.product.attribute.PersistableProductOptionValue;
 import com.salesmanager.catalog.presentation.model.product.attribute.ProductOptionValueDescription;
 import org.apache.commons.collections4.CollectionUtils;
@@ -25,23 +25,22 @@ import java.util.Set;
 public class PersistableProductOptionValuePopulator extends
 		AbstractDataPopulator<PersistableProductOptionValue, ProductOptionValue> {
 
-	
-	private LanguageService languageService;
-	
-	public LanguageService getLanguageService() {
-		return languageService;
+	private LanguageInfoService languageInfoService;
+
+	public LanguageInfoService getLanguageInfoService() {
+		return languageInfoService;
 	}
 
-	public void setLanguageService(LanguageService languageService) {
-		this.languageService = languageService;
+	public void setLanguageInfoService(LanguageInfoService languageInfoService) {
+		this.languageInfoService = languageInfoService;
 	}
 
 	@Override
 	public ProductOptionValue populate(PersistableProductOptionValue source,
-									   ProductOptionValue target, MerchantStoreInfo store, Language language)
+									   ProductOptionValue target, MerchantStoreInfo store, LanguageInfo language)
 			throws ConversionException {
 		
-		Validate.notNull(languageService, "Requires to set LanguageService");
+		Validate.notNull(languageInfoService, "Requires to set LanguageInfoService");
 		
 		
 		try {
@@ -55,7 +54,7 @@ public class PersistableProductOptionValuePopulator extends
 				Set<com.salesmanager.catalog.model.product.attribute.ProductOptionValueDescription> descriptions = new HashSet<com.salesmanager.catalog.model.product.attribute.ProductOptionValueDescription>();
 				for(ProductOptionValueDescription desc  : source.getDescriptions()) {
 					com.salesmanager.catalog.model.product.attribute.ProductOptionValueDescription description = new com.salesmanager.catalog.model.product.attribute.ProductOptionValueDescription();
-					Language lang = languageService.getByCode(desc.getLanguage());
+					LanguageInfo lang = languageInfoService.findbyCode(desc.getLanguage());
 					if(lang==null) {
 						throw new ConversionException("Language is null for code " + description.getLanguage() + " use language ISO code [en, fr ...]");
 					}

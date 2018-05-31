@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.RestUtils;
 import org.slf4j.Logger;
@@ -23,7 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.catalog.presentation.model.manufacturer.PersistableManufacturer;
 import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufacturer;
 import com.salesmanager.catalog.presentation.controller.product.facade.ProductFacade;
@@ -71,7 +71,7 @@ public class ManufacturerApi {
 		try {
 			
 			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 
 			productFacade.saveOrUpdateManufacturer(manufacturer, merchantStore, language);
 
@@ -98,7 +98,7 @@ public class ManufacturerApi {
 		try {
 			
 			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 
 			ReadableManufacturer manufacturer = productFacade.getManufacturer(id, merchantStore, language);
 			
@@ -132,7 +132,7 @@ public class ManufacturerApi {
 		try {
 			
 			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 
 			return productFacade.getAllManufacturers(merchantStore, language);
 
@@ -159,7 +159,7 @@ public class ManufacturerApi {
 		try {
 			
 			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 
 			productFacade.saveOrUpdateManufacturer(manufacturer, merchantStore, language);
 
@@ -186,7 +186,7 @@ public class ManufacturerApi {
 		try {
 			
 			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(com.salesmanager.common.business.constants.Constants.DEFAULT_STORE);
-			Language language = restUtils.getRESTLanguage(request, merchantStore);
+			LanguageInfo language = restUtils.getRESTLanguage(request, merchantStore);
 			
 			Manufacturer manufacturer = manufacturerService.getById(id);
 					

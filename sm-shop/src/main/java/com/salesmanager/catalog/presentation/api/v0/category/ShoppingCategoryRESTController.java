@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.apache.commons.lang3.StringUtils;
@@ -25,9 +27,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.ProductService;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.catalog.model.category.Category;
-import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.category.PersistableCategory;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
@@ -43,7 +43,7 @@ import com.salesmanager.catalog.presentation.controller.category.facade.Category
 public class ShoppingCategoryRESTController {
 	
 	@Inject
-	private LanguageService languageService;
+	private LanguageInfoService languageInfoService;
 	
 	@Inject
 	private MerchantStoreInfoService merchantStoreInfoService;
@@ -96,9 +96,9 @@ public class ShoppingCategoryRESTController {
 				return null;
 			}
 			
-			Language language = languageService.getByCode(merchantStore.getDefaultLanguage());
+			LanguageInfo language = languageInfoService.findbyCode(merchantStore.getDefaultLanguage());
 			
-			Map<String,Language> langs = languageService.getLanguagesMap();
+			Map<String,LanguageInfo> langs = languageInfoService.getLanguagesMap();
 
 			
 			if(!StringUtils.isBlank(request.getParameter(Constants.LANG))) {
@@ -109,7 +109,7 @@ public class ShoppingCategoryRESTController {
 			}
 			
 			if(language==null) {
-				language = languageService.getByCode(merchantStore.getDefaultLanguage());
+				language = languageInfoService.findbyCode(merchantStore.getDefaultLanguage());
 			}
 			
 			

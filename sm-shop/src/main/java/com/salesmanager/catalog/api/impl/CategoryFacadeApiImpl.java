@@ -9,7 +9,6 @@ import com.salesmanager.catalog.presentation.controller.category.facade.Category
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.language.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

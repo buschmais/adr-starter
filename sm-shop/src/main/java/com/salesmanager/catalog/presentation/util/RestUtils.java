@@ -1,8 +1,9 @@
 package com.salesmanager.catalog.presentation.util;
 
+import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
+import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
-import com.salesmanager.core.business.services.reference.language.LanguageService;
-import com.salesmanager.core.model.reference.language.Language;
+import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.shop.constants.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RestUtils {
 
     @Autowired
-    private LanguageService languageService;
+    private LanguageInfoService languageInfoService;
 
     /**
      * Should be used by rest web services
@@ -24,36 +25,37 @@ public class RestUtils {
      * @return
      * @throws Exception
      */
-    public Language getRESTLanguage(HttpServletRequest request, MerchantStoreInfo store) throws Exception {
+    public LanguageInfo getRESTLanguage(HttpServletRequest request, MerchantStoreInfo store) throws Exception {
 
         Validate.notNull(request,"HttpServletRequest must not be null");
         Validate.notNull(store,"MerchantStore must not be null");
 
-        Language language = null;
+        LanguageDTO languageDTO = null;
+        LanguageInfo language = null;
 
 
         String lang = request.getParameter(Constants.LANG);
 
         if(StringUtils.isBlank(lang)) {
             //try with HttpSession
-            language = (Language) request.getSession().getAttribute(Constants.LANGUAGE);
-            if(language==null) {
-                language = languageService.getByCode(store.getDefaultLanguage());
+            languageDTO = (LanguageDTO) request.getSession().getAttribute(Constants.LANGUAGE_DTO);
+            if(languageDTO==null) {
+                language = languageInfoService.findbyCode(store.getDefaultLanguage());
             }
 
             if(language==null) {
-                language = languageService.defaultLanguage();
+                language = languageInfoService.defaultLanguage();
             }
         } else {
-            language = languageService.getByCode(lang);
+            language = languageInfoService.findbyCode(lang);
             if(language==null) {
-                language = (Language) request.getSession().getAttribute(Constants.LANGUAGE);
-                if(language==null) {
-                    language = languageService.getByCode(store.getDefaultLanguage());
+                languageDTO = (LanguageDTO) request.getSession().getAttribute(Constants.LANGUAGE_DTO);
+                if(languageDTO==null) {
+                    language = languageInfoService.findbyCode(store.getDefaultLanguage());
                 }
 
                 if(language==null) {
-                    language = languageService.defaultLanguage();
+                    language = languageInfoService.defaultLanguage();
                 }
             }
         }
