@@ -29,6 +29,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.Valid;
 
+import com.salesmanager.core.integration.TransferableEntity;
+import com.salesmanager.core.integration.customer.CustomerDTO;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -48,7 +50,7 @@ import com.salesmanager.core.utils.CloneUtils;
 
 @Entity
 @Table(name = "CUSTOMER", schema=SchemaConstant.SALESMANAGER_SCHEMA)
-public class Customer extends SalesManagerEntity<Long, Customer> implements Auditable {
+public class Customer extends SalesManagerEntity<Long, Customer> implements Auditable, TransferableEntity<CustomerDTO> {
 	private static final long serialVersionUID = -6966934116557219193L;
 	
 	@Id
@@ -336,5 +338,9 @@ public class Customer extends SalesManagerEntity<Long, Customer> implements Audi
 	public void setProvider(String provider) {
 		this.provider = provider;
 	}
-	
+
+	@Override
+	public CustomerDTO toDTO() {
+		return new CustomerDTO(this.id, this.nick);
+	}
 }
