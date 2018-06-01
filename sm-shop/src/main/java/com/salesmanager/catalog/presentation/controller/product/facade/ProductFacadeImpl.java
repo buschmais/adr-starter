@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.business.integration.core.service.CustomerInfoService;
 import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
@@ -22,7 +23,6 @@ import com.salesmanager.catalog.business.service.product.attribute.ProductOption
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionValueService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
-import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
@@ -73,9 +73,6 @@ public class ProductFacadeImpl implements ProductFacade {
 	private PricingService pricingService;
 	
 	@Inject
-	private CustomerService customerService;
-	
-	@Inject
 	private ProductReviewService productReviewService;
 
 	@Autowired
@@ -83,6 +80,9 @@ public class ProductFacadeImpl implements ProductFacade {
 
 	@Autowired
 	private LanguageInfoService languageInfoService;
+
+	@Autowired
+	private CustomerInfoService customerInfoService;
 
 	@Override
 	public PersistableProduct saveProduct(MerchantStoreInfo store, PersistableProduct product, LanguageInfo language)
@@ -116,7 +116,7 @@ public class ProductFacadeImpl implements ProductFacade {
 		persistableProductPopulator.setProductOptionService(productOptionService);
 		persistableProductPopulator.setProductOptionValueService(productOptionValueService);
 		persistableProductPopulator.setTaxClassService(taxClassService);
-		persistableProductPopulator.setCustomerService(customerService);
+		persistableProductPopulator.setCustomerInfoService(customerInfoService);
 		
 		Product target = null;
 		if(product.getId() != null && product.getId().longValue() > 0) {
@@ -376,7 +376,7 @@ public class ProductFacadeImpl implements ProductFacade {
 	public void saveOrUpdateReview(PersistableProductReview review, MerchantStoreInfo store, LanguageInfo language) throws Exception {
 		PersistableProductReviewPopulator populator = new PersistableProductReviewPopulator();
 		populator.setLanguageInfoService(languageInfoService);
-		populator.setCustomerService(customerService);
+		populator.setCustomerInfoService(customerInfoService);
 		populator.setProductService(productService);
 		
 		com.salesmanager.catalog.model.product.review.ProductReview rev = new com.salesmanager.catalog.model.product.review.ProductReview();

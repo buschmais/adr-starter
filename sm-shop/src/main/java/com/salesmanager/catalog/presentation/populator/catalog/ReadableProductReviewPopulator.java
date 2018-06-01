@@ -4,13 +4,13 @@ import java.util.Set;
 
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.catalog.presentation.model.customer.ReadableCustomerInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
+import com.salesmanager.catalog.presentation.populator.customer.ReadableCustomerInfoPopulator;
 import com.salesmanager.core.business.exception.ConversionException;
 import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.catalog.model.product.review.ProductReviewDescription;
 import com.salesmanager.catalog.presentation.model.product.ReadableProductReview;
-import com.salesmanager.shop.model.customer.ReadableCustomer;
-import com.salesmanager.shop.populator.customer.ReadableCustomerPopulator;
 import com.salesmanager.common.presentation.util.DateUtil;
 
 public class ReadableProductReviewPopulator extends
@@ -23,8 +23,8 @@ public class ReadableProductReviewPopulator extends
 
 		
 		try {
-			ReadableCustomerPopulator populator = new ReadableCustomerPopulator();
-			ReadableCustomer customer = new ReadableCustomer();
+			ReadableCustomerInfoPopulator populator = new ReadableCustomerInfoPopulator();
+			ReadableCustomerInfo customer = new ReadableCustomerInfo();
 			populator.populate(source.getCustomer(), customer, null, null);
 
 			target.setId(source.getId());

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.CustomerInfo;
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import org.apache.commons.lang.Validate;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,6 @@ import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.review.ProductReview;
-import com.salesmanager.core.model.customer.Customer;
 
 @Service("productReviewService")
 public class ProductReviewServiceImpl extends
@@ -36,7 +36,7 @@ public class ProductReviewServiceImpl extends
 	}
 
 	@Override
-	public List<ProductReview> getByCustomer(Customer customer) {
+	public List<ProductReview> getByCustomer(CustomerInfo customer) {
 		return productReviewRepository.findByCustomer(customer.getId());
 	}
 

@@ -19,7 +19,9 @@ import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.common.business.constants.Constants;
 import com.salesmanager.common.presentation.util.DateUtil;
 import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
+import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import org.apache.commons.collections4.CollectionUtils;
@@ -41,6 +43,8 @@ public class ReadableProductPopulator extends
 	private CatalogImageFilePathUtils imageUtils;
 
 	private CatalogImageFilePathApi imageFilePathApi;
+
+	private CustomerService customerService;
 
 	public CatalogImageFilePathUtils getimageUtils() {
 		return imageUtils;
@@ -72,6 +76,14 @@ public class ReadableProductPopulator extends
 
 	public void setProductPriceApi(ProductPriceApi productPriceApi) {
 		this.productPriceApi = productPriceApi;
+	}
+
+	public CustomerService getCustomerService() {
+		return customerService;
+	}
+
+	public void setCustomerService(CustomerService customerService) {
+		this.customerService = customerService;
 	}
 
 	@Override
@@ -124,27 +136,6 @@ public class ReadableProductPopulator extends
 			/**
 			 * END RENTAL
 			 */
-			
-			if(source.getOwner() != null) {
-				RentalOwner owner = new RentalOwner();
-				owner.setId(source.getOwner().getId());
-				owner.setEmailAddress(source.getOwner().getEmailAddress());
-				owner.setFirstName(source.getOwner().getBilling().getFirstName());
-				owner.setLastName(source.getOwner().getBilling().getLastName());
-				com.salesmanager.shop.model.customer.Address address = new com.salesmanager.shop.model.customer.Address();
-				address.setAddress(source.getOwner().getBilling().getAddress());
-				address.setBillingAddress(true);
-				address.setCity(source.getOwner().getBilling().getCity());
-				address.setCompany(source.getOwner().getBilling().getCompany());
-				address.setCountry(source.getOwner().getBilling().getCountry().getIsoCode());
-				address.setZone(source.getOwner().getBilling().getZone().getCode());
-				address.setLatitude(source.getOwner().getBilling().getLatitude());
-				address.setLongitude(source.getOwner().getBilling().getLongitude());
-				address.setPhone(source.getOwner().getBilling().getTelephone());
-				address.setPostalCode(source.getOwner().getBilling().getPostalCode());
-				owner.setAddress(address);
-				target.setOwner(owner);
-			}
 			
 			
 			if(source.getDateAvailable() != null) {

@@ -8,6 +8,7 @@ import java.util.Set;
 import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
+import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.shop.populator.catalog.ReadableProductPopulator;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.Validate;
@@ -45,6 +46,8 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
     private ProductAttributeService productAttributeService;
     
     private CatalogImageFilePathUtils imageUtils;
+
+    private CustomerService customerService;
 	
 	@Override
 	public ReadableShoppingCart populate(ShoppingCart source, ReadableShoppingCart target, MerchantStore store,
@@ -56,6 +59,7 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
     	Validate.notNull(productAttributeService, "Requires to set productAttributeService");
     	Validate.notNull(shoppingCartCalculationService, "Requires to set shoppingCartCalculationService");
     	Validate.notNull(imageUtils, "Requires to set imageUtils");
+    	Validate.notNull(customerService, "Requires CustomerService not null");
     	
     	if(target == null) {
     		target = new ReadableShoppingCart();
@@ -80,6 +84,7 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
                 	readableProductPopulator.setPricingService(pricingService);
                 	readableProductPopulator.setimageUtils(imageUtils);
                 	readableProductPopulator.populate(item.getProduct(), shoppingCartItem,  store, language);
+                	readableProductPopulator.setCustomerService(customerService);
 
 
 
@@ -254,5 +259,13 @@ public class ReadableShoppingCartPopulator extends AbstractDataPopulator<Shoppin
 
 	public void setPricingService(PricingService pricingService) {
 		this.pricingService = pricingService;
+	}
+
+	public CustomerService getCustomerService() {
+		return customerService;
+	}
+
+	public void setCustomerService(CustomerService customerService) {
+		this.customerService = customerService;
 	}
 }

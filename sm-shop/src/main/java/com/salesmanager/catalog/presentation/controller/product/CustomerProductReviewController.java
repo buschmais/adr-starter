@@ -1,22 +1,22 @@
 package com.salesmanager.catalog.presentation.controller.product;
 
+import com.salesmanager.catalog.business.integration.core.service.CustomerInfoService;
 import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
+import com.salesmanager.catalog.model.integration.core.CustomerInfo;
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.catalog.PersistableProductReviewPopulator;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductPopulator;
 import com.salesmanager.catalog.presentation.populator.catalog.ReadableProductReviewPopulator;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
-import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.catalog.presentation.model.product.PersistableProductReview;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
@@ -65,7 +65,7 @@ public class CustomerProductReviewController {
 	private ProductReviewService productReviewService;
 	
 	@Inject
-	private CustomerService customerService;
+	private CustomerInfoService customerInfoService;
 	
 	@Inject
 	private LabelUtils messages;
@@ -107,7 +107,7 @@ public class CustomerProductReviewController {
         model.addAttribute("product", readableProduct);
         
 
-        Customer customer =  customerService.getByNick(request.getRemoteUser(), store.getId());
+        CustomerInfo customer =  customerInfoService.findByNick(request.getRemoteUser(), store.getId());
         
         List<ProductReview> reviews = productReviewService.getByProduct(product, language);
 	    for(ProductReview r : reviews) {
@@ -154,7 +154,7 @@ public class CustomerProductReviewController {
 
 		MerchantStoreInfo store = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 
-		Customer customer =  customerService.getByNick(request.getRemoteUser(), store.getId());
+		CustomerInfo customer =  customerInfoService.findByNick(request.getRemoteUser(), store.getId());
         
         if(customer==null) {
         	return "redirect:" + Constants.SHOP_URI;
@@ -213,7 +213,7 @@ public class CustomerProductReviewController {
 
 	    
 	    PersistableProductReviewPopulator populator = new PersistableProductReviewPopulator();
-	    populator.setCustomerService(customerService);
+	    populator.setCustomerInfoService(customerInfoService);
 	    populator.setLanguageInfoService(languageInfoService);
 	    populator.setProductService(productService);
 	    

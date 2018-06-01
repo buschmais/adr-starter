@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.ProductService;
-import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
@@ -51,9 +50,6 @@ public class ProductApi {
 	
 	@Inject
 	private CategoryService categoryService;
-	
-	@Inject
-	private CustomerService customerService;
 	
 	@Inject
 	private ProductService productService;

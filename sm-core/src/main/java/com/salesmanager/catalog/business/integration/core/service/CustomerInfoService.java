@@ -18,4 +18,8 @@ public class CustomerInfoService {
     public CustomerInfo findById(Long id) {
         return this.customerInfoRepository.findById(id);
     }
+
+    public CustomerInfo findByNick(String nick, Integer storeId) {
+        return this.customerInfoRepository.findByNick(nick, storeId);
+    }
 }

@@ -1,5 +1,6 @@
 package com.salesmanager.catalog.presentation.api.v0.product;
 
+import com.salesmanager.catalog.business.integration.core.service.CustomerInfoService;
 import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
@@ -11,7 +12,6 @@ import com.salesmanager.catalog.business.service.product.manufacturer.Manufactur
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
-import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
@@ -67,9 +67,6 @@ public class ShopProductRESTController {
 	private CategoryService categoryService;
 	
 	@Inject
-	private CustomerService customerService;
-	
-	@Inject
 	private ProductService productService;
 	
 	@Inject
@@ -101,6 +98,9 @@ public class ShopProductRESTController {
 	
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
+
+	@Autowired
+	private CustomerInfoService customerInfoService;
 	
 
 	
@@ -337,7 +337,7 @@ public class ShopProductRESTController {
 
 			PersistableProductReviewPopulator populator = new PersistableProductReviewPopulator();
 			populator.setLanguageInfoService(languageInfoService);
-			populator.setCustomerService(customerService);
+			populator.setCustomerInfoService(customerInfoService);
 			populator.setProductService(productService);
 			
 			com.salesmanager.catalog.model.product.review.ProductReview rev = new com.salesmanager.catalog.model.product.review.ProductReview();

@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 
@@ -25,5 +26,21 @@ public class CustomerInfo {
 
     @Column(name="CUSTOMER_NICK", length=96)
     private String nick;
+
+    @NotEmpty
+    @Column (name ="CUSTOMER_FIRST_NAME", length=64, nullable=false)
+    private String firstName;
+
+    @NotEmpty
+    @Column (name ="CUSTOMER_LAST_NAME", length=64, nullable=false)
+    private String lastName;
+
+    @ManyToOne
+    @JoinColumn(name="MERCHANT_ID", nullable=false)
+    private MerchantStoreInfo merchantStore;
+
+    @ManyToOne
+    @JoinColumn(name = "LANGUAGE_ID", nullable=false)
+    private LanguageInfo defaultLanguage;
 
 }

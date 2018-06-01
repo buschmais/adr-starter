@@ -9,6 +9,7 @@ import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
 import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.orderproduct.OrderProduct;
@@ -33,6 +34,7 @@ public class ReadableOrderProductPopulator extends
 	private PricingService pricingService;
 	private CatalogImageFilePathApi imageFilePathApi;
 	private CatalogImageFilePathUtils imageUtils;
+	private CustomerService customerService;
 
 
 
@@ -102,6 +104,7 @@ public class ReadableOrderProductPopulator extends
 					populator.setimageUtils(imageUtils);
 					populator.setImageFilePathApi(imageFilePathApi);
 					populator.setProductPriceApi(productPriceApi);
+					populator.setCustomerService(customerService);
 					
 					ReadableProduct productProxy = populator.populate(product, new ReadableProduct(), store, language);
 					target.setProduct(productProxy);
@@ -165,5 +168,13 @@ public class ReadableOrderProductPopulator extends
 
 	public void setProductApi(ProductApi productApi) {
 		this.productApi = productApi;
+	}
+
+	public CustomerService getCustomerService() {
+		return customerService;
+	}
+
+	public void setCustomerService(CustomerService customerService) {
+		this.customerService = customerService;
 	}
 }

@@ -17,6 +17,7 @@ import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.api.CatalogImageFilePathApi;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
+import com.salesmanager.core.business.services.customer.CustomerService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -87,6 +88,9 @@ public class ShoppingCartFacadeImpl
 
 	@Autowired
     private CatalogImageFilePathUtils imageUtils;
+
+	@Autowired
+    private CustomerService customerService;
 
     public void deleteShoppingCart(final Long id, final MerchantStore store) throws Exception {
     	ShoppingCart cart = shoppingCartService.getById(id, store);
@@ -691,6 +695,7 @@ public class ShoppingCartFacadeImpl
         readableShoppingCart.setProductAttributeService(productAttributeService);
         readableShoppingCart.setShoppingCartCalculationService(shoppingCartCalculationService);
         readableShoppingCart.setPricingService(pricingService);
+        readableShoppingCart.setCustomerService(customerService);
         ReadableShoppingCart readableCart = new  ReadableShoppingCart();
         
         readableShoppingCart.populate(cartModel, readableCart,  store, language);
@@ -758,6 +763,7 @@ public class ShoppingCartFacadeImpl
         readableShoppingCart.setProductAttributeService(productAttributeService);
         readableShoppingCart.setShoppingCartCalculationService(shoppingCartCalculationService);
         readableShoppingCart.setPricingService(pricingService);
+        readableShoppingCart.setCustomerService(customerService);
   
         ReadableShoppingCart readableCart = new  ReadableShoppingCart();
         
@@ -791,6 +797,7 @@ public class ShoppingCartFacadeImpl
 	        readableShoppingCart.setProductAttributeService(productAttributeService);
 	        readableShoppingCart.setShoppingCartCalculationService(shoppingCartCalculationService);
             readableShoppingCart.setPricingService(pricingService);
+            readableShoppingCart.setCustomerService(customerService);
 	        readableShoppingCart.populate(cart, readableCart,  store, language);
 			
 			

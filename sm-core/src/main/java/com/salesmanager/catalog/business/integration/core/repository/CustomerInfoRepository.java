@@ -12,4 +12,6 @@ public interface CustomerInfoRepository extends JpaRepository<CustomerInfo, Long
     @Query("SELECT c FROM CustomerInfo c WHERE c.id = ?1")
     CustomerInfo findById(Long id);
 
+    @Query("SELECT c FROM CustomerInfo c JOIN c.merchantStore m WHERE c.nick = ?1 AND m.id = ?2")
+    CustomerInfo findByNick(String nick, Integer storeId);
 }

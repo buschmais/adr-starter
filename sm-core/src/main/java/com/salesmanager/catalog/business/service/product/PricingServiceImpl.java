@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import com.salesmanager.catalog.model.integration.core.CustomerInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,6 @@ import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
 import com.salesmanager.catalog.model.product.price.FinalPrice;
-import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.reference.currency.Currency;
 
 /**
@@ -39,7 +39,7 @@ public class PricingServiceImpl implements PricingService {
 	}
 	
 	@Override
-	public FinalPrice calculateProductPrice(Product product, Customer customer) throws ServiceException {
+	public FinalPrice calculateProductPrice(Product product, CustomerInfo customer) throws ServiceException {
 		/** TODO add rules for price calculation **/
 		return priceUtil.getFinalPrice(product);
 	}
@@ -50,7 +50,7 @@ public class PricingServiceImpl implements PricingService {
 	}
 	
 	@Override
-	public FinalPrice calculateProductPrice(Product product, List<ProductAttribute> attributes, Customer customer) throws ServiceException {
+	public FinalPrice calculateProductPrice(Product product, List<ProductAttribute> attributes, CustomerInfo customer) throws ServiceException {
 		/** TODO add rules for price calculation **/
 		return priceUtil.getFinalProductPrice(product, attributes);
 	}

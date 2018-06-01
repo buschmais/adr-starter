@@ -13,6 +13,7 @@ import com.salesmanager.catalog.api.CatalogImageFilePathApi;
 import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.catalog.api.ProductRelationshipApi;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
+import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.shop.populator.catalog.ReadableProductPopulator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,6 +76,9 @@ public class LandingController {
 
 	@Autowired
 	private ProductPriceApi productPriceApi;
+
+	@Autowired
+	private CustomerService customerService;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(LandingController.class);
 	private final static String HOME_LINK_CODE="HOME";
@@ -128,6 +132,7 @@ public class LandingController {
 		populator.setimageUtils(imageUtils);
 		populator.setProductPriceApi(productPriceApi);
 		populator.setImageFilePathApi(imageFilePathApi);
+		populator.setCustomerService(customerService);
 
 		
 		//featured items

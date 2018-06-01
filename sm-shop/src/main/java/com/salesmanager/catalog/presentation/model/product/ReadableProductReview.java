@@ -2,7 +2,7 @@ package com.salesmanager.catalog.presentation.model.product;
 
 import java.io.Serializable;
 
-import com.salesmanager.shop.model.customer.ReadableCustomer;
+import com.salesmanager.catalog.presentation.model.customer.ReadableCustomerInfo;
 
 
 public class ReadableProductReview extends ProductReviewEntity implements Serializable {
@@ -11,11 +11,11 @@ public class ReadableProductReview extends ProductReviewEntity implements Serial
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ReadableCustomer customer;
-	public ReadableCustomer getCustomer() {
+	private ReadableCustomerInfo customer;
+	public ReadableCustomerInfo getCustomer() {
 		return customer;
 	}
-	public void setCustomer(ReadableCustomer customer) {
+	public void setCustomer(ReadableCustomerInfo customer) {
 		this.customer = customer;
 	}
 

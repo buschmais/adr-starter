@@ -1,6 +1,8 @@
 package com.salesmanager.catalog.presentation.populator.catalog;
 
+import com.salesmanager.catalog.business.integration.core.service.CustomerInfoService;
 import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
+import com.salesmanager.catalog.model.integration.core.CustomerInfo;
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
@@ -9,7 +11,6 @@ import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionValueService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
-import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
@@ -47,7 +48,7 @@ public class PersistableProductPopulator extends
 	
 	private ProductOptionService productOptionService;
 	private ProductOptionValueService productOptionValueService;
-	private CustomerService customerService;
+	private CustomerInfoService customerInfoService;
 	
 
 	@Override
@@ -59,7 +60,7 @@ public class PersistableProductPopulator extends
 			Validate.notNull(languageInfoService, "Requires to set LanguageInfoService");
 			Validate.notNull(categoryService, "Requires to set CategoryService");
 			Validate.notNull(taxClassService, "Requires to set TaxClassService");
-			Validate.notNull(customerService, "Requires to set CustomerService");//RENTAL
+			Validate.notNull(customerInfoService, "Requires to set CustomerInfoService");//RENTAL
 			Validate.notNull(productOptionService, "Requires to set ProductOptionService");
 			Validate.notNull(productOptionValueService, "Requires to set ProductOptionValueService");
 		
@@ -86,7 +87,7 @@ public class PersistableProductPopulator extends
 			/** end RENTAL **/
 			
 			if(source.getOwner()!=null && source.getOwner().getId()!=null) {
-				com.salesmanager.core.model.customer.Customer owner = customerService.getById(source.getOwner().getId());
+				CustomerInfo owner = customerInfoService.findById(source.getOwner().getId());
 				target.setOwner(owner);
 			}
 			
@@ -383,16 +384,11 @@ public class PersistableProductPopulator extends
 		return null;
 	}
 
-
-
-	public CustomerService getCustomerService() {
-		return customerService;
+	public CustomerInfoService getCustomerInfoService() {
+		return customerInfoService;
 	}
 
-
-
-	public void setCustomerService(CustomerService customerService) {
-		this.customerService = customerService;
+	public void setCustomerInfoService(CustomerInfoService customerInfoService) {
+		this.customerInfoService = customerInfoService;
 	}
-
 }

@@ -10,4 +10,12 @@ public class CustomerDTO extends AbstractCoreDTO {
 
     private String nick;
 
+    private String merchantStoreCode;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String defaultLanguageCode;
+
 }

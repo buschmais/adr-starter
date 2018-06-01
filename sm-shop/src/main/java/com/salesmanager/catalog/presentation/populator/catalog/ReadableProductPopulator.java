@@ -113,32 +113,6 @@ public class ReadableProductPopulator extends
 			}
 			target.setRentalStatus(source.getRentalStatus());
 			
-			/**
-			 * END RENTAL
-			 */
-			
-			if(source.getOwner() != null) {
-				RentalOwner owner = new RentalOwner();
-				owner.setId(source.getOwner().getId());
-				owner.setEmailAddress(source.getOwner().getEmailAddress());
-				owner.setFirstName(source.getOwner().getBilling().getFirstName());
-				owner.setLastName(source.getOwner().getBilling().getLastName());
-				com.salesmanager.shop.model.customer.Address address = new com.salesmanager.shop.model.customer.Address();
-				address.setAddress(source.getOwner().getBilling().getAddress());
-				address.setBillingAddress(true);
-				address.setCity(source.getOwner().getBilling().getCity());
-				address.setCompany(source.getOwner().getBilling().getCompany());
-				address.setCountry(source.getOwner().getBilling().getCountry().getIsoCode());
-				address.setZone(source.getOwner().getBilling().getZone().getCode());
-				address.setLatitude(source.getOwner().getBilling().getLatitude());
-				address.setLongitude(source.getOwner().getBilling().getLongitude());
-				address.setPhone(source.getOwner().getBilling().getTelephone());
-				address.setPostalCode(source.getOwner().getBilling().getPostalCode());
-				owner.setAddress(address);
-				target.setOwner(owner);
-			}
-			
-			
 			if(source.getDateAvailable() != null) {
 				target.setDateAvailable(DateUtil.formatDate(source.getDateAvailable()));
 			}

@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Locale;
 
+import com.salesmanager.catalog.model.integration.core.CustomerInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
 import com.salesmanager.catalog.model.product.price.FinalPrice;
-import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.reference.currency.Currency;
 
 
@@ -38,7 +38,7 @@ public interface PricingService {
 	 * @return
 	 * @throws ServiceException
 	 */
-	FinalPrice calculateProductPrice(Product product, Customer customer)
+	FinalPrice calculateProductPrice(Product product, CustomerInfo customer)
 			throws ServiceException;
 
 	/**
@@ -65,7 +65,7 @@ public interface PricingService {
 	 * @throws ServiceException
 	 */
 	FinalPrice calculateProductPrice(Product product,
-			List<ProductAttribute> attributes, Customer customer)
+			List<ProductAttribute> attributes, CustomerInfo customer)
 			throws ServiceException;
 
 	/**

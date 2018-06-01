@@ -13,7 +13,6 @@ import com.salesmanager.catalog.business.service.product.review.ProductReviewSer
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.RestUtils;
-import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
@@ -56,9 +55,6 @@ public class ProductItemsRESTController {
 	
 	@Inject
 	private CategoryService categoryService;
-	
-	@Inject
-	private CustomerService customerService;
 	
 	@Inject
 	private ProductService productService;

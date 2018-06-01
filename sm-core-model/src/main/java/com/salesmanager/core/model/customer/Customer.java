@@ -341,6 +341,6 @@ public class Customer extends SalesManagerEntity<Long, Customer> implements Audi
 
 	@Override
 	public CustomerDTO toDTO() {
-		return new CustomerDTO(this.id, this.nick);
+		return new CustomerDTO(this.id, this.nick, this.merchantStore.getCode(), this.billing.getFirstName(), this.billing.getLastName(), this.defaultLanguage.getCode());
 	}
 }

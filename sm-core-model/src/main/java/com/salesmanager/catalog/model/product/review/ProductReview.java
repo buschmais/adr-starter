@@ -23,12 +23,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import com.salesmanager.catalog.model.integration.core.CustomerInfo;
 import com.salesmanager.core.constants.SchemaConstant;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.common.audit.AuditListener;
 import com.salesmanager.core.model.common.audit.AuditSection;
 import com.salesmanager.core.model.common.audit.Auditable;
-import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.common.model.SalesManagerEntity;
 
 @Entity
@@ -68,7 +68,7 @@ public class ProductReview extends SalesManagerEntity<Long, ProductReview> imple
 
 	@ManyToOne
 	@JoinColumn(name="CUSTOMERS_ID")
-	private Customer customer;
+	private CustomerInfo customer;
 	
 	@OneToOne
 	@JoinColumn(name="PRODUCT_ID")
@@ -112,11 +112,11 @@ public class ProductReview extends SalesManagerEntity<Long, ProductReview> imple
 		this.status = status;
 	}
 
-	public Customer getCustomer() {
+	public CustomerInfo getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(Customer customer) {
+	public void setCustomer(CustomerInfo customer) {
 		this.customer = customer;
 	}
 

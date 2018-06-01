@@ -26,6 +26,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Pattern;
 
+import com.salesmanager.catalog.model.integration.core.CustomerInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -42,7 +43,6 @@ import com.salesmanager.catalog.model.product.type.ProductType;
 import com.salesmanager.core.model.common.audit.AuditListener;
 import com.salesmanager.core.model.common.audit.AuditSection;
 import com.salesmanager.core.model.common.audit.Auditable;
-import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.common.model.SalesManagerEntity;
 import com.salesmanager.core.model.tax.taxclass.TaxClass;
 
@@ -208,7 +208,7 @@ public class Product extends SalesManagerEntity<Long, Product> implements Audita
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="CUSTOMER_ID", nullable=true)
-	private Customer owner;
+	private CustomerInfo owner;
 
 	public Product() {
 	}
@@ -499,11 +499,11 @@ public class Product extends SalesManagerEntity<Long, Product> implements Audita
 		this.rentalStatus = rentalStatus;
 	}
 	
-	public Customer getOwner() {
+	public CustomerInfo getOwner() {
 		return owner;
 	}
 
-	public void setOwner(Customer owner) {
+	public void setOwner(CustomerInfo owner) {
 		this.owner = owner;
 	}
 
