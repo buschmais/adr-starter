@@ -3,7 +3,7 @@ package com.salesmanager.catalog.model.product;
 import java.util.List;
 
 import com.salesmanager.catalog.model.product.attribute.AttributeCriteria;
-import com.salesmanager.core.model.common.Criteria;
+import com.salesmanager.catalog.model.common.Criteria;
 
 public class ProductCriteria extends Criteria {
 	

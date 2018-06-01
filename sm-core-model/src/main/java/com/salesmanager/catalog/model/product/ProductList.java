@@ -3,7 +3,7 @@ package com.salesmanager.catalog.model.product;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.salesmanager.core.model.common.EntityList;
+import com.salesmanager.catalog.model.common.EntityList;
 
 public class ProductList extends EntityList {
 	

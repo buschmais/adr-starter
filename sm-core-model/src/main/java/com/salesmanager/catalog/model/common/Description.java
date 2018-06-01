@@ -1,9 +1,9 @@
 package com.salesmanager.catalog.model.common;
 
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
-import com.salesmanager.core.model.common.audit.AuditListener;
-import com.salesmanager.core.model.common.audit.AuditSection;
-import com.salesmanager.core.model.common.audit.Auditable;
+import com.salesmanager.catalog.model.common.audit.AuditListener;
+import com.salesmanager.catalog.model.common.audit.AuditSection;
+import com.salesmanager.catalog.model.common.audit.Auditable;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 

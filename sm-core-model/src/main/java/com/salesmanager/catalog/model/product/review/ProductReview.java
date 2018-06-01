@@ -26,9 +26,9 @@ import javax.persistence.UniqueConstraint;
 import com.salesmanager.catalog.model.integration.core.CustomerInfo;
 import com.salesmanager.core.constants.SchemaConstant;
 import com.salesmanager.catalog.model.product.Product;
-import com.salesmanager.core.model.common.audit.AuditListener;
-import com.salesmanager.core.model.common.audit.AuditSection;
-import com.salesmanager.core.model.common.audit.Auditable;
+import com.salesmanager.catalog.model.common.audit.AuditListener;
+import com.salesmanager.catalog.model.common.audit.AuditSection;
+import com.salesmanager.catalog.model.common.audit.Auditable;
 import com.salesmanager.common.model.SalesManagerEntity;
 
 @Entity

@@ -20,16 +20,17 @@ import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 
+import com.salesmanager.catalog.model.common.audit.AuditListener;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.salesmanager.core.constants.SchemaConstant;
-import com.salesmanager.core.model.common.audit.AuditSection;
-import com.salesmanager.core.model.common.audit.Auditable;
+import com.salesmanager.catalog.model.common.audit.AuditSection;
+import com.salesmanager.catalog.model.common.audit.Auditable;
 import com.salesmanager.common.model.SalesManagerEntity;
 
 @Entity
-@EntityListeners(value = com.salesmanager.core.model.common.audit.AuditListener.class)
+@EntityListeners(value = AuditListener.class)
 @Table(name = "CATEGORY", schema= SchemaConstant.SALESMANAGER_SCHEMA,uniqueConstraints=
     @UniqueConstraint(columnNames = {"MERCHANT_ID", "CODE"}) )
 

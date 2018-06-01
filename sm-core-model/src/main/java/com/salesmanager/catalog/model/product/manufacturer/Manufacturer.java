@@ -23,9 +23,9 @@ import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.salesmanager.core.constants.SchemaConstant;
-import com.salesmanager.core.model.common.audit.AuditListener;
-import com.salesmanager.core.model.common.audit.AuditSection;
-import com.salesmanager.core.model.common.audit.Auditable;
+import com.salesmanager.catalog.model.common.audit.AuditListener;
+import com.salesmanager.catalog.model.common.audit.AuditSection;
+import com.salesmanager.catalog.model.common.audit.Auditable;
 import com.salesmanager.common.model.SalesManagerEntity;
 
 @Entity

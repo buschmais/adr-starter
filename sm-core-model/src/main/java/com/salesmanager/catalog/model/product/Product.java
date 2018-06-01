@@ -41,9 +41,9 @@ import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.catalog.model.product.type.ProductType;
-import com.salesmanager.core.model.common.audit.AuditListener;
-import com.salesmanager.core.model.common.audit.AuditSection;
-import com.salesmanager.core.model.common.audit.Auditable;
+import com.salesmanager.catalog.model.common.audit.AuditListener;
+import com.salesmanager.catalog.model.common.audit.AuditSection;
+import com.salesmanager.catalog.model.common.audit.Auditable;
 import com.salesmanager.common.model.SalesManagerEntity;
 
 
