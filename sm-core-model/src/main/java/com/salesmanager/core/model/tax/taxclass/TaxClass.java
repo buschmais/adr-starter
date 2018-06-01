@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
 
+import com.salesmanager.core.integration.TransferableEntity;
+import com.salesmanager.core.integration.tax.TaxClassDTO;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.salesmanager.core.constants.SchemaConstant;
@@ -27,7 +29,7 @@ import com.salesmanager.core.model.tax.taxrate.TaxRate;
 @Entity
 @Table(name = "TAX_CLASS", schema = SchemaConstant.SALESMANAGER_SCHEMA,uniqueConstraints=
     @UniqueConstraint(columnNames = {"MERCHANT_ID", "TAX_CLASS_CODE"}) )
-public class TaxClass extends SalesManagerEntity<Long, TaxClass> {
+public class TaxClass extends SalesManagerEntity<Long, TaxClass> implements TransferableEntity<TaxClassDTO> {
 	private static final long serialVersionUID = -325750148480212355L;
 	
 	public final static String DEFAULT_TAX_CLASS = "DEFAULT";
@@ -119,5 +121,9 @@ public class TaxClass extends SalesManagerEntity<Long, TaxClass> {
 	public void setMerchantStore(MerchantStore merchantStore) {
 		this.merchantStore = merchantStore;
 	}
-	
+
+	@Override
+	public TaxClassDTO toDTO() {
+		return new TaxClassDTO(this.id, this.code);
+	}
 }
