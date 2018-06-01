@@ -52,12 +52,6 @@ public class TaxClass extends SalesManagerEntity<Long, TaxClass> implements Tran
 	@NotEmpty
 	@Column(name = "TAX_CLASS_TITLE" , nullable=false , length=32 )
 	private String title;
-	
-
-
-	@OneToMany(mappedBy = "taxClass", targetEntity = Product.class)
-	private List<Product> products = new ArrayList<Product>();
-	
 
 /*	@ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "MERCHANT_TAXCLASS", schema=SchemaConstant.SALESMANAGER_SCHEMA, joinColumns = { 
@@ -105,15 +99,6 @@ public class TaxClass extends SalesManagerEntity<Long, TaxClass> implements Tran
 		this.code = code;
 	}
 
-	public List<TaxRate> getTaxRates() {
-		return taxRates;
-	}
-
-	public void setTaxRates(List<TaxRate> taxRates) {
-		this.taxRates = taxRates;
-	}
-
-
 	public MerchantStore getMerchantStore() {
 		return merchantStore;
 	}
@@ -124,6 +109,6 @@ public class TaxClass extends SalesManagerEntity<Long, TaxClass> implements Tran
 
 	@Override
 	public TaxClassDTO toDTO() {
-		return new TaxClassDTO(this.id, this.code);
+		return new TaxClassDTO(this.id, this.code, this.merchantStore.getCode());
 	}
 }

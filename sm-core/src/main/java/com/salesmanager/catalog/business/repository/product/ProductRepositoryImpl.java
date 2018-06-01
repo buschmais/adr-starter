@@ -13,6 +13,7 @@ import javax.persistence.Query;
 
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.catalog.model.integration.core.TaxClassInfo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -21,7 +22,6 @@ import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
 import com.salesmanager.catalog.model.product.ProductList;
 import com.salesmanager.catalog.model.product.attribute.AttributeCriteria;
-import com.salesmanager.core.model.tax.taxclass.TaxClass;
 
 
 public class ProductRepositoryImpl implements ProductRepositoryCustom {
@@ -911,7 +911,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 	
 	
 	@Override
-	public List<Product> listByTaxClass(TaxClass taxClass) {
+	public List<Product> listByTaxClass(TaxClassInfo taxClass) {
 
 		
 		/**

@@ -16,4 +16,6 @@ public class TaxClassDTO extends AbstractCoreDTO {
 
     private String code;
 
+    private String merchantStoreCode;
+
 }

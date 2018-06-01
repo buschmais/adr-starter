@@ -5,6 +5,8 @@ import com.salesmanager.catalog.model.integration.core.TaxClassInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TaxClassInfoService {
 
@@ -17,6 +19,10 @@ public class TaxClassInfoService {
 
     public TaxClassInfo findById(Long id) {
         return this.taxClassInfoRepository.findById(id);
+    }
+
+    public List<TaxClassInfo> listByStore(Integer id) {
+        return this.taxClassInfoRepository.listByStore(id);
     }
 
 }

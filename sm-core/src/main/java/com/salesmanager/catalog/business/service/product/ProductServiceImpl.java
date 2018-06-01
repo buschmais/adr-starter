@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.catalog.model.integration.core.TaxClassInfo;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +41,6 @@ import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.catalog.model.product.review.ProductReview;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.ImageContentFile;
-import com.salesmanager.core.model.tax.taxclass.TaxClass;
 
 @Service("productService")
 public class ProductServiceImpl extends SalesManagerEntityServiceImpl<Long, Product> implements ProductService {
@@ -194,7 +194,7 @@ public class ProductServiceImpl extends SalesManagerEntityServiceImpl<Long, Prod
 	}
 	
 	@Override
-	public List<Product> listByTaxClass(TaxClass taxClass) {
+	public List<Product> listByTaxClass(TaxClassInfo taxClass) {
 		return productRepository.listByTaxClass(taxClass);
 	}
 	

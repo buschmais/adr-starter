@@ -2,8 +2,10 @@ package com.salesmanager.shop.init.data;
 
 import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.business.integration.core.service.TaxClassInfoService;
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.catalog.model.integration.core.TaxClassInfo;
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.ProductService;
@@ -23,6 +25,7 @@ import com.salesmanager.core.business.services.reference.country.CountryService;
 import com.salesmanager.core.business.services.reference.currency.CurrencyService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
 import com.salesmanager.core.business.services.reference.zone.ZoneService;
+import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.core.business.services.user.GroupService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.category.CategoryDescription;
@@ -56,6 +59,7 @@ import com.salesmanager.core.model.reference.country.Country;
 import com.salesmanager.core.model.reference.currency.Currency;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.model.reference.zone.Zone;
+import com.salesmanager.core.model.tax.taxclass.TaxClass;
 import com.salesmanager.core.model.user.Group;
 import com.salesmanager.core.model.user.GroupType;
 import com.salesmanager.shop.constants.Constants;
@@ -63,6 +67,7 @@ import com.salesmanager.shop.utils.LocaleUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -147,6 +152,12 @@ public class InitStoreData implements InitData {
 	@Inject
 	private LanguageInfoService languageInfoService;
 
+	@Autowired
+	private TaxClassInfoService taxClassInfoService;
+
+	@Autowired
+	private TaxClassService taxClassService;
+
 	public void initInitialData() throws ServiceException {
 		
 
@@ -167,7 +178,9 @@ public class InitStoreData implements InitData {
 		MerchantStore store = merchantService.getMerchantStore(MerchantStore.DEFAULT_STORE);
 		MerchantStoreInfo storeInfo = merchantStoreInfoService.findbyCode(store.getCode());
 		ProductType generalType = productTypeService.getProductType(ProductType.GENERAL_TYPE);
-		
+
+		TaxClass taxClass = this.taxClassService.getByCode(TaxClass.DEFAULT_TAX_CLASS);
+		TaxClassInfo taxClassInfo = this.taxClassInfoService.findById(taxClass.getId());
 		
 		 Category book = new Category();
 		    book.setMerchantStore(storeInfo);
@@ -437,6 +450,7 @@ public class InitStoreData implements InitData {
 		    product.setType(generalType);
 		    product.setMerchantStore(storeInfo);
 		    product.setProductShipeable(true);
+		    product.setTaxClass(taxClassInfo);
 		    
 		    // Availability
 		    ProductAvailability availability = new ProductAvailability();
@@ -497,6 +511,7 @@ public class InitStoreData implements InitData {
 		    product2.setType(generalType);
 		    product2.setMerchantStore(storeInfo);
 		    product2.setProductShipeable(true);
+		    product2.setTaxClass(taxClassInfo);
 
 		    // Product description
 		    description = new ProductDescription();
@@ -555,6 +570,7 @@ public class InitStoreData implements InitData {
 		    product3.setType(generalType);
 		    product3.setMerchantStore(storeInfo);
 		    product3.setProductShipeable(true);
+		    product3.setTaxClass(taxClassInfo);
 
 		    // Product description
 		    description = new ProductDescription();
@@ -611,6 +627,7 @@ public class InitStoreData implements InitData {
 		    product4.setType(generalType);
 		    product4.setMerchantStore(storeInfo);
 		    product4.setProductShipeable(true);
+		    product4.setTaxClass(taxClassInfo);
 
 		    // Product description
 		    description = new ProductDescription();
@@ -668,6 +685,7 @@ public class InitStoreData implements InitData {
 		    product5.setType(generalType);
 		    product5.setMerchantStore(storeInfo);
 		    product5.setProductShipeable(true);
+		    product5.setTaxClass(taxClassInfo);
 
 		    // Product description
 		    description = new ProductDescription();
@@ -728,6 +746,7 @@ public class InitStoreData implements InitData {
 		    product6.setType(generalType);
 		    product6.setMerchantStore(storeInfo);
 		    product6.setProductShipeable(true);
+		    product6.setTaxClass(taxClassInfo);
 
 		    // Product description
 		    description = new ProductDescription();

@@ -28,6 +28,7 @@ import javax.validation.constraints.Pattern;
 
 import com.salesmanager.catalog.model.integration.core.CustomerInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
+import com.salesmanager.catalog.model.integration.core.TaxClassInfo;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -44,7 +45,6 @@ import com.salesmanager.core.model.common.audit.AuditListener;
 import com.salesmanager.core.model.common.audit.AuditSection;
 import com.salesmanager.core.model.common.audit.Auditable;
 import com.salesmanager.common.model.SalesManagerEntity;
-import com.salesmanager.core.model.tax.taxclass.TaxClass;
 
 
 @Entity
@@ -119,9 +119,9 @@ public class Product extends SalesManagerEntity<Long, Product> implements Audita
 	@JoinColumn(name="PRODUCT_TYPE_ID", nullable=true)
 	private ProductType type;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name="TAX_CLASS_ID", nullable=true)
-	private TaxClass taxClass;
+	private TaxClassInfo taxClass;
 
 	@Column(name = "PRODUCT_VIRTUAL")
 	private boolean productVirtual = false;
@@ -369,11 +369,11 @@ public class Product extends SalesManagerEntity<Long, Product> implements Audita
 		this.availabilities = availabilities;
 	}
 
-	public TaxClass getTaxClass() {
+	public TaxClassInfo getTaxClass() {
 		return taxClass;
 	}
 
-	public void setTaxClass(TaxClass taxClass) {
+	public void setTaxClass(TaxClassInfo taxClass) {
 		this.taxClass = taxClass;
 	}
 

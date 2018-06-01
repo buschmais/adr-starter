@@ -2,6 +2,7 @@ package com.salesmanager.catalog.presentation.controller.admin.product;
 
 import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
+import com.salesmanager.catalog.business.integration.core.service.TaxClassInfoService;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.image.ProductImageService;
@@ -9,7 +10,7 @@ import com.salesmanager.catalog.business.service.product.manufacturer.Manufactur
 import com.salesmanager.catalog.business.service.product.type.ProductTypeService;
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
-import com.salesmanager.core.business.services.tax.TaxClassService;
+import com.salesmanager.catalog.model.integration.core.TaxClassInfo;
 import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
@@ -29,7 +30,6 @@ import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.catalog.model.product.type.ProductType;
 import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.tax.taxclass.TaxClass;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.common.presentation.util.DateUtil;
@@ -77,19 +77,16 @@ public class ProductController {
 	
 	@Inject
 	private ProductImageService productImageService;
-	
-	@Inject
-	private TaxClassService taxClassService;
-	
+
 	@Inject
 	private ProductPriceUtils priceUtil;
 
 	@Inject
 	LabelUtils messages;
-	
+
 	@Inject
 	private CoreConfiguration configuration;
-	
+
 	@Inject
 	CategoryService categoryService;
 
@@ -98,6 +95,9 @@ public class ProductController {
 
 	@Autowired
 	private LanguageInfoService languageInfoService;
+
+	@Autowired
+	private TaxClassInfoService taxClassInfoService;
 
 	@PreAuthorize("hasRole('PRODUCTS')")
 	@RequestMapping(value="/admin/products/editProduct.html", method=RequestMethod.GET)
@@ -148,7 +148,7 @@ public class ProductController {
 		
 		List<ProductType> productTypes = productTypeService.list();
 		
-		List<TaxClass> taxClasses = taxClassService.listByStore(store.getId());
+		List<TaxClassInfo> taxClasses = taxClassInfoService.listByStore(store.getId());
 		
 		List<LanguageInfo> languages = store.getLanguages();
 		
@@ -291,7 +291,7 @@ public class ProductController {
 		
 		List<ProductType> productTypes = productTypeService.list();
 		
-		List<TaxClass> taxClasses = taxClassService.listByStore(store.getId());
+		List<TaxClassInfo> taxClasses = taxClassInfoService.listByStore(store.getId());
 		
 		List<LanguageInfo> languages = store.getLanguages();
 		
@@ -581,7 +581,7 @@ public class ProductController {
 		
 		List<Manufacturer> manufacturers = manufacturerService.listByStore(store, language);
 		List<ProductType> productTypes = productTypeService.list();
-		List<TaxClass> taxClasses = taxClassService.listByStore(store.getId());
+		List<TaxClassInfo> taxClasses = taxClassInfoService.listByStore(store.getId());
 
 		model.addAttribute("manufacturers", manufacturers);
 		model.addAttribute("productTypes", productTypes);
