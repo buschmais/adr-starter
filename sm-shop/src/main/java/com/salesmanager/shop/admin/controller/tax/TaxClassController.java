@@ -1,6 +1,6 @@
 package com.salesmanager.shop.admin.controller.tax;
 
-import com.salesmanager.catalog.business.service.product.ProductService;
+import com.salesmanager.catalog.api.ProductApi;
 import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
@@ -12,6 +12,7 @@ import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -42,10 +43,10 @@ public class TaxClassController {
 	private TaxClassService taxClassService = null;
 	
 	@Inject
-	private ProductService productService=null;
-	
-	@Inject
 	LabelUtils messages;
+
+	@Autowired
+	private ProductApi productApi;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(TaxClassController.class);
 
@@ -229,7 +230,7 @@ public class TaxClassController {
 			}
 			
 			//look if the taxclass is used for products
-			List<Product> products = productService.listByTaxClass(taxClass);
+			List<Product> products = productApi.listByTaxClass(taxClass.toDTO());
 
 			if(products!=null && products.size()>0) {
 				resp.setStatusMessage(messages.getMessage("message.product.association", locale));
