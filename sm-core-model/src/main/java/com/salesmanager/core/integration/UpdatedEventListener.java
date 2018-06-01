@@ -3,9 +3,11 @@ package com.salesmanager.core.integration;
 import com.salesmanager.core.integration.customer.CustomerUpdatedEvent;
 import com.salesmanager.core.integration.language.LanguageUpdatedEvent;
 import com.salesmanager.core.integration.merchant.MerchantStoreUpdatedEvent;
+import com.salesmanager.core.integration.tax.TaxClassUpdatedEvent;
 import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
+import com.salesmanager.core.model.tax.taxclass.TaxClass;
 import org.hibernate.event.spi.PostUpdateEvent;
 import org.hibernate.event.spi.PostUpdateEventListener;
 import org.hibernate.persister.entity.EntityPersister;
@@ -30,6 +32,9 @@ public class UpdatedEventListener implements PostUpdateEventListener, Applicatio
         } else if (event.getEntity() instanceof Customer) {
             Customer customer = ((Customer) event.getEntity());
             applicationEventPublisher.publishEvent(new CustomerUpdatedEvent(customer.toDTO()));
+        } else if (event.getEntity() instanceof TaxClass) {
+            TaxClass taxClass = ((TaxClass) event.getEntity());
+            applicationEventPublisher.publishEvent(new TaxClassUpdatedEvent(taxClass.toDTO()));
         }
     }
 
