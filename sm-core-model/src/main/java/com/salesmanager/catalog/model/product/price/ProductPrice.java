@@ -28,7 +28,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.salesmanager.core.constants.SchemaConstant;
 import com.salesmanager.catalog.model.product.availability.ProductAvailability;
 import com.salesmanager.common.model.SalesManagerEntity;
-import com.salesmanager.core.utils.CloneUtils;
 
 @Entity
 @Table(name = "PRODUCT_PRICE", schema=SchemaConstant.SALESMANAGER_SCHEMA)
@@ -105,20 +104,20 @@ public class ProductPrice extends SalesManagerEntity<Long, ProductPrice> {
 
 	
 	public Date getProductPriceSpecialStartDate() {
-		return CloneUtils.clone(productPriceSpecialStartDate);
+		return productPriceSpecialStartDate != null ? (Date) productPriceSpecialStartDate.clone() : null;
 	}
 
 	public void setProductPriceSpecialStartDate(
 			Date productPriceSpecialStartDate) {
-		this.productPriceSpecialStartDate = CloneUtils.clone(productPriceSpecialStartDate);
+		this.productPriceSpecialStartDate = productPriceSpecialStartDate != null ? ((Date) productPriceSpecialStartDate.clone()) : null;
 	}
 
 	public Date getProductPriceSpecialEndDate() {
-		return CloneUtils.clone(productPriceSpecialEndDate);
+		return productPriceSpecialEndDate != null ? ((Date) productPriceSpecialEndDate.clone()) : null;
 	}
 
 	public void setProductPriceSpecialEndDate(Date productPriceSpecialEndDate) {
-		this.productPriceSpecialEndDate = CloneUtils.clone(productPriceSpecialEndDate);
+		this.productPriceSpecialEndDate = productPriceSpecialEndDate != null ? ((Date) productPriceSpecialEndDate.clone()) : null;
 	}
 
 

@@ -1,7 +1,5 @@
 package com.salesmanager.catalog.model.common.audit;
 
-import com.salesmanager.core.utils.CloneUtils;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
@@ -30,19 +28,19 @@ public class AuditSection implements Serializable {
 	}
 
 	public Date getDateCreated() {
-		return CloneUtils.clone(dateCreated);
+		return dateCreated != null ? (Date) dateCreated.clone() : null;
 	}
 
 	public void setDateCreated(Date dateCreated) {
-		this.dateCreated = CloneUtils.clone(dateCreated);
+		this.dateCreated = dateCreated != null ? (Date) dateCreated.clone() : null;
 	}
 
 	public Date getDateModified() {
-		return CloneUtils.clone(dateModified);
+		return dateModified != null ? (Date) dateModified.clone() : null;
 	}
 
 	public void setDateModified(Date dateModified) {
-		this.dateModified = CloneUtils.clone(dateModified);
+		this.dateModified = dateModified != null ? (Date) dateModified.clone() : null;
 	}
 
 	public String getModifiedBy() {

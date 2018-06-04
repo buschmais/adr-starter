@@ -25,7 +25,6 @@ import com.salesmanager.core.constants.SchemaConstant;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.price.ProductPrice;
 import com.salesmanager.common.model.SalesManagerEntity;
-import com.salesmanager.core.utils.CloneUtils;
 
 
 @Entity
@@ -96,11 +95,11 @@ public class ProductAvailability extends SalesManagerEntity<Long, ProductAvailab
 	}
 
 	public Date getProductDateAvailable() {
-		return CloneUtils.clone(productDateAvailable);
+		return productDateAvailable != null ? (Date) productDateAvailable.clone() : null;
 	}
 
 	public void setProductDateAvailable(Date productDateAvailable) {
-		this.productDateAvailable = CloneUtils.clone(productDateAvailable);
+		this.productDateAvailable = productDateAvailable != null ? (Date) productDateAvailable.clone() : null;
 	}
 
 	public String getRegion() {
