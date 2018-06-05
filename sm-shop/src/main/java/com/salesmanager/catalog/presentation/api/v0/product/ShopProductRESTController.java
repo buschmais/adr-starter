@@ -12,7 +12,6 @@ import com.salesmanager.catalog.business.service.product.manufacturer.Manufactur
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
-import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
@@ -86,9 +85,6 @@ public class ShopProductRESTController {
 	
 	@Inject
 	private ProductOptionValueService productOptionValueService;
-	
-	@Inject
-	private TaxClassService taxClassService;
 	
 	@Inject
 	private ManufacturerService manufacturerService;

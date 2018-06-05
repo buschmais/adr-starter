@@ -23,7 +23,6 @@ import com.salesmanager.catalog.business.service.product.attribute.ProductOption
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionValueService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
 import com.salesmanager.catalog.business.service.product.review.ProductReviewService;
-import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
@@ -62,9 +61,6 @@ public class ProductFacadeImpl implements ProductFacade {
 	
 	@Inject
 	private ProductOptionValueService productOptionValueService;
-	
-	@Inject
-	private TaxClassService taxClassService;
 	
 	@Inject
 	private ProductService productService;
@@ -115,7 +111,6 @@ public class ProductFacadeImpl implements ProductFacade {
 		persistableProductPopulator.setLanguageInfoService(languageInfoService);
 		persistableProductPopulator.setProductOptionService(productOptionService);
 		persistableProductPopulator.setProductOptionValueService(productOptionValueService);
-		persistableProductPopulator.setTaxClassService(taxClassService);
 		persistableProductPopulator.setCustomerInfoService(customerInfoService);
 		
 		Product target = null;

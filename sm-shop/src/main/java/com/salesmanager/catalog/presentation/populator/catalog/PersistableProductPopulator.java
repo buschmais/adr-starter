@@ -11,7 +11,6 @@ import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionService;
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionValueService;
 import com.salesmanager.catalog.business.service.product.manufacturer.ManufacturerService;
-import com.salesmanager.core.business.services.tax.TaxClassService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
@@ -43,7 +42,6 @@ public class PersistableProductPopulator extends
 	
 	private CategoryService categoryService;
 	private ManufacturerService manufacturerService;
-	private TaxClassService taxClassService;
 	private LanguageInfoService languageInfoService;
 	
 	private ProductOptionService productOptionService;
@@ -59,7 +57,6 @@ public class PersistableProductPopulator extends
 			Validate.notNull(manufacturerService, "Requires to set ManufacturerService");
 			Validate.notNull(languageInfoService, "Requires to set LanguageInfoService");
 			Validate.notNull(categoryService, "Requires to set CategoryService");
-			Validate.notNull(taxClassService, "Requires to set TaxClassService");
 			Validate.notNull(customerInfoService, "Requires to set CustomerInfoService");//RENTAL
 			Validate.notNull(productOptionService, "Requires to set ProductOptionService");
 			Validate.notNull(productOptionValueService, "Requires to set ProductOptionValueService");
@@ -341,14 +338,6 @@ public class PersistableProductPopulator extends
 
 	public ManufacturerService getManufacturerService() {
 		return manufacturerService;
-	}
-
-	public void setTaxClassService(TaxClassService taxClassService) {
-		this.taxClassService = taxClassService;
-	}
-
-	public TaxClassService getTaxClassService() {
-		return taxClassService;
 	}
 
 
