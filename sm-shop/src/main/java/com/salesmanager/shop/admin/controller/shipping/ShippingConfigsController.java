@@ -31,7 +31,7 @@ import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.model.shipping.ShippingConfiguration;
 import com.salesmanager.core.model.shipping.ShippingType;
 import com.salesmanager.core.business.services.shipping.ShippingService;
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 

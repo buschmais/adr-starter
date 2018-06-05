@@ -12,7 +12,7 @@ import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import org.apache.commons.lang.Validate;
 
-import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.common.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.review.ProductReview;

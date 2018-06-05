@@ -8,7 +8,7 @@ import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
-import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.common.business.exception.ConversionException;
 import com.salesmanager.core.business.services.customer.CustomerService;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.merchant.MerchantStore;

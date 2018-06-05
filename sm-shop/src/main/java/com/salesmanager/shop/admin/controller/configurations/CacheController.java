@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.salesmanager.core.business.utils.CacheUtils;
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.shop.admin.controller.ControllerConstants;
 import com.salesmanager.common.presentation.model.admin.Menu;

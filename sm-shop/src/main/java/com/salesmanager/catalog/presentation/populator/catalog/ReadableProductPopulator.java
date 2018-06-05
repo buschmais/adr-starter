@@ -13,7 +13,7 @@ import org.apache.commons.lang.Validate;
 import org.apache.commons.lang3.StringUtils;
 
 import com.salesmanager.common.business.constants.Constants;
-import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.common.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
@@ -26,7 +26,6 @@ import com.salesmanager.catalog.presentation.model.category.ReadableCategory;
 import com.salesmanager.catalog.presentation.model.manufacturer.ReadableManufacturer;
 import com.salesmanager.catalog.presentation.model.product.ReadableImage;
 import com.salesmanager.catalog.presentation.model.product.ReadableProduct;
-import com.salesmanager.catalog.presentation.model.product.RentalOwner;
 import com.salesmanager.common.presentation.util.DateUtil;
 
 

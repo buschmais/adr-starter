@@ -3,7 +3,7 @@ package com.salesmanager.shop.admin.controller.content;
 import com.salesmanager.catalog.api.ProductRelationshipApi;
 import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.core.model.content.Content;
 import com.salesmanager.core.model.content.ContentDescription;

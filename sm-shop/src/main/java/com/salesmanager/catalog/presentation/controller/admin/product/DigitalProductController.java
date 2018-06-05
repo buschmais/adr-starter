@@ -5,7 +5,7 @@ import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.file.DigitalProductService;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.file.DigitalProduct;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;

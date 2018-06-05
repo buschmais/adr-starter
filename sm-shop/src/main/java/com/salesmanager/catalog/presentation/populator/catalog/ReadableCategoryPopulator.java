@@ -7,7 +7,7 @@ import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
 import org.apache.commons.lang.Validate;
 
-import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.common.business.exception.ConversionException;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.category.CategoryDescription;
 import com.salesmanager.catalog.presentation.model.category.ReadableCategory;

@@ -1,7 +1,7 @@
 package com.salesmanager.shop.admin.controller.content;
 
 import com.salesmanager.core.business.services.content.ContentService;
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.InputContentFile;
 import com.salesmanager.core.model.merchant.MerchantStore;

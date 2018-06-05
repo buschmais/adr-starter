@@ -6,7 +6,7 @@ import com.salesmanager.catalog.business.service.product.attribute.ProductOption
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionValue;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionValueDescription;
 import com.salesmanager.core.integration.language.LanguageDTO;

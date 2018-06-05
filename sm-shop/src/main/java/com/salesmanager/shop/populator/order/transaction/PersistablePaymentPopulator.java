@@ -6,7 +6,7 @@ import java.util.Map;
 import com.salesmanager.catalog.api.ProductPriceApi;
 import org.apache.commons.lang3.Validate;
 
-import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.common.business.exception.ConversionException;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.payments.Payment;

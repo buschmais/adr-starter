@@ -2,7 +2,7 @@ package com.salesmanager.test.shop.controller.store.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.shop.model.shop.ContactForm;
 import org.junit.Ignore;
 import org.junit.Test;

@@ -5,7 +5,7 @@ import com.salesmanager.core.business.services.customer.attribute.CustomerOption
 import com.salesmanager.core.business.services.customer.attribute.CustomerOptionSetService;
 import com.salesmanager.core.business.services.customer.attribute.CustomerOptionValueService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.core.model.customer.attribute.*;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;

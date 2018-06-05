@@ -6,8 +6,8 @@ import com.salesmanager.catalog.business.service.product.manufacturer.Manufactur
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
-import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxPageableResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
 import com.salesmanager.catalog.model.product.manufacturer.ManufacturerDescription;
 import com.salesmanager.core.integration.language.LanguageDTO;

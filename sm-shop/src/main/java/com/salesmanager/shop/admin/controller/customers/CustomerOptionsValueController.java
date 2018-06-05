@@ -2,7 +2,7 @@ package com.salesmanager.shop.admin.controller.customers;
 
 import com.salesmanager.core.business.services.customer.attribute.CustomerOptionValueService;
 import com.salesmanager.core.business.services.reference.language.LanguageService;
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.core.model.customer.attribute.CustomerOptionValue;
 import com.salesmanager.core.model.customer.attribute.CustomerOptionValueDescription;
 import com.salesmanager.core.model.merchant.MerchantStore;

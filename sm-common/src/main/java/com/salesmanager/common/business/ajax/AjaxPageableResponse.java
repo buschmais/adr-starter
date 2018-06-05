@@ -1,4 +1,4 @@
-package com.salesmanager.core.business.utils.ajax;
+package com.salesmanager.common.business.ajax;
 
 import java.util.Map;
 import java.util.Set;

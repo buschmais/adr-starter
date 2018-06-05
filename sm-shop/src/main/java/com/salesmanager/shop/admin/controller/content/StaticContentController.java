@@ -34,7 +34,7 @@ import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.InputContentFile;
 import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.model.merchant.MerchantStore;
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.shop.admin.controller.ControllerConstants;
 import com.salesmanager.shop.admin.model.content.ContentFiles;
 import com.salesmanager.common.presentation.model.admin.Menu;

@@ -4,7 +4,7 @@ import com.salesmanager.catalog.business.integration.core.service.LanguageInfoSe
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
-import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.common.business.exception.ConversionException;
 import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.presentation.model.category.CategoryDescription;

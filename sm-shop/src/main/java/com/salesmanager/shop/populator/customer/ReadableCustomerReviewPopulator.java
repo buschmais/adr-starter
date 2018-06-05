@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
 
-import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.common.business.exception.ConversionException;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.customer.review.CustomerReview;
 import com.salesmanager.core.model.customer.review.CustomerReviewDescription;

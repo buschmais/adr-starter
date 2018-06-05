@@ -4,7 +4,7 @@ package com.salesmanager.shop.populator.customer;
 import java.math.BigDecimal;
 import java.util.Map;
 
-import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.common.business.exception.ConversionException;
 import com.salesmanager.core.business.services.customer.attribute.CustomerOptionService;
 import com.salesmanager.core.business.services.customer.attribute.CustomerOptionValueService;
 import com.salesmanager.core.business.services.reference.country.CountryService;

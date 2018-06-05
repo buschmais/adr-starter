@@ -5,7 +5,7 @@ import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.model.customer.ReadableCustomerInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
-import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.common.business.exception.ConversionException;
 
 public class ReadableCustomerInfoPopulator extends AbstractDataPopulator<CustomerInfo, ReadableCustomerInfo> {
 

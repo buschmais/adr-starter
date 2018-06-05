@@ -3,7 +3,7 @@ package com.salesmanager.shop.admin.controller.user;
 import com.salesmanager.core.business.services.reference.country.CountryService;
 import com.salesmanager.core.business.services.user.GroupService;
 import com.salesmanager.core.business.services.user.PermissionService;
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.core.model.user.Permission;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.common.presentation.util.LabelUtils;

@@ -4,7 +4,7 @@ import com.salesmanager.catalog.business.integration.core.service.LanguageInfoSe
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.populator.AbstractDataPopulator;
-import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.common.business.exception.ConversionException;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionValue;
 import com.salesmanager.catalog.presentation.model.product.attribute.PersistableProductOptionValue;
 import com.salesmanager.catalog.presentation.model.product.attribute.ProductOptionValueDescription;

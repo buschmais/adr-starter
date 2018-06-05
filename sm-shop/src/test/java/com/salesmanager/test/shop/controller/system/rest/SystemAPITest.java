@@ -1,12 +1,9 @@
 package com.salesmanager.test.shop.controller.system.rest;
 
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import org.junit.Ignore;
-import org.junit.Test;
 import org.springframework.http.*;
-import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.client.RestTemplate;

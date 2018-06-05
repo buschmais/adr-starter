@@ -2,7 +2,7 @@ package com.salesmanager.shop.populator.order;
 
 import com.salesmanager.catalog.api.ProductPriceApi;
 import com.salesmanager.common.business.constants.Constants;
-import com.salesmanager.core.business.exception.ConversionException;
+import com.salesmanager.common.business.exception.ConversionException;
 import com.salesmanager.core.business.utils.AbstractDataPopulator;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.order.OrderTotal;

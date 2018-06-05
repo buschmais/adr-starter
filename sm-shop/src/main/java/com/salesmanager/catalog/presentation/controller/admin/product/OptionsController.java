@@ -5,7 +5,7 @@ import com.salesmanager.catalog.business.integration.core.service.MerchantStoreI
 import com.salesmanager.catalog.business.service.product.attribute.ProductOptionService;
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
-import com.salesmanager.core.business.utils.ajax.AjaxResponse;
+import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.attribute.ProductOption;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionDescription;
 import com.salesmanager.core.integration.language.LanguageDTO;

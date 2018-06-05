@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.salesmanager.core.business.exception;
+package com.salesmanager.common.business.exception;
 
 /**
  * @author Umesh A
