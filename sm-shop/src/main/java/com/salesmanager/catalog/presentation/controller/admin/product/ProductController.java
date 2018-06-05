@@ -11,7 +11,6 @@ import com.salesmanager.catalog.business.service.product.type.ProductTypeService
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.model.integration.core.TaxClassInfo;
-import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
@@ -38,6 +37,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -85,9 +85,6 @@ public class ProductController {
 	LabelUtils messages;
 
 	@Inject
-	private CoreConfiguration configuration;
-
-	@Inject
 	CategoryService categoryService;
 
 	@Autowired
@@ -98,6 +95,9 @@ public class ProductController {
 
 	@Autowired
 	private TaxClassInfoService taxClassInfoService;
+
+	@Autowired
+	private Environment environment;
 
 	@PreAuthorize("hasRole('PRODUCTS')")
 	@RequestMapping(value="/admin/products/editProduct.html", method=RequestMethod.GET)
@@ -326,9 +326,9 @@ public class ProductController {
 			
 			try {
 				
-				String maxHeight = configuration.getProperty("PRODUCT_IMAGE_MAX_HEIGHT_SIZE");
-				String maxWidth = configuration.getProperty("PRODUCT_IMAGE_MAX_WIDTH_SIZE");
-				String maxSize = configuration.getProperty("PRODUCT_IMAGE_MAX_SIZE");
+				String maxHeight = environment.getProperty("catalog.product.image.height.max");
+				String maxWidth = environment.getProperty("catalog.product.image.width.max");
+				String maxSize = environment.getProperty("catalog.product.image.size.max");
 				
 				
 				BufferedImage image = ImageIO.read(product.getImage().getInputStream());

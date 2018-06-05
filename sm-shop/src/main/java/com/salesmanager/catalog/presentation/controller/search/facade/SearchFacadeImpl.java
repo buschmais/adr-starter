@@ -12,6 +12,7 @@ import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,6 @@ import com.salesmanager.catalog.business.service.category.CategoryService;
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.search.SearchService;
-import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
@@ -55,8 +55,8 @@ public class SearchFacadeImpl implements SearchFacade {
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
 	
-	@Inject
-	private CoreConfiguration coreConfiguration;
+	@Autowired
+	private Environment environment;
 
 	@Autowired
 	private MerchantStoreInfoService merchantStoreInfoService;
@@ -86,7 +86,7 @@ public class SearchFacadeImpl implements SearchFacade {
 	@Override
 	public SearchProductList search(MerchantStoreInfo store, LanguageInfo language, SearchProductRequest searchRequest) throws Exception {
 
-		String query = String.format(coreConfiguration.getProperty("SEARCH_QUERY"), searchRequest.getQuery());
+		String query = String.format(environment.getProperty("search.query"), searchRequest.getQuery());
 		SearchResponse response =  searchService.search(store, language.getCode(), query, searchRequest.getCount(), searchRequest.getStart());
 		return this.copySearchResponse(response, store, searchRequest.getStart(), searchRequest.getCount(), language);
 	}

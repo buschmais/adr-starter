@@ -6,7 +6,6 @@ import com.salesmanager.catalog.business.service.product.manufacturer.Manufactur
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.admin.ControllerConstants;
-import com.salesmanager.core.business.utils.CoreConfiguration;
 import com.salesmanager.core.business.utils.ajax.AjaxPageableResponse;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.manufacturer.Manufacturer;
@@ -20,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -54,8 +54,8 @@ public class ManufacturerController {
 	@Inject
 	private LanguageInfoService languageInfoService;
 
-	@Inject
-	private CoreConfiguration configuration;
+	@Autowired
+	private Environment environment;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ManufacturerController.class);
 	
@@ -199,9 +199,9 @@ public class ManufacturerController {
 
 			try {
 
-				String maxHeight = configuration.getProperty("PRODUCT_IMAGE_MAX_HEIGHT_SIZE");
-				String maxWidth = configuration.getProperty("PRODUCT_IMAGE_MAX_WIDTH_SIZE");
-				String maxSize = configuration.getProperty("PRODUCT_IMAGE_MAX_SIZE");
+				String maxHeight = environment.getProperty("catalog.product.image.height.max");
+				String maxWidth = environment.getProperty("catalog.product.image.width.max");
+				String maxSize = environment.getProperty("catalog.product.image.size.max");
 
 				BufferedImage image = ImageIO.read(manufacturer.getImage().getInputStream());
 

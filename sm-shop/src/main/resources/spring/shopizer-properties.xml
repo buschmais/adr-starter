@@ -21,9 +21,6 @@
     			<prop key="MULTIPLE_PRICE_AVAILABILITY">false</prop>
 				
 				<!-- upload image validations -->
-				<prop key="PRODUCT_IMAGE_MAX_HEIGHT_SIZE">2000</prop>
-				<prop key="PRODUCT_IMAGE_MAX_WIDTH_SIZE">4000</prop>
-				<prop key="PRODUCT_IMAGE_MAX_SIZE">9000000</prop>
 				<prop key="IMAGE_FORMATS">jpg|png|gif</prop>
 				
 				<prop key="POPULATE_TEST_DATA">true</prop>
@@ -31,8 +28,7 @@
 				<!-- when removing the context path from the url put that value to blank (nothing) otherwise put the uri for the web app eg /sm-shop -->
 				<prop key="CONTEXT_PATH"></prop>
 				<prop key="URL_EXTENSION">.html</prop>
-				<!-- search query -->
-				<prop key="SEARCH_QUERY"><![CDATA[{"query":{"multi_match":{"query":"%s","type":"best_fields","fields":["name^10","description^1"]}},"aggregations":{"categories":{"terms":{"field":"categories"}},"manufacturer":{"terms":{"field": "manufacturer"}}}}]]></prop>
+
 				<!-- Google maps key -->
 				<prop key="shopizer.googlemaps_key">AIzaSyB9NBFBiHKJ00SpVlRB495bTktcJE3iwNA</prop>
 				<!-- #https://www.google.com/recaptcha/admin/create -->
