@@ -1,6 +1,7 @@
 package com.salesmanager.catalog.presentation.tag;
 
 import java.math.BigDecimal;
+import java.util.Currency;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,6 @@ import org.springframework.web.servlet.tags.RequestContextAwareTag;
 
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.util.ProductPriceUtils;
-import com.salesmanager.core.model.reference.currency.Currency;
 import com.salesmanager.shop.constants.Constants;
 
 
@@ -81,7 +81,7 @@ public class ShopProductPriceFormatTag extends RequestContextAwareTag  {
 		String formatedPrice = null;
 		
 		if(this.getCurrency()!=null) {
-			formatedPrice = productPriceUtils.getFormatedAmountWithCurrency(this.getCurrency(), this.getValue());
+			formatedPrice = productPriceUtils.getFormatedAmountWithCurrency(this.currency, this.getValue());
 		} else {
 			formatedPrice = pricingService.getDisplayAmount(this.getValue(), store);
 		}

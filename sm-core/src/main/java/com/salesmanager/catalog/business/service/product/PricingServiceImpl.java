@@ -17,7 +17,6 @@ import com.salesmanager.catalog.business.util.ProductPriceUtils;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
 import com.salesmanager.catalog.model.product.price.FinalPrice;
-import com.salesmanager.core.model.reference.currency.Currency;
 
 /**
  * Contains all the logic required to calculate product price
@@ -62,18 +61,6 @@ public class PricingServiceImpl implements PricingService {
 			return price;
 		} catch (Exception e) {
 			LOGGER.error("An error occured when trying to format an amount " + amount.toString());
-			throw new ServiceException(e);
-		}
-	}
-	
-	@Override
-	public String getDisplayAmount(BigDecimal amount, Locale locale,
-			Currency currency, MerchantStoreInfo store) throws ServiceException {
-		try {
-			String price= priceUtil.getFormatedAmountWithCurrency(locale, currency, amount);
-			return price;
-		} catch (Exception e) {
-			LOGGER.error("An error occured when trying to format an amunt " + amount.toString() + " using locale " + locale.toString() + " and currency " + currency.toString());
 			throw new ServiceException(e);
 		}
 	}

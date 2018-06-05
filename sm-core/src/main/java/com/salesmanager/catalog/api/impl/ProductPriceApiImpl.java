@@ -8,7 +8,6 @@ import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
 import com.salesmanager.catalog.model.product.price.FinalPrice;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.reference.currency.Currency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,8 +56,4 @@ public class ProductPriceApiImpl implements ProductPriceApi {
         return this.productPriceUtils.getFinalProductPrice(product, attributes);
     }
 
-    @Override
-    public String getFormattedAmountWithCurrency(Currency currency, BigDecimal amount) throws Exception {
-        return this.productPriceUtils.getFormatedAmountWithCurrency(currency, amount);
-    }
 }

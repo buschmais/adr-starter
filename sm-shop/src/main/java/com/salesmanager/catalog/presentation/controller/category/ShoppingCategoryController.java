@@ -9,7 +9,6 @@ import com.salesmanager.catalog.business.service.product.manufacturer.Manufactur
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.ControllerConstants;
-import com.salesmanager.core.business.utils.CacheUtils;
 import com.salesmanager.catalog.model.category.Category;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.ProductCriteria;
@@ -36,6 +35,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.Cache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -80,9 +81,6 @@ public class ShoppingCategoryController {
 	private BreadcrumbsUtils breadcrumbsUtils;
 	
 	@Inject
-	private CacheUtils cache;
-	
-	@Inject
 	private PricingService pricingService;
 	
 	@Autowired
@@ -90,8 +88,9 @@ public class ShoppingCategoryController {
 
 	@Autowired
 	private LanguageInfoService languageInfoService;
-	
 
+	@Value("#{catalogEhCacheManager.getCache('catalogCache')}")
+	private Cache catalogCache;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ShoppingCategoryController.class);
 	
@@ -215,7 +214,8 @@ public class ShoppingCategoryController {
 		if(store.isUseCache()) {
 
 			//get from the cache
-			subCategories = (List<ReadableCategory>) cache.getFromCache(subCategoriesCacheKey.toString());
+			Cache.ValueWrapper wrapper = catalogCache.get(subCategoriesCacheKey.toString());
+			subCategories = wrapper != null ? (List<ReadableCategory>) wrapper.get() : null;
 			if(subCategories==null) {
 				//get from missed cache
 				//Boolean missedContent = (Boolean)cache.getFromCache(subCategoriesMissed.toString());
@@ -225,7 +225,7 @@ public class ShoppingCategoryController {
 					subCategories = getSubCategories(store,category,countProductsByCategories,language,locale);
 					
 					if(subCategories!=null) {
-						cache.putInCache(subCategories, subCategoriesCacheKey.toString());
+						catalogCache.put(subCategories, subCategoriesCacheKey.toString());
 					} else {
 						//cache.putInCache(new Boolean(true), subCategoriesCacheKey.toString());
 					}
@@ -287,8 +287,9 @@ public class ShoppingCategoryController {
 			if(store.isUseCache()) {
 
 				//get from the cache
-				 
-				manufacturerList = (List<ReadableManufacturer>) cache.getFromCache(manufacturersKey.toString());
+
+				Cache.ValueWrapper wrapper = catalogCache.get(manufacturersKey.toString());
+				manufacturerList = wrapper != null ? (List<ReadableManufacturer>) wrapper.get() : null;
 				
 
 				if(manufacturerList==null) {
@@ -297,7 +298,7 @@ public class ShoppingCategoryController {
 					//if(missedContent==null) {
 						manufacturerList = this.getManufacturers(store, subCategoryIds, language);
 						if(manufacturerList.isEmpty()) {
-							cache.putInCache(new Boolean(true), manufacturersKeyMissed.toString());
+							catalogCache.put(new Boolean(true), manufacturersKeyMissed.toString());
 						} else {
 							//cache.putInCache(manufacturerList, manufacturersKey.toString());
 						}

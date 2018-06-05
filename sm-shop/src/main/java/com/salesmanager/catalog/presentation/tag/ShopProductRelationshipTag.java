@@ -16,13 +16,14 @@ import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.cache.Cache;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.tags.RequestContextAwareTag;
 
 import com.salesmanager.catalog.business.service.product.PricingService;
 import com.salesmanager.catalog.business.service.product.relationship.ProductRelationshipService;
-import com.salesmanager.core.business.utils.CacheUtils;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.shop.constants.Constants;
@@ -48,9 +49,6 @@ public class ShopProductRelationshipTag extends RequestContextAwareTag  {
 	@Inject
 	private PricingService pricingService;
 	
-	@Inject
-	private CacheUtils cache;
-	
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
 
@@ -59,6 +57,9 @@ public class ShopProductRelationshipTag extends RequestContextAwareTag  {
 
 	@Autowired
 	private LanguageInfoService languageInfoService;
+
+	@Value("#{catalogEhCacheManager.getCache('catalogCache')}")
+	private Cache catalogCache;
 	
 	
 	private String groupName;
@@ -113,14 +114,15 @@ public class ShopProductRelationshipTag extends RequestContextAwareTag  {
 		if(store.isUseCache()) {
 		
 			//get from the cache
-			objects = (List<ReadableProduct>) cache.getFromCache(groupKey.toString());
+			Cache.ValueWrapper wrapper = catalogCache.get(groupKey.toString());
+			objects = wrapper != null ? (List<ReadableProduct>) wrapper.get() : null;
 			Boolean missedContent = null;
 
 			if(objects==null && missedContent==null) {
 				objects = getProducts(request);
 
 				//put in cache
-				cache.putInCache(objects, groupKey.toString());
+				catalogCache.put(objects, groupKey.toString());
 					
 			} else {
 				//put in missed cache

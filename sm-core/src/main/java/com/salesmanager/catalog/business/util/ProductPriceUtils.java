@@ -249,26 +249,6 @@ public class ProductPriceUtils {
 		
 
     }
-	
-	
-	public String getFormatedAmountWithCurrency(Locale locale, com.salesmanager.core.model.reference.currency.Currency currency, BigDecimal amount) throws Exception {
-		if(amount==null) {
-			return "";
-		}
-
-		Currency curr = currency.getCurrency();
-
-
-		
-		NumberFormat currencyInstance = null;
-
-		currencyInstance = NumberFormat.getCurrencyInstance(locale);
-		currencyInstance.setCurrency(curr);
-	    return currencyInstance.format(amount.doubleValue());
-		
-
-    }
-	
 
 	
 	/**
@@ -310,23 +290,21 @@ public class ProductPriceUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public String getFormatedAmountWithCurrency(com.salesmanager.core.model.reference.currency.Currency currency, BigDecimal amount) throws Exception {
+	public String getFormatedAmountWithCurrency(Currency currency, BigDecimal amount) throws Exception {
 		if(amount==null) {
 			return "";
 		}
 		
-		Validate.notNull(currency.getCurrency(),"Currency must be populated with java.util.Currency");
+		Validate.notNull(currency);
 		
 		NumberFormat nf = null;
 
-		
-		Currency curr = currency.getCurrency();
 		nf = NumberFormat.getInstance(Constants.DEFAULT_LOCALE);
 		nf.setMaximumFractionDigits(Integer.parseInt(Character
 				.toString(DECIMALCOUNT)));
 		nf.setMinimumFractionDigits(Integer.parseInt(Character
 				.toString(DECIMALCOUNT)));
-		nf.setCurrency(curr);
+		nf.setCurrency(currency);
 
 
 		String stringNumber = nf.format(amount);

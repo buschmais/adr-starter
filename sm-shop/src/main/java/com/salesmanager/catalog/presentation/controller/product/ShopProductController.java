@@ -12,7 +12,6 @@ import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.controller.ControllerConstants;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
-import com.salesmanager.core.business.utils.CacheUtils;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionDescription;
@@ -43,6 +42,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.Cache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -82,9 +83,6 @@ public class ShopProductController {
 	private LabelUtils messages;
 	
 	@Inject
-	private CacheUtils cache;
-	
-	@Inject
 	private CategoryService categoryService;
 	
 	@Inject
@@ -98,6 +96,9 @@ public class ShopProductController {
 
 	@Autowired
 	private LanguageInfoService languageInfoService;
+
+	@Value("#{catalogEhCacheManager.getCache('catalogCache')}")
+	private Cache catalogCache;
 
 	private static final Logger LOG = LoggerFactory.getLogger(ShopProductController.class);
 	
@@ -189,7 +190,8 @@ public class ShopProductController {
 		if(store.isUseCache()) {
 
 			//get from the cache
-			relatedItemsMap = (Map<Long,List<ReadableProduct>>) cache.getFromCache(relatedItemsCacheKey.toString());
+			Cache.ValueWrapper wrapper = catalogCache.get(relatedItemsCacheKey.toString());
+			relatedItemsMap = wrapper != null ? (Map<Long,List<ReadableProduct>>) wrapper.get() : null;
 			if(relatedItemsMap==null) {
 				//get from missed cache
 				//Boolean missedContent = (Boolean)cache.getFromCache(relatedItemsMissed.toString());
@@ -199,7 +201,7 @@ public class ShopProductController {
 					if(relatedItems!=null) {
 						relatedItemsMap = new HashMap<Long,List<ReadableProduct>>();
 						relatedItemsMap.put(product.getId(), relatedItems);
-						cache.putInCache(relatedItemsMap, relatedItemsCacheKey.toString());
+						catalogCache.put(relatedItemsMap, relatedItemsCacheKey.toString());
 					} else {
 						//cache.putInCache(new Boolean(true), relatedItemsMissed.toString());
 					}

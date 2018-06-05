@@ -10,7 +10,6 @@ import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.attribute.ProductAttribute;
 import com.salesmanager.catalog.model.product.price.FinalPrice;
-import com.salesmanager.core.model.reference.currency.Currency;
 
 
 /**
@@ -76,18 +75,6 @@ public interface PricingService {
 	 * @throws ServiceException
 	 */
 	String getDisplayAmount(BigDecimal amount, MerchantStoreInfo store)
-			throws ServiceException;
-	
-	/**
-	 * Method to be used when building an amount formatted with the appropriate currency
-	 * @param amount
-	 * @param locale
-	 * @param currency
-	 * @param store
-	 * @return
-	 * @throws ServiceException
-	 */
-	String getDisplayAmount(BigDecimal amount, Locale locale, Currency currency, MerchantStoreInfo store)
 			throws ServiceException;
 	
 	/**

@@ -597,8 +597,8 @@ function captureOrder(orderId){
 									</c:if>
 								</td> 
 								<td ><c:out value="${orderProduct.productQuantity}" /></td> 
-			            		<td><strong><sm:monetary value="${orderProduct.oneTimeCharge}" currency="${order.order.currency}"/></strong> </td>
-								<td><strong><sm:monetary value="${total}" currency="${order.order.currency}"/></strong></td> 
+			            		<td><strong><sm:monetary value="${orderProduct.oneTimeCharge}" currency="${order.order.currency.currency}"/></strong> </td>
+								<td><strong><sm:monetary value="${total}" currency="${order.order.currency.currency}"/></strong></td>
 							</tr> 
 			
 						</c:forEach> 
@@ -607,7 +607,7 @@ function captureOrder(orderId){
 							<tr class="subt"> 
 								<td colspan="2">&nbsp;</td> 
 								<td colspan="2" ><c:if test="${orderTotal.orderTotalCode=='refund'}"><font color="red"></c:if><s:message code="${orderTotal.orderTotalCode}" text="${orderTotal.orderTotalCode}"/><c:if test="${orderTotal.orderTotalCode=='refund'}"></font></c:if></td> 
-								<td ><strong><c:if test="${orderTotal.orderTotalCode=='refund'}"><font color="red"></c:if><sm:monetary value="${orderTotal.value}" currency="${order.order.currency}"/><c:if test="${orderTotal.orderTotalCode=='refund'}"></font></c:if></strong></td> 
+								<td ><strong><c:if test="${orderTotal.orderTotalCode=='refund'}"><font color="red"></c:if><sm:monetary value="${orderTotal.value}" currency="${order.order.currency.currency}"/><c:if test="${orderTotal.orderTotalCode=='refund'}"></font></c:if></strong></td>
 							</tr> 
 						</c:forEach> 	 
 					</tbody>    
