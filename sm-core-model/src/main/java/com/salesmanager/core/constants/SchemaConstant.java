@@ -12,11 +12,6 @@ public class SchemaConstant {
 	 * 
 	 */
 	public static final String[] LANGUAGE_ISO_CODE = {"en", "fr", "ru"};
-	
-	/**
-	 * All regions
-	 */
-	public static final String ALL_REGIONS = "*";
 
 	/**
 	 * Country iso codes

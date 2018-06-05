@@ -22,6 +22,18 @@
             <artifactId>sm-core-model-api</artifactId>
             <version>${shopizer.version}</version>
         </dependency>
+
+        <!-- http://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
+        <!-- For transient Multipart File only -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
     </dependencies>
 
 
