@@ -34,6 +34,7 @@ import javax.persistence.EntityListeners;
 @EntityScan(basePackages = {"com.salesmanager.catalog.model"})
 @PropertySource("classpath:catalog.properties")
 @EnableCaching
+@ImportResource("classpath:/spring/shopizer-catalog-context.xml")
 public class CatalogConfiguration {
 
     @Autowired

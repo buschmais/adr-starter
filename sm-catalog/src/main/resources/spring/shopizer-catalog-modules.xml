@@ -1,0 +1,72 @@
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns="http://www.springframework.org/schema/data/jpa"
+			 xmlns:util="http://www.springframework.org/schema/util"
+			 xmlns:context="http://www.springframework.org/schema/context"
+			 xmlns:aop="http://www.springframework.org/schema/aop"
+			 xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+	http://www.springframework.org/schema/cache
+	http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+	<!--
+	********************
+	CMS
+	********************
+	 -->
+
+
+	<!-- Product images manager -->
+	<beans:bean id="productFileManager"
+				class="com.salesmanager.catalog.business.cms.product.ProductFileManagerImpl">
+		<beans:property name="uploadImage">
+			<beans:ref bean="cmsProductImage" />
+		</beans:property>
+		<beans:property name="getImage">
+			<beans:ref bean="cmsProductImage" />
+		</beans:property>
+		<beans:property name="removeImage">
+			<beans:ref bean="cmsProductImage" />
+		</beans:property>
+	</beans:bean>
+
+	<!-- CMS implementation for product images -->
+	<beans:bean id="cmsProductImage"
+				class="com.salesmanager.catalog.business.cms.product.infinispan.CmsImageFileManagerImpl" factory-method="getInstance" >
+		<!--<beans:property name="rootName" value="product-merchant"/>-->
+		<beans:property name="rootName" value="/Applications/MAMP/htdocs/bam-images"/>
+	</beans:bean>
+
+	<!-- product downloads -->
+	<beans:bean id="productDownloadsFileManager"	class="com.salesmanager.catalog.business.cms.product.StaticProductFileManagerImpl">
+		<beans:property name="uploadFile">
+			<beans:ref bean="cmsProductFile" />
+		</beans:property>
+		<beans:property name="getFile">
+			<beans:ref bean="cmsProductFile" />
+		</beans:property>
+		<beans:property name="removeFile">
+			<beans:ref bean="cmsProductFile" />
+		</beans:property>
+	</beans:bean>
+	<!--  end of CMS implementation for static content data -->
+
+
+	<!-- CMS implementation for static content data -->
+	<beans:bean id="cmsProductFile" class="com.salesmanager.catalog.business.cms.product.infinispan.CmsStaticProductFileManagerImpl" factory-method="getInstance">
+		<beans:property name="rootName" value="product-file"/>
+		<!--<beans:property name="rootName" value="/Applications/MAMP/htdocs/bam-images"/>-->
+	</beans:bean>
+
+</beans:beans>

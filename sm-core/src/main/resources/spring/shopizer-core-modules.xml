@@ -92,28 +92,6 @@
 	 -->
 
 
-	<!-- Product images manager -->
-	<beans:bean id="productFileManager"
-				class="com.salesmanager.catalog.business.cms.product.ProductFileManagerImpl">
-		<beans:property name="uploadImage">
-			<beans:ref bean="cmsProductImage" />
-		</beans:property>
-		<beans:property name="getImage">
-			<beans:ref bean="cmsProductImage" />
-		</beans:property>
-		<beans:property name="removeImage">
-			<beans:ref bean="cmsProductImage" />
-		</beans:property>
-	</beans:bean>
-
-	<!-- CMS implementation for product images -->
-	<beans:bean id="cmsProductImage"
-				class="com.salesmanager.catalog.business.cms.product.infinispan.CmsImageFileManagerImpl" factory-method="getInstance" >
-		<!--<beans:property name="rootName" value="product-merchant"/>-->
-		<beans:property name="rootName" value="/Applications/MAMP/htdocs/bam-images"/>
-	</beans:bean>
-
-
 
 	<!-- Content images manager (logo, other store artifacts) -->
 	<beans:bean id="contentFileManager"
@@ -164,27 +142,7 @@
 		<!--<beans:property name="rootName" value="/Applications/MAMP/htdocs/bam-images/"/>-->
 	</beans:bean>
 
-
-	<!-- product downloads -->
-	<beans:bean id="productDownloadsFileManager"	class="com.salesmanager.catalog.business.cms.product.StaticProductFileManagerImpl">
-		<beans:property name="uploadFile">
-			<beans:ref bean="cmsProductFile" />
-		</beans:property>
-		<beans:property name="getFile">
-			<beans:ref bean="cmsProductFile" />
-		</beans:property>
-		<beans:property name="removeFile">
-			<beans:ref bean="cmsProductFile" />
-		</beans:property>
-	</beans:bean>
 	<!--  end of CMS implementation for static content data -->
-
-
-	<!-- CMS implementation for static content data -->
-	<beans:bean id="cmsProductFile" class="com.salesmanager.catalog.business.cms.product.infinispan.CmsStaticProductFileManagerImpl" factory-method="getInstance">
-		<beans:property name="rootName" value="product-file"/>
-		<!--<beans:property name="rootName" value="/Applications/MAMP/htdocs/bam-images"/>-->
-	</beans:bean>
 
 
 	<!-- Store Cache Manager (infinispan) -->
