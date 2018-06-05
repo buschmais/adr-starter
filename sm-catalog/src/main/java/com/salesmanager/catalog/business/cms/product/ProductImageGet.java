@@ -3,7 +3,6 @@ package com.salesmanager.catalog.business.cms.product;
 import java.util.List;
 
 import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.core.business.modules.cms.common.ImageGet;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.file.ProductImageSize;
 import com.salesmanager.catalog.model.product.image.ProductImage;

@@ -17,7 +17,7 @@ public interface ControllerConstants {
         }
 
         interface Search{
-            final static String search="search";
+            final static String search= "search";
         }
 
     }

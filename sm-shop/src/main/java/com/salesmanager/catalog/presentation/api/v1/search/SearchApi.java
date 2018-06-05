@@ -8,7 +8,6 @@ import com.salesmanager.catalog.business.integration.core.service.MerchantStoreI
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.RestUtils;
-import com.salesmanager.core.integration.language.LanguageDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -56,7 +55,7 @@ public class SearchApi {
 	 * @throws Exception
 	 */
     @ResponseStatus(HttpStatus.FOUND)
-	@RequestMapping( value="/search", method=RequestMethod.POST)
+	@RequestMapping( value= "/search", method=RequestMethod.POST)
 	public @ResponseBody SearchProductList search(@RequestBody SearchProductRequest searchRequest, @RequestParam(value = "lang", required=false) String lang, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		try {
