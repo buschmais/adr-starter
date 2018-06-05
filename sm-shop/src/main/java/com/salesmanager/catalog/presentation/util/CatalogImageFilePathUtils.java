@@ -2,7 +2,7 @@ package com.salesmanager.catalog.presentation.util;
 
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.model.product.Product;
-import com.salesmanager.core.model.content.FileContentType;
+import com.salesmanager.catalog.model.content.FileContentType;
 import com.salesmanager.shop.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;

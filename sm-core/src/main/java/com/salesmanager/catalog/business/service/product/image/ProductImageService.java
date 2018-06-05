@@ -7,8 +7,8 @@ import com.salesmanager.common.business.service.SalesManagerEntityService;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.file.ProductImageSize;
 import com.salesmanager.catalog.model.product.image.ProductImage;
-import com.salesmanager.core.model.content.ImageContentFile;
-import com.salesmanager.core.model.content.OutputContentFile;
+import com.salesmanager.catalog.model.content.ImageContentFile;
+import com.salesmanager.catalog.model.content.OutputContentFile;
 
 
 public interface ProductImageService extends SalesManagerEntityService<Long, ProductImage> {

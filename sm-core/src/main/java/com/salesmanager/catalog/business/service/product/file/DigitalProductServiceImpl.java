@@ -13,8 +13,8 @@ import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.common.business.service.SalesManagerEntityServiceImpl;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.file.DigitalProduct;
-import com.salesmanager.core.model.content.FileContentType;
-import com.salesmanager.core.model.content.InputContentFile;
+import com.salesmanager.catalog.model.content.FileContentType;
+import com.salesmanager.catalog.model.content.InputContentFile;
 
 @Service("digitalProductService")
 public class DigitalProductServiceImpl extends SalesManagerEntityServiceImpl<Long, DigitalProduct> 

@@ -6,14 +6,12 @@ import com.salesmanager.catalog.business.service.product.attribute.ProductOption
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.presentation.util.CatalogImageFilePathUtils;
-import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.business.utils.ajax.AjaxResponse;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionValue;
 import com.salesmanager.catalog.model.product.attribute.ProductOptionValueDescription;
 import com.salesmanager.core.integration.language.LanguageDTO;
 import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
-import com.salesmanager.core.model.content.FileContentType;
-import com.salesmanager.core.model.content.InputContentFile;
+import com.salesmanager.catalog.model.content.InputContentFile;
 import com.salesmanager.common.presentation.model.admin.Menu;
 import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.common.presentation.util.LabelUtils;
@@ -49,9 +47,6 @@ public class OptionsValueController {
 	
 	@Inject
 	LabelUtils messages;
-	
-	@Inject
-	private ContentService contentService;
 	
 	@Autowired
 	private CatalogImageFilePathUtils imageUtils;
@@ -261,8 +256,7 @@ public class OptionsValueController {
             cmsContentImage.setFileName(imageName);
             cmsContentImage.setMimeType( optionValue.getImage().getContentType() );
             cmsContentImage.setFile( inputStream );
-            contentService.addOptionImage(store.getCode(), cmsContentImage);
-            
+
             optionValue.setProductOptionValueImage(imageName);
 
 		}
@@ -404,8 +398,6 @@ public class OptionsValueController {
 			Long id = Long.parseLong(optionValueId);
 			
 			ProductOptionValue optionValue = productOptionValueService.getById(store, id);
-
-			contentService.removeFile(store.getCode(), FileContentType.PROPERTY, optionValue.getProductOptionValueImage());
 
 			optionValue.setProductOptionValueImage(null);
 			productOptionValueService.update(optionValue);

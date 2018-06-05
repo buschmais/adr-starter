@@ -48,7 +48,7 @@ public class UriUtils {
             String shopUrl = coreRestTemplate.postForObject("/store/uri/relative", parameter, String.class);
             catalogCache.put(RELATIVE_STORE_URI_KEY, shopUrl);
         }
-        return (String) catalogCache.get(RELATIVE_STORE_URI_KEY).get();
+        return catalogCache.get(RELATIVE_STORE_URI_KEY).get() == null ? "" : (String) catalogCache.get(RELATIVE_STORE_URI_KEY).get();
     }
 
 }

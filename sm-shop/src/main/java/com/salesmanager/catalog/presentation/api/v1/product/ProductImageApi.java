@@ -33,8 +33,8 @@ import com.salesmanager.catalog.business.service.product.ProductService;
 import com.salesmanager.catalog.business.service.product.image.ProductImageService;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.image.ProductImage;
-import com.salesmanager.core.model.content.FileContentType;
-import com.salesmanager.core.model.content.ImageContentFile;
+import com.salesmanager.catalog.model.content.FileContentType;
+import com.salesmanager.catalog.model.content.ImageContentFile;
 import com.salesmanager.catalog.presentation.model.product.PersistableImage;
 import com.salesmanager.catalog.presentation.populator.catalog.PersistableImagePopulator;
 

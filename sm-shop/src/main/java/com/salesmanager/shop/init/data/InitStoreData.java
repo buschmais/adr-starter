@@ -3,6 +3,8 @@ package com.salesmanager.shop.init.data;
 import com.salesmanager.catalog.business.integration.core.service.LanguageInfoService;
 import com.salesmanager.catalog.business.integration.core.service.MerchantStoreInfoService;
 import com.salesmanager.catalog.business.integration.core.service.TaxClassInfoService;
+import com.salesmanager.catalog.model.content.FileContentType;
+import com.salesmanager.catalog.model.content.ImageContentFile;
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import com.salesmanager.catalog.model.integration.core.TaxClassInfo;
@@ -42,8 +44,6 @@ import com.salesmanager.catalog.model.product.relationship.ProductRelationshipTy
 import com.salesmanager.catalog.model.product.type.ProductType;
 import com.salesmanager.core.model.common.Billing;
 import com.salesmanager.core.model.common.Delivery;
-import com.salesmanager.core.model.content.FileContentType;
-import com.salesmanager.core.model.content.ImageContentFile;
 import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.customer.CustomerGender;
 import com.salesmanager.core.model.merchant.MerchantStore;

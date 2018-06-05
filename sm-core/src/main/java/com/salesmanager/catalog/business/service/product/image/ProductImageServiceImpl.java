@@ -19,9 +19,9 @@ import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.file.ProductImageSize;
 import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.catalog.model.product.image.ProductImageDescription;
-import com.salesmanager.core.model.content.FileContentType;
-import com.salesmanager.core.model.content.ImageContentFile;
-import com.salesmanager.core.model.content.OutputContentFile;
+import com.salesmanager.catalog.model.content.FileContentType;
+import com.salesmanager.catalog.model.content.ImageContentFile;
+import com.salesmanager.catalog.model.content.OutputContentFile;
 
 @Service("productImage")
 public class ProductImageServiceImpl extends SalesManagerEntityServiceImpl<Long, ProductImage>

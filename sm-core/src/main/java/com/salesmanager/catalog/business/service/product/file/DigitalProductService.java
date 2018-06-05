@@ -5,7 +5,7 @@ import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.common.business.service.SalesManagerEntityService;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.file.DigitalProduct;
-import com.salesmanager.core.model.content.InputContentFile;
+import com.salesmanager.catalog.model.content.InputContentFile;
 
 
 public interface DigitalProductService extends SalesManagerEntityService<Long, DigitalProduct> {

@@ -1,8 +1,8 @@
 package com.salesmanager.catalog.business.cms.product;
 
 import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.core.model.content.FileContentType;
-import com.salesmanager.core.model.content.OutputContentFile;
+import com.salesmanager.catalog.model.content.FileContentType;
+import com.salesmanager.catalog.model.content.OutputContentFile;
 
 import java.util.List;
 

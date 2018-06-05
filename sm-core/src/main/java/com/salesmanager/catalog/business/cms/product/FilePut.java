@@ -4,7 +4,7 @@
 package com.salesmanager.catalog.business.cms.product;
 
 import com.salesmanager.common.business.exception.ServiceException;
-import com.salesmanager.core.model.content.InputContentFile;
+import com.salesmanager.catalog.model.content.InputContentFile;
 
 import java.util.List;
 

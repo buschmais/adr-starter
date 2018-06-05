@@ -57,13 +57,14 @@ public class ProductDescriptionUrlTag extends RequestContextAwareTag {
 					.getRequest();
 
 			MerchantStoreDTO storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.MERCHANT_STORE_DTO);
-			MerchantStoreInfo merchantStore = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
+			MerchantStoreInfo merchantStore;
 			//*** IF USED FROM ADMIN THE STORE WILL BE NULL, THEN TRY TO USE ADMIN STORE
-			if(merchantStore==null) {
+			if(storeDTO==null) {
 				storeDTO = (MerchantStoreDTO) request.getAttribute(Constants.ADMIN_STORE_DTO);
-				merchantStore = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
 			}
-			
+			merchantStore = this.merchantStoreInfoService.findbyCode(storeDTO.getCode());
+
+
 			
 			StringBuilder productPath = new StringBuilder();
 			

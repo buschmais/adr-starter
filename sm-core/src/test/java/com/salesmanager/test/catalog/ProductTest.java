@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.salesmanager.catalog.model.content.OutputContentFile;
 import com.salesmanager.catalog.model.integration.core.LanguageInfo;
 import com.salesmanager.catalog.model.integration.core.MerchantStoreInfo;
 import org.apache.commons.io.IOUtils;
@@ -43,9 +44,7 @@ import com.salesmanager.catalog.model.product.review.ProductReviewDescription;
 import com.salesmanager.catalog.model.product.type.ProductType;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.ImageContentFile;
-import com.salesmanager.core.model.content.OutputContentFile;
 import com.salesmanager.core.model.merchant.MerchantStore;
-import com.salesmanager.core.model.reference.language.Language;
 
 import junit.framework.Assert;
 

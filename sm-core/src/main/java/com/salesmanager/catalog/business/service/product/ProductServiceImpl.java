@@ -39,8 +39,8 @@ import com.salesmanager.catalog.model.product.description.ProductDescription;
 import com.salesmanager.catalog.model.product.image.ProductImage;
 import com.salesmanager.catalog.model.product.relationship.ProductRelationship;
 import com.salesmanager.catalog.model.product.review.ProductReview;
-import com.salesmanager.core.model.content.FileContentType;
-import com.salesmanager.core.model.content.ImageContentFile;
+import com.salesmanager.catalog.model.content.FileContentType;
+import com.salesmanager.catalog.model.content.ImageContentFile;
 
 @Service("productService")
 public class ProductServiceImpl extends SalesManagerEntityServiceImpl<Long, Product> implements ProductService {

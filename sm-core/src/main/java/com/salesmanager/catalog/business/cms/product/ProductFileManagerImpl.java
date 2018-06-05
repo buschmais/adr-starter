@@ -23,9 +23,9 @@ import com.salesmanager.catalog.business.util.ProductImageSizeUtils;
 import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.catalog.model.product.file.ProductImageSize;
 import com.salesmanager.catalog.model.product.image.ProductImage;
-import com.salesmanager.core.model.content.FileContentType;
-import com.salesmanager.core.model.content.ImageContentFile;
-import com.salesmanager.core.model.content.OutputContentFile;
+import com.salesmanager.catalog.model.content.FileContentType;
+import com.salesmanager.catalog.model.content.ImageContentFile;
+import com.salesmanager.catalog.model.content.OutputContentFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
