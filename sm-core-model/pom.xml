@@ -36,7 +36,13 @@
 			<artifactId>sm-common</artifactId>
 			<version>${shopizer.version}</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>com.shopizer</groupId>
+			<artifactId>sm-catalog</artifactId>
+			<version>${shopizer.version}</version>
+		</dependency>
+
 		<!-- Spring Data JPA-->
 		<dependency>
             <groupId>org.springframework.boot</groupId>

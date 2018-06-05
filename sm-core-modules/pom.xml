@@ -34,6 +34,13 @@
 			<artifactId>sm-core-model</artifactId>
 			<version>${shopizer.version}</version>
 		</dependency>
+
+		<!-- sm-catalog -->
+		<dependency>
+			<groupId>com.shopizer</groupId>
+			<artifactId>sm-catalog</artifactId>
+			<version>${shopizer.version}</version>
+		</dependency>
 		
 	</dependencies>
 	
