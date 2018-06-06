@@ -2,7 +2,7 @@ package com.salesmanager.shop.utils;
 
 import org.springframework.stereotype.Component;
 
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 
 /**
  * To be used when using an external web server for managing images

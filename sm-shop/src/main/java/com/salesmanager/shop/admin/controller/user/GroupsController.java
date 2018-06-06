@@ -38,7 +38,7 @@ import com.salesmanager.core.model.user.Group;
 import com.salesmanager.core.model.user.GroupType;
 import com.salesmanager.shop.admin.model.permission.GroupDetails;
 import com.salesmanager.common.presentation.model.admin.Menu;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 import com.salesmanager.common.presentation.util.LabelUtils;
 
 @Controller

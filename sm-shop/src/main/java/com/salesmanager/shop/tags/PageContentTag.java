@@ -14,7 +14,7 @@ import com.salesmanager.core.model.content.Content;
 import com.salesmanager.core.model.content.ContentDescription;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 
 
 public class PageContentTag extends RequestContextAwareTag  {

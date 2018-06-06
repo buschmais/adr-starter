@@ -31,7 +31,7 @@ import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.model.system.MerchantConfig;
 import com.salesmanager.core.model.system.MerchantConfiguration;
 import com.salesmanager.core.model.system.MerchantConfigurationType;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 import com.salesmanager.shop.model.customer.Address;
 import com.salesmanager.shop.model.customer.AnonymousCustomer;
 import com.salesmanager.shop.populator.catalog.ReadableCategoryPopulator;

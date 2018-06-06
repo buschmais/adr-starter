@@ -12,7 +12,7 @@ import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.InputContentFile;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.common.presentation.model.admin.Menu;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

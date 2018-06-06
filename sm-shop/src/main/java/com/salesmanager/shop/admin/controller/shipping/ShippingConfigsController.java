@@ -33,7 +33,7 @@ import com.salesmanager.core.model.shipping.ShippingType;
 import com.salesmanager.core.business.services.shipping.ShippingService;
 import com.salesmanager.common.business.ajax.AjaxResponse;
 import com.salesmanager.common.presentation.model.admin.Menu;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 
 
 @Controller

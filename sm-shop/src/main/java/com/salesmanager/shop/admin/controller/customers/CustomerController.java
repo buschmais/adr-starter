@@ -30,7 +30,7 @@ import com.salesmanager.shop.admin.model.customer.attribute.CustomerOption;
 import com.salesmanager.shop.admin.model.customer.attribute.CustomerOptionValue;
 import com.salesmanager.shop.admin.model.userpassword.UserReset;
 import com.salesmanager.common.presentation.model.admin.Menu;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 import com.salesmanager.shop.constants.EmailConstants;
 import com.salesmanager.shop.populator.customer.ReadableCustomerOptionPopulator;
 import com.salesmanager.shop.utils.EmailUtils;

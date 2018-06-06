@@ -22,7 +22,7 @@ import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.user.Group;
 import com.salesmanager.core.model.user.Permission;
 import com.salesmanager.shop.admin.security.SecurityDataAccessException;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 
 public abstract class AbstractCustomerServices implements UserDetailsService{
 	

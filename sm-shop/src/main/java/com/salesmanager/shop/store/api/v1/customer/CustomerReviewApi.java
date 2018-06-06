@@ -24,7 +24,7 @@ import com.salesmanager.core.model.customer.Customer;
 import com.salesmanager.core.model.customer.review.CustomerReview;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 import com.salesmanager.shop.model.customer.PersistableCustomerReview;
 import com.salesmanager.shop.model.customer.ReadableCustomerReview;
 import com.salesmanager.shop.store.controller.customer.facade.CustomerFacade;

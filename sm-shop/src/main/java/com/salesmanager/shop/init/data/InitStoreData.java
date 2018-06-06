@@ -62,7 +62,7 @@ import com.salesmanager.core.model.reference.zone.Zone;
 import com.salesmanager.core.model.tax.taxclass.TaxClass;
 import com.salesmanager.core.model.user.Group;
 import com.salesmanager.core.model.user.GroupType;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 import com.salesmanager.shop.utils.LocaleUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;

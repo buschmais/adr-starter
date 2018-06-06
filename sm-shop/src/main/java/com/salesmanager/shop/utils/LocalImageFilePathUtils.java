@@ -3,12 +3,9 @@ package com.salesmanager.shop.utils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import com.salesmanager.catalog.model.product.Product;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.merchant.MerchantStore;
-import com.salesmanager.shop.constants.Constants;
-import com.salesmanager.catalog.presentation.model.manufacturer.Manufacturer;
-
+import com.salesmanager.common.presentation.constants.Constants;
 
 
 /**

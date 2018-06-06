@@ -15,13 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.salesmanager.core.business.services.reference.country.CountryService;
 import com.salesmanager.core.business.services.user.UserService;
-import com.salesmanager.core.model.common.CriteriaOrderBy;
 import com.salesmanager.core.model.merchant.MerchantStore;
-import com.salesmanager.core.model.order.OrderCriteria;
 import com.salesmanager.core.model.reference.country.Country;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.model.user.User;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 
 
 

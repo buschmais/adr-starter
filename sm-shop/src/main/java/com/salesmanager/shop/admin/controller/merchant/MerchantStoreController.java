@@ -22,7 +22,7 @@ import com.salesmanager.shop.admin.controller.ControllerConstants;
 import com.salesmanager.shop.admin.model.reference.Size;
 import com.salesmanager.shop.admin.model.reference.Weight;
 import com.salesmanager.common.presentation.model.admin.Menu;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 import com.salesmanager.shop.constants.EmailConstants;
 import com.salesmanager.shop.utils.*;
 import org.apache.commons.lang3.StringUtils;

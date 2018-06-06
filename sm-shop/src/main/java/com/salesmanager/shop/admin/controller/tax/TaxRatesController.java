@@ -12,7 +12,7 @@ import com.salesmanager.core.model.tax.taxclass.TaxClass;
 import com.salesmanager.core.model.tax.taxrate.TaxRate;
 import com.salesmanager.core.model.tax.taxrate.TaxRateDescription;
 import com.salesmanager.common.presentation.model.admin.Menu;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 import com.salesmanager.common.presentation.util.LabelUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

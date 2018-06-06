@@ -4,7 +4,7 @@ import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.services.content.ContentService;
 import com.salesmanager.core.model.content.FileContentType;
 import com.salesmanager.core.model.content.OutputContentFile;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 import com.salesmanager.shop.store.controller.AbstractController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

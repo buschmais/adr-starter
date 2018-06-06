@@ -23,7 +23,6 @@ public interface ControllerConstants
         interface Customer{
             final static String customer="customer";
             final static String customerLogon="customerLogon";
-            final static String review="review";
             final static String register="register";
             final static String changePassword="customerPassword";
             final static String customerOrders="customerOrders";

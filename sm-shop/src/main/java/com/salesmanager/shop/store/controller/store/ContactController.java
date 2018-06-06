@@ -8,7 +8,7 @@ import com.salesmanager.core.model.content.ContentDescription;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.constants.ApplicationConstants;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 import com.salesmanager.shop.model.shop.ContactForm;
 import com.salesmanager.common.presentation.model.PageInformation;
 import com.salesmanager.shop.store.controller.AbstractController;

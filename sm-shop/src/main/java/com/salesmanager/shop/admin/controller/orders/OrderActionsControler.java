@@ -18,7 +18,7 @@ import com.salesmanager.core.model.payments.Transaction;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.modules.integration.IntegrationException;
 import com.salesmanager.shop.admin.model.orders.Refund;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 import com.salesmanager.common.presentation.util.DateUtil;
 import com.salesmanager.shop.utils.EmailTemplatesUtils;
 import com.salesmanager.common.presentation.util.LabelUtils;

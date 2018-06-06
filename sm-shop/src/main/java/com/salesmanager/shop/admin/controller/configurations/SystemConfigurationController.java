@@ -23,7 +23,7 @@ import com.salesmanager.core.business.services.system.MerchantConfigurationServi
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.system.MerchantConfig;
 import com.salesmanager.common.presentation.model.admin.Menu;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 
 
 

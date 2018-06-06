@@ -2,9 +2,7 @@ package com.salesmanager.shop.api;
 
 import com.salesmanager.common.business.exception.ServiceException;
 import com.salesmanager.core.business.services.merchant.MerchantStoreService;
-import com.salesmanager.core.integration.merchant.MerchantStoreDTO;
 import com.salesmanager.core.model.merchant.MerchantStore;
-import com.salesmanager.shop.constants.Constants;
 import com.salesmanager.shop.utils.FilePathUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

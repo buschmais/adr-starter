@@ -6,7 +6,7 @@ package com.salesmanager.shop.store.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import com.salesmanager.core.model.reference.language.Language;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 import com.salesmanager.shop.store.model.paging.PaginationData;
 
 /**

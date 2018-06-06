@@ -15,7 +15,7 @@ import com.salesmanager.core.model.order.orderproduct.OrderProductDownload;
 import com.salesmanager.core.model.reference.country.Country;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.model.reference.zone.Zone;
-import com.salesmanager.shop.constants.Constants;
+import com.salesmanager.common.presentation.constants.Constants;
 import com.salesmanager.shop.model.order.ReadableOrder;
 import com.salesmanager.shop.model.order.ReadableOrderProductDownload;
 import com.salesmanager.shop.populator.order.ReadableOrderProductDownloadPopulator;
