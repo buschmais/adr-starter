@@ -39,6 +39,7 @@
 		<infinispan.version>6.0.2.Final</infinispan.version>
 		<mysql-jdbc-version>6.0.5</mysql-jdbc-version>
 		<simple-json-version>1.1.1</simple-json-version>
+		<jqassistant.version>1.10.1</jqassistant.version>
     </properties>
 
     <dependencies>
@@ -179,7 +180,33 @@
 				<version>1.16.20</version>
 			</dependency>
 		</dependencies>
-
 	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.buschmais.jqassistant</groupId>
+				<artifactId>jqassistant-maven-plugin</artifactId>
+				<version>${jqassistant.version}</version>
+				<executions>
+					<execution>
+						<id>default-cli</id>
+						<goals>
+							<goal>scan</goal>
+							<goal>analyze</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<store>
+						<embedded>
+							<!-- config needed for Gitpod -->
+							<listenAddress>0.0.0.0</listenAddress>
+						</embedded>
+					</store>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
