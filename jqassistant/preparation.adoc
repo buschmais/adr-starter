@@ -1,0 +1,21 @@
+= Data Preparation
+
+These concepts define basic labels and further enrichments for the dataset.
+
+[[preparation:Default]]
+[role=group,includesConcepts="preparation:ShopizerFiles"]
+== Concepts
+
+[[preparation:ShopizerFiles]]
+[source,cypher,role="concept"]
+.Labels all Shopizer artifacts and contained files with "Shopizer".
+----
+MATCH    (artifact:Main:Artifact{group: "com.shopizer"})
+SET      artifact:Shopizer
+WITH     artifact
+MATCH    (artifact)-[:CONTAINS]->(c)
+SET      c:Shopizer
+RETURN   artifact.name AS Artifact,
+         count(DISTINCT c) AS ContentCount
+ORDER BY artifact.name
+----

@@ -1,0 +1,20 @@
+:toc: left
+:toclevels: 3
+
+= Shopizer Documentation
+
+[[default]]
+[role=group,includesGroups="preparation:Default"]
+== Content
+
+This is the technical documentation of the Shopizer eCommerce-Software System.
+
+It includes architectural decisions and validation of compliance with them as well as an architectural overview and coding rules.
+
+:leveloffset: +1
+include::preparation.adoc[]
+:leveloffset: -1
+
+include::jQA:Summary[]
+
+include::jQA:Rules[]
