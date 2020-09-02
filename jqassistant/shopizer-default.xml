@@ -1,0 +1,23 @@
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/v2.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://schema.jqassistant.org/rule/v2.0 https://schema.jqassistant.org/rule/jqassistant-rule-v2.0.xsd">
+
+    <group id="shopizer:Default">
+        <includeConcept refId="preparation:ShopizerFiles"/>
+    </group>
+
+    <concept id="preparation:ShopizerFiles">
+        <description>Labels all Shopizer artifacts and contained files with "Shopizer".</description>
+        <cypher><![CDATA[
+            MATCH    (artifact:Main:Artifact{group: "com.shopizer"})
+            SET      artifact:Shopizer
+            WITH     artifact
+            MATCH    (artifact)-[:CONTAINS]->(c)
+            SET      c:Shopizer
+            RETURN   artifact.name AS Artifact,
+                     count(DISTINCT c) AS ContentCount
+            ORDER BY artifact.name
+            ]]></cypher>
+    </concept>
+
+</jqassistant-rules>
