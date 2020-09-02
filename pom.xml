@@ -195,6 +195,11 @@
 							<goal>scan</goal>
 							<goal>analyze</goal>
 						</goals>
+						<configuration>
+							<groups>
+								<group>default</group>
+							</groups>
+						</configuration>
 					</execution>
 				</executions>
 				<configuration>
