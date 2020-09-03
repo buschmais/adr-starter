@@ -27,7 +27,7 @@ For existing code:
 - Refactor all uses of other logging frameworks and calls to `System.out` and `System.err` to Slf4j
 
 [[adr:UseSlf4jForLogging]]
-[source,cypher,role="constraint",requiresConcepts="preparation:ShopizerFiles,preparation:Logger,preparation:Slf4j"]
+[source,cypher,role="constraint",requiresConcepts="preparation:ShopizerFiles,preparation:Logger,preparation:Slf4j",severity=minor]
 .Only the usage of Slf4 is allowed
 ----
 MATCH  (logger:Type:Logger)-[:DECLARES]->(m:Method),
@@ -37,7 +37,7 @@ RETURN t.fqn AS Type, logger.fqn AS Logger, collect(usage.lineNumber) AS LineNum
 ----
 
 [[adr:IllegalUsageOfSystemOutAndErr]]
-[source,cypher,role="constraint",requiresConcepts="preparation:ShopizerFiles"]
+[source,cypher,role="constraint",requiresConcepts="preparation:ShopizerFiles",severity=minor]
 .Don't use System.out and System.err in production code for logging
 ----
 MATCH  (system:Type{fqn: "java.lang.System"})-[:DECLARES]->(writer:Field),
