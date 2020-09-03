@@ -1,5 +1,7 @@
-== Architecture Decision Records
+= Architecture Decision Records
 
+[[adr:Default]]
+[role=group,includesConstraints="adr:*"]
 == Introduction
 
 This document contains all Architecture Decision Records made for this application.
@@ -44,7 +46,7 @@ If there need to be changes to an existing ADR, following actions are possible d
 *** If there are rues validating this decision, disable them by updating the ADR
 ** If everything is accomplished, get the changes reviewed in a PR and have it merged
 
-== Architecture Decision Records
+== Decisions
 
 :leveloffset: +2
 include::001-Use_Slf4j_for_Logging.adoc[]

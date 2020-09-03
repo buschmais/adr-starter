@@ -19,3 +19,23 @@ RETURN   artifact.name AS Artifact,
          count(DISTINCT c) AS ContentCount
 ORDER BY artifact.name
 ----
+
+[[preparation:Logger]]
+[source,cypher,role="concept"]
+.Labels all loggers with "Logger".
+----
+MATCH  (t:Type)
+WHERE  t.fqn IN ["org.slf4j.Logger", "org.apache.commons.logging.Log"]
+SET    t:Logger
+RETURN t.fqn AS Logger
+----
+
+[[preparation:Slf4j]]
+[source,cypher,role="concept"]
+.Labels the Slf4j logger.
+----
+MATCH  (t:Type)
+WHERE  t.fqn = "org.slf4j.Logger"
+SET    t:Slf4j
+RETURN t.fqn
+----
