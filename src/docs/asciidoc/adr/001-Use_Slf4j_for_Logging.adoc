@@ -1,0 +1,29 @@
+= 001 - Use Slf4j for Logging
+
+== Status
+
+Proposed
+
+== Context
+
+Proper logging of the processes taking place during runtime is crucial to understand and debug occuring issues in production.
+
+This requires that logging is done uniformly to one place which requires that there is only one logging framework with one configuration used.
+
+Currently, there are multiple ways to log implemented in the application.
+
+== Decision
+
+Use the Slf4j API for all logging.
+
+== Consequences
+
+For new code:
+
+- Only use `org.slf4j.Logger` and `org.slf4j.LoggerFactory`
+
+For existing code:
+
+- Refactor all uses of other logging frameworks and calls to `System.out` and `System.err` to Slf4j
+
+
