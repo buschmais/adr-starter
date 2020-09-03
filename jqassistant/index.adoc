@@ -13,6 +13,8 @@ It includes architectural decisions and validation of compliance with them as we
 
 :leveloffset: +1
 include::preparation.adoc[]
+
+include::adr/adr.adoc[]
 :leveloffset: -1
 
 include::jQA:Summary[]
