@@ -4,7 +4,7 @@
 = Shopizer Documentation
 
 [[default]]
-[role=group,includesGroups="preparation:Default"]
+[role=group,includesGroups="preparation:Default,adr:Default"]
 == Content
 
 This is the technical documentation of the Shopizer eCommerce-Software System.
