@@ -45,3 +45,7 @@ If there need to be changes to an existing ADR, following actions are possible d
 ** If everything is accomplished, get the changes reviewed in a PR and have it merged
 
 == Architecture Decision Records
+
+:leveloffset: +2
+include::001-Use_Slf4j_for_Logging.adoc[]
+:leveloffset: -2
