@@ -1,4 +1,4 @@
-== Architecture Decision Records
+= Architecture Decision Records
 
 == Introduction
 
@@ -47,3 +47,4 @@ If there need to be changes to an existing ADR, following actions are possible d
 == Architecture Decision Records
 
 include::001-Use_Slf4j_for_Logging.adoc[leveloffset=+2]
+include::002-Dont_Log_and_Throw.adoc[leveloffset=+3]

@@ -1,0 +1,27 @@
+= 002 - Don't Log and Throw an Exception
+
+== Status
+
+Proposed
+
+== Context
+
+Exception handling and logging are closely related to each other and are important to properly track down issues in the field.
+
+For an efficient root cause analysis exceptions must be handled, i.e. logged, at one place.
+Otherwise, the log get's quickly polluted.
+This is what is often referred to as an anti-pattern called "Log and Throw".
+
+The current exception handling and logging contains exactly these situations, which lead to difficult root cause analysis of field issues.
+
+== Decision
+
+It's not allowed to catch an exception, log (no matter if only the message or the stacktrace) and rethrow it.
+
+If an exception occurs at one place it needs to be decided, if the calling code can handle the exception properly.
+If that's not the case, the exception needs to be propagated to the next higher level.
+
+== Consequences
+
+- Existing code needs to be checked to remove all implementations of the Log and Throw pattern
+- New code must not implement the Log and Throw pattern
