@@ -25,3 +25,18 @@ If that's not the case, the exception needs to be propagated to the next higher 
 
 - Existing code needs to be checked to remove all implementations of the Log and Throw pattern
 - New code must not implement the Log and Throw pattern
+
+[[adr:LogAndThrow]]
+[source,cypher,role=constraint,requiresConcepts="preparation:Logger,preparation:ShopizerFiles"]
+.Reports all occurences of Log and Throw
+----
+MATCH  (exception:Type)-[:DECLARES]->(constructor:Constructor),
+       (method:Method)-[newException:INVOKES]->(constructor)
+WHERE  exception.fqn =~ ".*Exception"
+WITH   method, newException
+MATCH  (logger:Type:Logger)-[:DECLARES]->(logMethod:Method),
+       (t:Type:Shopizer)-[:DECLARES]->(method)-[log:INVOKES]->(logMethod)
+WHERE  logMethod.signature =~ ".*,java.lang.Throwable\\)"
+       AND abs(log.lineNumber - newException.lineNumber) <= 4
+RETURN t.fqn as DeclaringType, collect(log.lineNumber) as LineNumber
+----
