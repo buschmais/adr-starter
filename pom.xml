@@ -40,6 +40,7 @@
 		<mysql-jdbc-version>6.0.5</mysql-jdbc-version>
 		<simple-json-version>1.1.1</simple-json-version>
 		<jqassistant.version>1.8.0</jqassistant.version>
+		<jqassistant-ddd.version>1.8.1</jqassistant-ddd.version>
     </properties>
 
     <dependencies>
@@ -179,6 +180,11 @@
 				<artifactId>lombok</artifactId>
 				<version>1.16.20</version>
 			</dependency>
+			<dependency>
+				<groupId>org.jqassistant.contrib.plugin</groupId>
+				<artifactId>jqassistant-java-ddd-annotations</artifactId>
+				<version>${jqassistant-ddd.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -198,6 +204,7 @@
 						<configuration>
 							<groups>
 								<group>default</group>
+								<group>java-ddd:Default</group>
 							</groups>
 						</configuration>
 					</execution>
@@ -210,6 +217,13 @@
 						</embedded>
 					</store>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.jqassistant.contrib.plugin</groupId>
+						<artifactId>jqassistant-java-ddd-plugin</artifactId>
+						<version>${jqassistant-ddd.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
