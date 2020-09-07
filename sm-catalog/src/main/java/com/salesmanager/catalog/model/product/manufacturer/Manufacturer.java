@@ -26,7 +26,9 @@ import com.salesmanager.catalog.model.common.audit.AuditListener;
 import com.salesmanager.catalog.model.common.audit.AuditSection;
 import com.salesmanager.catalog.model.common.audit.Auditable;
 import com.salesmanager.common.model.SalesManagerEntity;
+import org.jqassistant.contrib.plugin.ddd.annotation.DDD;
 
+@DDD.AggregateRoot
 @Entity
 @EntityListeners(value = AuditListener.class)
 @Table(name = "MANUFACTURER", uniqueConstraints=

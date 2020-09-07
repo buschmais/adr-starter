@@ -7,9 +7,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.jqassistant.contrib.plugin.ddd.annotation.DDD;
 
 import javax.persistence.*;
 
+@DDD.AggregateRoot
 @Entity
 @Table(name = "CUSTOMER_INFO")
 @NoArgsConstructor

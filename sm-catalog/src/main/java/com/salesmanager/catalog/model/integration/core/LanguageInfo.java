@@ -5,12 +5,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
+import org.jqassistant.contrib.plugin.ddd.annotation.DDD;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@DDD.AggregateRoot
 @Entity
 @Table(name = "LANGUAGE_INFO")
 @NoArgsConstructor
