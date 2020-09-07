@@ -32,4 +32,17 @@ For easier identification of classes that represent an Aggregate Root, they will
 ** If a new Aggregate Root is introduced, it needs to be marked as such
 ** Deep Links from one Aggregate to another must not be added. Aggregates may only reference each other via Aggregate Roots.
 
+[[adr:DeepLinkingBetweenAggregates]]
+[source,cypher,role=constraint,requiresConcepts="java-ddd:*",severity=minor]
+.Return all Entities that are part of more than one Aggregate via their Transitive Closure.
+----
+MATCH (a:AggregateRoot)
+WITH a
+OPTIONAL MATCH p=shortestPath((a)-[:DEPENDS_ON*]->(e:Entity))
+WHERE NOT e:AggregateRoot AND NONE(x IN tail(nodes(p)) WHERE (x:AggregateRoot))
+WITH e, collect(DISTINCT a.name) AS aggregates
+WHERE size(aggregates) > 1 AND e IS NOT NULL
+RETURN e.fqn, aggregates AS Aggregates
+----
+
 
