@@ -1,0 +1,35 @@
+= 003 - No Deep Links between Aggregates
+
+== Status
+
+Proposed
+
+== Context
+
+The upcoming switch from a relational to a document-based database technology for the catalog sub-domain requires the implementation of aggregates in the data model.
+
+While those aggregates can be identified manually, it's required that there are no deep links between different aggregates.
+
+An entity linked to by two aggregates as depicted in the figure would thus violate the requirement.
+
+== Decision
+
+Each entity must only be referenced in one aggregate, i.e. by one aggregate root and not by entities from outside the aggregate.
+
+Following constructs must therefore be avoided:
+
+* An Entity which is referenced by two or more Aggregate Roots
+* An Entity which is referenced by an Entity which is not part of the same Aggregate
+
+For easier identification of classes that represent an Aggregate Root, they will be annotated with `org.jqassistant.contrib.plugin.ddd.annotation`.
+
+== Consequences
+
+* Existing Code
+** All Aggregate Roots in the data model of the catalog sub-domain (`com.salesmanager.catalog`) must be identified and marked as such
+** All violations must be identified and fixed
+* New Code
+** If a new Aggregate Root is introduced, it needs to be marked as such
+** Deep Links from one Aggregate to another must not be added. Aggregates may only reference each other via Aggregate Roots.
+
+
