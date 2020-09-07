@@ -52,4 +52,6 @@ If there need to be changes to an existing ADR, following actions are possible d
 include::001-Use_Slf4j_for_Logging.adoc[]
 '''
 include::002-Dont_Log_and_Throw.adoc[]
+'''
+include::003-No_Deep_Links_between_Aggregates.adoc[]
 :leveloffset: -2
