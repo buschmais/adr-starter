@@ -45,4 +45,14 @@ WHERE size(aggregates) > 1 AND e IS NOT NULL
 RETURN e.fqn, aggregates AS Aggregates
 ----
 
+[[adr:DeepLinkingIntoAggregatesOutsideCatalog]]
+[source,cypher,role=constraint,requiresConcepts="jmolecules-ddd:*,jpa2:Entity"]
+.Return all Entities and Aggregate Root objects from the Catalog Bounded Context which are referenced from another context.
+----
+MATCH  (bC1:BoundedContext{name: "Catalog"})-[:CONTAINS]->(e1:Entity),
+	   (e2:Entity)-[:DEPENDS_ON]->(e1)
+WHERE  NOT exists((bC1)-[:CONTAINS]->(e2))
+RETURN e1.fqn AS CatalogDependency, e2.fqn AS DependentClass, e1:AggregateRoot AS IsAggregateRoot
+----
+
 
