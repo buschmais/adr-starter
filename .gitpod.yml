@@ -1,0 +1,8 @@
+# exposed ports
+ports:
+  - port: 7474
+    onOpen: open-browser
+  - port: 7687
+tasks:
+  - before: yes | sdk install java 8.0.265.hs-adpt
+    init: mvn clean verify -DskipTests
