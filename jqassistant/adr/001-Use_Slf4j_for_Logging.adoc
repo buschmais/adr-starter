@@ -1,0 +1,53 @@
+= 001 - Use Slf4j for Logging
+
+== Status
+
+Proposed
+
+== Context
+
+Proper logging of the processes taking place during runtime is crucial to understand and debug occuring issues in production.
+
+This requires that logging is done uniformly to one place which requires that there is only one logging framework with one configuration used.
+
+Currently, there are multiple ways to log implemented in the application.
+
+== Decision
+
+Use the Slf4j API for all logging.
+
+== Consequences
+
+For new code:
+
+- Only use `org.slf4j.Logger` and `org.slf4j.LoggerFactory`
+
+For existing code:
+
+- Refactor all uses of other logging frameworks and calls to `System.out` and `System.err` to Slf4j
+
+[[adr:UseSlf4jForLogging]]
+[source,cypher,role="constraint",requiresConcepts="preparation:ShopizerFiles,preparation:Logger,preparation:Slf4j",severity=minor]
+.Only the usage of Slf4 is allowed
+----
+MATCH  (logger:Type:Logger)-[:DECLARES]->(m:Method),
+       (t:Type:Shopizer)-[:DECLARES]->(:Method)-[usage:INVOKES]->(m)
+WHERE  NOT logger:Slf4j
+RETURN t.fqn AS Type, logger.fqn AS Logger, collect(usage.lineNumber) AS LineNumbers
+----
+
+[[adr:IllegalUsageOfSystemOutAndErr]]
+[source,cypher,role="constraint",requiresConcepts="preparation:ShopizerFiles",severity=minor]
+.Don't use System.out and System.err in production code for logging
+----
+MATCH  (system:Type{fqn: "java.lang.System"})-[:DECLARES]->(writer:Field),
+       (a:Shopizer:Main:Artifact)-[:CONTAINS]->(t:Type)-[:DECLARES]->(m:Method),
+       (m)-[reads:READS]->(writer)
+WHERE  writer.signature in [
+         "java.io.PrintStream out",
+         "java.io.PrintStream err"
+       ]
+RETURN t.fqn as Type, writer.signature, collect(reads.lineNumber) as LineNumbers
+----
+
+

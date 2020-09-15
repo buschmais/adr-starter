@@ -27,13 +27,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.salesmanager.catalog.model.common.audit.AuditSection;
 import com.salesmanager.catalog.model.common.audit.Auditable;
 import com.salesmanager.common.model.SalesManagerEntity;
+import org.jqassistant.contrib.plugin.ddd.annotation.DDD;
 
+@DDD.AggregateRoot
 @Entity
 @EntityListeners(value = AuditListener.class)
 @Table(name = "CATEGORY", uniqueConstraints=
     @UniqueConstraint(columnNames = {"MERCHANT_ID", "CODE"}) )
-
-
 public class Category extends SalesManagerEntity<Long, Category> implements Auditable {
 	private static final long serialVersionUID = -846291242449186747L;
 	

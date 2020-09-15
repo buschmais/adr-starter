@@ -1,28 +1,41 @@
-[[preparation:Default]]
-[role=group,includesConcepts="preparation:ShopizerFiles"]
-== Preparation
+= Data Preparation
 
 These concepts define basic labels and further enrichments for the dataset.
 
-=== Concepts
+[[preparation:Default]]
+[role=group,includesConcepts="preparation:ShopizerFiles"]
+== Concepts
 
 [[preparation:ShopizerFiles]]
 [source,cypher,role="concept"]
 .Labels all Shopizer artifacts and contained files with "Shopizer".
 ----
-MATCH
-    (artifact:Main:Artifact{group: "com.shopizer"})
-SET
-    artifact:Shopizer
-WITH
-    artifact
-MATCH
-    (artifact)-[:CONTAINS]->(c)
-SET
-    c:Shopizer
-RETURN
-    artifact.name AS Artifact,
-    count(DISTINCT c) AS ContentCount
-ORDER BY
-    artifact.name
+MATCH    (artifact:Main:Artifact{group: "com.shopizer"})
+SET      artifact:Shopizer
+WITH     artifact
+MATCH    (artifact)-[:CONTAINS]->(c)
+SET      c:Shopizer
+RETURN   artifact.name AS Artifact,
+         count(DISTINCT c) AS ContentCount
+ORDER BY artifact.name
+----
+
+[[preparation:Logger]]
+[source,cypher,role="concept"]
+.Labels all loggers with "Logger".
+----
+MATCH  (t:Type)
+WHERE  t.fqn IN ["org.slf4j.Logger", "org.apache.commons.logging.Log"]
+SET    t:Logger
+RETURN t.fqn AS Logger
+----
+
+[[preparation:Slf4j]]
+[source,cypher,role="concept"]
+.Labels the Slf4j logger.
+----
+MATCH  (t:Type)
+WHERE  t.fqn = "org.slf4j.Logger"
+SET    t:Slf4j
+RETURN t.fqn
 ----
