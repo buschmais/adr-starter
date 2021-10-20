@@ -39,7 +39,9 @@
 		<infinispan.version>6.0.2.Final</infinispan.version>
 		<mysql-jdbc-version>6.0.5</mysql-jdbc-version>
 		<simple-json-version>1.1.1</simple-json-version>
+		<jmolecules.version>1.3.0</jmolecules.version>
 		<jqassistant.version>1.10.1</jqassistant.version>
+		<jqassistant-jmolecules.version>1.2.0</jqassistant-jmolecules.version>
     </properties>
 
     <dependencies>
@@ -130,8 +132,7 @@
 		    <groupId>com.googlecode.json-simple</groupId>
 		    <artifactId>json-simple</artifactId>
 		    <version>${simple-json-version}</version>
-		</dependency>	
-		
+		</dependency>
     </dependencies>
 
 	<modules>
@@ -179,6 +180,11 @@
 				<artifactId>lombok</artifactId>
 				<version>1.16.20</version>
 			</dependency>
+			<dependency>
+				<groupId>org.jmolecules</groupId>
+				<artifactId>jmolecules-ddd</artifactId>
+				<version>${jmolecules.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -211,6 +217,13 @@
 					</store>
 					<failOnSeverity>BLOCKER</failOnSeverity>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.jqassistant.contrib.plugin</groupId>
+						<artifactId>jqassistant-jmolecules-plugin</artifactId>
+						<version>${jqassistant-jmolecules.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
