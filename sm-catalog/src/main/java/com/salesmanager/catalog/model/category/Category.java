@@ -27,7 +27,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.salesmanager.catalog.model.common.audit.AuditSection;
 import com.salesmanager.catalog.model.common.audit.Auditable;
 import com.salesmanager.common.model.SalesManagerEntity;
+import org.jmolecules.ddd.annotation.AggregateRoot;
 
+@AggregateRoot
 @Entity
 @EntityListeners(value = AuditListener.class)
 @Table(name = "CATEGORY", uniqueConstraints=

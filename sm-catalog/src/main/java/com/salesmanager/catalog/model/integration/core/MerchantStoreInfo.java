@@ -2,12 +2,14 @@ package com.salesmanager.catalog.model.integration.core;
 
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.jmolecules.ddd.annotation.AggregateRoot;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
+@AggregateRoot
 @Entity
 @Table(name = "MERCHANT_STORE_INFO")
 @NoArgsConstructor
