@@ -2,9 +2,11 @@ package com.salesmanager.catalog.model.integration.core;
 
 import lombok.*;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.jmolecules.ddd.annotation.AggregateRoot;
 
 import javax.persistence.*;
 
+@AggregateRoot
 @Entity
 @Table(name = "TAX_CLASS_INFO")
 @NoArgsConstructor
