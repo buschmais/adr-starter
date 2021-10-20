@@ -1,4 +1,8 @@
 jqassistant:
+  plugins:
+    - group-id: org.jqassistant.plugin
+      artifact-id: jqassistant-jmolecules-plugin
+      version: 2.1.0-M4
   analyze:
     groups:
       - shopizer:Default

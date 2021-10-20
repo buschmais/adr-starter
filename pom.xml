@@ -40,6 +40,8 @@
 		<mysql-jdbc-version>6.0.5</mysql-jdbc-version>
 		<simple-json-version>1.1.1</simple-json-version>
 		<jqassistant.version>2.3.0-RC1</jqassistant.version>
+        <jmolecules.version>1.9.0</jmolecules.version>
+        <jqassistant-jmolecules.version>2.1.0-M4</jqassistant-jmolecules.version>
     </properties>
 
     <dependencies>
@@ -179,6 +181,11 @@
 				<artifactId>lombok</artifactId>
 				<version>1.18.4</version>
 			</dependency>
+            <dependency>
+                <groupId>org.jmolecules</groupId>
+                <artifactId>jmolecules-ddd</artifactId>
+                <version>${jmolecules.version}</version>
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
 
