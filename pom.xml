@@ -209,6 +209,7 @@
 							<listenAddress>0.0.0.0</listenAddress>
 						</embedded>
 					</store>
+					<failOnSeverity>BLOCKER</failOnSeverity>
 				</configuration>
 			</plugin>
 		</plugins>
