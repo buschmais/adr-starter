@@ -30,7 +30,7 @@ This already reduces the risk of heavily deviating from the to-bo-architecture.
 
 However, there is no guarantee and no one checking that deviation doesn't happen, right? 
 Here comes jQAssistant into play: With this open-source tool it's possible write automatically-checked constraints that ensure specific structures to be in or not in place.
-Imagine you decide to split your system into Bounded Contexts and want to make sure that dependencies between them are implemented only were allowed. Or you want to make shure that for logging purposes only Slf4j is used. This can be checked with jQAssistant and the constraints can be directly formulated inside AsciiDoc.
+Imagine you decide to split your system into Bounded Contexts and want to make sure that dependencies between them are implemented only where they are allowed. Or you want to make shure that for logging purposes only Slf4j is used. This can be checked with jQAssistant and the constraints can be directly formulated inside AsciiDoc.
 
 ## How to use Architecture Decision Records
 
