@@ -32,4 +32,4 @@ For easier identification of classes that represent an Aggregate Root, they will
 ** If a new Aggregate Root is introduced, it needs to be marked as such
 ** Deep Links from one Aggregate to another must not be added. Aggregates may only reference each other via Aggregate Roots.
 
-
+include::jQAssistant:Summary[constraints="adr-003-deep-linking:*"]

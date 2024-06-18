@@ -1,0 +1,24 @@
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/v2.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://schema.jqassistant.org/rule/v2.0 https://schema.jqassistant.org/rule/jqassistant-rule-v2.0.xsd">
+
+    <group id="adr-003-deep-linking:Default">
+        <includeConstraint refId="adr-003-deep-linking:IllegalDeepLinkingBetweenAggregates"/>
+    </group>
+
+    <constraint id="adr-003-deep-linking:IllegalDeepLinkingBetweenAggregates">
+        <requiresConcept refId="jmolecules-ddd:AggregateRootType"/>
+        <requiresConcept refId="jpa2:Entity"/>
+        <description>Return all Entities that are part of more than one Aggregate via their Transitive Closure.</description>
+        <cypher><![CDATA[
+            MATCH (a:AggregateRoot)
+            WITH a
+            OPTIONAL MATCH p=shortestPath((a)-[:DEPENDS_ON*]->(e:Entity))
+            WHERE NOT e:AggregateRoot AND NONE(x IN tail(nodes(p)) WHERE (x:AggregateRoot))
+            WITH e, collect(DISTINCT a.name) AS aggregates
+            WHERE size(aggregates) > 1 AND e IS NOT NULL
+            RETURN e.fqn, aggregates AS Aggregates
+        ]]></cypher>
+    </constraint>
+
+</jqassistant-rules>

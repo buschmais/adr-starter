@@ -3,6 +3,9 @@ jqassistant:
     - group-id: org.jqassistant.plugin
       artifact-id: jqassistant-jmolecules-plugin
       version: 2.1.0-M4
+    - group-id: org.jqassistant.plugin
+      artifact-id: jqassistant-jee-plugin
+      version: 1.0.0
   analyze:
     groups:
       - shopizer:Default

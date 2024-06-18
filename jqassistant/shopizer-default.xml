@@ -7,6 +7,7 @@
 
         <includeGroup refId="adr-001-logging:Default"/>
         <includeGroup refId="adr-002-log-and-throw:Default"/>
+        <includeGroup refId="adr-003-deep-linking:Default"/>
     </group>
 
     <concept id="preparation:ShopizerFiles">
