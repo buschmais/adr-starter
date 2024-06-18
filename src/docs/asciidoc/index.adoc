@@ -13,6 +13,7 @@ It includes architectural decisions and validation of compliance with them as we
 
 include::adr/adr.adoc[leveloffset=+1]
 
+== jQAssistant Summary
 include::jQAssistant:Summary[]
 
-include::jQAssistant:Rules[constraints="*"]
+include::jQAssistant:Rules[leveloffset=+2,constraints="*"]

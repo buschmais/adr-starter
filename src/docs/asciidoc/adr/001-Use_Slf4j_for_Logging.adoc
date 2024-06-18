@@ -26,4 +26,6 @@ For existing code:
 
 - Refactor all uses of other logging frameworks and calls to `System.out` and `System.err` to Slf4j
 
+include::jQAssistant:Summary[constraints="adr-001-logging:*"]
+
 

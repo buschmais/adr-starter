@@ -4,6 +4,8 @@
 
     <group id="shopizer:Default">
         <includeConcept refId="preparation:ShopizerFiles"/>
+
+        <includeGroup refId="adr-001-logging:Default"/>
     </group>
 
     <concept id="preparation:ShopizerFiles">

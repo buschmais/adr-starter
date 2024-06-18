@@ -1,0 +1,67 @@
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/v2.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://schema.jqassistant.org/rule/v2.0 https://schema.jqassistant.org/rule/jqassistant-rule-v2.0.xsd">
+
+    <group id="adr-001-logging:Default">
+        <includeConcept refId="adr-001-logging:Logger"/>
+        <includeConcept refId="adr-001-logging:Slf4j"/>
+        <includeConcept refId="adr-001-logging:CommonsLogging"/>
+
+        <includeConstraint refId="adr-001-logging:UseSlf4jForLogging"/>
+        <includeConstraint refId="adr-001-logging:IllegalUsageOfSystemOutAndErr"/>
+    </group>
+
+    <concept id="adr-001-logging:Logger">
+        <description>Base concept for loggers.</description>
+    </concept>
+
+    <concept id="adr-001-logging:Slf4j">
+        <providesConcept refId="adr-001-logging:Logger"/>
+        <description>Labels the Slf4j logger.</description>
+        <cypher><![CDATA[
+            MATCH  (t:Type)
+            WHERE  t.fqn = "org.slf4j.Logger"
+            SET    t:Logger:Slf4j
+            RETURN t.fqn
+        ]]></cypher>
+    </concept>
+
+    <concept id="adr-001-logging:CommonsLogging">
+        <providesConcept refId="adr-001-logging:Logger"/>
+        <description>Labels the Commons logger.</description>
+        <cypher><![CDATA[
+            MATCH  (t:Type)
+            WHERE  t.fqn = "org.apache.commons.logging.Log"
+            SET    t:Logger:Commons
+            RETURN t.fqn
+        ]]></cypher>
+    </concept>
+
+    <constraint id="adr-001-logging:UseSlf4jForLogging">
+        <requiresConcept refId="preparation:ShopizerFiles"/>
+        <requiresConcept refId="adr-001-logging:Logger"/>
+        <description>Only the usage of Slf4 is allowed</description>
+        <cypher><![CDATA[
+            MATCH  (logger:Type:Logger)-[:DECLARES]->(m:Method),
+            (t:Type:Shopizer)-[:DECLARES]->(:Method)-[usage:INVOKES]->(m)
+            WHERE  NOT logger:Slf4j
+            RETURN t.fqn AS Type, logger.fqn AS Logger, collect(usage.lineNumber) AS LineNumbers
+        ]]></cypher>
+    </constraint>
+
+    <constraint id="adr-001-logging:IllegalUsageOfSystemOutAndErr">
+        <requiresConcept refId="preparation:ShopizerFiles"/>
+        <description>Don't use System.out and System.err in production code for logging</description>
+        <cypher><![CDATA[
+            MATCH  (system:Type{fqn: "java.lang.System"})-[:DECLARES]->(writer:Field),
+                   (a:Shopizer:Main:Artifact)-[:CONTAINS]->(t:Type)-[:DECLARES]->(m:Method),
+                   (m)-[reads:READS]->(writer)
+            WHERE  writer.signature in [
+                        "java.io.PrintStream out",
+                        "java.io.PrintStream err"
+                   ]
+            RETURN t.fqn as Type, writer.signature, collect(reads.lineNumber) as LineNumbers
+        ]]></cypher>
+    </constraint>
+
+</jqassistant-rules>
