@@ -4,6 +4,7 @@
 
     <group id="adr-003-deep-linking:Default">
         <includeConstraint refId="adr-003-deep-linking:IllegalDeepLinkingBetweenAggregates"/>
+        <includeConstraint refId="adr-003-deep-linking:IllegalDeepLinkingIntoAggregatesOfCatalog"/>
     </group>
 
     <constraint id="adr-003-deep-linking:IllegalDeepLinkingBetweenAggregates">
@@ -18,6 +19,19 @@
             WITH e, collect(DISTINCT a.name) AS aggregates
             WHERE size(aggregates) > 1 AND e IS NOT NULL
             RETURN e.fqn, aggregates AS Aggregates
+        ]]></cypher>
+    </constraint>
+
+    <constraint id="adr-003-deep-linking:IllegalDeepLinkingIntoAggregatesOfCatalog">
+        <requiresConcept refId="jmolecules-ddd:BoundedContextPackage"/>
+        <requiresConcept refId="jmolecules-ddd:AggregateRootType"/>
+        <requiresConcept refId="jpa2:Entity"/>
+        <description>Return all Entities and Aggregate Root objects from the Catalog Bounded Context which are referenced from another context.</description>
+        <cypher><![CDATA[
+            MATCH  (bC1:BoundedContext{name: "Catalog"})-[:CONTAINS]->(e1:Entity),
+                   (e2:Entity)-[:DEPENDS_ON]->(e1)
+            WHERE  NOT exists((bC1)-[:CONTAINS]->(e2))
+            RETURN e1.fqn AS CatalogDependency, e2.fqn AS DependentClass, e1:AggregateRoot AS IsAggregateRoot
         ]]></cypher>
     </constraint>
 
