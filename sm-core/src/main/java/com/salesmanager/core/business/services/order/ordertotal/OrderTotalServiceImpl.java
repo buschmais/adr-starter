@@ -13,9 +13,9 @@ import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.core.model.shoppingcart.ShoppingCartItem;
 import com.salesmanager.core.modules.order.total.OrderTotalPostProcessorModule;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.List;
 public class OrderTotalServiceImpl implements OrderTotalService {
 	
 	@Autowired
-	@Resource(name="orderTotalsPostProcessors")
+	@Qualifier("orderTotalsPostProcessors")
 	List<OrderTotalPostProcessorModule> orderTotalPostProcessors;
 
 	@Autowired

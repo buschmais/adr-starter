@@ -32,9 +32,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.*;
@@ -82,17 +82,17 @@ public class ShippingServiceImpl implements ShippingService {
 	private ShippingQuoteService shippingQuoteService;
 	
 	@Inject
-	@Resource(name="shippingModules")
+	@Qualifier("shippingModules")
 	private Map<String,ShippingQuoteModule> shippingModules;
 	
 	//shipping pre-processors
 	@Inject
-	@Resource(name="shippingModulePreProcessors")
+	@Qualifier("shippingModulePreProcessors")
 	private List<ShippingQuotePrePostProcessModule> shippingModulePreProcessors;
 	
 	//shipping post-processors
 	@Inject
-	@Resource(name="shippingModulePostProcessors")
+	@Qualifier("shippingModulePostProcessors")
 	private List<ShippingQuotePrePostProcessModule> shippingModulePostProcessors;
 	
 	@Override

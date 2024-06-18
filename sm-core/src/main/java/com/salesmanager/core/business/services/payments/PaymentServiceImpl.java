@@ -10,11 +10,11 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.salesmanager.common.business.constants.Constants;
@@ -70,7 +70,7 @@ public class PaymentServiceImpl implements PaymentService {
 	private CoreConfiguration coreConfiguration;
 	
 	@Inject
-	@Resource(name="paymentModules")
+	@Qualifier("paymentModules")
 	private Map<String,PaymentModule> paymentModules;
 	
 	@Inject
