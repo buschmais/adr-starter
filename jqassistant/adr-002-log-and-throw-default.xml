@@ -1,0 +1,26 @@
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/v2.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://schema.jqassistant.org/rule/v2.0 https://schema.jqassistant.org/rule/jqassistant-rule-v2.0.xsd">
+
+    <group id="adr-002-log-and-throw:Default">
+        <includeConstraint refId="adr-002-log-and-throw:IllegalLogAndThrow"/>
+    </group>
+
+    <constraint id="adr-002-log-and-throw:IllegalLogAndThrow">
+        <requiresConcept refId="preparation:ShopizerFiles"/>
+        <requiresConcept refId="adr-001-logging:Logger"/>
+        <description>Reports all occurences of Log and Throw</description>
+        <cypher><![CDATA[
+            MATCH  (exception:Type)-[:DECLARES]->(constructor:Constructor),
+                   (method:Method)-[newException:INVOKES]->(constructor)
+            WHERE  exception.fqn =~ ".*Exception"
+            WITH   method, newException
+            MATCH  (logger:Type:Logger)-[:DECLARES]->(logMethod:Method),
+                   (t:Type:Shopizer)-[:DECLARES]->(method)-[log:INVOKES]->(logMethod)
+            WHERE  logMethod.signature =~ ".*,java.lang.Throwable\\)"
+                   AND abs(log.lineNumber - newException.lineNumber) <= 4
+            RETURN t.fqn as DeclaringType, collect(log.lineNumber) as LineNumber
+        ]]></cypher>
+    </constraint>
+
+</jqassistant-rules>

@@ -25,3 +25,5 @@ If that's not the case, the exception needs to be propagated to the next higher 
 
 - Existing code needs to be checked to remove all implementations of the Log and Throw pattern
 - New code must not implement the Log and Throw pattern
+
+include::jQAssistant:Summary[constraints="adr-002-log-and-throw:*"]

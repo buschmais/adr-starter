@@ -6,6 +6,7 @@
         <includeConcept refId="preparation:ShopizerFiles"/>
 
         <includeGroup refId="adr-001-logging:Default"/>
+        <includeGroup refId="adr-002-log-and-throw:Default"/>
     </group>
 
     <concept id="preparation:ShopizerFiles">
